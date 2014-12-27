@@ -1,0 +1,23 @@
+{
+  "name": "realtime-bus-sms",
+  "version": "1.0.0",
+  "description": "Gets realtime bus data for the Peoplemover in Anchorage, AK. Input and output is through Twilio.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codeforanchorage/realtime-bus-sms.git"
+  },
+  "author": "Nigel Kibodeaux",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codeforanchorage/realtime-bus-sms/issues"
+  },
+  "homepage": "https://github.com/codeforanchorage/realtime-bus-sms",
+  "dependencies": {
+    "request": "^2.51.0",
+    "twilio": "^1.10.0"
+  }
+}
