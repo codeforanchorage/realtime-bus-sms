@@ -1,11 +1,17 @@
+/* TODO
+logging
+authenticate that requests are from twilio
+use express middleware
+*/
+
 var request = require('request')
 var http = require('http')
 var querystring = require('querystring')
 var stop_number_lookup = require('./stop_number_lookup')
-var config = require('./config')
+// var config = require('./config')
 
 var muni_url = 'http://bustracker.muni.org/InfoPoint/departures.aspx?stopid='
-var twilio = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
+// var twilio = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
 
 
 /* This scrapes and  parses the stop data from the muni */
