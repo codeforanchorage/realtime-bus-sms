@@ -10,13 +10,53 @@ var querystring = require('querystring')
 var stop_number_lookup = require('./stop_number_lookup')
 // var config = require('./config')
 
-var muni_url = 'http://bustracker.muni.org/InfoPoint/departures.aspx?stopid='
+// Used by node-geocoder - might need API for higher volume requests
+var geocoderProvider = 'google';
+var httpAdapter = 'http';
+var extra = {formatter: 'json'};
+// optional
+/*var extra = {
+    apiKey: 'YOUR_API_KEY', // for Mapquest, OpenCage, Google Premier
+    formatter: null         // 'gpx', 'string', ...
+};
+*/
+geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
+
+// I don't have a good grasp on scope and returning values or callbacks
+// Trying to lump it all together
+function getClosestStop(address, callback) {
+		geocoder.geocode(address, function(err, res) {
+        lat = res[0].latitude;
+        lon = res[0].longitude;
+	    console.log(lat + ' ' + lon);
+        carto_url_beg = 'http://brendanbabb.cartodb.com/api/v2/sql?q=SELECT%20bustracker_id%20FROM%20gtfs_bustracker_lat_long%20ORDER%20BY%20the_geom%20%3C-%3E%20CDB_LatLng(';
+		carto_url_end = ')%20LIMIT%201&api_key=c2d8157bcdd5ef382c8a92bbc8bd13efea372006';
+		carto_url = carto_url_beg + lat + ',' + lon + carto_url_end;
+		console.log(carto_url);
+        request(carto_url, function (error, response, body) {
+        	if (error || response.statusCode != 200) {
+            	return callback(error || response.statusCode)
+        	}
+       	 	else {
+            	//console.log(JSON.parse(body).rows[0].bustracker_id);
+            	bus_id = JSON.parse(body).rows[0].bustracker_id;
+            	console.log(bus_id);
+            	getStopData(bus_id, callback)
+        	}
+		})
+	})}
+
+//address='Arctic and 19th, Anchorage, AK';
+//y = getClosestStop(address);
+        
+var muni_url = 'http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=';
 // var twilio = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
 
+    
 
 /* This scrapes and  parses the stop data from the muni */
 function getStopData(bustrackerId, callback) {
-    request(muni_url + bustrackerId, function (error, response, body) {
+    request(muni_url + bustrackerId, function (error, response, body) {console.log('returned data from the muni')
         if (error || response.statusCode != 200) {
             return callback(error || response.statusCode)
         }
@@ -80,21 +120,32 @@ http.createServer(function (req, res) {
     req.on('end', function() {
         var decodedBody = querystring.parse(fullBody)
         var stopId = parseInt(decodedBody.Body)
-        var bustrackerId = stop_number_lookup[stopId]
-
+        
         res.writeHead(200, {'Content-Type': 'text/plain'})
-        if (!bustrackerId) {
-            console.log('Bad input')
-            console.dir(decodedBody)
-            return res.end('Invalid stop number')
-        }
-        else {
-            getStopData(bustrackerId, function(err, data) {
+
+    	if (isNaN(stopId)) {
+    		getClosestStop(decodedBody.Body, function(err, data) {
                 console.log('Good input')
                 console.dir(decodedBody)
                 return res.end(data)
             })
-        }
+    	}
+    	else {
+	        var bustrackerId = stop_number_lookup[stopId]
+		    
+	        if (!bustrackerId) {
+	            console.log('Bad input')
+	            console.dir(decodedBody)
+	            return res.end('Invalid stop number')
+	        }
+	    	else {
+	            getStopData(bustrackerId, function(err, data) {
+	                console.log('Good input')
+	                console.dir(decodedBody)
+	                return res.end(data)
+	            })	
+	        }	
+    	}
     });
 }).listen(8080)
 
