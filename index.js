@@ -24,8 +24,10 @@ geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, e
 
 // I don't have a good grasp on scope and returning values or callbacks
 // Trying to lump it all together
+var city_state = ', Anchorage, Alaska'; //set default city to Anchorage Alaska seems to work for Eagle River as well.
+
 function getClosestStop(address, callback) {
-		geocoder.geocode(address, function(err, res) {
+		geocoder.geocode(address+city_state, function(err, res) {
         lat = res[0].latitude;
         lon = res[0].longitude;
 	    console.log(lat + ' ' + lon);
