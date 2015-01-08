@@ -32,7 +32,7 @@ function getClosestStop(address, callback) {
         lon = res[0].longitude;
 	    console.log(lat + ' ' + lon);
         carto_url_beg = 'http://brendanbabb.cartodb.com/api/v2/sql?q=SELECT%20bustracker_id%20FROM%20gtfs_bustracker_lat_long%20ORDER%20BY%20the_geom%20%3C-%3E%20CDB_LatLng(';
-		carto_url_end = ')%20LIMIT%201&api_key=CARTODB_API';
+		carto_url_end = ')%20LIMIT%201&api_key='+CARTODB_API;
 		carto_url = carto_url_beg + lat + ',' + lon + carto_url_end;
 		console.log(carto_url);
         request(carto_url, function (error, response, body) {
