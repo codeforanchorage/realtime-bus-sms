@@ -3,7 +3,7 @@ logging
 authenticate that requests are from twilio
 use express middleware
 */
-
+var port = process.env.PORT || 8080
 var request = require('request')
 var http = require('http')
 var querystring = require('querystring')
@@ -149,6 +149,6 @@ http.createServer(function (req, res) {
 	        }	
     	}
     });
-}).listen(8080)
+}).listen(port)
 
-console.log('Server running at http://127.0.0.1:8080/')
+console.log('Server running at http://127.0.0.1:%d/',port)

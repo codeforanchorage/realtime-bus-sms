@@ -20,6 +20,5 @@
     "dependencies": {
         "request": "^2.51.0",
         "node-geocoder": "^2.13.0",
-        "querystring": "^0.2.0"
     }
 }
