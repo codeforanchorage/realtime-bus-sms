@@ -3,7 +3,6 @@ logging
 authenticate that requests are from twilio
 use express middleware
 */
-var port = process.env.PORT || 8080
 var request = require('request')
 var http = require('http')
 var querystring = require('querystring')
@@ -20,6 +19,8 @@ var extra = {formatter: 'json'};
     formatter: null         // 'gpx', 'string', ...
 };
 */
+var port = process.env.PORT || 8080;
+
 geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
 
 // I don't have a good grasp on scope and returning values or callbacks

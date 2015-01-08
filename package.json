@@ -19,6 +19,6 @@
     "homepage": "https://github.com/codeforanchorage/realtime-bus-sms",
     "dependencies": {
         "request": "^2.51.0",
-        "node-geocoder": "^2.13.0",
+        "node-geocoder": "2.13.0",
     }
 }
