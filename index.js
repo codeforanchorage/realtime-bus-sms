@@ -7,7 +7,7 @@ var request = require('request')
 var http = require('http')
 var querystring = require('querystring')
 var stop_number_lookup = require('./stop_number_lookup')
-// var config = require('./config')
+var config = require('./config')
 
 // Used by node-geocoder - might need API for higher volume requests
 var geocoderProvider = 'google';
@@ -33,7 +33,7 @@ function getClosestStop(address, callback) {
         lon = res[0].longitude;
 	    console.log(lat + ' ' + lon);
         carto_url_beg = 'http://brendanbabb.cartodb.com/api/v2/sql?q=SELECT%20bustracker_id%20FROM%20gtfs_bustracker_lat_long%20ORDER%20BY%20the_geom%20%3C-%3E%20CDB_LatLng(';
-		carto_url_end = ')%20LIMIT%201&api_key='+CARTODB_API;
+		carto_url_end = ')%20LIMIT%201&api_key=' + config.CARTODB_API_KEY;
 		carto_url = carto_url_beg + lat + ',' + lon + carto_url_end;
 		console.log(carto_url);
         request(carto_url, function (error, response, body) {
@@ -51,11 +51,11 @@ function getClosestStop(address, callback) {
 
 //address='Arctic and 19th, Anchorage, AK';
 //y = getClosestStop(address);
-        
+
 var muni_url = 'http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=';
 // var twilio = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
 
-    
+
 
 /* This scrapes and  parses the stop data from the muni */
 function getStopData(bustrackerId, callback) {
@@ -123,7 +123,7 @@ http.createServer(function (req, res) {
     req.on('end', function() {
         var decodedBody = querystring.parse(fullBody)
         var stopId = parseInt(decodedBody.Body)
-        
+
         res.writeHead(200, {'Content-Type': 'text/plain'})
 
     	if (isNaN(stopId)) {
@@ -135,7 +135,7 @@ http.createServer(function (req, res) {
     	}
     	else {
 	        var bustrackerId = stop_number_lookup[stopId]
-		    
+
 	        if (!bustrackerId) {
 	            console.log('Bad input')
 	            console.dir(decodedBody)
@@ -146,8 +146,8 @@ http.createServer(function (req, res) {
 	                console.log('Good input')
 	                console.dir(decodedBody)
 	                return res.end(data)
-	            })	
-	        }	
+	            })
+	        }
     	}
     });
 }).listen(port,'0.0.0.0')
