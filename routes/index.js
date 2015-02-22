@@ -9,12 +9,16 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-/* POST home page */
+// Twilio hits this endpoint. The user's text message is 
+// in the POST body.
+// TODO: better error messages
 router.post('/', function(req, res, next) {
-  var stopId = req.body.stopNumber;
-  var intersection = req.body.intersection;
+  var message = req.body.Body;
 
-  if (stopId) {
+  var isOnlyDigits = /^\d+$/.test(message);
+
+  if (isOnlyDigits) {
+    var stopId = message;
     var bustrackerId = stop_number_lookup[stopId];
 
     if (!bustrackerId) {
@@ -31,15 +35,16 @@ router.post('/', function(req, res, next) {
         })
     }
   } 
-  else if (intersection) {
-    lib.getStopFromAddress(intersection, function(err, data) {
+  else {
+    // assume the user sent us an intersection or address
+    var address = message;
+    
+    lib.getStopFromAddress(address, function(err, data) {
         debug('Good input');
 
         res.set('Content-Type', 'text/plain');
         res.send(data);
     })
-  } else {
-    res.send('No input');
   }
 });
 

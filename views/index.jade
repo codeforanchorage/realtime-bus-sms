@@ -2,11 +2,6 @@ extends layout
 
 block content
   form(method="POST")
-    p Get current bus times!
-    label(for="stopNumber") Enter a bus stop number: 
-    input(name="stopNumber")
-    br
-    label(for="intersection") OR Enter an intersection: 
-    input(name="intersection")
-    br
+    p Enter a bus stop number, address or intersection to get current bus times
+    input(name="Body")
     input(type="submit")
