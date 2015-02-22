@@ -2,30 +2,49 @@ var express = require('express');
 var router = express.Router();
 var stop_number_lookup = require('../lib/stop_number_lookup');
 var debug = require('debug')('routes/index.js');
-var getStopData = require('../lib/index');
+var lib = require('../lib/index');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-/* POST home page */
+// Twilio hits this endpoint. The user's text message is 
+// in the POST body.
+// TODO: better error messages
 router.post('/', function(req, res, next) {
-  var stopId = req.body.Body;
-  var bustrackerId = stop_number_lookup[stopId];
+  var message = req.body.Body;
 
-  if (!bustrackerId) {
-      debug('Bad input');
-      debug(stopId);
-      res.send('Invalid stop number');
-  }
+  var isOnlyDigits = /^\d+$/.test(message);
+
+  if (isOnlyDigits) {
+    var stopId = message;
+    var bustrackerId = stop_number_lookup[stopId];
+
+    if (!bustrackerId) {
+        debug('Bad input');
+        debug(stopId);
+        res.send('Invalid stop number');
+    }
+    else {
+        lib.getStopFromBusTrackerId(bustrackerId, function(err, data) {
+            debug('Good input');
+
+            res.set('Content-Type', 'text/plain');
+            res.send(data);
+        })
+    }
+  } 
   else {
-      getStopData(bustrackerId, function(err, data) {
-          debug('Good input');
+    // assume the user sent us an intersection or address
+    var address = message;
+    
+    lib.getStopFromAddress(address, function(err, data) {
+        debug('Good input');
 
-          res.set('Content-Type', 'text/plain');
-          res.send(data);
-      })
+        res.set('Content-Type', 'text/plain');
+        res.send(data);
+    })
   }
 });
 

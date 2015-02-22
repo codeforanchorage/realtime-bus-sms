@@ -25,6 +25,9 @@
         "express": "~4.11.1",
         "jade": "~1.9.1",
         "morgan": "~1.5.1",
-        "serve-favicon": "~2.2.0"
+        "serve-favicon": "~2.2.0",
+        "node-geocoder": "~2.16.0",
+        "turf": "~1.4.0",
+        "turf-nearest": "~1.0.2"
     }
 }
