@@ -14,8 +14,6 @@ router.post('/', function(req, res, next) {
   var stopId = req.body.stopNumber;
   var intersection = req.body.intersection;
 
-  console.dir(lib)
-
   if (stopId) {
     var bustrackerId = stop_number_lookup[stopId];
 
@@ -25,7 +23,7 @@ router.post('/', function(req, res, next) {
         res.send('Invalid stop number');
     }
     else {
-        lib.getStopData(bustrackerId, function(err, data) {
+        lib.getStopFromBusTrackerId(bustrackerId, function(err, data) {
             debug('Good input');
 
             res.set('Content-Type', 'text/plain');
