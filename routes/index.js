@@ -47,5 +47,26 @@ router.post('/', function(req, res, next) {
     })
   }
 });
+router.get('/api', function(req, res, next) {
+  if(typeof req.query.stop == "undefined"){
+        console.log('could not find route');
+  }
+  var stopId = req.query.route;
+  var bustrackerId = stop_number_lookup[stopId];
 
+  if (!bustrackerId) {
+      debug('Bad input');
+      debug(stopId);
+      res.send('Invalid stop number');
+  }
+  else {
+      getStopData(bustrackerId, function(err, data) {
+          debug('Good input');
+
+          res.set('Content-Type', 'application/json');
+          res.send(data);
+      })
+  }
+});
 module.exports = router;
+
