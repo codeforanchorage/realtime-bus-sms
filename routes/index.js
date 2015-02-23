@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 /* POST home page */
 router.post('/', function(req, res, next) {
   var stopId = req.body.Body;
+  stopId = req.body.Body.replace(/^0+/, '');
   var bustrackerId = stop_number_lookup[stopId];
 
   if (!bustrackerId) {
@@ -32,7 +33,7 @@ router.get('/api', function(req, res, next) {
   if(typeof req.query.stop == "undefined"){
         console.log('could not find route');
   }
-  var stopId = req.query.route;
+  var stopId = req.query.stop.replace(/^0+/, '');
   var bustrackerId = stop_number_lookup[stopId];
 
   if (!bustrackerId) {
