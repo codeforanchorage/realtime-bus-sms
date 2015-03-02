@@ -15,38 +15,25 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   var message = req.body.Body;
 
-  var isOnlyDigits = /^\d+$/.test(message);
-
-  if (isOnlyDigits) {
-    var stopId = message.replace(/^0+/, '');
-    var bustrackerId = stop_number_lookup[stopId];
-
-    if (!bustrackerId) {
-        debug('Bad input');
-        debug(stopId);
-        res.send('Invalid stop number');
-    }
-    else {
-        lib.getStopFromBusTrackerId(bustrackerId, function(err, data) {
-            debug('Good input');
-
-            res.set('Content-Type', 'text/plain');
-            res.send(data);
-        })
-    }
+  if (!message || /^\s*$/.test(message)) {
+    res.send('No input. Please send a stop number, intersection, or street address to get bus times.');
+  }
+  else if (/^\d+$/.test(message)) {
+    // the message is only digits -- assume it's a stop number
+    lib.getStopFromStopNumber(message, function(err, data) {
+        res.set('Content-Type', 'text/plain');
+        res.send(data);
+    });
   } 
   else {
     // assume the user sent us an intersection or address
-    var address = message;
-    
-    lib.getStopFromAddress(address, function(err, data) {
-        debug('Good input');
-
+    lib.getStopFromAddress(message, function(err, data) {
         res.set('Content-Type', 'text/plain');
         res.send(data);
     })
   }
 });
+
 router.get('/api', function(req, res, next) {
   if(typeof req.query.stop == "undefined"){
         console.log('could not find route');
@@ -55,8 +42,6 @@ router.get('/api', function(req, res, next) {
   var bustrackerId = stop_number_lookup[stopId];
 
   if (!bustrackerId) {
-      debug('Bad input');
-      debug(stopId);
       res.send('Invalid stop number');
   }
   else {
