@@ -28,6 +28,7 @@
         "serve-favicon": "~2.2.0",
         "node-geocoder": "~2.16.0",
         "turf": "~1.4.0",
-        "turf-nearest": "~1.0.2"
+        "turf-nearest": "~1.0.2",
+        "mocha": "~2.1.0"
     }
 }
