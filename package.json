@@ -4,8 +4,8 @@
     "description": "Gets realtime bus data for the Peoplemover in Anchorage, AK. Input and output is through Twilio.",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-          "start": "node ./bin/www"
+        "test": "test/test.js",
+        "start": "node ./bin/www"
     },
     "repository": {
         "type": "git",
