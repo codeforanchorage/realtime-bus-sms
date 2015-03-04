@@ -19,6 +19,14 @@ What exists
 - [Bustracker.muni.org](http://bustracker.muni.org) is a good desktop web interface for showing realtime ETA and locations of buses. This app is hard to view and use on a smartphone screen.
 - A text based version of Bustracker. You choose the route and then scroll for the stop name and then select to see the bus ETAs. Good if you know the bus stop name. This project is leveraging the text bustracker interface.
 
+Contributing
+------------
+
+Contributing is easy!
+
+1. Fork the repo and work on your changes
+1. Create a pull request to the *dev* branch (or your own feature branch)
+
 Project Setup
 --------------
 
