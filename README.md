@@ -22,10 +22,8 @@ What exists
 Contributing
 ------------
 
-Contributing is easy!
-
 1. Fork the repo and work on your changes
-1. Create a pull request to the *dev* branch (or your own feature branch)
+1. Create a pull request to the **dev** branch (or your own feature branch)
 
 Project Setup
 --------------
