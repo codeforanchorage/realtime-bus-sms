@@ -1,7 +1,7 @@
 realtime-bus-sms
 ================
 
-[![Build Status](https://travis-ci.org/jessicaaustin/realtime-bus-sms.svg?branch=master)](https://travis-ci.org/jessicaaustin/realtime-bus-sms) 
+[![Build Status](https://travis-ci.org/codeforanchorage/realtime-bus-sms.svg?branch=master)](https://travis-ci.org/codeforanchorage/realtime-bus-sms) 
 
 
 Text back current arrival time for buses given a texted in bus stop number for People Mover
