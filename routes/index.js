@@ -27,11 +27,12 @@ router.post('/', function(req, res, next) {
         res.set('Content-Type', 'text/plain');
 
         // format the data if it's not just an error string
+        var output = data
         if (typeof(data) === 'object') {
-            data = lib.formatStopData(data)
+            output = lib.formatStopData(data)
         }
 
-        res.send(data)
+        res.send(output)
 
         // log info about this lookup
         var entry = {
