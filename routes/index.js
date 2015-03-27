@@ -6,7 +6,7 @@ var stop_number_lookup = require('../lib/stop_number_lookup');
 var debug = require('debug')('routes/index.js');
 var lib = require('../lib/index');
 
-var db = low('db.json')
+var db = low('./public/db.json')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
