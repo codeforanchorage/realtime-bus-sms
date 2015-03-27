@@ -20,9 +20,18 @@ router.post('/', function(req, res, next) {
     var message = req.body.Body;
 
     function sendIt(err, data) {
-        // TODO: handle an error here
+        if (err) {
+            console.log(err)
+            return
+        }
         res.set('Content-Type', 'text/plain');
-        res.send(lib.formatStopData(data));
+
+        // format the data if it's not just an error string
+        if (typeof(data) === 'object') {
+            data = lib.formatStopData(data)
+        }
+
+        res.send(data)
 
         // log info about this lookup
         var entry = {
