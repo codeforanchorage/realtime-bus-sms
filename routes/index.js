@@ -35,6 +35,11 @@ router.post('/', function(req, res, next) {
         res.send(output)
 
         // log info about this lookup
+        // Log format:
+        // message is whatever the user sends
+        // stop is the stop that we've parsed from the message
+        // data is the current datetime
+        // if it's sent from twiliio, we store a human-readable hash of the #
         var entry = {
             input: message,
             stop: data.route,
