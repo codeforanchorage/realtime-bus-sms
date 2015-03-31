@@ -1,7 +1,87 @@
-extends layout
+doctype html
+html
+    head
+        title= title
+        style.
+            body {
+              font-family: sans-serif;
+              text-align: center;
+            }
+            #output {
+              padding-top: 20px;
+            }
+        meta(name='MobileOptimized', content='320')
+        meta(name='viewport', content='width=device-width, minimum-scale=1, maximum-scale=1')
+        meta(name='apple-mobile-web-app-capable' content='yes')
 
-block content
-  form(method="POST")
-    p Enter a bus stop number, address or intersection to get current bus times
-    input(name="Body")
-    input(type="submit")
+
+    body
+        form(method="POST", onsubmit="return postIt()")
+            h1 When's the next bus?
+            p Enter a bus stop number, address or intersection to see when the next bus arrives
+            input(name="Body")
+            input(type="submit")
+
+        p(id="output")
+
+
+
+
+    script.
+        function showLoading() {
+            document.getElementById('output').innerHTML = 'Loading...';
+        }
+
+
+        function updateOutputDiv() {
+            if(this.readyState == 4 && this.status == 200) {
+                var output = this.responseText;
+                output = output.replace(/\n/g, '<br>');
+                document.getElementById('output').innerHTML = output;
+            }
+        }
+
+
+        function postIt(){
+            showLoading();
+
+            var http = new XMLHttpRequest();
+            http.open("POST", "/", true);
+            var payload = {Body: document.getElementsByName('Body')[0].value};
+            payload = JSON.stringify(payload);
+
+            //Send the proper header information along with the request
+            http.setRequestHeader("Content-type", "application/json");
+
+            http.onreadystatechange = updateOutputDiv.bind(http);
+            http.send(payload);
+
+            return false;
+        }
+
+
+        function showPosition(position) {
+            var http = new XMLHttpRequest();
+            var url = '/byLatLon?lat=';
+            url += position.coords.latitude + '&lon=' + position.coords.longitude;
+            http.open('GET', url, true);
+
+            http.onreadystatechange = updateOutputDiv.bind(http);
+            http.send();
+        }
+
+
+        // if the browser is capable, get the nearest stop by geolocation
+        if (navigator.geolocation) {
+            showLoading();
+
+            navigator.geolocation.getCurrentPosition(
+                showPosition,
+                null,
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 60000,
+                }
+            );
+        }
