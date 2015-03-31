@@ -8,10 +8,21 @@ var lib = require('../lib/index');
 
 var db = low('./public/db.json')
 
+// Log format:
+// message is whatever the user sends
+// stop is the stop that we've parsed from the message
+// data is the current datetime
+// if it's sent from twiliio, we store a human-readable hash of the #
+function logRequest(entry) {
+    entry.date = new Date()
+    db('requests').push(entry)
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index');
 });
+
 
 // Twilio hits this endpoint. The user's text message is
 // in the POST body.
@@ -21,8 +32,7 @@ router.post('/', function(req, res, next) {
 
     function sendIt(err, data) {
         if (err) {
-            console.log(err)
-            return
+            next(err)
         }
         res.set('Content-Type', 'text/plain');
 
@@ -35,24 +45,18 @@ router.post('/', function(req, res, next) {
         res.send(output)
 
         // log info about this lookup
-        // Log format:
-        // message is whatever the user sends
-        // stop is the stop that we've parsed from the message
-        // data is the current datetime
-        // if it's sent from twiliio, we store a human-readable hash of the #
         var entry = {
             input: message,
             stop: data.route,
-            date: new Date(),
         }
         if (req.body.From) {
             entry.phone = hashwords.hashStr(req.body.From)
         }
-        db('requests').push(entry)
+        logRequest(entry)
     }
 
     if (!message || /^\s*$/.test(message)) {
-        res.send('No input. Please send a stop number, intersection, or street address to get bus times.');
+        res.send('No input.\nPlease send a stop number, intersection, or street address to get bus times.');
     }
     else if (/^\d+$/.test(message)) {
         // the message is only digits -- assume it's a stop number
@@ -63,6 +67,7 @@ router.post('/', function(req, res, next) {
         lib.getStopFromAddress(message, sendIt)
     }
 });
+
 
 router.get('/api', function(req, res, next) {
     if(typeof req.query.stop == "undefined"){
@@ -83,4 +88,33 @@ router.get('/api', function(req, res, next) {
         })
     }
 });
+
+
+router.get('/byLatLon', function(req, res, next) {
+    var stop = lib.findNearestStop(req.query.lat, req.query.lon);
+
+    lib.getStopFromStopNumber(stop, function(err, data) {
+        if (err) {
+            next(err)
+        }
+
+        // format the data if it's not just an error string
+        var output = data
+        if (typeof(data) === 'object') {
+            output = lib.formatStopData(data)
+        }
+
+        res.set('Content-Type', 'text/plain');
+        res.send(output)
+
+        // log it
+        var entry = {
+            input: req.query.lat + ', ' + req.query.lon,
+            stop: data.route,
+        }
+        logRequest(entry)
+    });
+});
+
+
 module.exports = router;
