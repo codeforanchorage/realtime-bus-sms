@@ -28,16 +28,35 @@ html
 
 
     script.
+        var interval = null;
+        var outputDiv = document.getElementById('output');
+
         function showLoading() {
-            document.getElementById('output').innerHTML = 'Loading...';
+            var elements = ['&bull;', '&nbsp;', '&nbsp;', '&nbsp;']
+            interval = window.setInterval(
+                function() {
+                    var output = elements.join('');
+                    outputDiv.innerHTML = output;
+                    elements.unshift(elements.pop());
+                },
+                300
+            );
+        }
+
+
+        function removeLoading() {
+            window.clearInterval(interval);
+            outputDiv.innerHTML = '';
         }
 
 
         function updateOutputDiv() {
+            removeLoading();
+
             if(this.readyState == 4 && this.status == 200) {
                 var output = this.responseText;
                 output = output.replace(/\n/g, '<br>');
-                document.getElementById('output').innerHTML = output;
+                outputDiv.innerHTML = output;
             }
         }
 
@@ -77,7 +96,7 @@ html
 
             navigator.geolocation.getCurrentPosition(
                 showPosition,
-                null,
+                removeLoading,
                 {
                     enableHighAccuracy: true,
                     timeout: 10000,
