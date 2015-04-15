@@ -10,6 +10,9 @@ html
             #output {
               padding-top: 20px;
             }
+            button {
+                margin: 20px auto;
+            }
         meta(name='MobileOptimized', content='320')
         meta(name='viewport', content='width=device-width, minimum-scale=1, maximum-scale=1')
         meta(name='apple-mobile-web-app-capable' content='yes')
@@ -22,6 +25,8 @@ html
             input(name="Body")
             input(type="submit")
 
+        button(id="button" onclick="locateMe()" style="display:none") Find Stop Nearest to Me
+        p Also! You can text a stop number or intersection to 907-312-2060
         p(id="output")
 
 
@@ -91,7 +96,7 @@ html
 
 
         // if the browser is capable, get the nearest stop by geolocation
-        if (navigator.geolocation) {
+        function locateMe() {
             showLoading();
 
             navigator.geolocation.getCurrentPosition(
@@ -103,4 +108,8 @@ html
                     maximumAge: 60000,
                 }
             );
+        }
+
+        if (navigator.geolocation) {
+            document.getElementById('button').style.display = 'block';
         }
