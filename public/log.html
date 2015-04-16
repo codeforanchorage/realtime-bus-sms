@@ -1,0 +1,32 @@
+<script>
+var http = new XMLHttpRequest();
+http.open("GET", "db.json", true);
+
+http.onreadystatechange = function() {
+    if(this.readyState == 4 && this.status == 200) {
+        var output = this.responseText;
+        output = JSON.parse(output);
+
+        // reverse order
+        output = output.requests.reverse();
+
+        table = '<table><tr><th>Time</th><th>Stop</th><th>Input</th><th>Phone</th></tr>'
+        output.forEach(function(item) {
+            table += '<tr>';
+            table += '<td>' + item.date + '</td>';
+            table += '<td>' + item.stop + '</td>';
+            table += '<td>' + item.input + '</td>';
+            table += '<td>' + item.phone + '</td>';
+            table += '</tr>';
+        });
+        table += '</table>';
+
+        document.body.innerHTML = table;
+    }
+};
+http.send();
+</script>
+<style>
+table { width: 100%; }
+/*td { border: 1px solid black; }*/
+</style>
