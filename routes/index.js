@@ -7,6 +7,7 @@ var debug = require('debug')('routes/index.js');
 var lib = require('../lib/index');
 
 var db = low('./public/db.json')
+var comments = low('./comments.json')
 
 // Log format:
 // message is whatever the user sends
@@ -114,6 +115,14 @@ router.get('/byLatLon', function(req, res, next) {
         }
         logRequest(entry)
     });
+});
+
+
+router.post('/feedback', function(req, res, next) {
+    comments('comments').push(req.body.comment)
+    console.log('This is a comment:')
+    console.log(req.body.comment)
+    res.send('Thanks for the feedback <br> <a href="/">back</a>')
 });
 
 
