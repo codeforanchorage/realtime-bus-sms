@@ -35,62 +35,40 @@ router.post('/', function(req, res, next) {
         if (err) {
             next(err)
         }
+
         res.set('Content-Type', 'text/plain');
 
-        // format the data if it's not just an error string
-        var output = data
-        if (typeof(data) === 'object') {
-            output = lib.formatStopData(data)
-        }
-
-        res.send(output)
+        res.send(output);
 
         // log info about this lookup
         var entry = {
             input: message,
             stop: data.route,
-        }
-        if (req.body.From) {
-            entry.phone = hashwords.hashStr(req.body.From)
+            phone: hashwords.hashStr(req.body.From),
         }
         logRequest(entry)
     }
 
-    if (!message || /^\s*$/.test(message)) {
-        res.send('No input.\nPlease send a stop number, intersection, or street address to get bus times.');
-    }
-    else if (/^\d+$/.test(message)) {
-        // the message is only digits -- assume it's a stop number
-        lib.getStopFromStopNumber(parseInt(message), sendIt);
-    }
-    else {
-        // assume the user sent us an intersection or address
-        lib.getStopFromAddress(message, sendIt)
-    }
+    lib.parseInputReturnBusTimes(sendIt);
 });
 
 
-router.get('/api', function(req, res, next) {
-    if(typeof req.query.stop == "undefined"){
-        console.log('could not find route');
-    }
-    var stopId = req.query.stop.replace(/^0+/, '');
-    var bustrackerId = stop_number_lookup[stopId];
+// This is what the browser hits
+router.post('/ajax', function(req, res, next) {
+    lib.parseInputReturnBusTimes(req.body.Body, function(err, data) {
 
-    if (!bustrackerId) {
-        res.send('Invalid stop number');
-    }
-    else {
-        getStopData(bustrackerId, function(err, data) {
-            debug('Good input');
+        res.send(data);
 
-            res.set('Content-Type', 'application/json');
-            res.send(data);
-        })
-    }
+        // log info about this lookup
+        logRequest({
+            input: req.body.Body,
+            stop: data.route,
+        });
+    });
 });
 
 
+// a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
     var stop = lib.findNearestStop(req.query.lat, req.query.lon);
 
@@ -118,6 +96,7 @@ router.get('/byLatLon', function(req, res, next) {
 });
 
 
+// feedback form endpoint
 router.post('/feedback', function(req, res, next) {
     comments('comments').push(req.body.comment)
     console.log('This is a comment:')

@@ -81,7 +81,7 @@ html
             showLoading();
 
             var http = new XMLHttpRequest();
-            http.open("POST", "/", true);
+            http.open("POST", "/ajax", true);
             var payload = {Body: document.getElementsByName('Body')[0].value};
             payload = JSON.stringify(payload);
 
