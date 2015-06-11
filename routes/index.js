@@ -49,7 +49,7 @@ router.post('/', function(req, res, next) {
         logRequest(entry)
     }
 
-    lib.parseInputReturnBusTimes(sendIt);
+    lib.parseInputReturnBusTimes(message, sendIt);
 });
 
 
