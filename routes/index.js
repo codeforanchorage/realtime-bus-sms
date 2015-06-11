@@ -38,7 +38,7 @@ router.post('/', function(req, res, next) {
 
         res.set('Content-Type', 'text/plain');
 
-        res.send(output);
+        res.send(data);
 
         // log info about this lookup
         var entry = {
