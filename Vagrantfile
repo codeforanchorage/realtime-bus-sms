@@ -9,7 +9,7 @@ OS = {
 }
 
 Vagrant.configure('2') do |config|
-  config.vm.box_url  = OS[:virtual_box]
+  config.vm.box_url  = OS[:virtualbox]
   config.vm.box      = OS[:box]
   config.vm.hostname = "realtime-bus-sms-0"
 
