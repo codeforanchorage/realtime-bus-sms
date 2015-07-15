@@ -26,7 +26,7 @@ Vagrant.configure('2') do |config|
 
   config.ssh.forward_agent = true
 
-  config.vm.provision "shell", inline: "sudo apt-get install npm nodejs nodejs-legacy"
+  config.vm.provision "shell", inline: "sudo apt-get -y install npm nodejs nodejs-legacy"
 
   config.vm.define "realtime_bus_sms_0" do |node|
     node.vm.network 'private_network', ip: '192.168.51.1'
