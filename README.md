@@ -27,6 +27,26 @@ Contributing
 
 Project Setup
 --------------
+Vagrant:
+
+    # create vagrant vm
+    vagrant up
+
+    # get onto vagrant vm
+    vagrant ssh
+
+    # install deps
+    cd realtime-bus-sms
+    npm install
+
+    # run 
+    # By default, this will serve on http://192.168.51.10:8080
+    ./bin/www
+
+    # run tests
+    sudo npm install -g mocha   # install testing framework
+    npm test
+
 
 Linux:
 
