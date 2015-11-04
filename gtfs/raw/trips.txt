@@ -1,1092 +1,1630 @@
-route_id,service_id,trip_id,trip_headsign,direction_id,block_id,shape_id,wheelchair_accessible,bikes_allowed
-1,1,711213-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711214-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711216-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711218-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711221-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711224-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711227-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711230-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711233-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711236-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711239-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711242-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711246-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711248-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711249-1,Muldoon,1,,1_EB_IB,1,1
-1,1,711250-1,Muldoon,1,,1_EB_IB,1,1
-1,2,711215-2,Muldoon,1,,1_EB_IB,1,1
-1,2,711217-2,Muldoon,1,,1_EB_IB,1,1
-1,2,711220-2,Muldoon,1,,1_EB_IB,1,1
-1,2,711223-2,Muldoon,1,,1_EB_IB,1,1
-1,2,711226-2,Muldoon,1,,1_EB_IB,1,1
-1,2,711229-2,Muldoon,1,,1_EB_IB,1,1
-1,2,711232-2,Muldoon,1,,1_EB_IB,1,1
-1,2,711235-2,Muldoon,1,,1_EB_IB,1,1
-1,2,711238-2,Muldoon,1,,1_EB_IB,1,1
-1,2,711241-2,Muldoon,1,,1_EB_IB,1,1
-1,2,711245-2,Muldoon,1,,1_EB_IB,1,1
-1,2,711247-2,Muldoon,1,,1_EB_IB,1,1
-1,3,711219-3,Muldoon,1,,1_EB_IB,1,1
-1,3,711222-3,Muldoon,1,,1_EB_IB,1,1
-1,3,711225-3,Muldoon,1,,1_EB_IB,1,1
-1,3,711228-3,Muldoon,1,,1_EB_IB,1,1
-1,3,711231-3,Muldoon,1,,1_EB_IB,1,1
-1,3,711234-3,Muldoon,1,,1_EB_IB,1,1
-1,3,711237-3,Muldoon,1,,1_EB_IB,1,1
-1,3,711240-3,Muldoon,1,,1_EB_IB,1,1
-1,3,711243-3,Muldoon,1,,1_EB_IB,1,1
-1,3,711244-3,Muldoon,1,,1_EB_IB,1,1
-1,1,711177-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711178-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711179-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711184-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711187-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711190-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711193-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711196-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711199-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711202-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711205-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711207-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711209-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711211-1,Dimond Center,0,,1_WB_OB,1,1
-1,1,711212-1,Dimond Center,0,,1_WB_OB,1,1
-1,2,711180-2,Dimond Center,0,,1_WB_OB,1,1
-1,2,711182-2,Dimond Center,0,,1_WB_OB,1,1
-1,2,711185-2,Dimond Center,0,,1_WB_OB,1,1
-1,2,711188-2,Dimond Center,0,,1_WB_OB,1,1
-1,2,711191-2,Dimond Center,0,,1_WB_OB,1,1
-1,2,711194-2,Dimond Center,0,,1_WB_OB,1,1
-1,2,711197-2,Dimond Center,0,,1_WB_OB,1,1
-1,2,711200-2,Dimond Center,0,,1_WB_OB,1,1
-1,2,711203-2,Dimond Center,0,,1_WB_OB,1,1
-1,2,711206-2,Dimond Center,0,,1_WB_OB,1,1
-1,2,711208-2,Dimond Center,0,,1_WB_OB,1,1
-1,2,711210-2,Dimond Center,0,,1_WB_OB,1,1
-1,3,711183-3,Dimond Center,0,,1_WB_OB,1,1
-1,3,711186-3,Dimond Center,0,,1_WB_OB,1,1
-1,3,711189-3,Dimond Center,0,,1_WB_OB,1,1
-1,3,711192-3,Dimond Center,0,,1_WB_OB,1,1
-1,3,711195-3,Dimond Center,0,,1_WB_OB,1,1
-1,3,711198-3,Dimond Center,0,,1_WB_OB,1,1
-1,3,711201-3,Dimond Center,0,,1_WB_OB,1,1
-1,3,711204-3,Dimond Center,0,,1_WB_OB,1,1
-1,1,711181-1,Dimond Center,0,,1_WB_OB,1,1
-2,1,711251-1,Downtown,1,,2_IB,1,1
-2,1,711252-1,Downtown,1,,2_IB,1,1
-2,1,711253-1,Downtown,1,,2_IB,1,1
-2,1,711254-1,Downtown,1,,2_IB,1,1
-2,1,711256-1,Downtown,1,,2_IB,1,1
-2,1,711258-1,Downtown,1,,2_IB,1,1
-2,1,711261-1,Downtown,1,,2_IB,1,1
-2,1,711264-1,Downtown,1,,2_IB,1,1
-2,1,711267-1,Downtown,1,,2_IB,1,1
-2,1,711270-1,Downtown,1,,2_IB,1,1
-2,1,711273-1,Downtown,1,,2_IB,1,1
-2,1,711276-1,Downtown,1,,2_IB,1,1
-2,1,711277-1,Downtown,1,,2_IB,1,1
-2,1,711280-1,Downtown,1,,2_IB,1,1
-2,1,711281-1,Downtown,1,,2_IB,1,1
-2,1,711284-1,Downtown,1,,2_IB,1,1
-2,1,711286-1,Downtown,1,,2_IB,1,1
-2,1,711287-1,Downtown,1,,2_IB,1,1
-2,1,711288-1,Downtown,1,,2_IB,1,1
-2,1,711289-1,Downtown,1,,2_IB,1,1
-2,2,711255-2,Downtown,1,,2_IB,1,1
-2,2,711257-2,Downtown,1,,2_IB,1,1
-2,2,711260-2,Downtown,1,,2_IB,1,1
-2,2,711263-2,Downtown,1,,2_IB,1,1
-2,2,711266-2,Downtown,1,,2_IB,1,1
-2,2,711269-2,Downtown,1,,2_IB,1,1
-2,2,711272-2,Downtown,1,,2_IB,1,1
-2,2,711275-2,Downtown,1,,2_IB,1,1
-2,2,711279-2,Downtown,1,,2_IB,1,1
-2,2,711283-2,Downtown,1,,2_IB,1,1
-2,2,711285-2,Downtown,1,,2_IB,1,1
-2,3,711259-3,Downtown,1,,2_IB,1,1
-2,3,711262-3,Downtown,1,,2_IB,1,1
-2,3,711265-3,Downtown,1,,2_IB,1,1
-2,3,711268-3,Downtown,1,,2_IB,1,1
-2,3,711271-3,Downtown,1,,2_IB,1,1
-2,3,711274-3,Downtown,1,,2_IB,1,1
-2,3,711278-3,Downtown,1,,2_IB,1,1
-2,3,711282-3,Downtown,1,,2_IB,1,1
-2,1,711365-1,Dimond Center,0,,2_OB,1,1
-2,1,711366-1,Dimond Center,0,,2_OB,1,1
-2,1,711367-1,Dimond Center,0,,2_OB,1,1
-2,1,711368-1,Dimond Center,0,,2_OB,1,1
-2,1,711370-1,Dimond Center,0,,2_OB,1,1
-2,1,711374-1,Dimond Center,0,,2_OB,1,1
-2,1,711377-1,Dimond Center,0,,2_OB,1,1
-2,1,711380-1,Dimond Center,0,,2_OB,1,1
-2,1,711383-1,Dimond Center,0,,2_OB,1,1
-2,1,711385-1,Dimond Center,0,,2_OB,1,1
-2,1,711387-1,Dimond Center,0,,2_OB,1,1
-2,1,711389-1,Dimond Center,0,,2_OB,1,1
-2,1,711391-1,Dimond Center,0,,2_OB,1,1
-2,1,711393-1,Dimond Center,0,,2_OB,1,1
-2,1,711395-1,Dimond Center,0,,2_OB,1,1
-2,1,711397-1,Dimond Center,0,,2_OB,1,1
-2,1,711399-1,Dimond Center,0,,2_OB,1,1
-2,1,711401-1,Dimond Center,0,,2_OB,1,1
-2,1,711403-1,Dimond Center,0,,2_OB,1,1
-2,1,711404-1,Dimond Center,0,,2_OB,1,1
-2,1,711405-1,Dimond Center,0,,2_OB,1,1
-2,2,711369-2,Dimond Center,0,,2_OB,1,1
-2,2,711371-2,Dimond Center,0,,2_OB,1,1
-2,2,711373-2,Dimond Center,0,,2_OB,1,1
-2,2,711376-2,Dimond Center,0,,2_OB,1,1
-2,2,711379-2,Dimond Center,0,,2_OB,1,1
-2,2,711382-2,Dimond Center,0,,2_OB,1,1
-2,2,711386-2,Dimond Center,0,,2_OB,1,1
-2,2,711390-2,Dimond Center,0,,2_OB,1,1
-2,2,711394-2,Dimond Center,0,,2_OB,1,1
-2,2,711398-2,Dimond Center,0,,2_OB,1,1
-2,2,711402-2,Dimond Center,0,,2_OB,1,1
-2,3,711372-3,Dimond Center,0,,2_OB,1,1
-2,3,711375-3,Dimond Center,0,,2_OB,1,1
-2,3,711378-3,Dimond Center,0,,2_OB,1,1
-2,3,711381-3,Dimond Center,0,,2_OB,1,1
-2,3,711384-3,Dimond Center,0,,2_OB,1,1
-2,3,711388-3,Dimond Center,0,,2_OB,1,1
-2,3,711392-3,Dimond Center,0,,2_OB,1,1
-2,3,711396-3,Dimond Center,0,,2_OB,1,1
-2,3,711400-3,Dimond Center,0,,2_OB,1,1
-3C,1,710926-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710927-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710928-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710930-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710931-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710934-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710935-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710938-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710939-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710942-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710943-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710946-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710947-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710949-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,1,710951-1,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,2,710929-2,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,2,710933-2,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,2,710937-2,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,2,710941-2,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,2,710945-2,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,2,710948-2,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,2,710950-2,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,3,710932-3,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,3,710936-3,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,3,710940-3,Chester Valley/Downtown,1,,3C_IB,1,1
-3C,3,710944-3,Chester Valley/Downtown,1,,3C_IB,1,1
-3N,1,711312-1,Nunaka Valley/Downtown,1,,3N_IB_CNT,1,1
-3N,2,711303-2,Nunaka Valley/Downtown,1,,3N_IB_CNT,1,1
-3N,2,711305-2,Nunaka Valley/Downtown,1,,3N_IB_CNT,1,1
-3N,2,711307-2,Nunaka Valley/Downtown,1,,3N_IB_CNT,1,1
-3N,2,711309-2,Nunaka Valley/Downtown,1,,3N_IB_CNT,1,1
-3N,2,711311-2,Nunaka Valley/Downtown,1,,3N_IB_CNT,1,1
-3N,2,711313-2,Nunaka Valley/Downtown,1,,3N_IB_CNT,1,1
-3N,3,711304-3,Nunaka Valley/Downtown,1,,3N_IB_CNT,1,1
-3N,3,711306-3,Nunaka Valley/Downtown,1,,3N_IB_CNT,1,1
-3N,3,711308-3,Nunaka Valley/Downtown,1,,3N_IB_CNT,1,1
-3N,3,711310-3,Nunaka Valley/Downtown,1,,3N_IB_CNT,1,1
-3N,1,711290-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3N,1,711291-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3N,1,711292-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3N,1,711293-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3N,1,711294-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3N,1,711295-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3N,1,711296-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3N,1,711297-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3N,1,711298-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3N,1,711299-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3N,1,711300-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3N,1,711301-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3N,1,711302-1,Nunaka Valley/Downtown,1,,3N_IB,1,1
-3C,1,711327-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711328-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711329-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711331-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711332-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711335-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711336-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711339-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711340-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711343-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711344-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711347-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711348-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711350-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,1,711351-1,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,2,711330-2,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,2,711334-2,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,2,711338-2,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,2,711342-2,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,2,711346-2,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,2,711349-2,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,3,711333-3,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,3,711337-3,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,3,711341-3,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3C,3,711345-3,Chester Valley/Muldoon/Centennial Village,0,,3C_OB_CNT,1,1
-3N,2,711568-2,Nunaka Valley/Muldoon/Centennial Village,0,,3N_OB_CNT,1,1
-3N,2,711569-2,Nunaka Valley/Muldoon/Centennial Village,0,,3N_OB_CNT,1,1
-3N,2,711571-2,Nunaka Valley/Muldoon/Centennial Village,0,,3N_OB_CNT,1,1
-3N,2,711573-2,Nunaka Valley/Muldoon/Centennial Village,0,,3N_OB_CNT,1,1
-3N,2,711575-2,Nunaka Valley/Muldoon/Centennial Village,0,,3N_OB_CNT,1,1
-3N,2,711577-2,Nunaka Valley/Muldoon/Centennial Village,0,,3N_OB_CNT,1,1
-3N,2,711578-2,Nunaka Valley/Muldoon/Centennial Village,0,,3N_OB_CNT,1,1
-3N,3,711570-3,Nunaka Valley/Muldoon/Centennial Village,0,,3N_OB_CNT,1,1
-3N,3,711572-3,Nunaka Valley/Muldoon/Centennial Village,0,,3N_OB_CNT,1,1
-3N,3,711574-3,Nunaka Valley/Muldoon/Centennial Village,0,,3N_OB_CNT,1,1
-3N,3,711576-3,Nunaka Valley/Muldoon/Centennial Village,0,,3N_OB_CNT,1,1
-3N,1,711553-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711554-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711555-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711556-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711557-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711558-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711559-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711560-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711561-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711562-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711563-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711564-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711565-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711566-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-3N,1,711567-1,Nunaka Valley/Muldoon,0,,3N_OB_MUL,1,1
-7A,1,710952-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710953-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710955-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710956-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710958-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710960-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710962-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710964-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710966-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710968-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710970-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710972-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710974-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710976-1,Airport/Downtown,1,,7A_IB,1,1
-7A,1,710977-1,Airport/Downtown,1,,7A_IB,1,1
-7A,2,710954-2,Airport/Downtown,1,,7A_IB,1,1
-7A,2,710957-2,Airport/Downtown,1,,7A_IB,1,1
-7A,2,710961-2,Airport/Downtown,1,,7A_IB,1,1
-7A,2,710965-2,Airport/Downtown,1,,7A_IB,1,1
-7A,2,710969-2,Airport/Downtown,1,,7A_IB,1,1
-7A,2,710973-2,Airport/Downtown,1,,7A_IB,1,1
-7A,2,710975-2,Airport/Downtown,1,,7A_IB,1,1
-7A,3,710959-3,Airport/Downtown,1,,7A_IB,1,1
-7A,3,710963-3,Airport/Downtown,1,,7A_IB,1,1
-7A,3,710967-3,Airport/Downtown,1,,7A_IB,1,1
-7A,3,710971-3,Airport/Downtown,1,,7A_IB,1,1
-7J,1,711590-1,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,1,711591-1,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,2,711579-2,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,2,711581-2,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,2,711583-2,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,2,711585-2,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,2,711587-2,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,2,711589-2,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,3,711580-3,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,3,711582-3,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,3,711584-3,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,3,711586-3,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,3,711588-3,Airport/Downtown,1,,7J_IB_AIR,1,1
-7J,1,711128-1,Downtown,1,,7J_IB,1,1
-7J,1,711129-1,Downtown,1,,7J_IB,1,1
-7J,1,711130-1,Downtown,1,,7J_IB,1,1
-7J,1,711131-1,Downtown,1,,7J_IB,1,1
-7J,1,711132-1,Downtown,1,,7J_IB,1,1
-7J,1,711133-1,Downtown,1,,7J_IB,1,1
-7J,1,711134-1,Downtown,1,,7J_IB,1,1
-7J,1,711135-1,Downtown,1,,7J_IB,1,1
-7J,1,711136-1,Downtown,1,,7J_IB,1,1
-7J,1,711137-1,Downtown,1,,7J_IB,1,1
-7J,1,711138-1,Downtown,1,,7J_IB,1,1
-7J,1,711139-1,Downtown,1,,7J_IB,1,1
-7J,1,711140-1,Downtown,1,,7J_IB,1,1
-7A,1,711527-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711528-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711529-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711531-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711533-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711535-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711537-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711539-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711541-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711543-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711545-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711547-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711549-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711551-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,1,711552-1,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,2,711530-2,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,2,711534-2,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,2,711538-2,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,2,711542-2,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,2,711546-2,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,2,711550-2,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,3,711532-3,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,3,711536-3,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,3,711540-3,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,3,711544-3,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7A,3,711548-3,Airport/Dimond Center,0,,7A_OB_DI,1,1
-7J,1,711324-1,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,1,711326-1,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,2,711314-2,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,2,711315-2,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,2,711317-2,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,2,711319-2,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,2,711321-2,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,2,711323-2,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,2,711325-2,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,3,711316-3,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,3,711318-3,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,3,711320-3,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,3,711322-3,Airport/Dimond Center,0,,7J_OB_DI_AIR,1,1
-7J,1,711352-1,Dimond Center,0,,7J_OB_DI,1,1
-7J,1,711353-1,Dimond Center,0,,7J_OB_DI,1,1
-7J,1,711354-1,Dimond Center,0,,7J_OB_DI,1,1
-7J,1,711355-1,Dimond Center,0,,7J_OB_DI,1,1
-7J,1,711356-1,Dimond Center,0,,7J_OB_DI,1,1
-7J,1,711357-1,Dimond Center,0,,7J_OB_DI,1,1
-7J,1,711358-1,Dimond Center,0,,7J_OB_DI,1,1
-7J,1,711359-1,Dimond Center,0,,7J_OB_DI,1,1
-7J,1,711360-1,Dimond Center,0,,7J_OB_DI,1,1
-7J,1,711361-1,Dimond Center,0,,7J_OB_DI,1,1
-7J,1,711362-1,Dimond Center,0,,7J_OB_DI,1,1
-7J,1,711363-1,Dimond Center,0,,7J_OB_DI,1,1
-7J,1,711364-1,Dimond Center,0,,7J_OB_DI,1,1
-8,1,711406-1,Downtown,1,,8_IB,1,1
-8,1,711407-1,Downtown,1,,8_IB,1,1
-8,1,711408-1,Downtown,1,,8_IB,1,1
-8,1,711410-1,Downtown,1,,8_IB,1,1
-8,1,711412-1,Downtown,1,,8_IB,1,1
-8,1,711414-1,Downtown,1,,8_IB,1,1
-8,1,711417-1,Downtown,1,,8_IB,1,1
-8,1,711420-1,Downtown,1,,8_IB,1,1
-8,1,711423-1,Downtown,1,,8_IB,1,1
-8,1,711426-1,Downtown,1,,8_IB,1,1
-8,1,711430-1,Downtown,1,,8_IB,1,1
-8,1,711433-1,Downtown,1,,8_IB,1,1
-8,1,711436-1,Downtown,1,,8_IB,1,1
-8,1,711438-1,Downtown,1,,8_IB,1,1
-8,1,711439-1,Downtown,1,,8_IB,1,1
-8,1,711440-1,Downtown,1,,8_IB,1,1
-8,2,711409-2,Downtown,1,,8_IB,1,1
-8,2,711411-2,Downtown,1,,8_IB,1,1
-8,2,711413-2,Downtown,1,,8_IB,1,1
-8,2,711415-2,Downtown,1,,8_IB,1,1
-8,2,711418-2,Downtown,1,,8_IB,1,1
-8,2,711421-2,Downtown,1,,8_IB,1,1
-8,2,711424-2,Downtown,1,,8_IB,1,1
-8,2,711427-2,Downtown,1,,8_IB,1,1
-8,2,711429-2,Downtown,1,,8_IB,1,1
-8,2,711432-2,Downtown,1,,8_IB,1,1
-8,2,711435-2,Downtown,1,,8_IB,1,1
-8,3,711416-3,Downtown,1,,8_IB,1,1
-8,3,711419-3,Downtown,1,,8_IB,1,1
-8,3,711422-3,Downtown,1,,8_IB,1,1
-8,3,711425-3,Downtown,1,,8_IB,1,1
-8,3,711428-3,Downtown,1,,8_IB,1,1
-8,3,711431-3,Downtown,1,,8_IB,1,1
-8,3,711434-3,Downtown,1,,8_IB,1,1
-8,3,711437-3,Downtown,1,,8_IB,1,1
-8,1,711677-1,Muldoon,0,,8_OB,1,1
-8,1,711678-1,Muldoon,0,,8_OB,1,1
-8,1,711679-1,Muldoon,0,,8_OB,1,1
-8,1,711681-1,Muldoon,0,,8_OB,1,1
-8,1,711683-1,Muldoon,0,,8_OB,1,1
-8,1,711686-1,Muldoon,0,,8_OB,1,1
-8,1,711689-1,Muldoon,0,,8_OB,1,1
-8,1,711692-1,Muldoon,0,,8_OB,1,1
-8,1,711695-1,Muldoon,0,,8_OB,1,1
-8,1,711698-1,Muldoon,0,,8_OB,1,1
-8,1,711701-1,Muldoon,0,,8_OB,1,1
-8,1,711704-1,Muldoon,0,,8_OB,1,1
-8,1,711705-1,Muldoon,0,,8_OB,1,1
-8,1,711708-1,Muldoon,0,,8_OB,1,1
-8,1,711709-1,Muldoon,0,,8_OB,1,1
-8,1,711710-1,Muldoon,0,,8_OB,1,1
-8,1,711711-1,Muldoon,0,,8_OB,1,1
-8,2,711680-2,Muldoon,0,,8_OB,1,1
-8,2,711682-2,Muldoon,0,,8_OB,1,1
-8,2,711685-2,Muldoon,0,,8_OB,1,1
-8,2,711688-2,Muldoon,0,,8_OB,1,1
-8,2,711691-2,Muldoon,0,,8_OB,1,1
-8,2,711694-2,Muldoon,0,,8_OB,1,1
-8,2,711697-2,Muldoon,0,,8_OB,1,1
-8,2,711700-2,Muldoon,0,,8_OB,1,1
-8,2,711703-2,Muldoon,0,,8_OB,1,1
-8,2,711707-2,Muldoon,0,,8_OB,1,1
-8,3,711684-3,Muldoon,0,,8_OB,1,1
-8,3,711687-3,Muldoon,0,,8_OB,1,1
-8,3,711690-3,Muldoon,0,,8_OB,1,1
-8,3,711693-3,Muldoon,0,,8_OB,1,1
-8,3,711696-3,Muldoon,0,,8_OB,1,1
-8,3,711699-3,Muldoon,0,,8_OB,1,1
-8,3,711702-3,Muldoon,0,,8_OB,1,1
-8,3,711706-3,Muldoon,0,,8_OB,1,1
-9,1,711441-1,Downtown,1,,9_IB,1,1
-9,1,711442-1,Downtown,1,,9_IB,1,1
-9,1,711443-1,Downtown,1,,9_IB,1,1
-9,1,711444-1,Downtown,1,,9_IB,1,1
-9,1,711446-1,Downtown,1,,9_IB,1,1
-9,1,711447-1,Downtown,1,,9_IB,1,1
-9,1,711449-1,Downtown,1,,9_IB,1,1
-9,1,711450-1,Downtown,1,,9_IB,1,1
-9,1,711453-1,Downtown,1,,9_IB,1,1
-9,1,711454-1,Downtown,1,,9_IB,1,1
-9,1,711457-1,Downtown,1,,9_IB,1,1
-9,1,711458-1,Downtown,1,,9_IB,1,1
-9,1,711461-1,Downtown,1,,9_IB,1,1
-9,1,711462-1,Downtown,1,,9_IB,1,1
-9,1,711465-1,Downtown,1,,9_IB,1,1
-9,1,711466-1,Downtown,1,,9_IB,1,1
-9,1,711469-1,Downtown,1,,9_IB,1,1
-9,1,711470-1,Downtown,1,,9_IB,1,1
-9,1,711473-1,Downtown,1,,9_IB,1,1
-9,1,711474-1,Downtown,1,,9_IB,1,1
-9,1,711477-1,Downtown,1,,9_IB,1,1
-9,1,711478-1,Downtown,1,,9_IB,1,1
-9,1,711481-1,Downtown,1,,9_IB,1,1
-9,1,711483-1,Downtown,1,,9_IB,1,1
-9,1,711485-1,Downtown,1,,9_IB,1,1
-9,1,711486-1,Downtown,1,,9_IB,1,1
-9,2,711445-2,Downtown,1,,9_IB,1,1
-9,2,711448-2,Downtown,1,,9_IB,1,1
-9,2,711452-2,Downtown,1,,9_IB,1,1
-9,2,711456-2,Downtown,1,,9_IB,1,1
-9,2,711460-2,Downtown,1,,9_IB,1,1
-9,2,711464-2,Downtown,1,,9_IB,1,1
-9,2,711468-2,Downtown,1,,9_IB,1,1
-9,2,711472-2,Downtown,1,,9_IB,1,1
-9,2,711476-2,Downtown,1,,9_IB,1,1
-9,2,711480-2,Downtown,1,,9_IB,1,1
-9,2,711482-2,Downtown,1,,9_IB,1,1
-9,2,711484-2,Downtown,1,,9_IB,1,1
-9,3,711451-3,Downtown,1,,9_IB,1,1
-9,3,711455-3,Downtown,1,,9_IB,1,1
-9,3,711459-3,Downtown,1,,9_IB,1,1
-9,3,711463-3,Downtown,1,,9_IB,1,1
-9,3,711467-3,Downtown,1,,9_IB,1,1
-9,3,711471-3,Downtown,1,,9_IB,1,1
-9,3,711475-3,Downtown,1,,9_IB,1,1
-9,3,711479-3,Downtown,1,,9_IB,1,1
-9,1,711592-1,Dimond Center,0,,9_OB,1,1
-9,1,711593-1,Dimond Center,0,,9_OB,1,1
-9,1,711594-1,Dimond Center,0,,9_OB,1,1
-9,1,711595-1,Dimond Center,0,,9_OB,1,1
-9,1,711596-1,Dimond Center,0,,9_OB,1,1
-9,1,711598-1,Dimond Center,0,,9_OB,1,1
-9,1,711599-1,Dimond Center,0,,9_OB,1,1
-9,1,711601-1,Dimond Center,0,,9_OB,1,1
-9,1,711602-1,Dimond Center,0,,9_OB,1,1
-9,1,711605-1,Dimond Center,0,,9_OB,1,1
-9,1,711606-1,Dimond Center,0,,9_OB,1,1
-9,1,711609-1,Dimond Center,0,,9_OB,1,1
-9,1,711610-1,Dimond Center,0,,9_OB,1,1
-9,1,711613-1,Dimond Center,0,,9_OB,1,1
-9,1,711614-1,Dimond Center,0,,9_OB,1,1
-9,1,711617-1,Dimond Center,0,,9_OB,1,1
-9,1,711618-1,Dimond Center,0,,9_OB,1,1
-9,1,711621-1,Dimond Center,0,,9_OB,1,1
-9,1,711622-1,Dimond Center,0,,9_OB,1,1
-9,1,711625-1,Dimond Center,0,,9_OB,1,1
-9,1,711626-1,Dimond Center,0,,9_OB,1,1
-9,1,711629-1,Dimond Center,0,,9_OB,1,1
-9,1,711630-1,Dimond Center,0,,9_OB,1,1
-9,1,711633-1,Dimond Center,0,,9_OB,1,1
-9,1,711635-1,Dimond Center,0,,9_OB,1,1
-9,1,711637-1,Dimond Center,0,,9_OB,1,1
-9,1,711638-1,Dimond Center,0,,9_OB,1,1
-9,2,711597-2,Dimond Center,0,,9_OB,1,1
-9,2,711600-2,Dimond Center,0,,9_OB,1,1
-9,2,711604-2,Dimond Center,0,,9_OB,1,1
-9,2,711608-2,Dimond Center,0,,9_OB,1,1
-9,2,711612-2,Dimond Center,0,,9_OB,1,1
-9,2,711616-2,Dimond Center,0,,9_OB,1,1
-9,2,711620-2,Dimond Center,0,,9_OB,1,1
-9,2,711624-2,Dimond Center,0,,9_OB,1,1
-9,2,711628-2,Dimond Center,0,,9_OB,1,1
-9,2,711632-2,Dimond Center,0,,9_OB,1,1
-9,2,711634-2,Dimond Center,0,,9_OB,1,1
-9,2,711636-2,Dimond Center,0,,9_OB,1,1
-9,3,711603-3,Dimond Center,0,,9_OB,1,1
-9,3,711607-3,Dimond Center,0,,9_OB,1,1
-9,3,711611-3,Dimond Center,0,,9_OB,1,1
-9,3,711615-3,Dimond Center,0,,9_OB,1,1
-9,3,711619-3,Dimond Center,0,,9_OB,1,1
-9,3,711623-3,Dimond Center,0,,9_OB,1,1
-9,3,711627-3,Dimond Center,0,,9_OB,1,1
-9,3,711631-3,Dimond Center,0,,9_OB,1,1
-13,1,711487-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711488-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711489-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711490-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711491-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711493-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711495-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711498-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711501-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711504-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711507-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711510-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711513-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711516-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711519-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711521-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711523-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711524-1,Senior Center/Downtown,1,,13_IB,1,1
-13,1,711525-1,Senior Center/Downtown,1,,13_IB,1,1
-13,2,711492-2,Senior Center/Downtown,1,,13_IB,1,1
-13,2,711494-2,Senior Center/Downtown,1,,13_IB,1,1
-13,2,711497-2,Senior Center/Downtown,1,,13_IB,1,1
-13,2,711500-2,Senior Center/Downtown,1,,13_IB,1,1
-13,2,711503-2,Senior Center/Downtown,1,,13_IB,1,1
-13,2,711506-2,Senior Center/Downtown,1,,13_IB,1,1
-13,2,711509-2,Senior Center/Downtown,1,,13_IB,1,1
-13,2,711512-2,Senior Center/Downtown,1,,13_IB,1,1
-13,2,711515-2,Senior Center/Downtown,1,,13_IB,1,1
-13,2,711518-2,Senior Center/Downtown,1,,13_IB,1,1
-13,2,711520-2,Senior Center/Downtown,1,,13_IB,1,1
-13,2,711522-2,Senior Center/Downtown,1,,13_IB,1,1
-13,3,711496-3,Senior Center/Downtown,1,,13_IB,1,1
-13,3,711499-3,Senior Center/Downtown,1,,13_IB,1,1
-13,3,711502-3,Senior Center/Downtown,1,,13_IB,1,1
-13,3,711505-3,Senior Center/Downtown,1,,13_IB,1,1
-13,3,711508-3,Senior Center/Downtown,1,,13_IB,1,1
-13,3,711511-3,Senior Center/Downtown,1,,13_IB,1,1
-13,3,711514-3,Senior Center/Downtown,1,,13_IB,1,1
-13,3,711517-3,Senior Center/Downtown,1,,13_IB,1,1
-13,1,710886-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710887-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710889-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710891-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710894-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710897-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710900-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710903-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710906-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710909-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710912-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710913-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710916-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710919-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710921-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710922-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,710923-1,Senior Center/Muldoon,0,,13_OB,1,1
-13,2,710888-2,Senior Center/Muldoon,0,,13_OB,1,1
-13,2,710890-2,Senior Center/Muldoon,0,,13_OB,1,1
-13,2,710893-2,Senior Center/Muldoon,0,,13_OB,1,1
-13,2,710896-2,Senior Center/Muldoon,0,,13_OB,1,1
-13,2,710899-2,Senior Center/Muldoon,0,,13_OB,1,1
-13,2,710902-2,Senior Center/Muldoon,0,,13_OB,1,1
-13,2,710905-2,Senior Center/Muldoon,0,,13_OB,1,1
-13,2,710908-2,Senior Center/Muldoon,0,,13_OB,1,1
-13,2,710911-2,Senior Center/Muldoon,0,,13_OB,1,1
-13,2,710915-2,Senior Center/Muldoon,0,,13_OB,1,1
-13,2,710918-2,Senior Center/Muldoon,0,,13_OB,1,1
-13,2,710920-2,Senior Center/Muldoon,0,,13_OB,1,1
-13,3,710892-3,Senior Center/Muldoon,0,,13_OB,1,1
-13,3,710895-3,Senior Center/Muldoon,0,,13_OB,1,1
-13,3,710898-3,Senior Center/Muldoon,0,,13_OB,1,1
-13,3,710901-3,Senior Center/Muldoon,0,,13_OB,1,1
-13,3,710904-3,Senior Center/Muldoon,0,,13_OB,1,1
-13,3,710907-3,Senior Center/Muldoon,0,,13_OB,1,1
-13,3,710910-3,Senior Center/Muldoon,0,,13_OB,1,1
-13,3,710914-3,Senior Center/Muldoon,0,,13_OB,1,1
-13,3,710917-3,Senior Center/Muldoon,0,,13_OB,1,1
-13,1,711639-1,Providence,0,,13_OB,1,1
-14,1,711640-1,Loop,0,,14_Loop,1,1
-14,1,711641-1,Loop,0,,14_Loop,1,1
-14,1,711642-1,Loop,0,,14_Loop,1,1
-14,1,711645-1,Loop,0,,14_Loop,1,1
-14,1,711648-1,Loop,0,,14_Loop,1,1
-14,1,711651-1,Loop,0,,14_Loop,1,1
-14,1,711654-1,Loop,0,,14_Loop,1,1
-14,1,711657-1,Loop,0,,14_Loop,1,1
-14,1,711660-1,Loop,0,,14_Loop,1,1
-14,1,711663-1,Loop,0,,14_Loop,1,1
-14,1,711666-1,Loop,0,,14_Loop,1,1
-14,1,711669-1,Loop,0,,14_Loop,1,1
-14,1,711671-1,Loop,0,,14_Loop,1,1
-14,1,711673-1,Loop,0,,14_Loop,1,1
-14,1,711675-1,Loop,0,,14_Loop,1,1
-14,1,711676-1,Loop,0,,14_Loop,1,1
-14,2,711643-2,Loop,0,,14_Loop,1,1
-14,2,711646-2,Loop,0,,14_Loop,1,1
-14,2,711649-2,Loop,0,,14_Loop,1,1
-14,2,711652-2,Loop,0,,14_Loop,1,1
-14,2,711655-2,Loop,0,,14_Loop,1,1
-14,2,711658-2,Loop,0,,14_Loop,1,1
-14,2,711661-2,Loop,0,,14_Loop,1,1
-14,2,711664-2,Loop,0,,14_Loop,1,1
-14,2,711667-2,Loop,0,,14_Loop,1,1
-14,2,711670-2,Loop,0,,14_Loop,1,1
-14,2,711672-2,Loop,0,,14_Loop,1,1
-14,2,711674-2,Loop,0,,14_Loop,1,1
-14,3,711644-3,Loop,0,,14_Loop,1,1
-14,3,711647-3,Loop,0,,14_Loop,1,1
-14,3,711650-3,Loop,0,,14_Loop,1,1
-14,3,711653-3,Loop,0,,14_Loop,1,1
-14,3,711656-3,Loop,0,,14_Loop,1,1
-14,3,711659-3,Loop,0,,14_Loop,1,1
-14,3,711662-3,Loop,0,,14_Loop,1,1
-14,3,711665-3,Loop,0,,14_Loop,1,1
-14,3,711668-3,Loop,0,,14_Loop,1,1
-15,1,710782-1,Downtown,1,,15_IB,1,1
-15,1,710783-1,Downtown,1,,15_IB,1,1
-15,1,710784-1,Downtown,1,,15_IB,1,1
-15,1,710785-1,Downtown,1,,15_IB,1,1
-15,1,710786-1,Downtown,1,,15_IB,1,1
-15,1,710788-1,Downtown,1,,15_IB,1,1
-15,1,710789-1,Downtown,1,,15_IB,1,1
-15,1,710791-1,Downtown,1,,15_IB,1,1
-15,1,710793-1,Downtown,1,,15_IB,1,1
-15,1,710795-1,Downtown,1,,15_IB,1,1
-15,1,710797-1,Downtown,1,,15_IB,1,1
-15,1,710799-1,Downtown,1,,15_IB,1,1
-15,1,710801-1,Downtown,1,,15_IB,1,1
-15,1,710803-1,Downtown,1,,15_IB,1,1
-15,1,710805-1,Downtown,1,,15_IB,1,1
-15,1,710807-1,Downtown,1,,15_IB,1,1
-15,1,710809-1,Downtown,1,,15_IB,1,1
-15,1,710811-1,Downtown,1,,15_IB,1,1
-15,1,710813-1,Downtown,1,,15_IB,1,1
-15,1,710815-1,Downtown,1,,15_IB,1,1
-15,1,710817-1,Downtown,1,,15_IB,1,1
-15,1,710819-1,Downtown,1,,15_IB,1,1
-15,1,710821-1,Downtown,1,,15_IB,1,1
-15,1,710823-1,Downtown,1,,15_IB,1,1
-15,1,710825-1,Downtown,1,,15_IB,1,1
-15,1,710827-1,Downtown,1,,15_IB,1,1
-15,1,710828-1,Downtown,1,,15_IB,1,1
-15,1,710829-1,Downtown,1,,15_IB,1,1
-15,2,710787-2,Downtown,1,,15_IB,1,1
-15,2,710790-2,Downtown,1,,15_IB,1,1
-15,2,710794-2,Downtown,1,,15_IB,1,1
-15,2,710798-2,Downtown,1,,15_IB,1,1
-15,2,710802-2,Downtown,1,,15_IB,1,1
-15,2,710806-2,Downtown,1,,15_IB,1,1
-15,2,710810-2,Downtown,1,,15_IB,1,1
-15,2,710814-2,Downtown,1,,15_IB,1,1
-15,2,710818-2,Downtown,1,,15_IB,1,1
-15,2,710822-2,Downtown,1,,15_IB,1,1
-15,2,710824-2,Downtown,1,,15_IB,1,1
-15,2,710826-2,Downtown,1,,15_IB,1,1
-15,3,710792-3,Downtown,1,,15_IB,1,1
-15,3,710796-3,Downtown,1,,15_IB,1,1
-15,3,710800-3,Downtown,1,,15_IB,1,1
-15,3,710804-3,Downtown,1,,15_IB,1,1
-15,3,710808-3,Downtown,1,,15_IB,1,1
-15,3,710812-3,Downtown,1,,15_IB,1,1
-15,3,710816-3,Downtown,1,,15_IB,1,1
-15,3,710820-3,Downtown,1,,15_IB,1,1
-15,1,711015-1,Muldoon,0,,15_OB,1,1
-15,1,711016-1,Muldoon,0,,15_OB,1,1
-15,1,711017-1,Muldoon,0,,15_OB,1,1
-15,1,711018-1,Muldoon,0,,15_OB,1,1
-15,1,711019-1,Muldoon,0,,15_OB,1,1
-15,1,711021-1,Muldoon,0,,15_OB,1,1
-15,1,711022-1,Muldoon,0,,15_OB,1,1
-15,1,711024-1,Muldoon,0,,15_OB,1,1
-15,1,711026-1,Muldoon,0,,15_OB,1,1
-15,1,711028-1,Muldoon,0,,15_OB,1,1
-15,1,711030-1,Muldoon,0,,15_OB,1,1
-15,1,711032-1,Muldoon,0,,15_OB,1,1
-15,1,711034-1,Muldoon,0,,15_OB,1,1
-15,1,711036-1,Muldoon,0,,15_OB,1,1
-15,1,711038-1,Muldoon,0,,15_OB,1,1
-15,1,711040-1,Muldoon,0,,15_OB,1,1
-15,1,711042-1,Muldoon,0,,15_OB,1,1
-15,1,711044-1,Muldoon,0,,15_OB,1,1
-15,1,711046-1,Muldoon,0,,15_OB,1,1
-15,1,711048-1,Muldoon,0,,15_OB,1,1
-15,1,711050-1,Muldoon,0,,15_OB,1,1
-15,1,711052-1,Muldoon,0,,15_OB,1,1
-15,1,711054-1,Muldoon,0,,15_OB,1,1
-15,1,711056-1,Muldoon,0,,15_OB,1,1
-15,1,711058-1,Muldoon,0,,15_OB,1,1
-15,1,711060-1,Muldoon,0,,15_OB,1,1
-15,1,711061-1,Muldoon,0,,15_OB,1,1
-15,2,711020-2,Muldoon,0,,15_OB,1,1
-15,2,711023-2,Muldoon,0,,15_OB,1,1
-15,2,711027-2,Muldoon,0,,15_OB,1,1
-15,2,711031-2,Muldoon,0,,15_OB,1,1
-15,2,711035-2,Muldoon,0,,15_OB,1,1
-15,2,711039-2,Muldoon,0,,15_OB,1,1
-15,2,711043-2,Muldoon,0,,15_OB,1,1
-15,2,711047-2,Muldoon,0,,15_OB,1,1
-15,2,711051-2,Muldoon,0,,15_OB,1,1
-15,2,711055-2,Muldoon,0,,15_OB,1,1
-15,2,711057-2,Muldoon,0,,15_OB,1,1
-15,2,711059-2,Muldoon,0,,15_OB,1,1
-15,3,711025-3,Muldoon,0,,15_OB,1,1
-15,3,711029-3,Muldoon,0,,15_OB,1,1
-15,3,711033-3,Muldoon,0,,15_OB,1,1
-15,3,711037-3,Muldoon,0,,15_OB,1,1
-15,3,711041-3,Muldoon,0,,15_OB,1,1
-15,3,711045-3,Muldoon,0,,15_OB,1,1
-15,3,711049-3,Muldoon,0,,15_OB,1,1
-15,3,711053-3,Muldoon,0,,15_OB,1,1
-36,1,710978-1,Downtown,1,,36_IB,1,1
-36,1,710979-1,Downtown,1,,36_IB,1,1
-36,1,710980-1,Downtown,1,,36_IB,1,1
-36,1,710981-1,Downtown,1,,36_IB,1,1
-36,1,710982-1,Downtown,1,,36_IB,1,1
-36,1,710983-1,Downtown,1,,36_IB,1,1
-36,1,710985-1,Downtown,1,,36_IB,1,1
-36,1,710988-1,Downtown,1,,36_IB,1,1
-36,1,710991-1,Downtown,1,,36_IB,1,1
-36,1,710994-1,Downtown,1,,36_IB,1,1
-36,1,710997-1,Downtown,1,,36_IB,1,1
-36,1,711000-1,Downtown,1,,36_IB,1,1
-36,1,711003-1,Downtown,1,,36_IB,1,1
-36,1,711006-1,Downtown,1,,36_IB,1,1
-36,1,711008-1,Downtown,1,,36_IB,1,1
-36,1,711010-1,Downtown,1,,36_IB,1,1
-36,1,711011-1,Downtown,1,,36_IB,1,1
-36,1,711012-1,Downtown,1,,36_IB,1,1
-36,1,711013-1,Downtown,1,,36_IB,1,1
-36,2,710984-2,Downtown,1,,36_IB,1,1
-36,2,710987-2,Downtown,1,,36_IB,1,1
-36,2,710990-2,Downtown,1,,36_IB,1,1
-36,2,710993-2,Downtown,1,,36_IB,1,1
-36,2,710996-2,Downtown,1,,36_IB,1,1
-36,2,710999-2,Downtown,1,,36_IB,1,1
-36,2,711002-2,Downtown,1,,36_IB,1,1
-36,2,711005-2,Downtown,1,,36_IB,1,1
-36,2,711007-2,Downtown,1,,36_IB,1,1
-36,2,711009-2,Downtown,1,,36_IB,1,1
-36,3,710986-3,Downtown,1,,36_IB,1,1
-36,3,710989-3,Downtown,1,,36_IB,1,1
-36,3,710992-3,Downtown,1,,36_IB,1,1
-36,3,710995-3,Downtown,1,,36_IB,1,1
-36,3,710998-3,Downtown,1,,36_IB,1,1
-36,3,711001-3,Downtown,1,,36_IB,1,1
-36,3,711004-3,Downtown,1,,36_IB,1,1
-36,1,711141-1,APU,0,,36_OB,1,1
-36,1,711142-1,APU,0,,36_OB,1,1
-36,1,711143-1,APU,0,,36_OB,1,1
-36,1,711144-1,APU,0,,36_OB,1,1
-36,1,711146-1,APU,0,,36_OB,1,1
-36,1,711149-1,APU,0,,36_OB,1,1
-36,1,711152-1,APU,0,,36_OB,1,1
-36,1,711155-1,APU,0,,36_OB,1,1
-36,1,711158-1,APU,0,,36_OB,1,1
-36,1,711161-1,APU,0,,36_OB,1,1
-36,1,711164-1,APU,0,,36_OB,1,1
-36,1,711165-1,APU,0,,36_OB,1,1
-36,1,711168-1,APU,0,,36_OB,1,1
-36,1,711170-1,APU,0,,36_OB,1,1
-36,1,711172-1,APU,0,,36_OB,1,1
-36,1,711173-1,APU,0,,36_OB,1,1
-36,1,711174-1,APU,0,,36_OB,1,1
-36,1,711175-1,APU,0,,36_OB,1,1
-36,1,711176-1,APU,0,,36_OB,1,1
-36,2,711145-2,APU,0,,36_OB,1,1
-36,2,711148-2,APU,0,,36_OB,1,1
-36,2,711151-2,APU,0,,36_OB,1,1
-36,2,711154-2,APU,0,,36_OB,1,1
-36,2,711157-2,APU,0,,36_OB,1,1
-36,2,711160-2,APU,0,,36_OB,1,1
-36,2,711163-2,APU,0,,36_OB,1,1
-36,2,711167-2,APU,0,,36_OB,1,1
-36,2,711169-2,APU,0,,36_OB,1,1
-36,2,711171-2,APU,0,,36_OB,1,1
-36,3,711147-3,APU,0,,36_OB,1,1
-36,3,711150-3,APU,0,,36_OB,1,1
-36,3,711153-3,APU,0,,36_OB,1,1
-36,3,711156-3,APU,0,,36_OB,1,1
-36,3,711159-3,APU,0,,36_OB,1,1
-36,3,711162-3,APU,0,,36_OB,1,1
-36,3,711166-3,APU,0,,36_OB,1,1
-45,1,711071-1,Downtown,1,,45_IB,1,1
-45,1,711072-1,Downtown,1,,45_IB,1,1
-45,1,711073-1,Downtown,1,,45_IB,1,1
-45,1,711074-1,Downtown,1,,45_IB,1,1
-45,1,711075-1,Downtown,1,,45_IB,1,1
-45,1,711077-1,Downtown,1,,45_IB,1,1
-45,1,711078-1,Downtown,1,,45_IB,1,1
-45,1,711080-1,Downtown,1,,45_IB,1,1
-45,1,711081-1,Downtown,1,,45_IB,1,1
-45,1,711084-1,Downtown,1,,45_IB,1,1
-45,1,711085-1,Downtown,1,,45_IB,1,1
-45,1,711088-1,Downtown,1,,45_IB,1,1
-45,1,711089-1,Downtown,1,,45_IB,1,1
-45,1,711090-1,Downtown,1,,45_IB,1,1
-45,1,711093-1,Downtown,1,,45_IB,1,1
-45,1,711094-1,Downtown,1,,45_IB,1,1
-45,1,711095-1,Downtown,1,,45_IB,1,1
-45,1,711098-1,Downtown,1,,45_IB,1,1
-45,1,711099-1,Downtown,1,,45_IB,1,1
-45,1,711100-1,Downtown,1,,45_IB,1,1
-45,1,711103-1,Downtown,1,,45_IB,1,1
-45,1,711104-1,Downtown,1,,45_IB,1,1
-45,1,711105-1,Downtown,1,,45_IB,1,1
-45,1,711108-1,Downtown,1,,45_IB,1,1
-45,1,711109-1,Downtown,1,,45_IB,1,1
-45,1,711110-1,Downtown,1,,45_IB,1,1
-45,1,711113-1,Downtown,1,,45_IB,1,1
-45,1,711114-1,Downtown,1,,45_IB,1,1
-45,1,711117-1,Downtown,1,,45_IB,1,1
-45,1,711118-1,Downtown,1,,45_IB,1,1
-45,1,711121-1,Downtown,1,,45_IB,1,1
-45,1,711123-1,Downtown,1,,45_IB,1,1
-45,1,711125-1,Downtown,1,,45_IB,1,1
-45,1,711126-1,Downtown,1,,45_IB,1,1
-45,1,711127-1,Downtown,1,,45_IB,1,1
-45,2,711076-2,Downtown,1,,45_IB,1,1
-45,2,711079-2,Downtown,1,,45_IB,1,1
-45,2,711083-2,Downtown,1,,45_IB,1,1
-45,2,711087-2,Downtown,1,,45_IB,1,1
-45,2,711092-2,Downtown,1,,45_IB,1,1
-45,2,711097-2,Downtown,1,,45_IB,1,1
-45,2,711102-2,Downtown,1,,45_IB,1,1
-45,2,711107-2,Downtown,1,,45_IB,1,1
-45,2,711112-2,Downtown,1,,45_IB,1,1
-45,2,711116-2,Downtown,1,,45_IB,1,1
-45,2,711120-2,Downtown,1,,45_IB,1,1
-45,2,711122-2,Downtown,1,,45_IB,1,1
-45,2,711124-2,Downtown,1,,45_IB,1,1
-45,3,711082-3,Downtown,1,,45_IB,1,1
-45,3,711086-3,Downtown,1,,45_IB,1,1
-45,3,711091-3,Downtown,1,,45_IB,1,1
-45,3,711096-3,Downtown,1,,45_IB,1,1
-45,3,711101-3,Downtown,1,,45_IB,1,1
-45,3,711106-3,Downtown,1,,45_IB,1,1
-45,3,711111-3,Downtown,1,,45_IB,1,1
-45,3,711115-3,Downtown,1,,45_IB,1,1
-45,3,711119-3,Downtown,1,,45_IB,1,1
-45,1,710830-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710831-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710832-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710833-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710834-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710835-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710836-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710838-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710840-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710842-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710844-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710846-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710847-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710849-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710851-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710852-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710854-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710856-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710857-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710859-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710861-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710862-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710864-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710866-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710867-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710869-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710871-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710873-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710875-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710878-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710880-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710881-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710883-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710884-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,1,710885-1,Tudor Center/ANMC,0,,45_OB,1,1
-45,2,710837-2,Tudor Center/ANMC,0,,45_OB,1,1
-45,2,710841-2,Tudor Center/ANMC,0,,45_OB,1,1
-45,2,710845-2,Tudor Center/ANMC,0,,45_OB,1,1
-45,2,710850-2,Tudor Center/ANMC,0,,45_OB,1,1
-45,2,710855-2,Tudor Center/ANMC,0,,45_OB,1,1
-45,2,710860-2,Tudor Center/ANMC,0,,45_OB,1,1
-45,2,710865-2,Tudor Center/ANMC,0,,45_OB,1,1
-45,2,710870-2,Tudor Center/ANMC,0,,45_OB,1,1
-45,2,710874-2,Tudor Center/ANMC,0,,45_OB,1,1
-45,2,710876-2,Tudor Center/ANMC,0,,45_OB,1,1
-45,2,710879-2,Tudor Center/ANMC,0,,45_OB,1,1
-45,2,710882-2,Tudor Center/ANMC,0,,45_OB,1,1
-45,3,710839-3,Tudor Center/ANMC,0,,45_OB,1,1
-45,3,710843-3,Tudor Center/ANMC,0,,45_OB,1,1
-45,3,710848-3,Tudor Center/ANMC,0,,45_OB,1,1
-45,3,710853-3,Tudor Center/ANMC,0,,45_OB,1,1
-45,3,710858-3,Tudor Center/ANMC,0,,45_OB,1,1
-45,3,710863-3,Tudor Center/ANMC,0,,45_OB,1,1
-45,3,710868-3,Tudor Center/ANMC,0,,45_OB,1,1
-45,3,710872-3,Tudor Center/ANMC,0,,45_OB,1,1
-45,3,710877-3,Tudor Center/ANMC,0,,45_OB,1,1
-60,1,710702-1,Downtown,1,,60_IB,1,1
-60,1,710703-1,Downtown,1,,60_IB,1,1
-60,1,710704-1,Downtown,1,,60_IB,1,1
-60,1,710706-1,Downtown,1,,60_IB,1,1
-60,1,710708-1,Downtown,1,,60_IB,1,1
-60,1,710711-1,Downtown,1,,60_IB,1,1
-60,1,710714-1,Downtown,1,,60_IB,1,1
-60,1,710717-1,Downtown,1,,60_IB,1,1
-60,1,710720-1,Downtown,1,,60_IB,1,1
-60,1,710723-1,Downtown,1,,60_IB,1,1
-60,1,710726-1,Downtown,1,,60_IB,1,1
-60,1,710727-1,Downtown,1,,60_IB,1,1
-60,1,710730-1,Downtown,1,,60_IB,1,1
-60,1,710733-1,Downtown,1,,60_IB,1,1
-60,1,710735-1,Downtown,1,,60_IB,1,1
-60,1,710737-1,Downtown,1,,60_IB,1,1
-60,1,710738-1,Downtown,1,,60_IB,1,1
-60,1,710739-1,Downtown,1,,60_IB,1,1
-60,2,710705-2,Downtown,1,,60_IB,1,1
-60,2,710707-2,Downtown,1,,60_IB,1,1
-60,2,710710-2,Downtown,1,,60_IB,1,1
-60,2,710713-2,Downtown,1,,60_IB,1,1
-60,2,710716-2,Downtown,1,,60_IB,1,1
-60,2,710719-2,Downtown,1,,60_IB,1,1
-60,2,710722-2,Downtown,1,,60_IB,1,1
-60,2,710725-2,Downtown,1,,60_IB,1,1
-60,2,710729-2,Downtown,1,,60_IB,1,1
-60,2,710732-2,Downtown,1,,60_IB,1,1
-60,2,710734-2,Downtown,1,,60_IB,1,1
-60,2,710736-2,Downtown,1,,60_IB,1,1
-60,3,710709-3,Downtown,1,,60_IB,1,1
-60,3,710712-3,Downtown,1,,60_IB,1,1
-60,3,710715-3,Downtown,1,,60_IB,1,1
-60,3,710718-3,Downtown,1,,60_IB,1,1
-60,3,710721-3,Downtown,1,,60_IB,1,1
-60,3,710724-3,Downtown,1,,60_IB,1,1
-60,3,710728-3,Downtown,1,,60_IB,1,1
-60,3,710731-3,Downtown,1,,60_IB,1,1
-60,1,710663-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710664-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710666-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710668-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710671-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710674-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710677-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710680-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710683-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710686-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710689-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710690-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710693-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710695-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710697-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710699-1,Huffman Business Park,0,,60_OB,1,1
-60,1,710700-1,Huffman Business Park,0,,60_OB,1,1
-60,2,710665-2,Huffman Business Park,0,,60_OB,1,1
-60,2,710667-2,Huffman Business Park,0,,60_OB,1,1
-60,2,710670-2,Huffman Business Park,0,,60_OB,1,1
-60,2,710673-2,Huffman Business Park,0,,60_OB,1,1
-60,2,710676-2,Huffman Business Park,0,,60_OB,1,1
-60,2,710679-2,Huffman Business Park,0,,60_OB,1,1
-60,2,710682-2,Huffman Business Park,0,,60_OB,1,1
-60,2,710685-2,Huffman Business Park,0,,60_OB,1,1
-60,2,710688-2,Huffman Business Park,0,,60_OB,1,1
-60,2,710692-2,Huffman Business Park,0,,60_OB,1,1
-60,2,710694-2,Huffman Business Park,0,,60_OB,1,1
-60,2,710696-2,Huffman Business Park,0,,60_OB,1,1
-60,2,710698-2,Huffman Business Park,0,,60_OB,1,1
-60,3,710669-3,Huffman Business Park,0,,60_OB,1,1
-60,3,710672-3,Huffman Business Park,0,,60_OB,1,1
-60,3,710675-3,Huffman Business Park,0,,60_OB,1,1
-60,3,710678-3,Huffman Business Park,0,,60_OB,1,1
-60,3,710681-3,Huffman Business Park,0,,60_OB,1,1
-60,3,710684-3,Huffman Business Park,0,,60_OB,1,1
-60,3,710687-3,Huffman Business Park,0,,60_OB,1,1
-60,3,710691-3,Huffman Business Park,0,,60_OB,1,1
-60,3,710701-3,Huffman Business Park,0,,60_OB,1,1
-75,1,711014-1,Downtown,1,,75_IB,1,1
-75,1,710622-1,Downtown,1,,75_IB,1,1
-75,1,710623-1,Downtown,1,,75_IB,1,1
-75,1,710624-1,Downtown,1,,75_IB,1,1
-75,1,710626-1,Downtown,1,,75_IB,1,1
-75,1,710627-1,Downtown,1,,75_IB,1,1
-75,1,710629-1,Downtown,1,,75_IB,1,1
-75,1,710632-1,Downtown,1,,75_IB,1,1
-75,1,710635-1,Downtown,1,,75_IB,1,1
-75,1,710638-1,Downtown,1,,75_IB,1,1
-75,1,710641-1,Downtown,1,,75_IB,1,1
-75,1,710642-1,Downtown,1,,75_IB,1,1
-75,1,710645-1,Downtown,1,,75_IB,1,1
-75,1,710646-1,Downtown,1,,75_IB,1,1
-75,1,710649-1,Downtown,1,,75_IB,1,1
-75,1,710650-1,Downtown,1,,75_IB,1,1
-75,1,710653-1,Downtown,1,,75_IB,1,1
-75,1,710654-1,Downtown,1,,75_IB,1,1
-75,1,710657-1,Downtown,1,,75_IB,1,1
-75,1,710659-1,Downtown,1,,75_IB,1,1
-75,1,710661-1,Downtown,1,,75_IB,1,1
-75,1,710662-1,Downtown,1,,75_IB,1,1
-75,2,710625-2,Downtown,1,,75_IB,1,1
-75,2,710628-2,Downtown,1,,75_IB,1,1
-75,2,710631-2,Downtown,1,,75_IB,1,1
-75,2,710634-2,Downtown,1,,75_IB,1,1
-75,2,710637-2,Downtown,1,,75_IB,1,1
-75,2,710640-2,Downtown,1,,75_IB,1,1
-75,2,710644-2,Downtown,1,,75_IB,1,1
-75,2,710648-2,Downtown,1,,75_IB,1,1
-75,2,710652-2,Downtown,1,,75_IB,1,1
-75,2,710656-2,Downtown,1,,75_IB,1,1
-75,2,710658-2,Downtown,1,,75_IB,1,1
-75,2,710660-2,Downtown,1,,75_IB,1,1
-75,3,710630-3,Downtown,1,,75_IB,1,1
-75,3,710633-3,Downtown,1,,75_IB,1,1
-75,3,710636-3,Downtown,1,,75_IB,1,1
-75,3,710639-3,Downtown,1,,75_IB,1,1
-75,3,710643-3,Downtown,1,,75_IB,1,1
-75,3,710647-3,Downtown,1,,75_IB,1,1
-75,3,710651-3,Downtown,1,,75_IB,1,1
-75,3,710655-3,Downtown,1,,75_IB,1,1
-75,1,711070-1,Muldoon,0,,75_OB,1,1
-75,1,710740-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710741-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710742-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710743-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710745-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710747-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710750-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710753-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710756-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710759-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710760-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710763-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710764-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710767-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710768-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710771-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710772-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710775-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710777-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710779-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710781-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710744-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710746-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710749-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710752-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710755-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710758-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710762-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710766-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710770-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710774-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710776-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710778-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,2,710780-2,Muldoon/VA Clinic,0,,75_OB,1,1
-75,3,710748-3,Muldoon/VA Clinic,0,,75_OB,1,1
-75,3,710751-3,Muldoon/VA Clinic,0,,75_OB,1,1
-75,3,710754-3,Muldoon/VA Clinic,0,,75_OB,1,1
-75,3,710757-3,Muldoon/VA Clinic,0,,75_OB,1,1
-75,3,710761-3,Muldoon/VA Clinic,0,,75_OB,1,1
-75,3,710765-3,Muldoon/VA Clinic,0,,75_OB,1,1
-75,3,710769-3,Muldoon/VA Clinic,0,,75_OB,1,1
-75,3,710773-3,Muldoon/VA Clinic,0,,75_OB,1,1
-75,1,710924-1,Muldoon/VA Clinic,0,,75_OB,1,1
-75,3,710925-3,Muldoon/VA Clinic,0,,75_OB,1,1
-102,1,711066-1,Downtown/UAA/ANMC,1,,102_IB,1,1
-102,1,711067-1,Downtown/UAA/ANMC,1,,102_IB,1,1
-102,1,711068-1,Downtown/UAA/ANMC,1,,102_IB,1,1
-102,1,711069-1,Downtown/UAA/ANMC,1,,102_IB,1,1
-102,1,711712-1,Eagle River,0,,102_OB,1,1
-102,1,711062-1,Downtown/Peters Creek,0,,102_OB,1,1
-102,1,711063-1,Downtown/Peters Creek,0,,102_OB,1,1
-102,1,711064-1,Downtown/Peters Creek,0,,102_OB,1,1
-102,1,711065-1,Downtown/Peters Creek,0,,102_OB,1,1
-102,1,711526-1,Downtown/Peters Creek,0,,102_OB,1,1
+route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_accessible,bikes_allowed
+1,1,1-610-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-610-O-91,Dimond Center,0,1_WB_OB,1,1
+1,1,1-710-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-710-O-91,Dimond Center,0,1_WB_OB,1,1
+1,1,1-810-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-810-O-91,Dimond Center,0,1_WB_OB,1,1
+1,2,1-820-O-2,Dimond Center,0,1_WB_OB,1,1
+1,1,1-910-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-910-O-91,Dimond Center,0,1_WB_OB,1,1
+1,2,1-920-O-2,Dimond Center,0,1_WB_OB,1,1
+1,3,1-1010-O-3,Dimond Center,0,1_WB_OB,1,1
+1,1,1-1010-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-1010-O-91,Dimond Center,0,1_WB_OB,1,1
+1,2,1-1020-O-2,Dimond Center,0,1_WB_OB,1,1
+1,3,1-1110-O-3,Dimond Center,0,1_WB_OB,1,1
+1,1,1-1110-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-1110-O-91,Dimond Center,0,1_WB_OB,1,1
+1,2,1-1120-O-2,Dimond Center,0,1_WB_OB,1,1
+1,3,1-1210-O-3,Dimond Center,0,1_WB_OB,1,1
+1,1,1-1210-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-1210-O-91,Dimond Center,0,1_WB_OB,1,1
+1,2,1-1220-O-2,Dimond Center,0,1_WB_OB,1,1
+1,3,1-1310-O-3,Dimond Center,0,1_WB_OB,1,1
+1,1,1-1310-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-1310-O-91,Dimond Center,0,1_WB_OB,1,1
+1,2,1-1320-O-2,Dimond Center,0,1_WB_OB,1,1
+1,3,1-1410-O-3,Dimond Center,0,1_WB_OB,1,1
+1,1,1-1410-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-1410-O-91,Dimond Center,0,1_WB_OB,1,1
+1,2,1-1420-O-2,Dimond Center,0,1_WB_OB,1,1
+1,3,1-1510-O-3,Dimond Center,0,1_WB_OB,1,1
+1,1,1-1510-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-1510-O-91,Dimond Center,0,1_WB_OB,1,1
+1,2,1-1520-O-2,Dimond Center,0,1_WB_OB,1,1
+1,3,1-1610-O-3,Dimond Center,0,1_WB_OB,1,1
+1,1,1-1614-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-1614-O-91,Dimond Center,0,1_WB_OB,1,1
+1,2,1-1620-O-2,Dimond Center,0,1_WB_OB,1,1
+1,3,1-1710-O-3,Dimond Center,0,1_WB_OB,1,1
+1,1,1-1714-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-1714-O-91,Dimond Center,0,1_WB_OB,1,1
+1,2,1-1720-O-2,Dimond Center,0,1_WB_OB,1,1
+1,1,1-1814-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-1814-O-91,Dimond Center,0,1_WB_OB,1,1
+1,2,1-1820-O-2,Dimond Center,0,1_WB_OB,1,1
+1,1,1-1914-O-1,Dimond Center,0,1_WB_OB,1,1
+1,91,1-1914-O-91,Dimond Center,0,1_WB_OB,1,1
+1,2,1-1920-O-2,Dimond Center,0,1_WB_OB,1,1
+1,1,1-2014-O-1,Dimond Center,0,1_WB_OB,1,1
+1,1,1-2114-O-1,Dimond Center,0,1_WB_OB,1,1
+1,1,1-640-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-640-I-91,Muldoon,1,1_EB_IB,1,1
+1,1,1-740-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-740-I-91,Muldoon,1,1_EB_IB,1,1
+1,2,1-831-I-2,Muldoon,1,1_EB_IB,1,1
+1,1,1-840-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-840-I-91,Muldoon,1,1_EB_IB,1,1
+1,2,1-931-I-2,Muldoon,1,1_EB_IB,1,1
+1,1,1-940-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-940-I-91,Muldoon,1,1_EB_IB,1,1
+1,3,1-949-I-3,Muldoon,1,1_EB_IB,1,1
+1,2,1-1031-I-2,Muldoon,1,1_EB_IB,1,1
+1,1,1-1040-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-1040-I-91,Muldoon,1,1_EB_IB,1,1
+1,3,1-1049-I-3,Muldoon,1,1_EB_IB,1,1
+1,2,1-1131-I-2,Muldoon,1,1_EB_IB,1,1
+1,1,1-1140-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-1140-I-91,Muldoon,1,1_EB_IB,1,1
+1,3,1-1149-I-3,Muldoon,1,1_EB_IB,1,1
+1,2,1-1231-I-2,Muldoon,1,1_EB_IB,1,1
+1,1,1-1240-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-1240-I-91,Muldoon,1,1_EB_IB,1,1
+1,3,1-1249-I-3,Muldoon,1,1_EB_IB,1,1
+1,2,1-1331-I-2,Muldoon,1,1_EB_IB,1,1
+1,1,1-1340-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-1340-I-91,Muldoon,1,1_EB_IB,1,1
+1,3,1-1349-I-3,Muldoon,1,1_EB_IB,1,1
+1,2,1-1431-I-2,Muldoon,1,1_EB_IB,1,1
+1,1,1-1440-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-1440-I-91,Muldoon,1,1_EB_IB,1,1
+1,3,1-1449-I-3,Muldoon,1,1_EB_IB,1,1
+1,2,1-1531-I-2,Muldoon,1,1_EB_IB,1,1
+1,1,1-1540-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-1540-I-91,Muldoon,1,1_EB_IB,1,1
+1,3,1-1549-I-3,Muldoon,1,1_EB_IB,1,1
+1,2,1-1631-I-2,Muldoon,1,1_EB_IB,1,1
+1,1,1-1640-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-1640-I-91,Muldoon,1,1_EB_IB,1,1
+1,3,1-1649-I-3,Muldoon,1,1_EB_IB,1,1
+1,2,1-1731-I-2,Muldoon,1,1_EB_IB,1,1
+1,1,1-1740-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-1740-I-91,Muldoon,1,1_EB_IB,1,1
+1,3,1-1749-I-3,Muldoon,1,1_EB_IB,1,1
+1,2,1-1831-I-2,Muldoon,1,1_EB_IB,1,1
+1,1,1-1840-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-1840-I-91,Muldoon,1,1_EB_IB,1,1
+1,3,1-1849-I-3,Muldoon,1,1_EB_IB,1,1
+1,2,1-1931-I-2,Muldoon,1,1_EB_IB,1,1
+2,1,2-545-I-1,Downtown,1,2_IB,1,1
+2,91,2-545-I-91,Downtown,1,2_IB,1,1
+2,1,2-615-I-1,Downtown,1,2_IB,1,1
+2,91,2-615-I-91,Downtown,1,2_IB,1,1
+2,1,2-645-I-1,Downtown,1,2_IB,1,1
+2,91,2-645-I-91,Downtown,1,2_IB,1,1
+2,1,2-745-I-1,Downtown,1,2_IB,1,1
+2,91,2-745-I-91,Downtown,1,2_IB,1,1
+2,2,2-755-I-2,Downtown,1,2_IB,1,1
+2,1,2-845-I-1,Downtown,1,2_IB,1,1
+2,91,2-845-I-91,Downtown,1,2_IB,1,1
+2,2,2-907-I-2,Downtown,1,2_IB,1,1
+2,1,2-945-I-1,Downtown,1,2_IB,1,1
+2,91,2-945-I-91,Downtown,1,2_IB,1,1
+2,3,2-949-I-3,Downtown,1,2_IB,1,1
+2,2,2-1007-I-2,Downtown,1,2_IB,1,1
+2,1,2-1045-I-1,Downtown,1,2_IB,1,1
+2,91,2-1045-I-91,Downtown,1,2_IB,1,1
+2,3,2-1049-I-3,Downtown,1,2_IB,1,1
+2,2,2-1107-I-2,Downtown,1,2_IB,1,1
+2,1,2-1145-I-1,Downtown,1,2_IB,1,1
+2,91,2-1145-I-91,Downtown,1,2_IB,1,1
+2,3,2-1149-I-3,Downtown,1,2_IB,1,1
+2,2,2-1207-I-2,Downtown,1,2_IB,1,1
+2,1,2-1245-I-1,Downtown,1,2_IB,1,1
+2,91,2-1245-I-91,Downtown,1,2_IB,1,1
+2,3,2-1249-I-3,Downtown,1,2_IB,1,1
+2,2,2-1307-I-2,Downtown,1,2_IB,1,1
+2,1,2-1345-I-1,Downtown,1,2_IB,1,1
+2,91,2-1345-I-91,Downtown,1,2_IB,1,1
+2,3,2-1349-I-3,Downtown,1,2_IB,1,1
+2,2,2-1407-I-2,Downtown,1,2_IB,1,1
+2,1,2-1445-I-1,Downtown,1,2_IB,1,1
+2,91,2-1445-I-91,Downtown,1,2_IB,1,1
+2,3,2-1449-I-3,Downtown,1,2_IB,1,1
+2,2,2-1507-I-2,Downtown,1,2_IB,1,1
+2,1,2-1515-I-1,Downtown,1,2_IB,1,1
+2,91,2-1515-I-91,Downtown,1,2_IB,1,1
+2,1,2-1545-I-1,Downtown,1,2_IB,1,1
+2,91,2-1545-I-91,Downtown,1,2_IB,1,1
+2,3,2-1549-I-3,Downtown,1,2_IB,1,1
+2,2,2-1607-I-2,Downtown,1,2_IB,1,1
+2,1,2-1615-I-1,Downtown,1,2_IB,1,1
+2,91,2-1615-I-91,Downtown,1,2_IB,1,1
+2,1,2-1645-I-1,Downtown,1,2_IB,1,1
+2,91,2-1645-I-91,Downtown,1,2_IB,1,1
+2,3,2-1653-I-3,Downtown,1,2_IB,1,1
+2,2,2-1707-I-2,Downtown,1,2_IB,1,1
+2,1,2-1745-I-1,Downtown,1,2_IB,1,1
+2,91,2-1745-I-91,Downtown,1,2_IB,1,1
+2,2,2-1807-I-2,Downtown,1,2_IB,1,1
+2,1,2-1845-I-1,Downtown,1,2_IB,1,1
+2,91,2-1845-I-91,Downtown,1,2_IB,1,1
+2,1,2-1945-I-1,Downtown,1,2_IB,1,1
+2,91,2-1945-I-91,Downtown,1,2_IB,1,1
+2,1,2-2045-I-1,Downtown,1,2_IB,1,1
+2,1,2-2145-I-1,Downtown,1,2_IB,1,1
+60,1,60-615-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-615-O-91,Huffman Business Park,0,60_OB,1,1
+60,1,60-715-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-715-O-91,Huffman Business Park,0,60_OB,1,1
+60,2,60-810-O-2,Huffman Business Park,0,60_OB,1,1
+60,1,60-815-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-815-O-91,Huffman Business Park,0,60_OB,1,1
+60,2,60-910-O-2,Huffman Business Park,0,60_OB,1,1
+60,1,60-915-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-915-O-91,Huffman Business Park,0,60_OB,1,1
+60,2,60-1010-O-2,Huffman Business Park,0,60_OB,1,1
+60,3,60-1010-O-3,Huffman Business Park,0,60_OB,1,1
+60,1,60-1015-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-1015-O-91,Huffman Business Park,0,60_OB,1,1
+60,3,60-1110-O-3,Huffman Business Park,0,60_OB,1,1
+60,2,60-1110-O-2,Huffman Business Park,0,60_OB,1,1
+60,1,60-1115-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-1115-O-91,Huffman Business Park,0,60_OB,1,1
+60,3,60-1210-O-3,Huffman Business Park,0,60_OB,1,1
+60,2,60-1210-O-2,Huffman Business Park,0,60_OB,1,1
+60,1,60-1215-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-1215-O-91,Huffman Business Park,0,60_OB,1,1
+60,3,60-1310-O-3,Huffman Business Park,0,60_OB,1,1
+60,2,60-1310-O-2,Huffman Business Park,0,60_OB,1,1
+60,1,60-1315-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-1315-O-91,Huffman Business Park,0,60_OB,1,1
+60,3,60-1410-O-3,Huffman Business Park,0,60_OB,1,1
+60,2,60-1410-O-2,Huffman Business Park,0,60_OB,1,1
+60,1,60-1415-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-1415-O-91,Huffman Business Park,0,60_OB,1,1
+60,3,60-1510-O-3,Huffman Business Park,0,60_OB,1,1
+60,2,60-1510-O-2,Huffman Business Park,0,60_OB,1,1
+60,1,60-1515-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-1515-O-91,Huffman Business Park,0,60_OB,1,1
+60,3,60-1610-O-3,Huffman Business Park,0,60_OB,1,1
+60,2,60-1610-O-2,Huffman Business Park,0,60_OB,1,1
+60,1,60-1615-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-1615-O-91,Huffman Business Park,0,60_OB,1,1
+60,1,60-1645-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-1645-O-91,Huffman Business Park,0,60_OB,1,1
+60,3,60-1710-O-3,Huffman Business Park,0,60_OB,1,1
+60,2,60-1710-O-2,Huffman Business Park,0,60_OB,1,1
+60,1,60-1715-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-1715-O-91,Huffman Business Park,0,60_OB,1,1
+60,2,60-1810-O-2,Huffman Business Park,0,60_OB,1,1
+60,1,60-1821-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-1821-O-91,Huffman Business Park,0,60_OB,1,1
+60,2,60-1910-O-2,Huffman Business Park,0,60_OB,1,1
+60,1,60-1915-O-1,Huffman Business Park,0,60_OB,1,1
+60,91,60-1915-O-91,Huffman Business Park,0,60_OB,1,1
+60,2,60-2010-O-2,Huffman Business Park,0,60_OB,1,1
+60,1,60-2015-O-1,Huffman Business Park,0,60_OB,1,1
+60,1,60-2115-O-1,Huffman Business Park,0,60_OB,1,1
+60,1,60-635-I-1,Downtown,1,60_IB,1,1
+60,91,60-635-I-91,Downtown,1,60_IB,1,1
+60,1,60-708-I-1,Downtown,1,60_IB,1,1
+60,91,60-708-I-91,Downtown,1,60_IB,1,1
+60,1,60-738-I-1,Downtown,1,60_IB,1,1
+60,91,60-738-I-91,Downtown,1,60_IB,1,1
+60,2,60-810-I-2,Downtown,1,60_IB,1,1
+60,1,60-812-I-1,Downtown,1,60_IB,1,1
+60,91,60-812-I-91,Downtown,1,60_IB,1,1
+60,2,60-910-I-2,Downtown,1,60_IB,1,1
+60,1,60-912-I-1,Downtown,1,60_IB,1,1
+60,91,60-912-I-91,Downtown,1,60_IB,1,1
+60,3,60-1005-I-3,Downtown,1,60_IB,1,1
+60,2,60-1010-I-2,Downtown,1,60_IB,1,1
+60,1,60-1012-I-1,Downtown,1,60_IB,1,1
+60,91,60-1012-I-91,Downtown,1,60_IB,1,1
+60,3,60-1105-I-3,Downtown,1,60_IB,1,1
+60,2,60-1110-I-2,Downtown,1,60_IB,1,1
+60,1,60-1112-I-1,Downtown,1,60_IB,1,1
+60,91,60-1112-I-91,Downtown,1,60_IB,1,1
+60,3,60-1205-I-3,Downtown,1,60_IB,1,1
+60,2,60-1210-I-2,Downtown,1,60_IB,1,1
+60,1,60-1212-I-1,Downtown,1,60_IB,1,1
+60,91,60-1212-I-91,Downtown,1,60_IB,1,1
+60,3,60-1305-I-3,Downtown,1,60_IB,1,1
+60,2,60-1310-I-2,Downtown,1,60_IB,1,1
+60,1,60-1312-I-1,Downtown,1,60_IB,1,1
+60,91,60-1312-I-91,Downtown,1,60_IB,1,1
+60,3,60-1405-I-3,Downtown,1,60_IB,1,1
+60,2,60-1410-I-2,Downtown,1,60_IB,1,1
+60,1,60-1415-I-1,Downtown,1,60_IB,1,1
+60,91,60-1415-I-91,Downtown,1,60_IB,1,1
+60,3,60-1505-I-3,Downtown,1,60_IB,1,1
+60,2,60-1510-I-2,Downtown,1,60_IB,1,1
+60,1,60-1517-I-1,Downtown,1,60_IB,1,1
+60,91,60-1517-I-91,Downtown,1,60_IB,1,1
+60,1,60-1545-I-1,Downtown,1,60_IB,1,1
+60,91,60-1545-I-91,Downtown,1,60_IB,1,1
+60,3,60-1605-I-3,Downtown,1,60_IB,1,1
+60,2,60-1610-I-2,Downtown,1,60_IB,1,1
+60,1,60-1615-I-1,Downtown,1,60_IB,1,1
+60,91,60-1615-I-91,Downtown,1,60_IB,1,1
+60,3,60-1705-I-3,Downtown,1,60_IB,1,1
+60,2,60-1710-I-2,Downtown,1,60_IB,1,1
+60,1,60-1720-I-1,Downtown,1,60_IB,1,1
+60,91,60-1720-I-91,Downtown,1,60_IB,1,1
+60,2,60-1810-I-2,Downtown,1,60_IB,1,1
+60,1,60-1815-I-1,Downtown,1,60_IB,1,1
+60,91,60-1815-I-91,Downtown,1,60_IB,1,1
+60,2,60-1910-I-2,Downtown,1,60_IB,1,1
+60,1,60-1919-I-1,Downtown,1,60_IB,1,1
+60,91,60-1919-I-91,Downtown,1,60_IB,1,1
+60,1,60-2011-I-1,Downtown,1,60_IB,1,1
+60,1,60-2111-I-1,Downtown,1,60_IB,1,1
+7,2,7J-836-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,2,7J-1033-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,3,7J-1135-O-3,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,2,7J-1238-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,3,7J-1335-O-3,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,2,7J-1438-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,3,7J-1535-O-3,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,2,7J-1636-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,3,7J-1735-O-3,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,2,7J-1836-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,1,7J-1945-O-1,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,91,7J-1945-O-91,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,2,7J-2036-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,1,7J-2145-O-1,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+3,1,3N-623-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-623-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-723-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-723-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-823-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-823-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-923-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-923-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-1023-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-1023-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-1123-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-1123-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-1223-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-1223-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-1321-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-1321-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-1421-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-1421-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-1521-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-1521-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-1621-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-1621-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-1723-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-1723-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-1823-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-1823-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-1953-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3N-1953-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3N-2153-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+7,1,7A-623-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-623-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-722-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-722-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7A-740-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-823-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-823-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-923-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-923-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7A-940-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-1022-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-1022-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,3,7A-1041-I-3,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-1122-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-1122-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7A-1140-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-1222-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-1222-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,3,7A-1241-I-3,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-1320-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-1320-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7A-1340-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-1420-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-1420-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,3,7A-1441-I-3,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-1520-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-1520-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7A-1540-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-1620-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-1620-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,3,7A-1641-I-3,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-1720-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-1720-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7A-1740-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-1823-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7A-1823-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7A-1940-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-2023-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7A-2153-I-1,A - Airport/Downtown,1,7A_IB,1,1
+36,1,36-605-I-1,Downtown,1,36_IB,1,1
+36,91,36-605-I-91,Downtown,1,36_IB,1,1
+36,1,36-635-I-1,Downtown,1,36_IB,1,1
+36,91,36-635-I-91,Downtown,1,36_IB,1,1
+36,1,36-705-I-1,Downtown,1,36_IB,1,1
+36,91,36-705-I-91,Downtown,1,36_IB,1,1
+36,1,36-735-I-1,Downtown,1,36_IB,1,1
+36,91,36-735-I-91,Downtown,1,36_IB,1,1
+36,1,36-805-I-1,Downtown,1,36_IB,1,1
+36,91,36-805-I-91,Downtown,1,36_IB,1,1
+36,1,36-905-I-1,Downtown,1,36_IB,1,1
+36,91,36-905-I-91,Downtown,1,36_IB,1,1
+36,2,36-954-I-2,Downtown,1,36_IB,1,1
+36,1,36-1005-I-1,Downtown,1,36_IB,1,1
+36,91,36-1005-I-91,Downtown,1,36_IB,1,1
+36,3,36-1049-I-3,Downtown,1,36_IB,1,1
+36,2,36-1054-I-2,Downtown,1,36_IB,1,1
+36,1,36-1105-I-1,Downtown,1,36_IB,1,1
+36,91,36-1105-I-91,Downtown,1,36_IB,1,1
+36,3,36-1149-I-3,Downtown,1,36_IB,1,1
+36,2,36-1154-I-2,Downtown,1,36_IB,1,1
+36,1,36-1205-I-1,Downtown,1,36_IB,1,1
+36,91,36-1205-I-91,Downtown,1,36_IB,1,1
+36,3,36-1249-I-3,Downtown,1,36_IB,1,1
+36,2,36-1254-I-2,Downtown,1,36_IB,1,1
+36,1,36-1305-I-1,Downtown,1,36_IB,1,1
+36,91,36-1305-I-91,Downtown,1,36_IB,1,1
+36,3,36-1349-I-3,Downtown,1,36_IB,1,1
+36,2,36-1354-I-2,Downtown,1,36_IB,1,1
+36,1,36-1405-I-1,Downtown,1,36_IB,1,1
+36,91,36-1405-I-91,Downtown,1,36_IB,1,1
+36,3,36-1449-I-3,Downtown,1,36_IB,1,1
+36,2,36-1454-I-2,Downtown,1,36_IB,1,1
+36,1,36-1505-I-1,Downtown,1,36_IB,1,1
+36,91,36-1505-I-91,Downtown,1,36_IB,1,1
+36,3,36-1549-I-3,Downtown,1,36_IB,1,1
+36,2,36-1554-I-2,Downtown,1,36_IB,1,1
+36,1,36-1605-I-1,Downtown,1,36_IB,1,1
+36,91,36-1605-I-91,Downtown,1,36_IB,1,1
+36,3,36-1649-I-3,Downtown,1,36_IB,1,1
+36,2,36-1654-I-2,Downtown,1,36_IB,1,1
+36,1,36-1706-I-1,Downtown,1,36_IB,1,1
+36,91,36-1706-I-91,Downtown,1,36_IB,1,1
+36,2,36-1754-I-2,Downtown,1,36_IB,1,1
+36,1,36-1806-I-1,Downtown,1,36_IB,1,1
+36,91,36-1806-I-91,Downtown,1,36_IB,1,1
+36,2,36-1854-I-2,Downtown,1,36_IB,1,1
+36,1,36-1904-I-1,Downtown,1,36_IB,1,1
+36,91,36-1904-I-91,Downtown,1,36_IB,1,1
+36,1,36-2004-I-1,Downtown,1,36_IB,1,1
+36,1,36-2104-I-1,Downtown,1,36_IB,1,1
+1,1,1-1940-I-1,Muldoon,1,1_EB_IB,1,1
+1,91,1-1940-I-91,Muldoon,1,1_EB_IB,1,1
+1,1,1-2040-I-1,Muldoon,1,1_EB_IB,1,1
+1,1,1-2140-I-1,Muldoon,1,1_EB_IB,1,1
+9,1,9-643-I-1,Downtown,1,9_IB,1,1
+9,91,9-643-I-91,Downtown,1,9_IB,1,1
+9,1,9-713-I-1,Downtown,1,9_IB,1,1
+9,91,9-713-I-91,Downtown,1,9_IB,1,1
+9,1,9-743-I-1,Downtown,1,9_IB,1,1
+9,91,9-743-I-91,Downtown,1,9_IB,1,1
+9,1,9-813-I-1,Downtown,1,9_IB,1,1
+9,91,9-813-I-91,Downtown,1,9_IB,1,1
+9,2,9-836-I-2,Downtown,1,9_IB,1,1
+9,1,9-843-I-1,Downtown,1,9_IB,1,1
+9,91,9-843-I-91,Downtown,1,9_IB,1,1
+9,1,9-913-I-1,Downtown,1,9_IB,1,1
+9,91,9-913-I-91,Downtown,1,9_IB,1,1
+9,2,9-936-I-2,Downtown,1,9_IB,1,1
+9,1,9-943-I-1,Downtown,1,9_IB,1,1
+9,91,9-943-I-91,Downtown,1,9_IB,1,1
+9,1,9-1013-I-1,Downtown,1,9_IB,1,1
+9,91,9-1013-I-91,Downtown,1,9_IB,1,1
+9,3,9-1033-I-3,Downtown,1,9_IB,1,1
+9,2,9-1036-I-2,Downtown,1,9_IB,1,1
+9,1,9-1043-I-1,Downtown,1,9_IB,1,1
+9,91,9-1043-I-91,Downtown,1,9_IB,1,1
+9,1,9-1113-I-1,Downtown,1,9_IB,1,1
+9,91,9-1113-I-91,Downtown,1,9_IB,1,1
+9,3,9-1133-I-3,Downtown,1,9_IB,1,1
+9,2,9-1136-I-2,Downtown,1,9_IB,1,1
+9,1,9-1143-I-1,Downtown,1,9_IB,1,1
+9,91,9-1143-I-91,Downtown,1,9_IB,1,1
+9,1,9-1213-I-1,Downtown,1,9_IB,1,1
+9,91,9-1213-I-91,Downtown,1,9_IB,1,1
+9,3,9-1233-I-3,Downtown,1,9_IB,1,1
+9,2,9-1236-I-2,Downtown,1,9_IB,1,1
+9,1,9-1243-I-1,Downtown,1,9_IB,1,1
+9,91,9-1243-I-91,Downtown,1,9_IB,1,1
+9,1,9-1313-I-1,Downtown,1,9_IB,1,1
+9,91,9-1313-I-91,Downtown,1,9_IB,1,1
+9,3,9-1333-I-3,Downtown,1,9_IB,1,1
+9,2,9-1336-I-2,Downtown,1,9_IB,1,1
+9,1,9-1343-I-1,Downtown,1,9_IB,1,1
+9,91,9-1343-I-91,Downtown,1,9_IB,1,1
+9,1,9-1410-I-1,Downtown,1,9_IB,1,1
+9,91,9-1410-I-91,Downtown,1,9_IB,1,1
+9,3,9-1433-I-3,Downtown,1,9_IB,1,1
+9,2,9-1436-I-2,Downtown,1,9_IB,1,1
+9,1,9-1440-I-1,Downtown,1,9_IB,1,1
+9,91,9-1440-I-91,Downtown,1,9_IB,1,1
+9,1,9-1510-I-1,Downtown,1,9_IB,1,1
+9,91,9-1510-I-91,Downtown,1,9_IB,1,1
+9,3,9-1533-I-3,Downtown,1,9_IB,1,1
+9,2,9-1536-I-2,Downtown,1,9_IB,1,1
+9,1,9-1540-I-1,Downtown,1,9_IB,1,1
+9,91,9-1540-I-91,Downtown,1,9_IB,1,1
+9,1,9-1610-I-1,Downtown,1,9_IB,1,1
+9,91,9-1610-I-91,Downtown,1,9_IB,1,1
+9,3,9-1633-I-3,Downtown,1,9_IB,1,1
+9,2,9-1636-I-2,Downtown,1,9_IB,1,1
+9,1,9-1640-I-1,Downtown,1,9_IB,1,1
+9,91,9-1640-I-91,Downtown,1,9_IB,1,1
+9,1,9-1710-I-1,Downtown,1,9_IB,1,1
+9,91,9-1710-I-91,Downtown,1,9_IB,1,1
+9,3,9-1733-I-3,Downtown,1,9_IB,1,1
+9,2,9-1736-I-2,Downtown,1,9_IB,1,1
+9,1,9-1810-I-1,Downtown,1,9_IB,1,1
+9,91,9-1810-I-91,Downtown,1,9_IB,1,1
+9,2,9-1836-I-2,Downtown,1,9_IB,1,1
+9,1,9-1930-I-1,Downtown,1,9_IB,1,1
+9,91,9-1930-I-91,Downtown,1,9_IB,1,1
+9,2,9-1936-I-2,Downtown,1,9_IB,1,1
+9,1,9-2020-I-1,Downtown,1,9_IB,1,1
+9,1,9-2135-I-1,Downtown,1,9_IB,1,1
+13,1,13-545-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-545-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-615-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-615-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-645-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-645-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-715-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-715-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-815-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-815-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,2,13-827-I-2,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-915-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-915-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,2,13-927-I-2,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-1015-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-1015-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,3,13-1020-I-3,Senior Center/Downtown,1,13_IB,1,1
+13,2,13-1027-I-2,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-1115-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-1115-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,3,13-1120-I-3,Senior Center/Downtown,1,13_IB,1,1
+13,2,13-1127-I-2,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-1215-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-1215-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,3,13-1220-I-3,Senior Center/Downtown,1,13_IB,1,1
+13,2,13-1227-I-2,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-1315-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-1315-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,3,13-1320-I-3,Senior Center/Downtown,1,13_IB,1,1
+13,2,13-1327-I-2,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-1415-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-1415-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,3,13-1420-I-3,Senior Center/Downtown,1,13_IB,1,1
+13,2,13-1427-I-2,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-1517-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-1517-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,3,13-1520-I-3,Senior Center/Downtown,1,13_IB,1,1
+13,2,13-1527-I-2,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-1617-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-1617-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,3,13-1620-I-3,Senior Center/Downtown,1,13_IB,1,1
+13,2,13-1627-I-2,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-1717-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-1717-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,3,13-1720-I-3,Senior Center/Downtown,1,13_IB,1,1
+13,2,13-1727-I-2,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-1818-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-1818-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,2,13-1827-I-2,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-1918-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,91,13-1918-I-91,Senior Center/Downtown,1,13_IB,1,1
+13,2,13-1927-I-2,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-2018-I-1,Senior Center/Downtown,1,13_IB,1,1
+13,1,13-2118-I-1,Senior Center/Downtown,1,13_IB,1,1
+7,1,7J-615-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-615-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7J-715-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-715-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7J-815-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-815-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7J-920-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-920-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7J-1015-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-1015-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7J-1115-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-1115-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7J-1215-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-1215-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7J-1315-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-1315-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7J-1415-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-1415-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7J-1515-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-1515-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7J-1615-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-1615-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7J-1715-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-1715-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7J-1815-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7J-1815-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+60,3,60-928-O-3,Huffman Business Park,0,60_OB,1,1
+3,1,3C-653-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-653-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-753-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-753-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-853-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-853-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,2,3C-910-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-953-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-953-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-1053-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-1053-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,3,3C-1106-O-3,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,2,3C-1110-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-1153-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-1153-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-1253-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-1253-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,3,3C-1306-O-3,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,2,3C-1310-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-1357-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-1357-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-1453-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-1453-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,3,3C-1506-O-3,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,2,3C-1510-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-1553-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-1553-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-1656-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-1656-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,3,3C-1706-O-3,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,2,3C-1710-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-1753-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-1753-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-1853-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3C-1853-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,2,3C-1911-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-2053-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3C-2243-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+8,1,8-617-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-617-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-647-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-647-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,2,8-715-I-2,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-717-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-717-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,2,8-815-I-2,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-817-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-817-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,2,8-915-I-2,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-917-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-917-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,2,8-1015-I-2,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-1017-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-1017-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,3,8-1026-I-3,Downtown,1,8_IB_to_TRANCNT,1,1
+8,2,8-1115-I-2,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-1117-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-1117-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,3,8-1126-I-3,Downtown,1,8_IB_to_TRANCNT,1,1
+8,2,8-1215-I-2,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-1217-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-1217-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,3,8-1226-I-3,Downtown,1,8_IB_to_TRANCNT,1,1
+8,2,8-1315-I-2,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-1317-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-1317-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,3,8-1326-I-3,Downtown,1,8_IB_to_TRANCNT,1,1
+8,2,8-1415-I-2,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-1417-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-1417-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,3,8-1426-I-3,Downtown,1,8_IB_to_TRANCNT,1,1
+8,2,8-1515-I-2,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-1518-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-1518-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,3,8-1528-I-3,Downtown,1,8_IB_to_TRANCNT,1,1
+8,2,8-1615-I-2,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-1618-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-1618-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,3,8-1628-I-3,Downtown,1,8_IB_to_TRANCNT,1,1
+8,2,8-1715-I-2,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-1721-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-1721-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,3,8-1728-I-3,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-1821-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-1821-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-1921-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+8,91,8-1921-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
+8,1,8-2021-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
+3,2,3N-810-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,2,3N-1010-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,3,3N-1206-O-3,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,2,3N-1210-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,3,3N-1406-O-3,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,2,3N-1410-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,3,3N-1606-O-3,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,2,3N-1610-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,3,3N-1806-O-3,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,2,3N-1810-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,2,3N-2010-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+7,2,7J-840-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,3,7J-941-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,2,7J-1040-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,3,7J-1141-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,2,7J-1240-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,3,7J-1341-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,2,7J-1440-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,3,7J-1541-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,2,7J-1640-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,3,7J-1741-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,2,7J-1840-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,1,7J-1920-I-1,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,91,7J-1920-I-91,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,1,7J-2050-I-1,J - Airport/Downtown,1,7J_IB_AIR,1,1
+9,1,9-649-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-649-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-719-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-719-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-749-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-749-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-819-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-819-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-849-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-849-O-91,Dimond Center,0,9_OB,1,1
+9,2,9-904-O-2,Dimond Center,0,9_OB,1,1
+9,1,9-919-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-919-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-949-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-949-O-91,Dimond Center,0,9_OB,1,1
+9,2,9-1004-O-2,Dimond Center,0,9_OB,1,1
+9,1,9-1019-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1019-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-1049-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1049-O-91,Dimond Center,0,9_OB,1,1
+9,3,9-1103-O-3,Dimond Center,0,9_OB,1,1
+9,2,9-1104-O-2,Dimond Center,0,9_OB,1,1
+9,1,9-1119-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1119-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-1149-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1149-O-91,Dimond Center,0,9_OB,1,1
+9,3,9-1203-O-3,Dimond Center,0,9_OB,1,1
+9,2,9-1204-O-2,Dimond Center,0,9_OB,1,1
+9,1,9-1219-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1219-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-1249-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1249-O-91,Dimond Center,0,9_OB,1,1
+9,3,9-1303-O-3,Dimond Center,0,9_OB,1,1
+9,2,9-1304-O-2,Dimond Center,0,9_OB,1,1
+9,1,9-1319-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1319-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-1349-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1349-O-91,Dimond Center,0,9_OB,1,1
+9,3,9-1403-O-3,Dimond Center,0,9_OB,1,1
+9,2,9-1404-O-2,Dimond Center,0,9_OB,1,1
+9,1,9-1419-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1419-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-1449-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1449-O-91,Dimond Center,0,9_OB,1,1
+9,3,9-1503-O-3,Dimond Center,0,9_OB,1,1
+9,2,9-1504-O-2,Dimond Center,0,9_OB,1,1
+9,1,9-1519-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1519-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-1549-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1549-O-91,Dimond Center,0,9_OB,1,1
+9,3,9-1603-O-3,Dimond Center,0,9_OB,1,1
+9,2,9-1604-O-2,Dimond Center,0,9_OB,1,1
+9,1,9-1619-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1619-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-1649-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1649-O-91,Dimond Center,0,9_OB,1,1
+9,3,9-1703-O-3,Dimond Center,0,9_OB,1,1
+9,2,9-1704-O-2,Dimond Center,0,9_OB,1,1
+9,1,9-1719-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1719-O-91,Dimond Center,0,9_OB,1,1
+9,1,9-1749-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1749-O-91,Dimond Center,0,9_OB,1,1
+9,3,9-1803-O-3,Dimond Center,0,9_OB,1,1
+9,2,9-1804-O-2,Dimond Center,0,9_OB,1,1
+9,1,9-1900-O-1,Dimond Center,0,9_OB,1,1
+9,91,9-1900-O-91,Dimond Center,0,9_OB,1,1
+9,2,9-1904-O-2,Dimond Center,0,9_OB,1,1
+9,1,9-2000-O-1,Dimond Center,0,9_OB,1,1
+9,2,9-2004-O-2,Dimond Center,0,9_OB,1,1
+9,1,9-2100-O-1,Dimond Center,0,9_OB,1,1
+9,1,9-2200-O-1,Dimond Center,0,9_OB,1,1
+3,1,3N-629-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3N-629-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3N-733-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3N-733-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3N-834-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3N-834-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3N-934-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3N-934-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3N-1034-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3N-1034-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3N-1133-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3N-1133-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3N-1233-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3N-1233-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3N-1333-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3N-1333-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3N-1433-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3N-1433-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3N-1536-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3N-1536-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3N-1636-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3N-1636-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3N-1739-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3N-1739-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3N-2054-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+2,1,2-545-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-545-O-91,Dimond Center,0,2_OB,1,1
+2,1,2-645-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-645-O-91,Dimond Center,0,2_OB,1,1
+2,1,2-745-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-745-O-91,Dimond Center,0,2_OB,1,1
+2,2,2-842-O-2,Dimond Center,0,2_OB,1,1
+2,1,2-845-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-845-O-91,Dimond Center,0,2_OB,1,1
+2,2,2-942-O-2,Dimond Center,0,2_OB,1,1
+2,1,2-945-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-945-O-91,Dimond Center,0,2_OB,1,1
+2,3,2-1000-O-3,Dimond Center,0,2_OB,1,1
+2,2,2-1042-O-2,Dimond Center,0,2_OB,1,1
+2,1,2-1045-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1045-O-91,Dimond Center,0,2_OB,1,1
+2,3,2-1100-O-3,Dimond Center,0,2_OB,1,1
+2,2,2-1142-O-2,Dimond Center,0,2_OB,1,1
+2,1,2-1145-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1145-O-91,Dimond Center,0,2_OB,1,1
+2,3,2-1200-O-3,Dimond Center,0,2_OB,1,1
+2,2,2-1242-O-2,Dimond Center,0,2_OB,1,1
+2,1,2-1245-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1245-O-91,Dimond Center,0,2_OB,1,1
+2,3,2-1300-O-3,Dimond Center,0,2_OB,1,1
+2,2,2-1342-O-2,Dimond Center,0,2_OB,1,1
+2,1,2-1345-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1345-O-91,Dimond Center,0,2_OB,1,1
+2,3,2-1400-O-3,Dimond Center,0,2_OB,1,1
+2,1,2-1415-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1415-O-91,Dimond Center,0,2_OB,1,1
+2,2,2-1442-O-2,Dimond Center,0,2_OB,1,1
+2,1,2-1445-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1445-O-91,Dimond Center,0,2_OB,1,1
+2,3,2-1500-O-3,Dimond Center,0,2_OB,1,1
+2,1,2-1515-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1515-O-91,Dimond Center,0,2_OB,1,1
+2,2,2-1542-O-2,Dimond Center,0,2_OB,1,1
+2,1,2-1545-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1545-O-91,Dimond Center,0,2_OB,1,1
+2,3,2-1600-O-3,Dimond Center,0,2_OB,1,1
+2,1,2-1615-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1615-O-91,Dimond Center,0,2_OB,1,1
+2,2,2-1642-O-2,Dimond Center,0,2_OB,1,1
+2,1,2-1645-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1645-O-91,Dimond Center,0,2_OB,1,1
+2,3,2-1700-O-3,Dimond Center,0,2_OB,1,1
+2,1,2-1715-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1715-O-91,Dimond Center,0,2_OB,1,1
+2,2,2-1742-O-2,Dimond Center,0,2_OB,1,1
+2,1,2-1745-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1745-O-91,Dimond Center,0,2_OB,1,1
+2,3,2-1800-O-3,Dimond Center,0,2_OB,1,1
+2,2,2-1842-O-2,Dimond Center,0,2_OB,1,1
+2,1,2-1845-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1845-O-91,Dimond Center,0,2_OB,1,1
+2,1,2-1945-O-1,Dimond Center,0,2_OB,1,1
+2,91,2-1945-O-91,Dimond Center,0,2_OB,1,1
+2,1,2-2050-O-1,Dimond Center,0,2_OB,1,1
+2,1,2-2145-O-1,Dimond Center,0,2_OB,1,1
+75,1,75-635-I-1,Downtown,1,75_IB,1,1
+75,91,75-635-I-91,Downtown,1,75_IB,1,1
+75,1,75-705-I-1,Downtown,1,75_IB,1,1
+75,91,75-705-I-91,Downtown,1,75_IB,1,1
+75,1,75-735-I-1,Downtown,1,75_IB,1,1
+75,91,75-735-I-91,Downtown,1,75_IB,1,1
+75,2,75-754-I-2,Downtown,1,75_IB,1,1
+75,1,75-815-I-1,Downtown,1,75_IB,1,1
+75,91,75-815-I-91,Downtown,1,75_IB,1,1
+75,1,75-855-I-1,Downtown,1,75_IB,1,1
+75,91,75-855-I-91,Downtown,1,75_IB,1,1
+75,2,75-920-I-2,Downtown,1,75_IB,1,1
+75,1,75-955-I-1,Downtown,1,75_IB,1,1
+75,91,75-955-I-91,Downtown,1,75_IB,1,1
+75,3,75-1016-I-3,Downtown,1,75_IB,1,1
+75,2,75-1020-I-2,Downtown,1,75_IB,1,1
+75,1,75-1055-I-1,Downtown,1,75_IB,1,1
+75,91,75-1055-I-91,Downtown,1,75_IB,1,1
+75,3,75-1116-I-3,Downtown,1,75_IB,1,1
+75,2,75-1120-I-2,Downtown,1,75_IB,1,1
+75,1,75-1200-I-1,Downtown,1,75_IB,1,1
+75,91,75-1200-I-91,Downtown,1,75_IB,1,1
+75,3,75-1216-I-3,Downtown,1,75_IB,1,1
+75,2,75-1220-I-2,Downtown,1,75_IB,1,1
+75,1,75-1300-I-1,Downtown,1,75_IB,1,1
+75,91,75-1300-I-91,Downtown,1,75_IB,1,1
+75,3,75-1316-I-3,Downtown,1,75_IB,1,1
+75,2,75-1320-I-2,Downtown,1,75_IB,1,1
+75,1,75-1330-I-1,Downtown,1,75_IB,1,1
+75,91,75-1330-I-91,Downtown,1,75_IB,1,1
+75,1,75-1400-I-1,Downtown,1,75_IB,1,1
+75,91,75-1400-I-91,Downtown,1,75_IB,1,1
+75,3,75-1416-I-3,Downtown,1,75_IB,1,1
+75,2,75-1420-I-2,Downtown,1,75_IB,1,1
+75,1,75-1430-I-1,Downtown,1,75_IB,1,1
+75,91,75-1430-I-91,Downtown,1,75_IB,1,1
+75,1,75-1500-I-1,Downtown,1,75_IB,1,1
+75,91,75-1500-I-91,Downtown,1,75_IB,1,1
+75,3,75-1516-I-3,Downtown,1,75_IB,1,1
+75,2,75-1520-I-2,Downtown,1,75_IB,1,1
+75,1,75-1530-I-1,Downtown,1,75_IB,1,1
+75,91,75-1530-I-91,Downtown,1,75_IB,1,1
+75,1,75-1600-I-1,Downtown,1,75_IB,1,1
+75,91,75-1600-I-91,Downtown,1,75_IB,1,1
+75,3,75-1616-I-3,Downtown,1,75_IB,1,1
+75,2,75-1620-I-2,Downtown,1,75_IB,1,1
+75,1,75-1637-I-1,Downtown,1,75_IB,1,1
+75,91,75-1637-I-91,Downtown,1,75_IB,1,1
+75,1,75-1707-I-1,Downtown,1,75_IB,1,1
+75,91,75-1707-I-91,Downtown,1,75_IB,1,1
+75,3,75-1716-I-3,Downtown,1,75_IB,1,1
+75,2,75-1720-I-2,Downtown,1,75_IB,1,1
+75,1,75-1807-I-1,Downtown,1,75_IB,1,1
+75,91,75-1807-I-91,Downtown,1,75_IB,1,1
+75,2,75-1820-I-2,Downtown,1,75_IB,1,1
+75,1,75-1854-I-1,Downtown,1,75_IB,1,1
+75,91,75-1854-I-91,Downtown,1,75_IB,1,1
+75,2,75-1920-I-2,Downtown,1,75_IB,1,1
+75,1,75-1954-I-1,Downtown,1,75_IB,1,1
+75,91,75-1954-I-91,Downtown,1,75_IB,1,1
+75,1,75-2054-I-1,Downtown,1,75_IB,1,1
+75,1,75-610-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-610-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-638-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-638-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-715-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-715-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-805-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-805-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-830-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-905-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-905-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-930-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1005-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1005-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-1030-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,3,75-1032-O-3,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1105-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1105-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-1130-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,3,75-1132-O-3,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1205-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1205-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-1230-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,3,75-1232-O-3,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1305-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1305-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-1330-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,3,75-1332-O-3,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1335-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1335-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1400-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1400-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-1430-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,3,75-1432-O-3,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1435-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1435-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1505-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1505-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-1530-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,3,75-1532-O-3,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1535-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1535-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1605-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1605-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-1630-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,3,75-1632-O-3,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1635-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1635-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1705-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1705-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-1730-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,3,75-1732-O-3,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1805-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1805-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-1830-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-1905-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-1905-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-1930-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-2005-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,2,75-2030-O-2,Muldoon/VA Clinic,0,75_OB,1,1
+75,1,75-2105-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+15,1,15-612-I-1,Downtown,1,15_IB,1,1
+15,91,15-612-I-91,Downtown,1,15_IB,1,1
+15,1,15-642-I-1,Downtown,1,15_IB,1,1
+15,91,15-642-I-91,Downtown,1,15_IB,1,1
+15,1,15-712-I-1,Downtown,1,15_IB,1,1
+15,91,15-712-I-91,Downtown,1,15_IB,1,1
+15,1,15-742-I-1,Downtown,1,15_IB,1,1
+15,91,15-742-I-91,Downtown,1,15_IB,1,1
+15,1,15-812-I-1,Downtown,1,15_IB,1,1
+15,91,15-812-I-91,Downtown,1,15_IB,1,1
+15,2,15-834-I-2,Downtown,1,15_IB,1,1
+15,1,15-842-I-1,Downtown,1,15_IB,1,1
+15,91,15-842-I-91,Downtown,1,15_IB,1,1
+15,1,15-912-I-1,Downtown,1,15_IB,1,1
+15,91,15-912-I-91,Downtown,1,15_IB,1,1
+15,2,15-934-I-2,Downtown,1,15_IB,1,1
+15,1,15-942-I-1,Downtown,1,15_IB,1,1
+15,91,15-942-I-91,Downtown,1,15_IB,1,1
+15,3,15-1000-I-3,Downtown,1,15_IB,1,1
+15,1,15-1012-I-1,Downtown,1,15_IB,1,1
+15,91,15-1012-I-91,Downtown,1,15_IB,1,1
+15,2,15-1034-I-2,Downtown,1,15_IB,1,1
+15,1,15-1042-I-1,Downtown,1,15_IB,1,1
+15,91,15-1042-I-91,Downtown,1,15_IB,1,1
+15,3,15-1100-I-3,Downtown,1,15_IB,1,1
+15,1,15-1112-I-1,Downtown,1,15_IB,1,1
+15,91,15-1112-I-91,Downtown,1,15_IB,1,1
+15,2,15-1134-I-2,Downtown,1,15_IB,1,1
+15,1,15-1142-I-1,Downtown,1,15_IB,1,1
+15,91,15-1142-I-91,Downtown,1,15_IB,1,1
+15,3,15-1200-I-3,Downtown,1,15_IB,1,1
+15,1,15-1212-I-1,Downtown,1,15_IB,1,1
+15,91,15-1212-I-91,Downtown,1,15_IB,1,1
+15,2,15-1234-I-2,Downtown,1,15_IB,1,1
+15,1,15-1242-I-1,Downtown,1,15_IB,1,1
+15,91,15-1242-I-91,Downtown,1,15_IB,1,1
+15,3,15-1300-I-3,Downtown,1,15_IB,1,1
+15,1,15-1312-I-1,Downtown,1,15_IB,1,1
+15,91,15-1312-I-91,Downtown,1,15_IB,1,1
+15,2,15-1334-I-2,Downtown,1,15_IB,1,1
+15,1,15-1342-I-1,Downtown,1,15_IB,1,1
+15,91,15-1342-I-91,Downtown,1,15_IB,1,1
+15,3,15-1400-I-3,Downtown,1,15_IB,1,1
+15,1,15-1412-I-1,Downtown,1,15_IB,1,1
+15,91,15-1412-I-91,Downtown,1,15_IB,1,1
+15,2,15-1434-I-2,Downtown,1,15_IB,1,1
+15,1,15-1442-I-1,Downtown,1,15_IB,1,1
+15,91,15-1442-I-91,Downtown,1,15_IB,1,1
+15,3,15-1500-I-3,Downtown,1,15_IB,1,1
+15,1,15-1512-I-1,Downtown,1,15_IB,1,1
+15,91,15-1512-I-91,Downtown,1,15_IB,1,1
+15,2,15-1534-I-2,Downtown,1,15_IB,1,1
+15,1,15-1546-I-1,Downtown,1,15_IB,1,1
+15,91,15-1546-I-91,Downtown,1,15_IB,1,1
+15,3,15-1600-I-3,Downtown,1,15_IB,1,1
+15,1,15-1616-I-1,Downtown,1,15_IB,1,1
+15,91,15-1616-I-91,Downtown,1,15_IB,1,1
+15,2,15-1634-I-2,Downtown,1,15_IB,1,1
+15,1,15-1646-I-1,Downtown,1,15_IB,1,1
+15,91,15-1646-I-91,Downtown,1,15_IB,1,1
+15,3,15-1700-I-3,Downtown,1,15_IB,1,1
+15,1,15-1716-I-1,Downtown,1,15_IB,1,1
+15,91,15-1716-I-91,Downtown,1,15_IB,1,1
+15,2,15-1734-I-2,Downtown,1,15_IB,1,1
+15,1,15-1816-I-1,Downtown,1,15_IB,1,1
+15,91,15-1816-I-91,Downtown,1,15_IB,1,1
+15,2,15-1834-I-2,Downtown,1,15_IB,1,1
+15,1,15-1846-I-1,Downtown,1,15_IB,1,1
+15,91,15-1846-I-91,Downtown,1,15_IB,1,1
+15,2,15-1934-I-2,Downtown,1,15_IB,1,1
+15,1,15-1946-I-1,Downtown,1,15_IB,1,1
+15,91,15-1946-I-91,Downtown,1,15_IB,1,1
+15,1,15-2046-I-1,Downtown,1,15_IB,1,1
+15,1,15-2146-I-1,Downtown,1,15_IB,1,1
+45,1,45-600-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-600-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-635-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-635-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-705-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-705-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-740-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-740-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-810-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-810-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-840-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-840-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-910-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-910-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,2,45-911-O-2,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-940-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-940-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,3,45-959-O-3,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1010-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1010-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,2,45-1011-O-2,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1040-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1040-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,3,45-1059-O-3,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1110-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1110-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,2,45-1111-O-2,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1150-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1150-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,3,45-1159-O-3,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1210-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1210-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,2,45-1211-O-2,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1230-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1230-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1250-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1250-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,3,45-1259-O-3,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1310-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1310-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,2,45-1311-O-2,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1330-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1330-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1350-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1350-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,3,45-1359-O-3,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1410-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1410-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,2,45-1411-O-2,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1430-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1430-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1450-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1450-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,3,45-1459-O-3,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1510-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1510-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,2,45-1511-O-2,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1530-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1530-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1550-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1550-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,3,45-1559-O-3,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1610-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1610-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,2,45-1611-O-2,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1640-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1640-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,3,45-1659-O-3,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1710-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1710-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,2,45-1711-O-2,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1740-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1740-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,3,45-1759-O-3,Tudor Center/ANMC,0,45_OB,1,1
+45,2,45-1811-O-2,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1815-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1815-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1845-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1845-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,2,45-1911-O-2,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-1915-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,91,45-1915-O-91,Tudor Center/ANMC,0,45_OB,1,1
+45,2,45-2011-O-2,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-2015-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-2115-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-2215-O-1,Tudor Center/ANMC,0,45_OB,1,1
+45,1,45-2245-O-1,Tudor Center/ANMC,0,45_OB,1,1
+13,1,13-705-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-705-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-805-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-805-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,2,13-817-O-2,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-905-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-905-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,2,13-917-O-2,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-1005-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-1005-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,3,13-1014-O-3,Senior Center/Muldoon,0,13_OB,1,1
+13,2,13-1017-O-2,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-1105-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-1105-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,3,13-1114-O-3,Senior Center/Muldoon,0,13_OB,1,1
+13,2,13-1117-O-2,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-1205-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-1205-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,3,13-1214-O-3,Senior Center/Muldoon,0,13_OB,1,1
+13,2,13-1217-O-2,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-1305-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-1305-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,3,13-1314-O-3,Senior Center/Muldoon,0,13_OB,1,1
+13,2,13-1317-O-2,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-1405-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-1405-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,3,13-1414-O-3,Senior Center/Muldoon,0,13_OB,1,1
+13,2,13-1417-O-2,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-1505-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-1505-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,3,13-1514-O-3,Senior Center/Muldoon,0,13_OB,1,1
+13,2,13-1517-O-2,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-1605-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-1605-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,3,13-1614-O-3,Senior Center/Muldoon,0,13_OB,1,1
+13,2,13-1617-O-2,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-1635-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-1635-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-1705-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-1705-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,3,13-1714-O-3,Senior Center/Muldoon,0,13_OB,1,1
+13,2,13-1717-O-2,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-1807-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-1807-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,3,13-1814-O-3,Senior Center/Muldoon,0,13_OB,1,1
+13,2,13-1817-O-2,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-1907-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,91,13-1907-O-91,Senior Center/Muldoon,0,13_OB,1,1
+13,2,13-1917-O-2,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-2007-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-2107-O-1,Senior Center/Muldoon,0,13_OB,1,1
+13,1,13-2207-O-1,Senior Center/Muldoon,0,13_OB,1,1
+75,1,75-609-O-1,Muldoon/VA Clinic,0,75_OB,1,1
+75,91,75-609-O-91,Muldoon/VA Clinic,0,75_OB,1,1
+75,3,75-951-O-3,Muldoon/VA Clinic,0,75_OB,1,1
+3,1,3C-556-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-556-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-654-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-654-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-754-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-754-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3C-810-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-854-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-854-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-954-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-954-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,3,3C-1006-I-3,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3C-1010-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-1054-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-1054-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-1151-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-1151-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,3,3C-1206-I-3,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3C-1210-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-1258-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-1258-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-1358-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-1358-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,3,3C-1406-I-3,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3C-1410-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-1507-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-1507-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-1601-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-1601-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,3,3C-1606-I-3,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3C-1610-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-1701-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-1701-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-1805-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-1805-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3C-1810-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-1956-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3C-1956-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3C-2010-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3C-2148-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+75,1,75-552-I-1,Downtown,1,75_IB,1,1
+75,91,75-552-I-91,Downtown,1,75_IB,1,1
+3,2,3N-910-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,3,3N-1106-I-3,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,2,3N-1110-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,3,3N-1306-I-3,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,2,3N-1310-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,3,3N-1506-I-3,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,2,3N-1510-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,3,3N-1706-I-3,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,2,3N-1710-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,1,3N-1855-I-1,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,91,3N-1855-I-91,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,2,3N-1910-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+7,1,7A-645-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-645-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-745-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-745-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-845-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-845-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,2,7A-936-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-945-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-945-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,3,7A-1035-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-1045-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-1045-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,2,7A-1138-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-1145-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-1145-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,3,7A-1235-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-1245-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-1245-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,2,7A-1338-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-1345-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-1345-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,3,7A-1435-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-1445-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-1445-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,2,7A-1538-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-1545-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-1545-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,3,7A-1635-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-1645-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-1645-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,2,7A-1736-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-1745-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-1745-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,3,7A-1835-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-1845-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7A-1845-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,2,7A-1936-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-2045-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7A-2240-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+14,1,14-641-O-1,Loop,0,14_Loop,1,1
+14,91,14-641-O-91,Loop,0,14_Loop,1,1
+14,1,14-741-O-1,Loop,0,14_Loop,1,1
+14,91,14-741-O-91,Loop,0,14_Loop,1,1
+14,1,14-841-O-1,Loop,0,14_Loop,1,1
+14,91,14-841-O-91,Loop,0,14_Loop,1,1
+14,2,14-851-O-2,Loop,0,14_Loop,1,1
+14,3,14-939-O-3,Loop,0,14_Loop,1,1
+14,1,14-941-O-1,Loop,0,14_Loop,1,1
+14,91,14-941-O-91,Loop,0,14_Loop,1,1
+14,2,14-951-O-2,Loop,0,14_Loop,1,1
+14,3,14-1039-O-3,Loop,0,14_Loop,1,1
+14,1,14-1041-O-1,Loop,0,14_Loop,1,1
+14,91,14-1041-O-91,Loop,0,14_Loop,1,1
+14,2,14-1051-O-2,Loop,0,14_Loop,1,1
+14,3,14-1139-O-3,Loop,0,14_Loop,1,1
+14,1,14-1141-O-1,Loop,0,14_Loop,1,1
+14,91,14-1141-O-91,Loop,0,14_Loop,1,1
+14,2,14-1151-O-2,Loop,0,14_Loop,1,1
+14,3,14-1239-O-3,Loop,0,14_Loop,1,1
+14,1,14-1241-O-1,Loop,0,14_Loop,1,1
+14,91,14-1241-O-91,Loop,0,14_Loop,1,1
+14,2,14-1251-O-2,Loop,0,14_Loop,1,1
+14,3,14-1339-O-3,Loop,0,14_Loop,1,1
+14,1,14-1341-O-1,Loop,0,14_Loop,1,1
+14,91,14-1341-O-91,Loop,0,14_Loop,1,1
+14,2,14-1351-O-2,Loop,0,14_Loop,1,1
+14,3,14-1439-O-3,Loop,0,14_Loop,1,1
+14,1,14-1441-O-1,Loop,0,14_Loop,1,1
+14,91,14-1441-O-91,Loop,0,14_Loop,1,1
+14,2,14-1451-O-2,Loop,0,14_Loop,1,1
+14,3,14-1539-O-3,Loop,0,14_Loop,1,1
+14,1,14-1541-O-1,Loop,0,14_Loop,1,1
+14,91,14-1541-O-91,Loop,0,14_Loop,1,1
+14,2,14-1551-O-2,Loop,0,14_Loop,1,1
+14,3,14-1639-O-3,Loop,0,14_Loop,1,1
+14,1,14-1641-O-1,Loop,0,14_Loop,1,1
+14,91,14-1641-O-91,Loop,0,14_Loop,1,1
+14,2,14-1651-O-2,Loop,0,14_Loop,1,1
+14,3,14-1739-O-3,Loop,0,14_Loop,1,1
+14,1,14-1741-O-1,Loop,0,14_Loop,1,1
+14,91,14-1741-O-91,Loop,0,14_Loop,1,1
+14,2,14-1748-O-2,Loop,0,14_Loop,1,1
+14,1,14-1841-O-1,Loop,0,14_Loop,1,1
+14,91,14-1841-O-91,Loop,0,14_Loop,1,1
+14,2,14-1848-O-2,Loop,0,14_Loop,1,1
+14,1,14-1941-O-1,Loop,0,14_Loop,1,1
+14,91,14-1941-O-91,Loop,0,14_Loop,1,1
+14,2,14-1948-O-2,Loop,0,14_Loop,1,1
+14,1,14-2041-O-1,Loop,0,14_Loop,1,1
+14,1,14-2141-O-1,Loop,0,14_Loop,1,1
+8,1,8-631-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-631-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-731-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-731-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-831-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-831-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,2,8-842-O-2,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-931-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-931-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,2,8-942-O-2,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-1031-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-1031-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,3,8-1040-O-3,Muldoon,0,8_OB_to_MULDOON,1,1
+8,2,8-1042-O-2,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-1131-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-1131-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,3,8-1140-O-3,Muldoon,0,8_OB_to_MULDOON,1,1
+8,2,8-1142-O-2,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-1231-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-1231-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,2,8-1239-O-2,Muldoon,0,8_OB_to_MULDOON,1,1
+8,3,8-1240-O-3,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-1331-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-1331-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,2,8-1339-O-2,Muldoon,0,8_OB_to_MULDOON,1,1
+8,3,8-1340-O-3,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-1425-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-1425-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,2,8-1439-O-2,Muldoon,0,8_OB_to_MULDOON,1,1
+8,3,8-1440-O-3,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-1525-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-1525-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,2,8-1539-O-2,Muldoon,0,8_OB_to_MULDOON,1,1
+8,3,8-1540-O-3,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-1625-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-1625-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,2,8-1639-O-2,Muldoon,0,8_OB_to_MULDOON,1,1
+8,3,8-1640-O-3,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-1705-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-1705-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-1730-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-1730-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,2,8-1739-O-2,Muldoon,0,8_OB_to_MULDOON,1,1
+8,3,8-1740-O-3,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-1835-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-1835-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-1935-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,91,8-1935-O-91,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-2035-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+8,1,8-2135-O-1,Muldoon,0,8_OB_to_MULDOON,1,1
+102,1,102-1502-O-1,Eagle River,0,102_OB,1,1
+102,91,102-1502-O-91,Eagle River,0,102_OB,1,1
+15,1,15-635-O-1,Muldoon,0,15_OB,1,1
+15,91,15-635-O-91,Muldoon,0,15_OB,1,1
+15,1,15-705-O-1,Muldoon,0,15_OB,1,1
+15,91,15-705-O-91,Muldoon,0,15_OB,1,1
+15,1,15-735-O-1,Muldoon,0,15_OB,1,1
+15,91,15-735-O-91,Muldoon,0,15_OB,1,1
+15,1,15-805-O-1,Muldoon,0,15_OB,1,1
+15,91,15-805-O-91,Muldoon,0,15_OB,1,1
+15,1,15-835-O-1,Muldoon,0,15_OB,1,1
+15,91,15-835-O-91,Muldoon,0,15_OB,1,1
+15,2,15-859-O-2,Muldoon,0,15_OB,1,1
+15,1,15-905-O-1,Muldoon,0,15_OB,1,1
+15,91,15-905-O-91,Muldoon,0,15_OB,1,1
+15,1,15-935-O-1,Muldoon,0,15_OB,1,1
+15,91,15-935-O-91,Muldoon,0,15_OB,1,1
+15,2,15-959-O-2,Muldoon,0,15_OB,1,1
+15,1,15-1005-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1005-O-91,Muldoon,0,15_OB,1,1
+15,3,15-1028-O-3,Muldoon,0,15_OB,1,1
+15,1,15-1035-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1035-O-91,Muldoon,0,15_OB,1,1
+15,2,15-1059-O-2,Muldoon,0,15_OB,1,1
+15,1,15-1105-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1105-O-91,Muldoon,0,15_OB,1,1
+15,3,15-1128-O-3,Muldoon,0,15_OB,1,1
+15,1,15-1135-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1135-O-91,Muldoon,0,15_OB,1,1
+15,2,15-1159-O-2,Muldoon,0,15_OB,1,1
+15,1,15-1205-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1205-O-91,Muldoon,0,15_OB,1,1
+15,3,15-1228-O-3,Muldoon,0,15_OB,1,1
+15,1,15-1235-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1235-O-91,Muldoon,0,15_OB,1,1
+15,2,15-1259-O-2,Muldoon,0,15_OB,1,1
+15,1,15-1305-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1305-O-91,Muldoon,0,15_OB,1,1
+15,3,15-1328-O-3,Muldoon,0,15_OB,1,1
+15,1,15-1335-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1335-O-91,Muldoon,0,15_OB,1,1
+15,2,15-1359-O-2,Muldoon,0,15_OB,1,1
+15,1,15-1405-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1405-O-91,Muldoon,0,15_OB,1,1
+15,3,15-1428-O-3,Muldoon,0,15_OB,1,1
+15,1,15-1435-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1435-O-91,Muldoon,0,15_OB,1,1
+15,2,15-1459-O-2,Muldoon,0,15_OB,1,1
+15,1,15-1505-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1505-O-91,Muldoon,0,15_OB,1,1
+15,3,15-1528-O-3,Muldoon,0,15_OB,1,1
+15,1,15-1535-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1535-O-91,Muldoon,0,15_OB,1,1
+15,2,15-1559-O-2,Muldoon,0,15_OB,1,1
+15,1,15-1605-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1605-O-91,Muldoon,0,15_OB,1,1
+15,3,15-1628-O-3,Muldoon,0,15_OB,1,1
+15,1,15-1635-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1635-O-91,Muldoon,0,15_OB,1,1
+15,2,15-1659-O-2,Muldoon,0,15_OB,1,1
+15,1,15-1710-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1710-O-91,Muldoon,0,15_OB,1,1
+15,3,15-1728-O-3,Muldoon,0,15_OB,1,1
+15,1,15-1735-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1735-O-91,Muldoon,0,15_OB,1,1
+15,2,15-1759-O-2,Muldoon,0,15_OB,1,1
+15,1,15-1805-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1805-O-91,Muldoon,0,15_OB,1,1
+15,2,15-1859-O-2,Muldoon,0,15_OB,1,1
+15,1,15-1905-O-1,Muldoon,0,15_OB,1,1
+15,91,15-1905-O-91,Muldoon,0,15_OB,1,1
+15,2,15-2004-O-2,Muldoon,0,15_OB,1,1
+15,1,15-2005-O-1,Muldoon,0,15_OB,1,1
+15,1,15-2105-O-1,Muldoon,0,15_OB,1,1
+15,1,15-2205-O-1,Muldoon,0,15_OB,1,1
+102,1,102-1537-O-1,Downtown/Peters Creek,0,102_OB,1,1
+102,91,102-1537-O-91,Downtown/Peters Creek,0,102_OB,1,1
+102,1,102-1607-O-1,Downtown/Peters Creek,0,102_OB,1,1
+102,91,102-1607-O-91,Downtown/Peters Creek,0,102_OB,1,1
+102,1,102-1642-O-1,Downtown/Peters Creek,0,102_OB,1,1
+102,91,102-1642-O-91,Downtown/Peters Creek,0,102_OB,1,1
+102,1,102-1739-O-1,Downtown/Peters Creek,0,102_OB,1,1
+102,91,102-1739-O-91,Downtown/Peters Creek,0,102_OB,1,1
+102,1,102-525-I-1,Downtown/UAA/ANMC,1,102_IB,1,1
+102,91,102-525-I-91,Downtown/UAA/ANMC,1,102_IB,1,1
+102,1,102-557-I-1,Downtown/UAA/ANMC,1,102_IB,1,1
+102,91,102-557-I-91,Downtown/UAA/ANMC,1,102_IB,1,1
+102,1,102-622-I-1,Downtown/UAA/ANMC,1,102_IB,1,1
+102,91,102-622-I-91,Downtown/UAA/ANMC,1,102_IB,1,1
+102,1,102-649-I-1,Downtown/UAA/ANMC,1,102_IB,1,1
+102,91,102-649-I-91,Downtown/UAA/ANMC,1,102_IB,1,1
+75,1,75-525-O-1,Muldoon,0,75_OB,1,1
+75,91,75-525-O-91,Muldoon,0,75_OB,1,1
+45,1,45-549-I-1,Downtown,1,45_IB,1,1
+45,91,45-549-I-91,Downtown,1,45_IB,1,1
+45,1,45-614-I-1,Downtown,1,45_IB,1,1
+45,91,45-614-I-91,Downtown,1,45_IB,1,1
+45,1,45-644-I-1,Downtown,1,45_IB,1,1
+45,91,45-644-I-91,Downtown,1,45_IB,1,1
+45,1,45-706-I-1,Downtown,1,45_IB,1,1
+45,91,45-706-I-91,Downtown,1,45_IB,1,1
+45,1,45-736-I-1,Downtown,1,45_IB,1,1
+45,91,45-736-I-91,Downtown,1,45_IB,1,1
+45,2,45-800-I-2,Downtown,1,45_IB,1,1
+45,1,45-800-I-1,Downtown,1,45_IB,1,1
+45,91,45-800-I-91,Downtown,1,45_IB,1,1
+45,1,45-830-I-1,Downtown,1,45_IB,1,1
+45,91,45-830-I-91,Downtown,1,45_IB,1,1
+45,2,45-900-I-2,Downtown,1,45_IB,1,1
+45,1,45-900-I-1,Downtown,1,45_IB,1,1
+45,91,45-900-I-91,Downtown,1,45_IB,1,1
+45,1,45-930-I-1,Downtown,1,45_IB,1,1
+45,91,45-930-I-91,Downtown,1,45_IB,1,1
+45,3,45-947-I-3,Downtown,1,45_IB,1,1
+45,2,45-1000-I-2,Downtown,1,45_IB,1,1
+45,1,45-1000-I-1,Downtown,1,45_IB,1,1
+45,91,45-1000-I-91,Downtown,1,45_IB,1,1
+45,1,45-1030-I-1,Downtown,1,45_IB,1,1
+45,91,45-1030-I-91,Downtown,1,45_IB,1,1
+45,3,45-1047-I-3,Downtown,1,45_IB,1,1
+45,2,45-1100-I-2,Downtown,1,45_IB,1,1
+45,1,45-1100-I-1,Downtown,1,45_IB,1,1
+45,91,45-1100-I-91,Downtown,1,45_IB,1,1
+45,1,45-1140-I-1,Downtown,1,45_IB,1,1
+45,91,45-1140-I-91,Downtown,1,45_IB,1,1
+45,3,45-1147-I-3,Downtown,1,45_IB,1,1
+45,2,45-1200-I-2,Downtown,1,45_IB,1,1
+45,1,45-1200-I-1,Downtown,1,45_IB,1,1
+45,91,45-1200-I-91,Downtown,1,45_IB,1,1
+45,1,45-1220-I-1,Downtown,1,45_IB,1,1
+45,91,45-1220-I-91,Downtown,1,45_IB,1,1
+45,1,45-1240-I-1,Downtown,1,45_IB,1,1
+45,91,45-1240-I-91,Downtown,1,45_IB,1,1
+45,3,45-1247-I-3,Downtown,1,45_IB,1,1
+45,2,45-1300-I-2,Downtown,1,45_IB,1,1
+45,1,45-1300-I-1,Downtown,1,45_IB,1,1
+45,91,45-1300-I-91,Downtown,1,45_IB,1,1
+45,1,45-1320-I-1,Downtown,1,45_IB,1,1
+45,91,45-1320-I-91,Downtown,1,45_IB,1,1
+45,1,45-1340-I-1,Downtown,1,45_IB,1,1
+45,91,45-1340-I-91,Downtown,1,45_IB,1,1
+45,3,45-1347-I-3,Downtown,1,45_IB,1,1
+45,2,45-1400-I-2,Downtown,1,45_IB,1,1
+45,1,45-1401-I-1,Downtown,1,45_IB,1,1
+45,91,45-1401-I-91,Downtown,1,45_IB,1,1
+45,1,45-1421-I-1,Downtown,1,45_IB,1,1
+45,91,45-1421-I-91,Downtown,1,45_IB,1,1
+45,1,45-1441-I-1,Downtown,1,45_IB,1,1
+45,91,45-1441-I-91,Downtown,1,45_IB,1,1
+45,3,45-1447-I-3,Downtown,1,45_IB,1,1
+45,2,45-1500-I-2,Downtown,1,45_IB,1,1
+45,1,45-1501-I-1,Downtown,1,45_IB,1,1
+45,91,45-1501-I-91,Downtown,1,45_IB,1,1
+45,1,45-1521-I-1,Downtown,1,45_IB,1,1
+45,91,45-1521-I-91,Downtown,1,45_IB,1,1
+45,1,45-1541-I-1,Downtown,1,45_IB,1,1
+45,91,45-1541-I-91,Downtown,1,45_IB,1,1
+45,3,45-1547-I-3,Downtown,1,45_IB,1,1
+45,2,45-1600-I-2,Downtown,1,45_IB,1,1
+45,1,45-1605-I-1,Downtown,1,45_IB,1,1
+45,91,45-1605-I-91,Downtown,1,45_IB,1,1
+45,1,45-1635-I-1,Downtown,1,45_IB,1,1
+45,91,45-1635-I-91,Downtown,1,45_IB,1,1
+45,3,45-1647-I-3,Downtown,1,45_IB,1,1
+45,2,45-1700-I-2,Downtown,1,45_IB,1,1
+45,1,45-1705-I-1,Downtown,1,45_IB,1,1
+45,91,45-1705-I-91,Downtown,1,45_IB,1,1
+45,1,45-1735-I-1,Downtown,1,45_IB,1,1
+45,91,45-1735-I-91,Downtown,1,45_IB,1,1
+45,3,45-1747-I-3,Downtown,1,45_IB,1,1
+45,2,45-1800-I-2,Downtown,1,45_IB,1,1
+45,1,45-1835-I-1,Downtown,1,45_IB,1,1
+45,91,45-1835-I-91,Downtown,1,45_IB,1,1
+45,2,45-1900-I-2,Downtown,1,45_IB,1,1
+45,1,45-1905-I-1,Downtown,1,45_IB,1,1
+45,91,45-1905-I-91,Downtown,1,45_IB,1,1
+45,2,45-2000-I-2,Downtown,1,45_IB,1,1
+45,1,45-2005-I-1,Downtown,1,45_IB,1,1
+45,1,45-2105-I-1,Downtown,1,45_IB,1,1
+45,1,45-2205-I-1,Downtown,1,45_IB,1,1
+7,1,7J-600-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-600-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7J-658-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-658-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7J-758-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-758-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7J-859-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-859-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7J-959-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-959-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7J-1059-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-1059-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7J-1158-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-1158-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7J-1259-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-1259-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7J-1358-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-1358-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7J-1458-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-1458-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7J-1558-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-1558-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7J-1658-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-1658-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7J-1758-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7J-1758-I-91,J - Downtown,1,7J_IB,1,1
+36,1,36-610-O-1,APU,0,36_OB,1,1
+36,91,36-610-O-91,APU,0,36_OB,1,1
+36,1,36-710-O-1,APU,0,36_OB,1,1
+36,91,36-710-O-91,APU,0,36_OB,1,1
+36,1,36-810-O-1,APU,0,36_OB,1,1
+36,91,36-810-O-91,APU,0,36_OB,1,1
+36,1,36-910-O-1,APU,0,36_OB,1,1
+36,91,36-910-O-91,APU,0,36_OB,1,1
+36,2,36-1005-O-2,APU,0,36_OB,1,1
+36,1,36-1010-O-1,APU,0,36_OB,1,1
+36,91,36-1010-O-91,APU,0,36_OB,1,1
+36,3,36-1103-O-3,APU,0,36_OB,1,1
+36,2,36-1105-O-2,APU,0,36_OB,1,1
+36,1,36-1110-O-1,APU,0,36_OB,1,1
+36,91,36-1110-O-91,APU,0,36_OB,1,1
+36,3,36-1203-O-3,APU,0,36_OB,1,1
+36,2,36-1205-O-2,APU,0,36_OB,1,1
+36,1,36-1210-O-1,APU,0,36_OB,1,1
+36,91,36-1210-O-91,APU,0,36_OB,1,1
+36,3,36-1303-O-3,APU,0,36_OB,1,1
+36,2,36-1305-O-2,APU,0,36_OB,1,1
+36,1,36-1311-O-1,APU,0,36_OB,1,1
+36,91,36-1311-O-91,APU,0,36_OB,1,1
+36,3,36-1403-O-3,APU,0,36_OB,1,1
+36,2,36-1405-O-2,APU,0,36_OB,1,1
+36,1,36-1409-O-1,APU,0,36_OB,1,1
+36,91,36-1409-O-91,APU,0,36_OB,1,1
+36,3,36-1503-O-3,APU,0,36_OB,1,1
+36,2,36-1505-O-2,APU,0,36_OB,1,1
+36,1,36-1509-O-1,APU,0,36_OB,1,1
+36,91,36-1509-O-91,APU,0,36_OB,1,1
+36,3,36-1603-O-3,APU,0,36_OB,1,1
+36,2,36-1605-O-2,APU,0,36_OB,1,1
+36,1,36-1610-O-1,APU,0,36_OB,1,1
+36,91,36-1610-O-91,APU,0,36_OB,1,1
+36,1,36-1635-O-1,APU,0,36_OB,1,1
+36,91,36-1635-O-91,APU,0,36_OB,1,1
+36,3,36-1703-O-3,APU,0,36_OB,1,1
+36,2,36-1705-O-2,APU,0,36_OB,1,1
+36,1,36-1710-O-1,APU,0,36_OB,1,1
+36,91,36-1710-O-91,APU,0,36_OB,1,1
+36,2,36-1805-O-2,APU,0,36_OB,1,1
+36,1,36-1810-O-1,APU,0,36_OB,1,1
+36,91,36-1810-O-91,APU,0,36_OB,1,1
+36,2,36-1905-O-2,APU,0,36_OB,1,1
+36,1,36-1910-O-1,APU,0,36_OB,1,1
+36,91,36-1910-O-91,APU,0,36_OB,1,1
+36,1,36-2010-O-1,APU,0,36_OB,1,1
+36,1,36-2110-O-1,APU,0,36_OB,1,1
+36,1,36-2215-O-1,APU,0,36_OB,1,1
+ERC,1,ERC-630-I-1,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,91,ERC-630-I-91,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,1,ERC-800-I-1,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,91,ERC-800-I-91,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,1,ERC-930-I-1,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,91,ERC-930-I-91,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,1,ERC-1100-I-1,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,91,ERC-1100-I-91,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,1,ERC-1200-I-1,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,91,ERC-1200-I-91,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,1,ERC-1630-I-1,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,91,ERC-1630-I-91,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,1,ERC-1900-I-1,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,91,ERC-1900-I-91,Muldoon Transfer Center,1,ERC_IB_to_MULDOON,1,2
+ERC,1,ERC-930-O-1,Eagle River Transit Center,0,ERC_OB_to_ERTC,1,2
+ERC,91,ERC-930-O-91,Eagle River Transit Center,0,ERC_OB_to_ERTC,1,2
+ERC,1,ERC-1105-O-1,Eagle River Transit Center,0,ERC_OB_to_ERTC,1,2
+ERC,91,ERC-1105-O-91,Eagle River Transit Center,0,ERC_OB_to_ERTC,1,2
+ERC,1,ERC-1430-O-1,Eagle River Transit Center,0,ERC_OB_to_ERTC,1,2
+ERC,91,ERC-1430-O-91,Eagle River Transit Center,0,ERC_OB_to_ERTC,1,2
+ERC,1,ERC-1800-O-1,Eagle River Transit Center,0,ERC_OB_to_ERTC,1,2
+ERC,91,ERC-1800-O-91,Eagle River Transit Center,0,ERC_OB_to_ERTC,1,2
