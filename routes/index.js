@@ -64,7 +64,7 @@ router.post('/ajax', function(req, res, next) {
             input: req.body.Body,
             stop: data.route,
         });
-    });
+    }, true);
 });
 
 
