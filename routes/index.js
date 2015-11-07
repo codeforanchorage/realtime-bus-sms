@@ -70,29 +70,23 @@ router.post('/ajax', function(req, res, next) {
 
 // a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
-    var stop = lib.findNearestStop(req.query.lat, req.query.lon);
+    var data = lib.findNearestStops(req.query.lat, req.query.lon);
 
-    lib.getStopFromStopNumber(stop, function(err, data) {
-        if (err) {
-            next(err)
-        }
+    // format the data if it's not just an error string
+    var output = data;
+    if (typeof(data) === 'object') {
+        output = lib.formatStopData(data, true)
+    }
 
-        // format the data if it's not just an error string
-        var output = data
-        if (typeof(data) === 'object') {
-            output = lib.formatStopData(data)
-        }
+    res.set('Content-Type', 'text/plain');
+    res.send(output)
 
-        res.set('Content-Type', 'text/plain');
-        res.send(output)
-
-        // log it
-        var entry = {
-            input: req.query.lat + ', ' + req.query.lon,
-            stop: data.route,
-        }
-        logRequest(entry)
-    });
+    // log it
+    var entry = {
+        input: req.query.lat + ', ' + req.query.lon,
+        stop: data.route,
+    }
+    logRequest(entry)
 });
 
 
