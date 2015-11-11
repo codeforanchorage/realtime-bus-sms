@@ -5,9 +5,10 @@ var router = express.Router();
 var stop_number_lookup = require('../lib/stop_number_lookup');
 var debug = require('debug')('routes/index.js');
 var lib = require('../lib/index');
+var config = require('../lib/config')
+
 
 var db = low('./public/db.json')
-var comments = low('./comments.json')
 
 // Log format:
 // message is whatever the user sends
@@ -47,6 +48,11 @@ router.post('/', function(req, res, next) {
             phone: hashwords.hashStr(req.body.From),
         }
         logRequest(entry)
+    }
+
+    if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
+        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), sendIt, false);
+        return;
     }
 
     lib.parseInputReturnBusTimes(message, sendIt);
@@ -92,10 +98,10 @@ router.get('/byLatLon', function(req, res, next) {
 
 // feedback form endpoint
 router.post('/feedback', function(req, res, next) {
-    comments('comments').push(req.body.comment)
-    console.log('This is a comment:')
-    console.log(req.body.comment)
-    res.send('Thanks for the feedback <br> <a href="/">back</a>')
+    function respond(err, response) {
+        res.send(response);
+    }
+    lib.processFeedback(req.body.comment, respond, true);
 });
 
 
