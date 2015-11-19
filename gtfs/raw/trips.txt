@@ -261,88 +261,88 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 60,91,60-1919-I-91,Downtown,1,60_IB,1,1
 60,1,60-2011-I-1,Downtown,1,60_IB,1,1
 60,1,60-2111-I-1,Downtown,1,60_IB,1,1
-7,2,7J-836-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,2,7J-1033-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,3,7J-1135-O-3,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,2,7J-1238-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,3,7J-1335-O-3,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,2,7J-1438-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,3,7J-1535-O-3,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,2,7J-1636-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,3,7J-1735-O-3,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,2,7J-1836-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,1,7J-1945-O-1,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,91,7J-1945-O-91,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,2,7J-2036-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-7,1,7J-2145-O-1,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
-3,1,3N-623-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-623-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-723-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-723-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-823-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-823-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-923-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-923-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-1023-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-1023-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-1123-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-1123-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-1223-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-1223-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-1321-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-1321-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-1421-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-1421-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-1521-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-1521-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-1621-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-1621-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-1723-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-1723-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-1823-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-1823-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-1953-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,91,3N-1953-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-3,1,3N-2153-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
-7,1,7A-623-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-623-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-722-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-722-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,2,7A-740-I-2,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-823-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-823-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-923-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-923-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,2,7A-940-I-2,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-1022-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-1022-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,3,7A-1041-I-3,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-1122-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-1122-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,2,7A-1140-I-2,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-1222-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-1222-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,3,7A-1241-I-3,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-1320-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-1320-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,2,7A-1340-I-2,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-1420-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-1420-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,3,7A-1441-I-3,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-1520-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-1520-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,2,7A-1540-I-2,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-1620-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-1620-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,3,7A-1641-I-3,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-1720-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-1720-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,2,7A-1740-I-2,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-1823-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,91,7A-1823-I-91,A - Airport/Downtown,1,7A_IB,1,1
-7,2,7A-1940-I-2,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-2023-I-1,A - Airport/Downtown,1,7A_IB,1,1
-7,1,7A-2153-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7-836-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,2,7-1033-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,3,7-1135-O-3,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,2,7-1238-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,3,7-1335-O-3,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,2,7-1438-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,3,7-1535-O-3,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,2,7-1636-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,3,7-1735-O-3,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,2,7-1836-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,1,7-1945-O-1,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,91,7-1945-O-91,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,2,7-2036-O-2,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+7,1,7-2145-O-1,J - Airport/Dimond Center,0,7J_OB_DI_AIR,1,1
+3,1,3-623-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-623-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-723-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-723-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-823-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-823-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-923-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-923-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-1023-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-1023-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-1123-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-1123-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-1223-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-1223-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-1321-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-1321-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-1421-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-1421-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-1521-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-1521-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-1621-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-1621-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-1723-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-1723-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-1823-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-1823-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-1953-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,91,3-1953-O-91,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+3,1,3-2153-O-1,N - Nunaka Valley/Muldoon,0,3N_OB_MUL,1,1
+7,1,7-623-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-623-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-722-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-722-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7-740-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-823-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-823-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-923-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-923-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7-940-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-1022-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-1022-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,3,7-1041-I-3,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-1122-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-1122-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7-1140-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-1222-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-1222-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,3,7-1241-I-3,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-1320-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-1320-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7-1340-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-1420-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-1420-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,3,7-1441-I-3,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-1520-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-1520-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7-1540-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-1620-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-1620-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,3,7-1641-I-3,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-1720-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-1720-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7-1740-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-1823-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,91,7-1823-I-91,A - Airport/Downtown,1,7A_IB,1,1
+7,2,7-1940-I-2,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-2023-I-1,A - Airport/Downtown,1,7A_IB,1,1
+7,1,7-2153-I-1,A - Airport/Downtown,1,7A_IB,1,1
 36,1,36-605-I-1,Downtown,1,36_IB,1,1
 36,91,36-605-I-91,Downtown,1,36_IB,1,1
 36,1,36-635-I-1,Downtown,1,36_IB,1,1
@@ -522,71 +522,71 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 13,2,13-1927-I-2,Senior Center/Downtown,1,13_IB,1,1
 13,1,13-2018-I-1,Senior Center/Downtown,1,13_IB,1,1
 13,1,13-2118-I-1,Senior Center/Downtown,1,13_IB,1,1
-7,1,7J-615-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-615-O-91,J - Dimond Center,0,7J_OB_DI,1,1
-7,1,7J-715-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-715-O-91,J - Dimond Center,0,7J_OB_DI,1,1
-7,1,7J-815-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-815-O-91,J - Dimond Center,0,7J_OB_DI,1,1
-7,1,7J-920-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-920-O-91,J - Dimond Center,0,7J_OB_DI,1,1
-7,1,7J-1015-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-1015-O-91,J - Dimond Center,0,7J_OB_DI,1,1
-7,1,7J-1115-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-1115-O-91,J - Dimond Center,0,7J_OB_DI,1,1
-7,1,7J-1215-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-1215-O-91,J - Dimond Center,0,7J_OB_DI,1,1
-7,1,7J-1315-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-1315-O-91,J - Dimond Center,0,7J_OB_DI,1,1
-7,1,7J-1415-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-1415-O-91,J - Dimond Center,0,7J_OB_DI,1,1
-7,1,7J-1515-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-1515-O-91,J - Dimond Center,0,7J_OB_DI,1,1
-7,1,7J-1615-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-1615-O-91,J - Dimond Center,0,7J_OB_DI,1,1
-7,1,7J-1715-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-1715-O-91,J - Dimond Center,0,7J_OB_DI,1,1
-7,1,7J-1815-O-1,J - Dimond Center,0,7J_OB_DI,1,1
-7,91,7J-1815-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-615-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-615-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-715-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-715-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-815-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-815-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-920-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-920-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-1015-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-1015-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-1115-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-1115-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-1215-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-1215-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-1315-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-1315-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-1415-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-1415-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-1515-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-1515-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-1615-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-1615-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-1715-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-1715-O-91,J - Dimond Center,0,7J_OB_DI,1,1
+7,1,7-1815-O-1,J - Dimond Center,0,7J_OB_DI,1,1
+7,91,7-1815-O-91,J - Dimond Center,0,7J_OB_DI,1,1
 60,3,60-928-O-3,Huffman Business Park,0,60_OB,1,1
-3,1,3C-653-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-653-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-753-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-753-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-853-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-853-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,2,3C-910-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-953-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-953-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-1053-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-1053-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,3,3C-1106-O-3,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,2,3C-1110-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-1153-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-1153-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-1253-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-1253-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,3,3C-1306-O-3,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,2,3C-1310-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-1357-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-1357-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-1453-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-1453-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,3,3C-1506-O-3,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,2,3C-1510-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-1553-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-1553-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-1656-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-1656-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,3,3C-1706-O-3,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,2,3C-1710-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-1753-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-1753-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-1853-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,91,3C-1853-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,2,3C-1911-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-2053-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
-3,1,3C-2243-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-653-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-653-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-753-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-753-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-853-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-853-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,2,3-910-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-953-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-953-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-1053-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-1053-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,3,3-1106-O-3,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,2,3-1110-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-1153-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-1153-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-1253-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-1253-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,3,3-1306-O-3,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,2,3-1310-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-1357-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-1357-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-1453-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-1453-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,3,3-1506-O-3,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,2,3-1510-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-1553-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-1553-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-1656-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-1656-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,3,3-1706-O-3,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,2,3-1710-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-1753-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-1753-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-1853-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,91,3-1853-O-91,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,2,3-1911-O-2,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-2053-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
+3,1,3-2243-O-1,C - Chester Valley/Muldoon/Centennial Village,0,3C_OB_CNT,1,1
 8,1,8-617-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
 8,91,8-617-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
 8,1,8-647-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
@@ -637,31 +637,31 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 8,1,8-1921-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
 8,91,8-1921-I-91,Downtown,1,8_IB_to_TRANCNT,1,1
 8,1,8-2021-I-1,Downtown,1,8_IB_to_TRANCNT,1,1
-3,2,3N-810-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
-3,2,3N-1010-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
-3,3,3N-1206-O-3,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
-3,2,3N-1210-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
-3,3,3N-1406-O-3,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
-3,2,3N-1410-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
-3,3,3N-1606-O-3,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
-3,2,3N-1610-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
-3,3,3N-1806-O-3,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
-3,2,3N-1810-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
-3,2,3N-2010-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
-7,2,7J-840-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,3,7J-941-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,2,7J-1040-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,3,7J-1141-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,2,7J-1240-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,3,7J-1341-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,2,7J-1440-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,3,7J-1541-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,2,7J-1640-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,3,7J-1741-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,2,7J-1840-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,1,7J-1920-I-1,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,91,7J-1920-I-91,J - Airport/Downtown,1,7J_IB_AIR,1,1
-7,1,7J-2050-I-1,J - Airport/Downtown,1,7J_IB_AIR,1,1
+3,2,3-810-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,2,3-1010-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,3,3-1206-O-3,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,2,3-1210-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,3,3-1406-O-3,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,2,3-1410-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,3,3-1606-O-3,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,2,3-1610-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,3,3-1806-O-3,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,2,3-1810-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+3,2,3-2010-O-2,N - Nunaka Valley/Muldoon/Centennial Village,0,3N_OB_CNT,1,1
+7,2,7-840-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,3,7-941-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,2,7-1040-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,3,7-1141-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,2,7-1240-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,3,7-1341-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,2,7-1440-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,3,7-1541-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,2,7-1640-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,3,7-1741-I-3,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,2,7-1840-I-2,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,1,7-1920-I-1,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,91,7-1920-I-91,J - Airport/Downtown,1,7J_IB_AIR,1,1
+7,1,7-2050-I-1,J - Airport/Downtown,1,7J_IB_AIR,1,1
 9,1,9-649-O-1,Dimond Center,0,9_OB,1,1
 9,91,9-649-O-91,Dimond Center,0,9_OB,1,1
 9,1,9-719-O-1,Dimond Center,0,9_OB,1,1
@@ -733,31 +733,31 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 9,2,9-2004-O-2,Dimond Center,0,9_OB,1,1
 9,1,9-2100-O-1,Dimond Center,0,9_OB,1,1
 9,1,9-2200-O-1,Dimond Center,0,9_OB,1,1
-3,1,3N-629-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,91,3N-629-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,1,3N-733-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,91,3N-733-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,1,3N-834-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,91,3N-834-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,1,3N-934-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,91,3N-934-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,1,3N-1034-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,91,3N-1034-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,1,3N-1133-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,91,3N-1133-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,1,3N-1233-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,91,3N-1233-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,1,3N-1333-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,91,3N-1333-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,1,3N-1433-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,91,3N-1433-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,1,3N-1536-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,91,3N-1536-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,1,3N-1636-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,91,3N-1636-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,1,3N-1739-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,91,3N-1739-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
-3,1,3N-2054-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-629-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3-629-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-733-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3-733-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-834-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3-834-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-934-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3-934-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-1034-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3-1034-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-1133-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3-1133-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-1233-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3-1233-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-1333-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3-1333-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-1433-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3-1433-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-1536-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3-1536-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-1636-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3-1636-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-1739-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,91,3-1739-I-91,N - Nunaka Valley/Downtown,1,3N_IB,1,1
+3,1,3-2054-I-1,N - Nunaka Valley/Downtown,1,3N_IB,1,1
 2,1,2-545-O-1,Dimond Center,0,2_OB,1,1
 2,91,2-545-O-91,Dimond Center,0,2_OB,1,1
 2,1,2-645-O-1,Dimond Center,0,2_OB,1,1
@@ -1156,99 +1156,99 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 75,1,75-609-O-1,Muldoon/VA Clinic,0,75_OB,1,1
 75,91,75-609-O-91,Muldoon/VA Clinic,0,75_OB,1,1
 75,3,75-951-O-3,Muldoon/VA Clinic,0,75_OB,1,1
-3,1,3C-556-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-556-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-654-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-654-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-754-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-754-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,2,3C-810-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-854-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-854-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-954-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-954-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,3,3C-1006-I-3,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,2,3C-1010-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-1054-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-1054-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-1151-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-1151-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,3,3C-1206-I-3,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,2,3C-1210-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-1258-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-1258-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-1358-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-1358-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,3,3C-1406-I-3,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,2,3C-1410-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-1507-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-1507-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-1601-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-1601-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,3,3C-1606-I-3,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,2,3C-1610-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-1701-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-1701-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-1805-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-1805-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,2,3C-1810-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-1956-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,91,3C-1956-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,2,3C-2010-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
-3,1,3C-2148-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-556-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-556-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-654-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-654-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-754-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-754-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3-810-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-854-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-854-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-954-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-954-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,3,3-1006-I-3,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3-1010-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-1054-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-1054-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-1151-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-1151-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,3,3-1206-I-3,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3-1210-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-1258-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-1258-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-1358-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-1358-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,3,3-1406-I-3,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3-1410-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-1507-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-1507-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-1601-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-1601-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,3,3-1606-I-3,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3-1610-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-1701-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-1701-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-1805-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-1805-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3-1810-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-1956-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,91,3-1956-I-91,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,2,3-2010-I-2,C - Chester Valley/Downtown,1,3C_IB,1,1
+3,1,3-2148-I-1,C - Chester Valley/Downtown,1,3C_IB,1,1
 75,1,75-552-I-1,Downtown,1,75_IB,1,1
 75,91,75-552-I-91,Downtown,1,75_IB,1,1
-3,2,3N-910-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
-3,3,3N-1106-I-3,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
-3,2,3N-1110-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
-3,3,3N-1306-I-3,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
-3,2,3N-1310-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
-3,3,3N-1506-I-3,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
-3,2,3N-1510-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
-3,3,3N-1706-I-3,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
-3,2,3N-1710-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
-3,1,3N-1855-I-1,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
-3,91,3N-1855-I-91,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
-3,2,3N-1910-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
-7,1,7A-645-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-645-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-745-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-745-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-845-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-845-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,2,7A-936-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-945-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-945-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,3,7A-1035-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-1045-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-1045-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,2,7A-1138-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-1145-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-1145-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,3,7A-1235-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-1245-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-1245-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,2,7A-1338-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-1345-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-1345-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,3,7A-1435-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-1445-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-1445-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,2,7A-1538-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-1545-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-1545-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,3,7A-1635-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-1645-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-1645-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,2,7A-1736-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-1745-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-1745-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,3,7A-1835-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-1845-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,91,7A-1845-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,2,7A-1936-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-2045-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
-7,1,7A-2240-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+3,2,3-910-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,3,3-1106-I-3,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,2,3-1110-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,3,3-1306-I-3,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,2,3-1310-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,3,3-1506-I-3,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,2,3-1510-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,3,3-1706-I-3,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,2,3-1710-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,1,3-1855-I-1,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,91,3-1855-I-91,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+3,2,3-1910-I-2,N - Nunaka Valley/Downtown,1,3N_IB_CNT,1,1
+7,1,7-645-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-645-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-745-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-745-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-845-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-845-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,2,7-936-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-945-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-945-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,3,7-1035-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-1045-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-1045-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,2,7-1138-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-1145-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-1145-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,3,7-1235-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-1245-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-1245-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,2,7-1338-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-1345-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-1345-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,3,7-1435-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-1445-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-1445-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,2,7-1538-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-1545-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-1545-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,3,7-1635-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-1645-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-1645-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,2,7-1736-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-1745-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-1745-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,3,7-1835-O-3,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-1845-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,91,7-1845-O-91,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,2,7-1936-O-2,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-2045-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
+7,1,7-2240-O-1,A - Airport/Dimond Center,0,7A_OB_DI,1,1
 14,1,14-641-O-1,Loop,0,14_Loop,1,1
 14,91,14-641-O-91,Loop,0,14_Loop,1,1
 14,1,14-741-O-1,Loop,0,14_Loop,1,1
@@ -1530,32 +1530,32 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 45,1,45-2005-I-1,Downtown,1,45_IB,1,1
 45,1,45-2105-I-1,Downtown,1,45_IB,1,1
 45,1,45-2205-I-1,Downtown,1,45_IB,1,1
-7,1,7J-600-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-600-I-91,J - Downtown,1,7J_IB,1,1
-7,1,7J-658-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-658-I-91,J - Downtown,1,7J_IB,1,1
-7,1,7J-758-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-758-I-91,J - Downtown,1,7J_IB,1,1
-7,1,7J-859-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-859-I-91,J - Downtown,1,7J_IB,1,1
-7,1,7J-959-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-959-I-91,J - Downtown,1,7J_IB,1,1
-7,1,7J-1059-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-1059-I-91,J - Downtown,1,7J_IB,1,1
-7,1,7J-1158-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-1158-I-91,J - Downtown,1,7J_IB,1,1
-7,1,7J-1259-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-1259-I-91,J - Downtown,1,7J_IB,1,1
-7,1,7J-1358-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-1358-I-91,J - Downtown,1,7J_IB,1,1
-7,1,7J-1458-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-1458-I-91,J - Downtown,1,7J_IB,1,1
-7,1,7J-1558-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-1558-I-91,J - Downtown,1,7J_IB,1,1
-7,1,7J-1658-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-1658-I-91,J - Downtown,1,7J_IB,1,1
-7,1,7J-1758-I-1,J - Downtown,1,7J_IB,1,1
-7,91,7J-1758-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-600-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-600-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-658-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-658-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-758-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-758-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-859-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-859-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-959-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-959-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-1059-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-1059-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-1158-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-1158-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-1259-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-1259-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-1358-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-1358-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-1458-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-1458-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-1558-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-1558-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-1658-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-1658-I-91,J - Downtown,1,7J_IB,1,1
+7,1,7-1758-I-1,J - Downtown,1,7J_IB,1,1
+7,91,7-1758-I-91,J - Downtown,1,7J_IB,1,1
 36,1,36-610-O-1,APU,0,36_OB,1,1
 36,91,36-610-O-91,APU,0,36_OB,1,1
 36,1,36-710-O-1,APU,0,36_OB,1,1

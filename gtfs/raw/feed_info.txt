@@ -1,2 +1,2 @@
 feed_publisher_name,feed_publisher_url,feed_lang,feed_version
-"Municipality of Anchorage, Public Transportation Department - People Mover",http://www.peoplemover.org/,en,2015.10.08.1
+"Municipality of Anchorage, Public Transportation Department - People Mover",http://www.peoplemover.org/,en,2015.11.12.1
