@@ -76,23 +76,29 @@ router.post('/ajax', function(req, res, next) {
 
 // a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
-    var data = lib.findNearestStops(req.query.lat, req.query.lon);
+    var output = "";
+    if (lib.serviceExceptions()) {
+        output = "No Service - Holiday";
+    } else {
 
-    // format the data if it's not just an error string
-    var output = data;
-    if (typeof(data) === 'object') {
-        output = lib.formatStopData(data, true)
+        var data = lib.findNearestStops(req.query.lat, req.query.lon);
+
+        // format the data if it's not just an error string
+        output = data;
+        if (typeof(data) === 'object') {
+            output = lib.formatStopData(data, true);
+            // log it
+            var entry = {
+                input: req.query.lat + ', ' + req.query.lon,
+                stop: data.route,
+            }
+            logRequest(entry)
+        }
     }
 
     res.set('Content-Type', 'text/plain');
     res.send(output)
 
-    // log it
-    var entry = {
-        input: req.query.lat + ', ' + req.query.lon,
-        stop: data.route,
-    }
-    logRequest(entry)
 });
 
 
