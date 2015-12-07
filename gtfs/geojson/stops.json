@@ -289,21 +289,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "CHECKMATE & 41ST AVENUE NNE",
-        "stop_id": "0585",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.784837,
-          61.18446
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "OLD GLENN & E LAKE RIDGE SSW",
         "stop_id": "6585",
         "stop_code": null
@@ -3208,21 +3193,6 @@
         "coordinates": [
           -149.833924,
           61.14801
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "BAXTER & HAMPTON SSW",
-        "stop_id": "3531",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.76348,
-          61.185682
         ]
       }
     },
@@ -7483,21 +7453,6 @@
         "coordinates": [
           -149.895912,
           61.188017
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "CHECKMATE & SHARON SSW",
-        "stop_id": "0603",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.785013,
-          61.185528
         ]
       }
     },
@@ -12514,21 +12469,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "BAXTER & VILLAGE SSW",
-        "stop_id": "3636",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.763477,
-          61.187563
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "NORTHERN LIGHTS & LAKE OTIS WNW",
         "stop_id": "0398",
         "stop_code": null
@@ -13444,21 +13384,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "CHECKMATE & SILLARY SSE",
-        "stop_id": "0587",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.784959,
-          61.188561
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "OLD GLENN & DOLLY SSW",
         "stop_id": "6581",
         "stop_code": null
@@ -13543,21 +13468,6 @@
         "coordinates": [
           -149.472641,
           61.39048
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "EMMANUEL & CHECKMATE ESE",
-        "stop_id": "0588",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.784875,
-          61.189748
         ]
       }
     },
@@ -13903,36 +13813,6 @@
         "coordinates": [
           -149.763308,
           61.189156
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "BAXTER & VILLAGE NNE",
-        "stop_id": "0491",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.763297,
-          61.188302
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "BAXTER & HAMPTON SSE",
-        "stop_id": "0490",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.763285,
-          61.1857
         ]
       }
     },
