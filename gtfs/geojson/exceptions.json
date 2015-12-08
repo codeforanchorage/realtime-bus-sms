@@ -1,28 +1,8 @@
 {
   "exceptions": [
     {
-      "date": "20150703",
+      "date": "20151224",
       "service_id": "1",
-      "exception_type": "2"
-    },
-    {
-      "date": "20150907",
-      "service_id": "1",
-      "exception_type": "2"
-    },
-    {
-      "date": "20151126",
-      "service_id": "1",
-      "exception_type": "2"
-    },
-    {
-      "date": "20150703",
-      "service_id": "2",
-      "exception_type": "1"
-    },
-    {
-      "date": "20150704",
-      "service_id": "2",
       "exception_type": "2"
     },
     {
@@ -31,28 +11,23 @@
       "exception_type": "1"
     },
     {
-      "date": "20160101",
-      "service_id": "1b",
-      "exception_type": "2"
-    },
-    {
       "date": "20151225",
-      "service_id": "1b",
+      "service_id": "1",
       "exception_type": "2"
     },
     {
-      "date": "20151224",
-      "service_id": "1b",
-      "exception_type": "2"
-    },
-    {
-      "date": "20160704",
-      "service_id": "1b",
+      "date": "20160101",
+      "service_id": "1",
       "exception_type": "2"
     },
     {
       "date": "20160530",
-      "service_id": "1b",
+      "service_id": "1",
+      "exception_type": "2"
+    },
+    {
+      "date": "20160704",
+      "service_id": "1",
       "exception_type": "2"
     }
   ]
