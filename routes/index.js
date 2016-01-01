@@ -20,6 +20,29 @@ function logRequest(entry) {
     db('requests').push(entry)
 }
 
+function sendIt(req, res, next, err, data, geocodedAddress, altInput, returnHtml) {
+    if (err) {
+        next(err)
+    }
+
+    if (!returnHtml) {
+        res.set('Content-Type', 'text/plain');
+    }
+
+    res.send(data);
+
+    // log info about this lookup
+    var entry = {
+        input: altInput || req.body.Body,
+        stop: data.route,
+        phone: hashwords.hashStr(req.body.From),
+        ip: req.connection.remoteAddress,
+        geocodedAddress: geocodedAddress
+    }
+    logRequest(entry)
+}
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index');
@@ -30,47 +53,25 @@ router.get('/', function(req, res, next) {
 // in the POST body.
 // TODO: better error messages
 router.post('/', function(req, res, next) {
+    var mySendIt = sendIt.bind(null,req,res,next);
+
     var message = req.body.Body;
 
-    function sendIt(err, data) {
-        if (err) {
-            next(err)
-        }
 
-        res.set('Content-Type', 'text/plain');
-
-        res.send(data);
-
-        // log info about this lookup
-        var entry = {
-            input: message,
-            stop: data.route,
-            phone: hashwords.hashStr(req.body.From),
-        }
-        logRequest(entry)
-    }
 
     if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
-        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), sendIt, false);
+        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), mySendIt, false);
         return;
     }
 
-    lib.parseInputReturnBusTimes(message, sendIt);
+    lib.parseInputReturnBusTimes(message, mySendIt, false);
 });
 
 
 // This is what the browser hits
 router.post('/ajax', function(req, res, next) {
-    lib.parseInputReturnBusTimes(req.body.Body, function(err, data) {
-
-        res.send(data);
-
-        // log info about this lookup
-        logRequest({
-            input: req.body.Body,
-            stop: data.route,
-        });
-    }, true);
+    var mySendIt = sendIt.bind(null, req, res, next)
+    lib.parseInputReturnBusTimes(req.body.Body, mySendIt, true);
 });
 
 
@@ -79,6 +80,7 @@ router.get('/byLatLon', function(req, res, next) {
     var output = "";
     if (lib.serviceExceptions()) {
         output = "No Service - Holiday";
+        sendIt(req, res, next, null, output)
     } else {
 
         var data = lib.findNearestStops(req.query.lat, req.query.lon);
@@ -87,27 +89,18 @@ router.get('/byLatLon', function(req, res, next) {
         output = data;
         if (typeof(data) === 'object') {
             output = lib.formatStopData(data, true);
-            // log it
-            var entry = {
-                input: req.query.lat + ', ' + req.query.lon,
-                stop: data.route,
-            }
-            logRequest(entry)
         }
+        sendIt(req, res, next, null, output, null, req.query.lat + ', ' + req.query.lon, true)
     }
 
-    res.set('Content-Type', 'text/plain');
-    res.send(output)
 
 });
 
 
 // feedback form endpoint
 router.post('/feedback', function(req, res, next) {
-    function respond(err, response) {
-        res.send(response);
-    }
-    lib.processFeedback(req.body.comment, respond, true);
+    var mySendIt = sendIt.bind(null,req,res,next);
+    lib.processFeedback(req.body.comment, mySendIt, true);
 });
 
 
