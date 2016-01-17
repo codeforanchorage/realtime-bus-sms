@@ -22,7 +22,7 @@ function logRequest(entry) {
 
 function sendIt(req, res, next, err, data, geocodedAddress, altInput, returnHtml) {
     if (err) {
-        next(err)
+        return next(err)
     }
 
     if (!returnHtml) {
