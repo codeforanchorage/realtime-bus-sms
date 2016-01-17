@@ -28,6 +28,7 @@
     "mocha": "~2.1.0",
     "morgan": "~1.5.1",
     "node-geocoder": "~2.16.0",
+    "nodemailer": "^2.0.0",
     "request": "^2.51.0",
     "serve-favicon": "~2.2.0",
     "turf": "~1.4.0",
