@@ -62,6 +62,7 @@ router.post('/', function(req, res, next) {
 // This is what the browser hits
 router.post('/ajax', function(req, res, next) {
     lib.parseInputReturnBusTimes(req.body.Body, function(err, data) {
+        if (err) return next(err);
 
         res.send(data);
 
