@@ -84,8 +84,9 @@ html
         function updateOutputDiv() {
             removeLoading();
 
-            if(this.readyState == 4 && this.status == 200) {
-                var output = this.responseText;
+            if(this.readyState == 4) {
+                var output = 'Sorry, there was an error';
+                if(this.status == 200) output = this.responseText;
                 output = output.replace(/\n/g, '<br>');
                 outputDiv.innerHTML = output;
             }
