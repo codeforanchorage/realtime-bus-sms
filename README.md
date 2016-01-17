@@ -44,8 +44,8 @@ Vagrant:
     ./bin/www
 
     # run tests
-    sudo npm install -g mocha   # install testing framework
-    npm test
+    sudo npm install -g nodeunit   # install testing framework
+    nodeunit test
 
 
 Linux:
@@ -66,8 +66,8 @@ Linux:
     ./bin/www
 
     # run tests
-    sudo npm install -g mocha   # install testing framework
-    npm test
+    sudo npm install -g nodeunit   # install testing framework
+    nodeunit test
 
 Mac:
 
