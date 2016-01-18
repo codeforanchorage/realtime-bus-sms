@@ -1,9 +1,2 @@
-foo {
-  bar: baz; }
 
-body {
-  background-color: red; }
-  body .foo .bar {
-    background-color: green; }
-
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpYi90ZXN0LnNjc3MiLCJpbmRleC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsU0FBUyxFQUNWOztBQ0FEO0VBQ0Usc0JBQXNCLEVBTXZCO0VBUEQ7SUFJUSx3QkFBd0IsRUFDM0IiLCJmaWxlIjoiaW5kZXguY3NzIiwic291cmNlc0NvbnRlbnQiOlsiZm9vIHtcbiAgYmFyOiBiYXo7XG59XG4iLCJAaW1wb3J0ICdsaWIvdGVzdCc7XG5cbmJvZHkge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZWQ7XG4gIC5mb28ge1xuICAgIC5iYXIge1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiBncmVlbjtcbiAgICB9XG4gIH1cbn1cbiJdLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ== */
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJpbmRleC5jc3MiLCJzb3VyY2VSb290IjoiL3NvdXJjZS8iLCJzb3VyY2VzQ29udGVudCI6W119 */

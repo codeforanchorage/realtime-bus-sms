@@ -8,25 +8,37 @@
 /* TODO
 
     [ ] Add instructions / intro (above).
+    [ ] Implement LiveReload with path / port to dev machine on LAN if not localhost.
+    --- Update LiveReload when dev machine path / port changes. / Just get address from nav bar.
+    [ ] Notify use of dev machine network path / port.
     [x] Clean up notifications.
 
 */
 
 
-// Main Dependencies
+// Node Core Dependencies
 
 var path = require('path');
 var fs = require('fs');
+var stream = require('stream');
+
+
+// Main Dependencies
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var changed = require('gulp-changed');
 var tap = require('gulp-tap');
 // var es = require('event-stream');
+var gzipSize = require('gzip-size');
+var size = require('filesize');
 var glob = require('glob');
 var runSequence = require('run-sequence');
 var source = require('vinyl-source-stream');
 var chokidar = require('chokidar');
 var rimraf = require('rimraf');
+var reload = require('livereload');
+var openport = require('openport');
 
 
 // Stylesheet Dependencies
@@ -44,12 +56,17 @@ var watchify = require('watchify');
 var yamlify = require('yamlify');
 
 
+// Globals
+
+var buildData = {};
+
+
 // Main configuration
 
 const SOURCE_DIR = 'public_source';
 const PRODUCTION_DIR = 'public_production';
 const DEVELOPMENT_DIR = 'public_development';
-
+const RELOAD_PORT_RANGE = [8010, 8099];
 
 /* RM --RF TASK
 
@@ -86,6 +103,7 @@ gulpSequentialTask('default',
 
 gulpSequentialTask('watch',
   'clean',
+  ['destination-reload', 'destination-log'],
   ['misc-watch', 'styles-watch', 'scripts-watch']
 );
 
@@ -118,7 +136,7 @@ gulp.task('misc-watch', function() {
   run();
 
   function run() {
-  miscCopy(glob, PRODUCTION_DIR, 'SILENT');
+    miscCopy(glob, PRODUCTION_DIR, 'SILENT');
     miscCopy(glob, DEVELOPMENT_DIR);
   }
 
@@ -129,7 +147,7 @@ function miscCopy(globIn, pathOut, silent) {
   return gulp.src(globIn)
     .pipe(changed(pathOut))
     .pipe(tap((file) => {
-      if (silent || fs.statSync(file.path).isDirectory()) return;
+      if (silent || !fs.statSync(file.path).isFile()) return;
       var path = file.path;
       if (file.path.substring(0, process.cwd().length) === process.cwd()) {
         path = path.substr(process.cwd().length+1);
@@ -233,6 +251,7 @@ const DEVELOPMENT_JS_OPTS = {
   paths: [path.join(process.cwd(), 'node_modules')],
   cache: {},
   packageCache: {},
+  fullPaths: false,
 };
 
 const PRODUCTION_JS_OPTS = {
@@ -240,6 +259,7 @@ const PRODUCTION_JS_OPTS = {
   paths: [path.join(process.cwd(), 'node_modules')],
   cache: {},
   packageCache: {},
+  fullPaths: false,
 };
 
 const JS_TRANSFORMS = [yamlify];
@@ -282,18 +302,26 @@ function jsStream(b, isDev) {
 
   if (isDev) {
 
+    var baseDir = path.join(SOURCE_DIR, 'js', 'dev');
     try {
-      var devScriptPath = '.'+path.sep+path.join(SOURCE_DIR, 'js', 'dev');
+      var devScriptPath = '.'+path.sep+baseDir;
       require.resolve(devScriptPath);
     }
     catch(e) {
       devScriptPath = null;
-      // TODO: Notify user they can add a dev script
+      gutil.log(
+        gutil.colors.yellow('No js dev script found in'),
+        gutil.colors.magenta(baseDir+path.sep)
+      );
     }
-
-    if (devScriptPath) b.require(devScriptPath, {
-      baseDir: path.join(SOURCE_DIR, 'js'),
-    });
+    if (devScriptPath) {
+      var s = new stream.Readable();
+      s.push('module.exports = '+JSON.stringify(buildData)+';');
+      s.push(null);
+      b.exclude('_buildData');
+      b.require(s, { expose: '_buildData' }); // make build data requireable
+      b.add(devScriptPath, { baseDir }); // concat dev scripts
+    }
 
   }
 
@@ -326,8 +354,61 @@ function jsBundler(b, dest, silent) {
 }
 
 
-/* TOP LEVEL FUNCTIONS USED THROUGHOUT
+/* FILE UPDATE TASKS
 
+  Watches destination folders, LiveReloading files and providing details when they change.
+
+*/
+
+
+gulp.task('destination-reload', function(done) {
+
+  openport.find({ ports: RELOAD_PORT_RANGE }, (err, port) => {
+    if (err) return gutil.log(gutil.color.red(err));
+    init(port);
+  });
+
+  function init(port) {
+    buildData.reloadPort = port;
+    reloadServer = reload.createServer({port});
+    reloadServer.watch(path.join(DEVELOPMENT_DIR, '**', '*'));
+    gutil.log(
+      gutil.colors.green('LiveReload listening'),
+      'on',
+      gutil.colors.magenta('port '+port)
+    )
+    done();
+  }
+
+});
+
+
+gulp.task('destination-log', function() {
+
+  var glob = [path.join(PRODUCTION_DIR, '**', '*'), path.join(DEVELOPMENT_DIR, '**', '*')];
+  watch(glob, (filePath, stat) => {
+    var root = filePath.split(path.sep)[0];
+    if (root === PRODUCTION_DIR) {
+      fs.readFile(filePath, (err, buffer) => gzipSize(buffer, (err, zipSize) => {
+        gutil.log(
+          gutil.colors.yellow(filePath),
+          gutil.colors.magenta(size(zipSize, {spacer: ' '}))
+        );
+      }));
+    }
+    else if (root === DEVELOPMENT_DIR) {
+      gutil.log(
+        gutil.colors.grey(filePath),
+        gutil.colors.grey(size(stat.size, {spacer: ' '}))
+      );
+    }
+  });
+
+});
+
+
+/* TOP LEVEL FUNCTIONS USED THROUGHOUT
+*
 */
 
 
@@ -344,8 +425,10 @@ function watch(glob) {
   };
 
   chokidar.watch(glob, opts).on('all', function(ev, path) {
+    var stat = fs.statSync(path);
+    if (!stat.isFile()) return;
     callbacks.forEach(function(callback) {
-      callback(path);
+      callback(path, stat);
     });
   });
 
