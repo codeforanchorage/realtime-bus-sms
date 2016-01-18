@@ -10,7 +10,7 @@
     [ ] Add instructions / intro (above).
     [x] Implement LiveReload with path / port to dev machine on LAN if not localhost.
     --- Update LiveReload when dev machine path / port changes. / Just get address from nav bar.
-    [ ] Notify use of dev machine network path / port.
+    [x] Notify use of dev machine network path / port. / Port not important here.
     [x] Clean up notifications.
 
 */
@@ -39,7 +39,7 @@ var chokidar = require('chokidar');
 var rimraf = require('rimraf');
 var reload = require('livereload');
 var openport = require('openport');
-
+var network = require('network');
 
 // Stylesheet Dependencies
 
@@ -67,6 +67,7 @@ const SOURCE_DIR = 'public_source';
 const PRODUCTION_DIR = 'public_production';
 const DEVELOPMENT_DIR = 'public_development';
 const RELOAD_PORT_RANGE = [8010, 8099];
+
 
 /* RM --RF TASK
 
@@ -103,6 +104,7 @@ gulpSequentialTask('default',
 
 gulpSequentialTask('watch',
   'clean',
+  'network',
   ['destination-reload', 'destination-log'],
   ['misc-watch', 'styles-watch', 'scripts-watch']
 );
@@ -402,6 +404,16 @@ gulp.task('destination-log', function() {
         gutil.colors.grey(size(stat.size, {spacer: ' '}))
       );
     }
+  });
+
+});
+
+
+gulp.task('network', function(done) {
+
+  network.get_private_ip(function(err, ip) {
+    gutil.log(err || gutil.colors.yellow('Machine IP address is ')+gutil.colors.magenta(ip));
+    done();
   });
 
 });
