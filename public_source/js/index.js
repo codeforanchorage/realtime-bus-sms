@@ -1,5 +1,4 @@
-function foo() {
-  console.log('It works.');
-}
-
-foo();
+/**
+ *  MAIN SCRIPT
+ *    Point of entry for front-end application.
+ */

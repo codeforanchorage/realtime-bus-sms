@@ -1,32 +1,50 @@
-/**
+/*
+ *
+ *
+ *
+/*
 
-  TODO:
-    [ ] Clean up notifications.
 
+/* TODO
 
-
+    [ ] Add instructions / intro (above).
+    [x] Clean up notifications.
 
 */
+
+
+// Main Dependencies
 
 var path = require('path');
 var fs = require('fs');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var es = require('event-stream');
+var changed = require('gulp-changed');
+var tap = require('gulp-tap');
+// var es = require('event-stream');
 var glob = require('glob');
 var runSequence = require('run-sequence');
 var source = require('vinyl-source-stream');
 var chokidar = require('chokidar');
 var rimraf = require('rimraf');
 
+
+// Stylesheet Dependencies
+
 var sass = require('gulp-sass');
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var prefix = require('gulp-autoprefixer');
 
+
+// Javascript Dependencies
+
 var browserify = require('browserify');
 var watchify = require('watchify');
+var yamlify = require('yamlify');
 
+
+// Main configuration
 
 const SOURCE_DIR = 'public_source';
 const PRODUCTION_DIR = 'public_production';
@@ -49,16 +67,14 @@ gulp.task('clean', function() {
 
 /* DEFAULT TASK
 
-  This runs everything.
+  This runs everything. If doing development, use gulp watch instead.
 
 */
 
-gulp.task('default', ['production']);
-
-gulpSequentialTask('production',
+gulpSequentialTask('default',
   'clean',
-  ['styles-development', 'scripts-development'],
-  ['styles-production', 'scripts-production']
+  ['misc-development', 'styles-development', 'scripts-development'],
+  ['misc-production', 'styles-production', 'scripts-production']
 );
 
 
@@ -87,11 +103,11 @@ const EXCLUDED_DIRS = [
 ];
 
 gulp.task('misc-production', function() {
-  return miscCopy(PRODUCTION_DIR, miscGlob());
+  return miscCopy(miscGlob(), PRODUCTION_DIR);
 });
 
 gulp.task('misc-development', function() {
-  return miscCopy(DEVELOPMENT_DIR, miscGlob());
+  return miscCopy(miscGlob(), DEVELOPMENT_DIR);
 });
 
 gulp.task('misc-watch', function() {
@@ -101,19 +117,26 @@ gulp.task('misc-watch', function() {
   watch(glob, run);
   run();
 
-  function run(glob) {
-    // LOG HERE
-    if (typeof glob === 'undefined') glob = miscGlob();
-    miscCopy(DEVELOPMENT_DIR, glob);
-    miscCopy(PRODUCTION_DIR, glob);
+  function run() {
+  miscCopy(glob, PRODUCTION_DIR, 'SILENT');
+    miscCopy(glob, DEVELOPMENT_DIR);
   }
 
 });
 
-function miscCopy(dir, glob) {
+function miscCopy(globIn, pathOut, silent) {
 
-  return gulp.src(glob)
-    .pipe(gulp.dest(dir))
+  return gulp.src(globIn)
+    .pipe(changed(pathOut))
+    .pipe(tap((file) => {
+      if (silent || fs.statSync(file.path).isDirectory()) return;
+      var path = file.path;
+      if (file.path.substring(0, process.cwd().length) === process.cwd()) {
+        path = path.substr(process.cwd().length+1);
+      }
+      gutil.log(gutil.colors.green('Copying '+path));
+    }))
+    .pipe(gulp.dest(pathOut))
   ;
 
 }
@@ -131,9 +154,7 @@ function miscGlob() {
 */
 
 
-const DEVELOPMENT_SCSS_OPTS = {
-
-};
+const DEVELOPMENT_SCSS_OPTS = {};
 
 const PRODUCTION_SCSS_OPTS = {
   outputStyle: 'compressed',
@@ -171,12 +192,12 @@ gulp.task('styles-watch', function() {
 
 function scssProduction(silent) {
 
-  gutil.log(gutil.colors.green('Compiling styles / PRODUCTION'));
+  if (!silent) gutil.log(gutil.colors.green('Compiling styles'));
 
   return gulp.src(path.join(SOURCE_DIR, 'scss', '*.scss'))
     .pipe(plumber())
     .pipe(sass(PRODUCTION_SCSS_OPTS))
-    .on('error', silent ? ()=>{} : sass.logError)
+    .on('error', silent ? () => {} : sass.logError)
     .pipe(prefix({ browsers: [ '> 5%', 'Explorer >= 11' ] }))
     .pipe(gulp.dest(path.join(PRODUCTION_DIR, 'css')))
   ;
@@ -185,13 +206,13 @@ function scssProduction(silent) {
 
 function scssDevelopment(silent) {
 
-  gutil.log(gutil.colors.green('Compiling styles / DEVELOPMENT'));
+  if (!silent) gutil.log(gutil.colors.green('Compiling styles'));
 
   return gulp.src(path.join(SOURCE_DIR, 'scss', '*.scss'))
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(sass(DEVELOPMENT_SCSS_OPTS))
-    .on('error', silent ? ()=>{} : sass.logError)
+    .on('error', silent ? () => {} : sass.logError)
     .pipe(prefix({ browsers: [ '> 5%', 'Explorer >= 11' ] }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(path.join(DEVELOPMENT_DIR, 'css')))
@@ -221,39 +242,78 @@ const PRODUCTION_JS_OPTS = {
   packageCache: {},
 };
 
+const JS_TRANSFORMS = [yamlify];
+const JS_PLUGINS = [];
+
 gulp.task('scripts-production', function() {
 
   var b = browserify(path.join(SOURCE_DIR, 'js', 'index.js'), PRODUCTION_JS_OPTS);
-  return jsBundler(b, PRODUCTION_DIR+'/js');
+  jsStream(b);
+  return jsBundler(b, path.join(PRODUCTION_DIR, 'js'));
 
 });
 
 gulp.task('scripts-development', function() {
 
   var b = browserify(path.join(SOURCE_DIR, 'js', 'index.js'), DEVELOPMENT_JS_OPTS);
+  jsStream(b, 'DEVELOPMENT');
   return jsBundler(b, path.join(DEVELOPMENT_DIR, 'js'));
 
 });
 
 gulp.task('scripts-watch', function() {
 
-  var bProd = browserify(path.join(SOURCE_DIR, 'js'), PRODUCTION_JS_OPTS);
-  var bDev = browserify(path.join(SOURCE_DIR, 'js'), DEVELOPMENT_JS_OPTS);
+  var b = browserify(path.join(SOURCE_DIR, 'js', 'index.js'), PRODUCTION_JS_OPTS);
+  b = watchify(b);
+  jsStream(b);
+  jsBundler(b, path.join(PRODUCTION_DIR, 'js'), 'SILENT');
 
-  bProd.plugin(watchify);
-  bDev.plugin(watchify);
-
-  jsBundler(bProd, path.join(PRODUCTION_DIR, 'js'), true);
-  jsBundler(bDev, path.join(DEVELOPMENT_DIR, 'js'));
+  var b = browserify(path.join(SOURCE_DIR, 'js', 'index.js'), DEVELOPMENT_JS_OPTS);
+  b = watchify(b);
+  jsStream(b, 'DEVELOPMENT');
+  jsBundler(b, path.join(DEVELOPMENT_DIR, 'js'));
 
 });
 
+function jsStream(b, isDev) {
+
+  JS_TRANSFORMS.forEach(t => b.transform(t));
+  JS_PLUGINS.forEach(p => b.plugin(p));
+
+  if (isDev) {
+
+    try {
+      var devScriptPath = '.'+path.sep+path.join(SOURCE_DIR, 'js', 'dev');
+      require.resolve(devScriptPath);
+    }
+    catch(e) {
+      devScriptPath = null;
+      // TODO: Notify user they can add a dev script
+    }
+
+    if (devScriptPath) b.require(devScriptPath, {
+      baseDir: path.join(SOURCE_DIR, 'js'),
+    });
+
+  }
+
+
+}
+
 function jsBundler(b, dest, silent) {
 
-  var rebundle = function() {
+  b.on('update', function() {
+    rebundle();
+  });
+
+  return rebundle();
+
+  function rebundle() {
+
+    if (!silent) gutil.log(gutil.colors.green('Compiling scripts'));
+
     return b.bundle()
-      .on('error', function(e) {
-        if (silent) return;
+      .on('error', silent ? () => {} : (e) => {
         gutil.beep();
         var message = e.annotated || e.message;
         gutil.log(gutil.colors.red(message));
@@ -261,21 +321,17 @@ function jsBundler(b, dest, silent) {
       .pipe(source('index.js'))
       .pipe(gulp.dest(dest))
     ;
-  };
-
-  b.on('update', function() {
-    rebundle();
-  });
-
-  b.on('bytes', function(bytes) {
-    gutil.log(gutil.colors.green('Completed script ('+Math.round(bytes/1000)+'kb)'));
-  });
-
-  return rebundle();
+  }
 
 }
 
 
+/* TOP LEVEL FUNCTIONS USED THROUGHOUT
+
+*/
+
+
+// gulp.watch is slow. Use chokidar.
 
 function watch(glob) {
 
@@ -294,6 +350,9 @@ function watch(glob) {
   });
 
 }
+
+
+// Generates glob only of modules from npm link
 
 function linkedModules() {
 
@@ -315,6 +374,7 @@ function linkedModules() {
 
 
 // Temporary shim until Gulp 4.0 releases sequential tasks.
+
 function gulpSequentialTask() {
 
   var args = Array.prototype.slice.call(arguments);
@@ -326,3 +386,8 @@ function gulpSequentialTask() {
   });
 
 }
+
+
+// For catching all on through streams and not reporting them.
+
+function noop() {}
