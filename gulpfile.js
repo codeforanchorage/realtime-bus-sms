@@ -8,7 +8,7 @@
 /* TODO
 
     [ ] Add instructions / intro (above).
-    [ ] Implement LiveReload with path / port to dev machine on LAN if not localhost.
+    [x] Implement LiveReload with path / port to dev machine on LAN if not localhost.
     --- Update LiveReload when dev machine path / port changes. / Just get address from nav bar.
     [ ] Notify use of dev machine network path / port.
     [x] Clean up notifications.
