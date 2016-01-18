@@ -45,7 +45,7 @@ Vagrant:
 
     # run tests
     sudo npm install -g nodeunit   # install testing framework
-    nodeunit test
+    npm test
 
 
 Linux:
@@ -67,7 +67,7 @@ Linux:
 
     # run tests
     sudo npm install -g nodeunit   # install testing framework
-    nodeunit test
+    npm test
 
 Mac:
 
