@@ -190,6 +190,14 @@ exports.outage_group = {
         }, function (res) {
             testOutage(test, res)
         });
+    },
+    test_networkFailuer: function(test) {
+        config.MUNI_URL = ''
+        for (var stopId in stop_number_lookup) break;
+        api.post(test, '/', {
+            data: {Body: stopId}
+        }, function (res) {
+            testOutage(test, res)
+        });
     }
 };
-
