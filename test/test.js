@@ -12,12 +12,26 @@ var fs = require('fs');
 
 
 // Helper functions
-function testFeedback(test, res, feedbackString) {
+function testFeedback(test, res, feedbackString, phone, email) {
     test.ok(res.body.indexOf("Thanks for the feedback") > -1, "Test feedback response");
     var comments = JSON.parse(fs.readFileSync('./comments.json'));
     test.ok(function() {
         for(var i=0; i < comments.comments.length; i++) {
-            if (comments.comments[i].indexOf(feedbackString) > -1) {
+            if (comments.comments[i].feedback && comments.comments[i].feedback.indexOf(feedbackString) > -1) {
+                if (phone) {
+                    if (comments.comments[i].phone == phone) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+                if (email) {
+                    if (comments.comments[i].email == email) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
                 return true
             }
         }
@@ -234,18 +248,22 @@ exports.group = {
 // Test feedback
     test_browserFeedback: function (test) {
         var feedbackString = "Test Feedback " + (new Date().toISOString());
+        var email = "test@example.com";
         api.post(test, '/feedback', {
-            data: {comment: feedbackString}
+            data: {comment: feedbackString,
+                   email: email}
         }, function (res) {
-            setTimeout(function () {testFeedback(test, res, feedbackString)}, 5000);  //Delay to make sure logging saves
+            setTimeout(function () {testFeedback(test, res, feedbackString, null, email)}, 5000);  //Delay to make sure logging saves
         });
     },
     test_smsFeedback: function (test) {
         var feedbackString = "Test Feedback " + (new Date().toISOString());
+        var phone = "907-555-1212";
         api.post(test, '/', {
-            data: {Body: config.FEEDBACK_TRIGGER + feedbackString}
+            data: {Body: config.FEEDBACK_TRIGGER + feedbackString,
+                From: phone}
         }, function (res) {
-            setTimeout(function () {testFeedback(test, res, feedbackString)}, 5000);  //Delay to make sure logging saves
+            setTimeout(function () {testFeedback(test, res, feedbackString, phone)}, 5000);  //Delay to make sure logging saves
         });
 
     },

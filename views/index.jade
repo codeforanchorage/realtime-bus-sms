@@ -4,11 +4,11 @@ html
         title= title
         style.
             body {
-              font-family: sans-serif;
-              text-align: center;
+                font-family: sans-serif;
+                text-align: center;
             }
             #output {
-              padding-top: 20px;
+                padding-top: 20px;
             }
             button {
                 margin: 20px auto;
@@ -43,9 +43,12 @@ html
         form(method="POST" action="/feedback" style="display:none" id="feedback")
             textarea(name="comment" style="width:300px; height:50px;")
             br
-            input(type="submit")
+            label(for='email') Email (optional)
+            input(type='text', id='email', name='email')
+            br
+            input(type="submit", value="Send Feedback")
 
-        p
+    p
         div
             a(href="http://codeforanchorage.org")
                 img.logo(src="img/cfa.png")
@@ -59,12 +62,12 @@ html
         function showLoading() {
             var elements = ['&bull;', '&nbsp;', '&nbsp;', '&nbsp;']
             interval = window.setInterval(
-                function() {
-                    var output = elements.join('');
-                    outputDiv.innerHTML = output;
-                    elements.unshift(elements.pop());
-                },
-                300
+                    function() {
+                        var output = elements.join('');
+                        outputDiv.innerHTML = output;
+                        elements.unshift(elements.pop());
+                    },
+                    300
             );
         }
 
@@ -127,13 +130,13 @@ html
             showLoading();
 
             navigator.geolocation.getCurrentPosition(
-                showPosition,
-                removeLoading,
-                {
-                    enableHighAccuracy: true,
-                    timeout: 10000,
-                    maximumAge: 60000,
-                }
+                    showPosition,
+                    removeLoading,
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 60000,
+                    }
             );
         }
 

@@ -67,7 +67,7 @@ router.post('/', function(req, res, next) {
 
 
     if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
-        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), mySendIt, false);
+        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req, mySendIt, false);
         return;
     }
 
@@ -107,7 +107,7 @@ router.get('/byLatLon', function(req, res, next) {
 // feedback form endpoint
 router.post('/feedback', function(req, res, next) {
     var mySendIt = sendIt.bind(null,req,res,next);
-    lib.processFeedback(req.body.comment, mySendIt, true);
+    lib.processFeedback(req.body.comment, req, mySendIt, true);
 });
 
 
