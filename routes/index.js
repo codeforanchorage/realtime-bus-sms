@@ -8,7 +8,8 @@ var lib = require('../lib/index');
 var config = require('../lib/config')
 
 
-var db = low('./public/db.json')
+var db = low('./public/db.json');
+var db_private = low('./db_private.json');
 
 // Log format:
 // message is whatever the user sends
@@ -16,8 +17,14 @@ var db = low('./public/db.json')
 // data is the current datetime
 // if it's sent from twiliio, we store a human-readable hash of the #
 function logRequest(entry) {
-    entry.date = new Date()
-    db('requests').push(entry)
+    entry.date = new Date();
+    db_private('requests').push(entry);
+    var entry2 = JSON.parse(JSON.stringify(entry)); // Required because of async mode of lowdb
+    if (entry.phone) {
+        entry2.phone = hashwords.hashStr(entry.phone);
+    }
+    entry2.ip = "";
+    db('requests').push(entry2);
 }
 
 function sendIt(req, res, next, err, data, geocodedAddress, altInput, returnHtml) {
@@ -35,7 +42,7 @@ function sendIt(req, res, next, err, data, geocodedAddress, altInput, returnHtml
     var entry = {
         input: altInput || req.body.Body,
         stop: data.route,
-        phone: hashwords.hashStr(req.body.From),
+        phone: req.body.From,
         ip: req.connection.remoteAddress,
         geocodedAddress: geocodedAddress
     }
@@ -60,7 +67,7 @@ router.post('/', function(req, res, next) {
 
 
     if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
-        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), mySendIt, false);
+        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req, mySendIt, false);
         return;
     }
 
@@ -100,7 +107,7 @@ router.get('/byLatLon', function(req, res, next) {
 // feedback form endpoint
 router.post('/feedback', function(req, res, next) {
     var mySendIt = sendIt.bind(null,req,res,next);
-    lib.processFeedback(req.body.comment, mySendIt, true);
+    lib.processFeedback(req.body.comment, req, mySendIt, true);
 });
 
 
