@@ -1,0 +1,100 @@
+doctype html
+html
+    head
+        title= title
+        style.
+            body {
+                font-family: sans-serif;
+                text-align: center;
+            }
+            #output {
+                padding-top: 20px;
+            }
+            button {
+                margin: 20px auto;
+            }
+            .logo-tag {
+                font-size: 10pt;
+                vertical-align: middle;
+            }
+            .logo {
+                width: 40px;
+                height: 40px;
+                vertical-align: middle;
+            }
+
+        meta(name='MobileOptimized', content='320')
+        meta(name='viewport', content='width=device-width, minimum-scale=1, maximum-scale=1')
+        meta(name='apple-mobile-web-app-capable' content='yes')
+
+
+    body
+        h1 "Logs"
+        button(id="btnHitsHour") Hits by Hour
+        button(id="btnHitsDay") Hits by Day
+        button(id="btnResponse") Response Time
+
+        p
+            div(id="plot")
+            a(href="http://codeforanchorage.org")
+                img.logo(src="img/cfa.png")
+            span.logo-tag &nbsp; Code For Anchorage
+
+    script(src="/javascripts/jquery.min.js")
+    script(src="/javascripts/jquery.flot.min.js")
+    script.
+
+        $(function() {
+
+
+            var data = [];
+
+            $("[id^='btnHits']").click(function() {
+
+                var button = $(this);
+
+                var options = {
+                    line: {
+                        show: true
+                    },
+                    points: {
+                        show: true
+                    },
+                    xaxis: {
+                        mode: "time",
+                        minTickSize: [1, "hour"]
+                    }
+                }
+
+                var bucket = 60 * 60 * 1000;   // Hours by default
+                if ($(button).attr("id").toLowerCase().indexOf("day") > -1) {
+                    bucket = 24 * 60 * 60 * 1000;
+                    options.xaxis.minTickSize = [1, "day"]
+                }
+
+                $.ajax({
+                    url: "/logdata?type=hits",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var sumData = [];
+                        data.forEach(function(point) {
+                            if (!sumData[point.type].length) {
+                                sumData.push(point.type);
+                            }
+                            sumData[point.type][Math.floor(point.date / bucket) * bucket]++;
+                        });
+                        var plotData = [];
+                        sumData.forEach(function(type) {
+                            sumData[type].forEach(function(key) {
+                                plotData[type].push([key, sumData[type][key]])
+                            })
+                        })
+                        $.plot("#plot", plotData, options)
+                    }
+                })
+            })
+
+            $("#btnHitsHour").click();
+        })
+

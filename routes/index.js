@@ -118,10 +118,11 @@ router.get('/logData', function(req, res, next) {
     var type = req.query.type;
     var logData = [];
     if (type == "hits") {
+        var dateTz = null;
         db_private('requests').filter(function(point) {
             if (point.date) {
                 var nowTz = moment.tz(new Date(), config.TIMEZONE);
-                var dateTz = moment.tz(point.date, config.TIMEZONE);
+                dateTz = moment.tz(point.date, config.TIMEZONE);
                 if (moment.duration(nowTz.diff(dateTz)).asDays() <= daysBack) {
                     return true;
                 }
@@ -134,12 +135,22 @@ router.get('/logData', function(req, res, next) {
             }
             var outPoint = {};
             outPoint.type = hitType;
-            outPoint.date = point.date;
+            outPoint.date = moment.tz(point.date, config.TIMEZONE).unix();
+            outPoint.muniTime = point.muniTime || 0;
+            outPoint.totalTime = point.totalTime || 0;
             logData.push(outPoint);
+            console.log(outPoint);
         })
     }
     sendIt(req, res, next, null, JSON.stringify(logData));
 });
+
+router.get('/logplot', function(req, res, next) {
+    res.render('logplot');
+});
+
+
+
 
 
 module.exports = router;
