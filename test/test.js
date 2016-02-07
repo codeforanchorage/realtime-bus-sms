@@ -245,6 +245,23 @@ exports.group = {
         });
     },
 
+// Log Plots
+    test_getLogData: function (test) {
+        api.get(test, '/logData/', {
+            data: {type: "hits",
+                   daysBack: "20"}
+        }, function(res) {
+            var logData = res.body;
+            test.ok(logData.length > 0, "Have log data");
+            var sampleRequest = logData[0];
+            test.ok(sampleRequest.hasOwnProperty('type'), "Type present (Browser or SMS)");
+            test.ok(sampleRequest.hasOwnProperty('date'), "Date present");
+            test.ok(sampleRequest.hasOwnProperty('totalTime'), "Total response time present");
+            test.ok(sampleRequest.hasOwnProperty('muniTime'), 'Muni response time present');
+            test.done();
+        });
+    },
+
 // Test feedback
     test_browserFeedback: function (test) {
         var feedbackString = "Test Feedback " + (new Date().toISOString());

@@ -5,7 +5,9 @@ var router = express.Router();
 var stop_number_lookup = require('../lib/stop_number_lookup');
 var debug = require('debug')('routes/index.js');
 var lib = require('../lib/index');
-var config = require('../lib/config')
+var config = require('../lib/config');
+var moment = require('moment-timezone');
+
 
 
 var db = low('./public/db.json');
@@ -108,6 +110,35 @@ router.get('/byLatLon', function(req, res, next) {
 router.post('/feedback', function(req, res, next) {
     var mySendIt = sendIt.bind(null,req,res,next);
     lib.processFeedback(req.body.comment, req, mySendIt, true);
+});
+
+// Log get
+router.get('/logData', function(req, res, next) {
+    var daysBack = req.query.daysBack || config.LOG_DAYS_BACK;
+    var type = req.query.type;
+    var logData = [];
+    if (type == "hits") {
+        db_private('requests').filter(function(point) {
+            if (point.date) {
+                var nowTz = moment.tz(new Date(), config.TIMEZONE);
+                var dateTz = moment.tz(point.date, config.TIMEZONE);
+                if (moment.duration(nowTz.diff(dateTz)).asDays() <= daysBack) {
+                    return true;
+                }
+            }
+            return false;
+        }).forEach(function(point) {
+            var hitType = "browser";
+            if (point.hasOwnProperty("phone")) {
+                hitType = "sms"
+            }
+            var outPoint = {};
+            outPoint.type = hitType;
+            outPoint.date = point.date;
+            logData.push(outPoint);
+        })
+    }
+    sendIt(req, res, next, null, JSON.stringify(logData));
 });
 
 
