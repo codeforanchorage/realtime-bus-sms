@@ -139,7 +139,6 @@ router.get('/logData', function(req, res, next) {
             outPoint.muniTime = point.muniTime || 0;
             outPoint.totalTime = point.totalTime || 0;
             logData.push(outPoint);
-            console.log(outPoint);
         })
     }
     sendIt(req, res, next, null, JSON.stringify(logData));
