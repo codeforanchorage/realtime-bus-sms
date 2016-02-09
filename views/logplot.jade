@@ -1,0 +1,186 @@
+doctype html
+html
+    head
+        title= title
+        style.
+            body {
+                font-family: sans-serif;
+                text-align: center;
+            }
+            #plot {
+                width:600px;
+                height:400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            button {
+                margin: 20px auto;
+            }
+            .logo-tag {
+                font-size: 10pt;
+                vertical-align: middle;
+            }
+            .logo {
+                width: 40px;
+                height: 40px;
+                vertical-align: middle;
+            }
+
+        meta(name='MobileOptimized', content='320')
+        meta(name='viewport', content='width=device-width, minimum-scale=1, maximum-scale=1')
+        meta(name='apple-mobile-web-app-capable' content='yes')
+
+
+    body
+        h1 Logs
+        button(id="btnHitsHour") Hit Counts by Hour
+        button(id="btnHitsDay") Hit Counts by Day
+        button(id="btnRTHour") Response Time by Hour
+        button(id="btnRTDay") Response Time by Day
+
+    p
+
+        div(id="plot")
+
+        p
+
+        a(href="http://codeforanchorage.org")
+            img.logo(src="img/cfa.png")
+        span.logo-tag &nbsp; Code For Anchorage
+
+    script(src="/javascripts/jquery.min.js")
+    script(src="/javascripts/jquery.flot.min.js")
+    script(src="/javascripts/jquery.flot.time.min.js")
+    script.
+
+        $(function() {
+
+
+            var data = [];
+
+            $("[id^='btn']").click(function() {
+
+                var button = $(this);
+
+                var options = {
+                    line: {
+                        show: true
+                    },
+                    points: {
+                        show: true
+                    },
+                    series: {
+                        lines: { show: true }
+                    },
+                    xaxis: {
+                        mode: "time",
+                        minTickSize: [1, "hour"],
+                        timeformat: "%m/%d %H:%M",
+                        timezone: "browser"
+                    }
+                }
+
+                var bucketWidth = 60 * 60;   // Hours by default
+                if ($(button).attr("id").toLowerCase().indexOf("day") > -1) {
+                    bucketWidth = 24 * 60 * 60;
+                    options.xaxis.minTickSize = [1, "day"];
+                    options.xaxis.timeformat = "%m/%d"
+                }
+
+                var showRT = false;
+                if ($(button).attr("id").indexOf("RT") > -1) {
+                    showRT = true;
+                }
+
+                $.ajax({
+                    url: "/logdata?type=hits",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var sumData = [];
+                        var cumulator = [];
+                        var firstBucket = 0;
+                        var lastBucket = 0;
+                        if (showRT) {   // We know what the series will be
+                            cumulator.push({data: []});   // Total time index = 0
+                            cumulator.push({data: []});   // Muni time index = 1
+                        }
+                        data.forEach(function(point) {
+                            var series = "";
+                            var bucket = Math.floor(parseInt(point.date) / bucketWidth) * bucketWidth;
+                            if (showRT) {
+                                ["totalTime", "muniTime"].forEach(function(t, idx) {
+                                    var pt = parseInt(point[t]);
+                                    if (pt > 0) {
+                                        if (!cumulator[idx].data.some(function (bucketQuad) {   // [timebucket, max, sum, count ]
+                                                    if (bucketQuad[0] == bucket * 1000) {
+                                                        bucketQuad[1] = Math.max(bucketQuad[1], pt);
+                                                        bucketQuad[2] += pt;
+                                                        bucketQuad[3]++;
+                                                        return true;
+                                                    }
+                                                })) {
+                                            cumulator[idx].data.push([bucket * 1000, pt, pt, 1])
+                                        }
+                                    }
+                                });
+                            } else {
+                                if (!sumData.some(function (el, idx) {
+                                            if (el.label === point.type) {
+                                                series = idx;
+                                                return true;
+                                            }
+                                        })) {
+                                    sumData.push({label: point.type, data: []});
+                                    series = sumData.length - 1;
+                                }
+                                lastBucket = Math.max(bucket, lastBucket)
+                                if (!firstBucket || (bucket < firstBucket)) firstBucket = bucket;
+                                if (!sumData[series].data.some(function (bucketPair) {
+                                            if (bucketPair[0] == bucket * 1000) {
+                                                bucketPair[1]++;
+                                                return true;
+                                            }
+                                        })) {
+                                    sumData[series].data.push([bucket * 1000, 1])
+                                }
+                            }
+                        });
+                        // Fill plotting array from cumulator
+                        if (showRT) {
+                            ["Total", "Muni"].forEach(function(t, idx) {
+                                var idx1 = sumData.push({label: "Avg " + t + " Time", data: []});  // Total time idx = 0 & 1, Muni time idx = 2 & 3
+                                var idx2 = sumData.push({label: "Max " + t + " Time", data: []});
+                                cumulator[idx].data.forEach(function(bucketQuad) {
+                                    sumData[idx1-1].data.push([bucketQuad[0], bucketQuad[2] / bucketQuad[3]]);  // Average
+                                    sumData[idx2-1].data.push([bucketQuad[0], bucketQuad[1]]);             // Max
+                                })
+                            })
+                        } else {
+                            // Zero fill missing data if showing hit counts
+                            for (var b = firstBucket; b <= lastBucket; b += bucketWidth) {
+                                sumData.forEach(function (el, idx) {
+                                    if (!sumData[idx].data.some(function (bucketPair) {
+                                                if (bucketPair[0] == b * 1000) {
+                                                    return true;
+                                                }
+                                            })) {
+                                        sumData[idx].data.push([b * 1000, 0])
+                                    }
+                                })
+                            }
+                        }
+                        // Sort each series
+                        sumData.forEach(function(el, idx){
+                            sumData[idx].data.sort(function(a, b) {
+                                return a[0] - b[0]
+                            })
+                        })
+                        $.plot("#plot", sumData, options)
+                    }
+                })
+            })
+
+            $("#btnHitsHour").click();
+        })
+

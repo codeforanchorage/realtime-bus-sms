@@ -5,8 +5,8 @@ var router = express.Router();
 var stop_number_lookup = require('../lib/stop_number_lookup');
 var debug = require('debug')('routes/index.js');
 var lib = require('../lib/index');
-var config = require('../lib/config')
-
+var config = require('../lib/config');
+var moment = require('moment-timezone');
 
 var db = low('./public/db.json');
 var db_private = low('./db_private.json');
@@ -27,7 +27,7 @@ function logRequest(entry) {
     db('requests').push(entry2);
 }
 
-function sendIt(req, res, next, err, data, geocodedAddress, altInput, returnHtml) {
+function sendIt(req, res, next, err, data, geocodedAddress, altInput, returnHtml, muniTime) {
     if (err) {
         return next(err)
     }
@@ -44,8 +44,10 @@ function sendIt(req, res, next, err, data, geocodedAddress, altInput, returnHtml
         stop: data.route,
         phone: req.body.From,
         ip: req.connection.remoteAddress,
-        geocodedAddress: geocodedAddress
-    }
+        geocodedAddress: geocodedAddress,
+        totalTime: req.start ? (Date.now() - req.start) : "",  // Should really go on res.on('finish'), but do we want to only log on successful sends?
+        muniTime: muniTime || ""
+    };
     logRequest(entry)
 }
 
@@ -60,6 +62,7 @@ router.get('/', function(req, res, next) {
 // in the POST body.
 // TODO: better error messages
 router.post('/', function(req, res, next) {
+    req.start = Date.now();
     var mySendIt = sendIt.bind(null,req,res,next);
 
     var message = req.body.Body;
@@ -77,6 +80,7 @@ router.post('/', function(req, res, next) {
 
 // This is what the browser hits
 router.post('/ajax', function(req, res, next) {
+    req.start = Date.now();
     var mySendIt = sendIt.bind(null, req, res, next)
     lib.parseInputReturnBusTimes(req.body.Body, mySendIt, true);
 });
@@ -84,6 +88,7 @@ router.post('/ajax', function(req, res, next) {
 
 // a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
+    req.start = Date.now();
     var output = "";
     if (lib.serviceExceptions()) {
         output = "No Service - Holiday";
@@ -109,6 +114,45 @@ router.post('/feedback', function(req, res, next) {
     var mySendIt = sendIt.bind(null,req,res,next);
     lib.processFeedback(req.body.comment, req, mySendIt, true);
 });
+
+// Log get
+router.get('/logData', function(req, res, next) {
+    var daysBack = req.query.daysBack || config.LOG_DAYS_BACK;
+    var type = req.query.type;
+    var logData = [];
+    if (type == "hits") {
+        var dateTz = null;
+        db_private('requests').filter(function(point) {
+            if (point.date) {
+                var nowTz = moment.tz(new Date(), config.TIMEZONE);
+                dateTz = moment.tz(point.date, config.TIMEZONE);
+                if (moment.duration(nowTz.diff(dateTz)).asDays() <= daysBack) {
+                    return true;
+                }
+            }
+            return false;
+        }).forEach(function(point) {
+            var hitType = "browser";
+            if (point.hasOwnProperty("phone")) {
+                hitType = "sms"
+            }
+            var outPoint = {};
+            outPoint.type = hitType;
+            outPoint.date = moment.tz(point.date, config.TIMEZONE).unix();
+            outPoint.muniTime = point.muniTime || "";
+            outPoint.totalTime = point.totalTime || "";
+            logData.push(outPoint);
+        })
+    }
+    res.send(logData);
+});
+
+router.get('/logplot', function(req, res, next) {
+    res.render('logplot');
+});
+
+
+
 
 
 module.exports = router;
