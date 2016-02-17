@@ -10,6 +10,8 @@ var moment = require('moment-timezone');
 
 var db = low('./public/db.json');
 var db_private = low('./db_private.json');
+var fs = require('fs');
+
 
 // Log format:
 // message is whatever the user sends
@@ -114,6 +116,22 @@ router.post('/feedback', function(req, res, next) {
     var mySendIt = sendIt.bind(null,req,res,next);
     lib.processFeedback(req.body.comment, req, mySendIt, true);
 });
+
+// Respond to feedback over SMS
+router.get('/respond', function(req, res, next) {
+    var comments = JSON.parse(fs.readFileSync('./comments.json'));
+    for(var i=0; i < comments.comments.length; i++) {
+        if (comments.comments[i].response_hash == req.body.hash) {
+            if (comments.comments[i].phone) {
+                res.render("respond", {pageData: {hash: comments.comments[i].response_hash, feedback: comments.comments[i].feedback, phone: comments.comments[i].phone}});
+                return
+            }
+        }
+    }
+    res.send(404);    // Simulate page not found
+});
+
+
 
 // Log get
 router.get('/logData', function(req, res, next) {

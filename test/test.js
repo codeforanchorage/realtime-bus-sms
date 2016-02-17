@@ -9,6 +9,8 @@ var config = require('../lib/config');
 var stop_number_lookup = require('../lib/stop_number_lookup');
 var hashwords = require('hashwords')();
 var fs = require('fs');
+var crypto = require('crypto');
+
 
 
 // Helper functions
@@ -292,6 +294,53 @@ exports.group = {
             setTimeout(function () {testFeedback(test, res, feedbackString, phone)}, 5000);  //Delay to make sure logging saves
         });
 
+    },
+    test_feedbackResponseValidGet: function(test) {
+        var comments = JSON.parse(fs.readFileSync('./comments.json'));
+        for (var i = comments.comments.length - 1; i >= 0; i--) {  // Find a feedback to respond to
+            if (comments.comments[i].phone && comments.comments[i].response_hash) {
+                api.get(test, "/respond?hash=" + comments.comments[i].response_hash, function (res) {   // Respond to the feedback
+                    console.log("Checking response page");
+                    test.ok((res.statusCode == 200) && (res.body.indexOf("feedback") > -1), "Should render a page on valid get for feedback response")
+                    test.done();
+                });
+                return
+            }
+        }
+    },
+
+    test_feedbackResponseInvalidGet: function(test) {
+        var response_hash = crypto.randomBytes(20).toString('hex');
+        api.get(test, "/respond?hash=" + comments.comments[i].response_hash, function (res) {   // Respond to the feedback
+            test.ok(res.statusCode == 404, "Invalid get for feedback response should produce 404")
+            test.done();
+        })
+    },
+
+    test_feedbackResponsePost: function(test) {
+        var comments = JSON.parse(fs.readFileSync('./comments.json'));
+        var response = "Glad you liked it!" + crypto.randomBytes(20).toString('hex');
+        for (var i = comments.comments.length - 1; i >= 0; i--) {  // Find a feedback to respond to
+            if (comments.comments[i].phone && comments.comments[i].response_hash) {
+                api.post(test,"/respond", {
+                    data: {hash: comments.comments[i].response_hash,
+                           response: response}
+                    }, function(res) {
+                        setTimeout(function () {   // Did we log our response?
+                            test.ok(function() {
+                                for (var j = 0; j < comments.comments.length; j++) {
+                                    if (comments.comments[i].response && comments.comments[i].response.indexOf(response) > -1) {
+                                        console.log("Got right response in log")
+                                        return true;
+                                    }
+                                }
+                                return false
+                            });
+                            test.done();
+                        }, 5000);  //Delay to make sure logging saves
+                });
+            }
+        }
     },
 
 // Test latlon
