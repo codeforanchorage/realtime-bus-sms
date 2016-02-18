@@ -125,7 +125,6 @@ router.get('/respond', function(req, res, next) {
     for(var i=comments.comments.length-1; i >= 0; i--) {
         if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.query.hash)) {
             if (comments.comments[i].phone) {
-                console.log("Responding to hash " + req.query.hash);
                 res.render("respond", {pageData: {hash: comments.comments[i].response_hash, feedback: comments.comments[i].feedback, phone: comments.comments[i].phone}});
                 return
             }
@@ -136,15 +135,12 @@ router.get('/respond', function(req, res, next) {
 
 router.post('/respond', function(req, res, next) {
     var comments = JSON.parse(fs.readFileSync('./comments.json'));
-    console.log("In feedback response");
     var foundIt = false;
     for(var i=comments.comments.length-1; i >= 0 && !foundIt; i--) {
         if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.body.hash)) {
             if (comments.comments[i].phone) {
                 foundIt = true;
-                console.log("Found feedback responding to");
                 if (req.body.response) {
-                    console.log("Calling Twilio");
                     twilioClient.messages.create({
                         to: comments.comments[i].phone,
                         from: config.MY_PHONE,
