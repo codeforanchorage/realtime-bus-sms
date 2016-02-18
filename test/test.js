@@ -107,8 +107,7 @@ exports.group = {
     setUp: function (done) {
         server.listen(port, '0.0.0.0');
         api = require('nodeunit-httpclient').create({
-            port: port,
-            status: 200    //Test each response is OK (can override later)
+            port: port
         });
         done();
     },
@@ -230,7 +229,7 @@ exports.group = {
 // Test logging
     test_smsLogging: function (test) {
         var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
-        var phone = "907-555-1212";
+        var phone = "608-432-5799";
         api.post(test, '/', {
             data: {Body: input,
                 From: phone}
@@ -286,7 +285,7 @@ exports.group = {
     },
     test_smsFeedback: function (test) {
         var feedbackString = "Test Feedback " + (new Date().toISOString());
-        var phone = "907-555-1212";
+        var phone = "608-432-5799";
         api.post(test, '/', {
             data: {Body: config.FEEDBACK_TRIGGER + feedbackString,
                 From: phone}
@@ -301,7 +300,7 @@ exports.group = {
             if (comments.comments[i].phone && comments.comments[i].response_hash) {
                 api.get(test, "/respond?hash=" + comments.comments[i].response_hash, function (res) {   // Respond to the feedback
                     console.log("Checking response page");
-                    test.ok((res.statusCode == 200) && (res.body.indexOf("feedback") > -1), "Should render a page on valid get for feedback response")
+                    test.ok((res.statusCode == 200) && (res.body.indexOf("feedback") > -1), "Should render a page on valid get for feedback response");
                     test.done();
                 });
                 return
@@ -311,7 +310,7 @@ exports.group = {
 
     test_feedbackResponseInvalidGet: function(test) {
         var response_hash = crypto.randomBytes(20).toString('hex');
-        api.get(test, "/respond?hash=" + comments.comments[i].response_hash, function (res) {   // Respond to the feedback
+        api.get(test, "/respond?hash=" + response_hash, function (res) {   // Respond to the feedback
             test.ok(res.statusCode == 404, "Invalid get for feedback response should produce 404")
             test.done();
         })
@@ -320,16 +319,21 @@ exports.group = {
     test_feedbackResponsePost: function(test) {
         var comments = JSON.parse(fs.readFileSync('./comments.json'));
         var response = "Glad you liked it!" + crypto.randomBytes(20).toString('hex');
-        for (var i = comments.comments.length - 1; i >= 0; i--) {  // Find a feedback to respond to
+        var foundOne = false;
+        console.log("Searching for feedback to use");
+        for (var i = comments.comments.length - 1; i >= 0 && !foundOne; i--) {  // Find a feedback to respond to
             if (comments.comments[i].phone && comments.comments[i].response_hash) {
+                foundOne = true;
+                console.log("Posting reponse")
                 api.post(test,"/respond", {
                     data: {hash: comments.comments[i].response_hash,
                            response: response}
                     }, function(res) {
                         setTimeout(function () {   // Did we log our response?
                             test.ok(function() {
-                                for (var j = 0; j < comments.comments.length; j++) {
-                                    if (comments.comments[i].response && comments.comments[i].response.indexOf(response) > -1) {
+                                console.log("Checking for reponse in log");
+                                for (var j = comments.comments.length-1; j >= 0 ; j--) {
+                                    if (comments.comments[j].response && comments.comments[j].response.indexOf(response) > -1) {
                                         console.log("Got right response in log")
                                         return true;
                                     }
