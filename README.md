@@ -27,6 +27,9 @@ Contributing
 
 Project Setup
 --------------
+
+There are several environment variables that need to be set up when you configure the installation. Check lib/config.js
+
 Vagrant:
 
     # create vagrant vm
