@@ -192,6 +192,7 @@ router.get('/logData', function(req, res, next) {
             outPoint.date = moment.tz(point.date, config.TIMEZONE).unix();
             outPoint.muniTime = point.muniTime || "";
             outPoint.totalTime = point.totalTime || "";
+            outPoint.userId = point.phone ? "phone" + point.phone : "ip"+point.ip;
             logData.push(outPoint);
         })
     }
