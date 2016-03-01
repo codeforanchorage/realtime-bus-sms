@@ -268,6 +268,7 @@ exports.group = {
             test.ok(sampleRequest.hasOwnProperty('date'), "Date present");
             test.ok(sampleRequest.hasOwnProperty('totalTime'), "Total response time present");
             test.ok(sampleRequest.hasOwnProperty('muniTime'), 'Muni response time present');
+            test.ok(sampleRequest.hasOwnProperty('userId'), 'User identifier present');
             test.done();
         });
     },

@@ -14,7 +14,7 @@ html
                 margin-right: auto;
             }
             button {
-                margin: 20px auto;
+                margin: 5px auto;
             }
             .logo-tag {
                 font-size: 10pt;
@@ -37,9 +37,11 @@ html
         button(id="btnHitsDay") Hit Counts by Day
         button(id="btnRTHour") Response Time by Hour
         button(id="btnRTDay") Response Time by Day
+        br
+        button(id="btnUsersDay") Unique Users by Day
 
     p
-
+        span(id="plotTitle")
         div(id="plot")
 
         p
@@ -61,6 +63,8 @@ html
             $("[id^='btn']").click(function() {
 
                 var button = $(this);
+
+                $("#plotTitle").text(button.text());
 
                 var options = {
                     line: {
@@ -92,6 +96,12 @@ html
                     showRT = true;
                 }
 
+                var userCt = false
+                if ($(button).attr("id").indexOf("Users") > -1) {
+                    userCt = true;
+                }
+
+
                 $.ajax({
                     url: "/logdata?type=hits",
                     type: "GET",
@@ -99,6 +109,7 @@ html
                     success: function(data) {
                         var sumData = [];
                         var cumulator = [];
+                        var users = [];
                         var firstBucket = 0;
                         var lastBucket = 0;
                         if (showRT) {   // We know what the series will be
@@ -124,6 +135,41 @@ html
                                         }
                                     }
                                 });
+                            } else if (userCt) {
+                                var newUser = false;
+                                var userId = point.userId;
+                                if (!users.some(function(bucketPair) {
+                                            if (bucketPair.bucket == bucket) {   //Found bucket, look through users
+                                                if (!bucketPair.users.some(function(user) {
+                                                            if (user == userId) {
+                                                                return true
+                                                            }
+                                                        })) {
+                                                    newUser = true;
+                                                    bucketPair.users.push(userId)  // Didn't find user so add user to this bucket's list
+                                                }
+                                                return true
+                                            }
+                                        })) {
+                                    users.push({bucket: bucket, users: [userId]});  // Didn't find bucket, add bucket and user
+                                    newUser = true;
+                                }
+                                if (newUser) {
+                                    series = 0;   // Only one series
+                                    if (sumData.length < 1) {
+                                        sumData.push({label: "users", data: []});
+                                    }
+                                    lastBucket = Math.max(bucket, lastBucket)
+                                    if (!firstBucket || (bucket < firstBucket)) firstBucket = bucket;
+                                    if (!sumData[series].data.some(function (bucketPair) {
+                                                if (bucketPair[0] == bucket * 1000) {
+                                                    bucketPair[1]++;
+                                                    return true;
+                                                }
+                                            })) {
+                                        sumData[series].data.push([bucket * 1000, 1])
+                                    }
+                                }
                             } else {
                                 if (!sumData.some(function (el, idx) {
                                             if (el.label === point.type) {
