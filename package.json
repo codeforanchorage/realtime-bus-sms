@@ -34,7 +34,7 @@
     "serve-favicon": "~2.2.0",
     "turf": "~1.4.0",
     "turf-nearest": "~1.0.2",
-    "twilio": "^3.3.0"
+    "twilio": "^3.3.0-edge"
   },
   "devDependencies": {
     "nodeunit-httpclient": "^0.2.1",
