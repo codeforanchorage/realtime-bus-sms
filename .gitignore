@@ -5,3 +5,5 @@ config.js
 public/db.json
 
 comments.json
+
+db_private.json
