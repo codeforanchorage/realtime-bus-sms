@@ -1,0 +1,10 @@
+if returnHTML
+    div 
+        if error.name
+            b #{error.name}
+            br 
+        | #{error.message}
+else
+    if error.name
+        |#{error.name} 
+    | #{error.message}  

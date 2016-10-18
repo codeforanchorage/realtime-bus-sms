@@ -31,18 +31,7 @@ function logRequest(entry) {
     db('requests').push(entry2);
 }
 
-function sendIt(req, res, next, err, data, geocodedAddress, altInput, returnHtml, muniTime) {
-    if (err) {
-        return next(err)
-    }
-
-    if (!returnHtml) {
-        res.set('Content-Type', 'text/plain');
-    }
-
-    res.send(data);
-
-    // log info about this lookup
+function logIt(req, res, next){
     var entry = {
         input: altInput || req.body.Body,
         stop: data.route,
@@ -55,68 +44,100 @@ function sendIt(req, res, next, err, data, geocodedAddress, altInput, returnHtml
     logRequest(entry)
 }
 
+function startLogTimer(req, res, next){
+    req.start = Date.now();
+    next();
+}
+
+function parseBody(req, res, next){
+    var message = req.body.Body;
+    if (!message || /^\s*$/.test(message)) {
+        res.locals.error = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'};
+        res.render('error-message')
+        return;
+    }
+    if (message.trim().toLowerCase() === 'about') {
+       res.render('about-partial'); 
+       return;  
+    }
+    // the message is only digits or # + digits or "stop" + (#) + digits -- assume it's a stop number
+    var stopMessage = message.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
+    if (/^\d+$/.test(stopMessage)) {
+        lib.getStopFromStopNumber(parseInt(stopMessage))
+        .then((data) => res.render('stop-list-partial', {route:data}))
+        .catch((err) => res.render('error-message', {error: err}));
+    } else {
+         lib.getStopsFromAddress(req.body.Body)
+         .then((data) => res.render('route-list-partial', {routes:data}))
+         .catch((err) => res.render('error-message', {error: err})); 
+    } 
+    return
+}
+
+
+router.use(startLogTimer);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index');
 });
 
-
 // Twilio hits this endpoint. The user's text message is
 // in the POST body.
 // TODO: better error messages
 router.post('/', function(req, res, next) {
-    req.start = Date.now();
-    var mySendIt = sendIt.bind(null,req,res,next);
-
     var message = req.body.Body;
-
-
-
-    if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
-        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req, mySendIt, false);
+   if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
+        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
+        .then((data)=>res.send("Thanks for the feedback"))
+        .catch((err)=>console.log("Feedback error: ", err));
         return;
     }
-
-    lib.parseInputReturnBusTimes(message, mySendIt, false);
-});
+    next();
+    },
+    parseBody
+);
 
 
 // This is what the browser hits
 router.post('/ajax', function(req, res, next) {
-    req.start = Date.now();
-    var mySendIt = sendIt.bind(null, req, res, next)
-    lib.parseInputReturnBusTimes(req.body.Body, mySendIt, true);
-});
-
+    res.locals.returnHTML = 1;
+    next()
+    },
+    parseBody
+);
 
 // a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
-    req.start = Date.now();
-    var output = "";
+    res.locals.returnHTML = 1;
     if (lib.serviceExceptions()) {
-        output = "No Service - Holiday";
-        sendIt(req, res, next, null, output)
-    } else {
-
-        var data = lib.findNearestStops(req.query.lat, req.query.lon);
-
-        // format the data if it's not just an error string
-        output = data;
-        if (typeof(data) === 'object') {
-            output = lib.formatStopData(data, true);
-        }
-        sendIt(req, res, next, null, output, null, req.query.lat + ', ' + req.query.lon, true)
+        res.locals.error = {message:'No Service - Holiday'};
+        res.render('error-message')
+        return;
     }
+    //fake it for now:
+    req.query.lat = '61.217605';
+    req.query.lon = '-149.893845';    
+    if (!req.query.lat){
+         res.render('error-message', {error: {message: "Can't determine your location"}});
+         return;
+     }
+     var data = lib.findNearestStops(req.query.lat, req.query.lon);
+     console.log("data", data);
+     if (!data || data.length == 0){
+         res.render('error-message', {error: {message: "No routes found near you"}});
+         return;
+     }
 
-
+     res.render('route-list-partial', {routes:  data });
 });
 
 
 // feedback form endpoint
-router.post('/feedback', function(req, res, next) {
-    var mySendIt = sendIt.bind(null,req,res,next);
-    lib.processFeedback(req.body.comment, req, mySendIt, true);
+router.post('/feedback', function(req, res) {
+    lib.processFeedback(req.body.comment, req)
+    .then()
+    .catch((err)=>console.log("feedback/ error ", err));
 });
 
 // Respond to feedback over SMS

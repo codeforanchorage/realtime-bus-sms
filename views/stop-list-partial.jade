@@ -1,0 +1,11 @@
+if returnHTML
+    b #{route.stopId} - #{route.route}
+    each stop in route.stops
+        p #{stop.name} - #{stop.times[0]}
+else
+    |#{route.stopId} - #{route.route}
+    | 
+    | 
+    each stop in route.stops
+        |* #{stop.name} - #{stop.times[0]} *
+        | 
