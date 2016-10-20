@@ -52,8 +52,8 @@ function startLogTimer(req, res, next){
 function parseBody(req, res, next){
     var message = req.body.Body;
     if (!message || /^\s*$/.test(message)) {
-        res.locals.error = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'};
-        res.render('error-message')
+        res.locals.message = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'};
+        res.render('message')
         return;
     }
     if (message.trim().toLowerCase() === 'about') {
@@ -65,11 +65,11 @@ function parseBody(req, res, next){
     if (/^\d+$/.test(stopMessage)) {
         lib.getStopFromStopNumber(parseInt(stopMessage))
         .then((data) => res.render('stop-list-partial', {route:data}))
-        .catch((err) => res.render('error-message', {error: err}));
+        .catch((err) => res.render('message', {message: err}));
     } else {
          lib.getStopsFromAddress(req.body.Body)
          .then((data) => res.render('route-list-partial', {routes:data}))
-         .catch((err) => res.render('error-message', {error: err})); 
+         .catch((err) => res.render('message', {message: err})); 
     } 
     return
 }
@@ -112,20 +112,17 @@ router.get('/byLatLon', function(req, res, next) {
     res.locals.returnHTML = 1;
     if (lib.serviceExceptions()) {
         res.locals.error = {message:'No Service - Holiday'};
-        res.render('error-message')
+        res.render('message')
         return;
     }
-    //fake it for now:
-    req.query.lat = '61.217605';
-    req.query.lon = '-149.893845';    
-    if (!req.query.lat){
-         res.render('error-message', {error: {message: "Can't determine your location"}});
+    if (!req.query.lat || !req.query.lon){
+         res.render('message', {message: {message: "Can't determine your location"}});
          return;
      }
      var data = lib.findNearestStops(req.query.lat, req.query.lon);
      console.log("data", data);
      if (!data || data.length == 0){
-         res.render('error-message', {error: {message: "No routes found near you"}});
+         res.render('message', {message: {message: "No routes found near you"}});
          return;
      }
 
@@ -135,9 +132,11 @@ router.get('/byLatLon', function(req, res, next) {
 
 // feedback form endpoint
 router.post('/feedback', function(req, res) {
+    res.locals.returnHTML = 1
     lib.processFeedback(req.body.comment, req)
-    .then()
-    .catch((err)=>console.log("feedback/ error ", err));
+    .then((res) => console.log("in then: ", res))
+    .catch((err)=> console.log("feedback/ error ", err)); // TODO - tell users if there is a problem or fail silently?
+    res.render('message', {message: {message:'Thanks for the feedback'}}); 
 });
 
 // Respond to feedback over SMS

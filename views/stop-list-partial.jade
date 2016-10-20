@@ -1,5 +1,5 @@
 if returnHTML
-    b #{route.stopId} - #{route.route}
+    b Stop Number: #{route.stopId} - #{route.route}
     each stop in route.stops
         p #{stop.name} - #{stop.times[0]}
 else

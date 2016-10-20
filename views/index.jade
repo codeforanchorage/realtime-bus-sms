@@ -25,6 +25,10 @@ html
             .address_text {
                 font-size:.85em;
             }
+            .about {
+                max-width: 400px;
+                display: inline-block;
+            }
 
         meta(name='MobileOptimized', content='320')
         meta(name='viewport', content='width=device-width, minimum-scale=1, maximum-scale=1')
@@ -47,9 +51,9 @@ html
  
        
 
-        a(onclick="return feedback()" href="#" id="feedback_link") Give feedback - with e-mail for response
-        form(method="POST" action="/feedback" style="display:none" id="feedback")
-            textarea(name="comment" style="width:300px; height:50px;")
+        a(onclick="return openFeedback()" href="#" id="feedback_link") Give feedback - with e-mail for response
+        form(method="POST", style="display:none" onsubmit="return submitFeedback()", id="feedback")
+            textarea(name="comment" id='comment' style="width:300px; height:50px;")
             br
             label(for='email') Email (optional)
             input(type='text', id='email', name='email')
@@ -79,12 +83,42 @@ html
             );
         }
 
-        function feedback() {
+        function openFeedback() {
             document.getElementById('feedback').style.display='block';
             document.getElementById('feedback_link').style.display='none';
             return false;
         }
+        function closeFeedback() {
+            console.log("in close Feedback: ", this)
+            var form = document.getElementById('feedback');
+            form.reset();
+            form.style.display="none";
+            document.getElementById('feedback_link').style.display='inline';
+        
+            if(this.readyState == 4) {
+                var output = 'Sorry, there was an error';
+                if(this.status == 200) output = this.responseText;
+                output = output.replace(/\n/g, '<br>');
+                outputDiv.innerHTML = output;
+            }
 
+        }
+        function submitFeedback() {       
+            var payload =  {
+                comment: document.getElementById('comment').value,
+                email: document.getElementById('email').value
+                }  
+            payload = JSON.stringify(payload);
+            console.log(payload)
+            var http = new XMLHttpRequest();
+            http.open("POST", "/feedback", true);
+            http.setRequestHeader('Content-type', 'application/json');
+
+            http.onreadystatechange = closeFeedback.bind(http);
+            http.send(payload);
+            return false;
+
+        }
 
         function removeLoading() {
             window.clearInterval(interval);
