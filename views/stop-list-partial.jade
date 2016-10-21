@@ -1,11 +1,11 @@
 if returnHTML
-    b Stop Number: #{route.stopId} - #{route.route}
-    each stop in route.stops
+    b Stop #{routes.data.stopId} - #{routes.data.route}
+    each stop in routes.data.stops
         p #{stop.name} - #{stop.times[0]}
 else
-    |#{route.stopId} - #{route.route}
+    |Stop #{routes.data.stopId} - #{routes.data.route}
     | 
     | 
-    each stop in route.stops
+    each stop in routes.data.stops
         |* #{stop.name} - #{stop.times[0]} *
         | 

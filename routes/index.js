@@ -14,13 +14,33 @@ var fs = require('fs');
 
 var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
 
-
+/* QUESTIONS
+    What should be logged - i.e. errors, about page, lat/lon requests etc.
+    It would probably be nice to put logging in it's own module
+*/
 
 // Log format:
 // message is whatever the user sends
 // stop is the stop that we've parsed from the message
 // data is the current datetime
 // if it's sent from twiliio, we store a human-readable hash of the #
+
+const EventEmitter = require('events');
+const logListener = new EventEmitter();
+
+logListener.on('logEntry', (locals) => {
+    var log             = locals.logEntry;
+    log.totalTime       = Date.now() - locals.startTime; // TODO: should this be more accurate?
+
+    if (locals.routes){ // only here when finding bus routes, not feedback, etc.
+        var routes          = locals.routes;
+        log.stop            = routes.data.stopId || "";
+        log.geocodedAddress = routes.data.geocodedAddress;
+        log.muniTime        = routes.muniTime;
+        log.geocodeTime     = routes.geocodeTime;
+    }
+    logRequest(log);
+})
 
 function logRequest(entry) {
     entry.date = new Date();
@@ -32,6 +52,10 @@ function logRequest(entry) {
     entry2.ip = "";
     db('requests').push(entry2);
 }
+
+/* 
+MIDDLEWARE FUNCTIONS 
+*/
 
 function startLogging(req, res, next){
      res.locals.logEntry = {
@@ -48,42 +72,26 @@ function startLogging(req, res, next){
     next();
 }
 
-function parseBody(req, res, next){
+function aboutResponder(req, res, next){
     var message = req.body.Body;
-    if (!message || /^\s*$/.test(message)) {
-        res.locals.message = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'};
-        res.render('message')
-        return;
-    }
     if (message.trim().toLowerCase() === 'about') {
        res.render('about-partial'); 
        return;  
     }
-    // the message is only digits or # + digits or "stop" + (#) + digits -- assume it's a stop number
-    var stopMessage = message.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
-    var log = res.locals.logEntry;
-    if (/^\d+$/.test(stopMessage)) {
-        lib.getStopFromStopNumber(parseInt(stopMessage))
-        .then((routeObject) => {
-            log.muniTime = routeObject.asyncTime;
-            log.stop = routeObject.data.stopId || "";
-            log.totalTime = Date.now() - res.locals.startTime;
-            logRequest(log);
-            res.render('stop-list-partial', {route:routeObject.data})
-        })
-        .catch((err) => res.render('message', {message: err}));
-    } else {
-        lib.getStopsFromAddress(req.body.Body)
-        .then((routeObject) => {        
-            log.geocodedAddress = routeObject.data.geocodedAddress || "";
-            log.geocodeTime = routeObject.asyncTime;
-            log.totalTime = Date.now() - res.locals.startTime;
-            logRequest(log);
-            res.render('route-list-partial', {routes:routeObject.data.stops})})
-        .catch((err) => res.render('message', {message: err})); 
-    } 
+    next();
+}
 
-    return
+function getRoutes(req, res, next){
+    lib.parseInputReturnBusTimes(req.body.Body)
+    .then((routeObject) => {
+        res.locals.routes = routeObject;
+        res.render('routes');
+        logListener.emit('logEntry', res.locals);
+    })
+    .catch((err) => {
+        logListener.emit('logEntry', res.locals);
+        res.render('message', {message: err})
+    });
 }
 
 /* GET home page. */
@@ -96,26 +104,29 @@ router.use(startLogging); //after get('/') means homepage requests don't get log
 // Twilio hits this endpoint. The user's text message is
 // in the POST body.
 // TODO: better error messages
-router.post('/', function(req, res, next) {
-    var message = req.body.Body;
-   if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
-        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
-        .then((data)=>res.send("Thanks for the feedback"))
-        .catch((err)=>console.log("Feedback error: ", err));
-        return;
-    }
-    next();
+router.post('/',
+    function (req, res, next){
+        var message = req.body.Body;
+        if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
+            lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
+            .then((data)=>res.send("Thanks for the feedback"))
+            .catch((err)=>console.log("Feedback error: ", err));
+            return;
+        }
+        next();
     },
-    parseBody
+    aboutResponder,
+    getRoutes
 );
 
-
 // This is what the browser hits
-router.post('/ajax', function(req, res, next) {
-    res.locals.returnHTML = 1;
-    next()
+router.post('/ajax', 
+    function (req, res, next) {
+        res.locals.returnHTML = 1;
+        next()
     },
-    parseBody
+    aboutResponder,
+    getRoutes
 );
 
 // a browser with location service enabled can hit this
@@ -128,7 +139,6 @@ router.get('/byLatLon', function(req, res, next) {
         return;
     }
     if (!req.query.lat || !req.query.lon){
-        req.logEntry.geocodedAddress = "not found";
         res.render('message', {message: {message: "Can't determine your location"}});
         return;
      }
@@ -137,17 +147,23 @@ router.get('/byLatLon', function(req, res, next) {
          res.render('message', {message: {message: "No routes found near you"}});
          return;
      }
-     res.render('route-list-partial', {routes:  data });
+    var data = lib.findNearestStops(req.query.lat, req.query.lon);
+
+     res.render('route-list-partial', {routes: {data: {stops: data}} });
+     logListener.emit('logEntry', res.locals);
+     
+
 });
 
 
 // feedback form endpoint
 router.post('/feedback', function(req, res) {
     res.locals.returnHTML = 1
+    res.locals.logEntry.input = "Feedback Form";
     lib.processFeedback(req.body.comment, req)
-    .then((res) => console.log("in then: ", res))
+    .then(() => logListener.emit('logEntry', res.locals))
     .catch((err)=> console.log("feedback/ error ", err)); // TODO - tell users if there is a problem or fail silently?
-    res.render('message', {message: {message:'Thanks for the feedback'}}); 
+    res.render('message', {message: {message:'Thanks for the feedback'}});
 });
 
 // Respond to feedback over SMS
