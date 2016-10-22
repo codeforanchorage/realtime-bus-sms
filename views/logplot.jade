@@ -118,7 +118,8 @@ html
                         }
                         data.forEach(function(point) {
                             var series = "";
-                            var bucket = (Math.floor(parseInt(point.date + (16*60*60)) / bucketWidth ) * bucketWidth) - (16*60*60); // shift the bucketing to account for UTC
+                                // shift the bucketing to account for UTC
+                                var bucket = ((Math.floor(parseInt((point.date) -(point.dateOffset*60)) / bucketWidth ) * bucketWidth) + (point.dateOffset*60)) ;
                             if (showRT) {
                                 ["totalTime", "muniTime"].forEach(function(t, idx) {
                                     var pt = parseInt(point[t]);

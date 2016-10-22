@@ -171,6 +171,7 @@ router.get('/logData', function(req, res, next) {
     var daysBack = req.query.daysBack || config.LOG_DAYS_BACK;
     var type = req.query.type;
     var logData = [];
+    var timezone = moment.tz.zone('America/Anchorage');
     if (type == "hits") {
         var dateTz = null;
         db_private('requests').filter(function(point) {
@@ -190,6 +191,7 @@ router.get('/logData', function(req, res, next) {
             var outPoint = {};
             outPoint.type = hitType;
             outPoint.date = moment.tz(point.date, config.TIMEZONE).unix();
+            outPoint.dateOffset = timezone.offset(outPoint.date*1000)
             outPoint.muniTime = point.muniTime || "";
             outPoint.totalTime = point.totalTime || "";
             outPoint.userId = point.phone ? "phone" + point.phone : "ip"+point.ip;
