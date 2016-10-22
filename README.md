@@ -1,7 +1,7 @@
 realtime-bus-sms
 ================
 
-[![Build Status](https://travis-ci.org/codeforanchorage/realtime-bus-sms.svg?branch=master)](https://travis-ci.org/codeforanchorage/realtime-bus-sms) 
+[![Build Status](https://travis-ci.org/codeforanchorage/realtime-bus-sms.svg?branch=master)](https://travis-ci.org/codeforanchorage/realtime-bus-sms)
 
 
 Text back current arrival time for buses given a texted in bus stop number for People Mover
@@ -38,20 +38,22 @@ Vagrant:
     # get onto vagrant vm
     vagrant ssh
 
+
+
+
+Linux:
+
     # install deps
     cd realtime-bus-sms
     npm install
 
-    # run 
+    # run
     # By default, this will serve on http://192.168.51.10:8080
     ./bin/www
 
     # run tests
     sudo npm install -g nodeunit   # install testing framework
     npm test
-
-
-Linux:
 
     # install nodejs/npm
     # (note: the legacy package makes sure /usr/bin/node links to nodejs and not something else)
@@ -64,7 +66,7 @@ Linux:
     cd realtime-bus-sms
     npm install
 
-    # run 
+    # run
     # By default, this will serve on http://127.0.0.1:8080
     ./bin/www
 
@@ -79,5 +81,3 @@ Mac:
 Windows:
 
     TODO: add
-
-
