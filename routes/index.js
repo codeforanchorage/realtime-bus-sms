@@ -171,7 +171,7 @@ router.get('/logData', function(req, res, next) {
     var daysBack = req.query.daysBack || config.LOG_DAYS_BACK;
     var type = req.query.type;
     var logData = [];
-    var timezone = moment.tz.zone('America/Anchorage');
+    var timezone = moment.tz.zone(config.TIMEZONE);
     if (type == "hits") {
         var dateTz = null;
         db_private('requests').filter(function(point) {
