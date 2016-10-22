@@ -38,12 +38,7 @@ Vagrant:
     # get onto vagrant vm
     vagrant ssh
 
-
-
-
-Linux:
-
-    # install deps
+    # install npm deps within virtual machine
     cd realtime-bus-sms
     npm install
 
@@ -54,6 +49,9 @@ Linux:
     # run tests
     sudo npm install -g nodeunit   # install testing framework
     npm test
+
+
+Linux:
 
     # install nodejs/npm
     # (note: the legacy package makes sure /usr/bin/node links to nodejs and not something else)
