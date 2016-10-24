@@ -31,7 +31,7 @@ var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AU
 
 function logRequest(locals) {
     var entry = {
-        date     : new Date(),
+        date     : new Date(), // Why not Date.now() to avoid allocating object?
         totalTime: Date.now() - locals.startTime, // TODO: should this be more accurate?
         input    : this.body.Body, // this refers to the request object.
         phone    : this.body.From,
