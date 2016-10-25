@@ -1,9 +1,11 @@
 if returnHTML
-    div 
-        if message.name
-            b #{message.name}
-            br 
-        | #{message.message}
+    div(id="mainContent")
+        div(class="message") 
+            if message.name
+                b #{message.name}
+                br 
+            | #{message.message}
+            p <a href="/">About this service</a>
 else
     if message.name
         |#{message.name} 
