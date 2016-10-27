@@ -20,6 +20,7 @@ input, textarea{
     padding-left: .5em;
     width:100%;
     margin-bottom: .35em;
+    font-family: 'PT Sans', 'Arial Narrow', sans-serif; /* Firefox ignores body font in textareas */
  }
 
 input {
@@ -44,9 +45,16 @@ form input:focus ~ button,
 textarea:focus ~ button {
      background-color: #d4d31e;
  }
- // TODO add other -selectors
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder{
+ :-ms-input-placeholder{
+    color:#b6b6b6;
+    text-transform: uppercase;  
+ }
+::-webkit-input-placeholder{
+    color:#b6b6b6;
+    text-transform: uppercase;
+}
+::-moz-placeholder
+{
     color:#b6b6b6;
     text-transform: uppercase;
 }
@@ -73,8 +81,9 @@ textarea:focus, input:focus {
     font-size: 88%;
  }
  #stop{
-     font-size: 1.4em;
+     font-size: 1.2em;
      display:flex;
+     align-content: flex-start;
      margin-top: .75em;
      line-height: 100%;
      padding-top: .25em;
@@ -84,6 +93,7 @@ textarea:focus, input:focus {
      margin-bottom: .75em;
  }
  #stop-name {
+    flex: 3;
      margin-left:15px;
      margin-top:0px;
       font-size: 1em;
@@ -92,18 +102,16 @@ textarea:focus, input:focus {
      margin-bottom:0;
  }
  #stop-number {
+    flex:1;
      text-transform: uppercase;
-     width:22%;
      text-align: right;
      padding-right: 5%;
      border-right:3px solid #333;
      margin-top: 0px;
      font-size: 1em;
-     flex-shrink: 0;
-     flex-basis: 17%;
      padding-top: .5em;
      padding-bottom: .5em;
-      margin-bottom:0;
+    margin-bottom:0;
  }
 #stop-list{
      margin-top:15px;
@@ -123,7 +131,7 @@ textarea:focus, input:focus {
     border-bottom: 1px solid #ddd;
  }
 .route div{
-    flex:5;
+    flex:3;
  }
 
 .route .bus-number {
@@ -176,6 +184,9 @@ div.message{
     font-size: 1.5em;
   }
   .route div{
-    flex:7;
+    flex:6;
+ }
+ #stop-name{
+    flex:6;
  }
 }
