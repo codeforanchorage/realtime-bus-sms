@@ -172,31 +172,42 @@ router.get('/logData', function(req, res, next) {
     var type = req.query.type;
     var logData = [];
     var timezone = moment.tz.zone(config.TIMEZONE);
+    var nowTz = moment.tz(new Date(), config.TIMEZONE);
+
     if (type == "hits") {
         var dateTz = null;
-        db_private('requests').filter(function(point) {
+        var requests = db_private('requests').value()
+        var index = requests.length - 1 // start at the newest record
+        var point
+
+        while(index > -1) {
+            point = requests[index]
+
             if (point.date) {
-                var nowTz = moment.tz(new Date(), config.TIMEZONE);
                 dateTz = moment.tz(point.date, config.TIMEZONE);
+
+                // check that this record is not too old
                 if (moment.duration(nowTz.diff(dateTz)).asDays() <= daysBack) {
-                    return true;
+                    var hitType = "browser";
+                    if (point.hasOwnProperty("phone")) {
+                        hitType = "sms"
+                    }
+                    var outPoint = {};
+                    outPoint.type = hitType;
+                    outPoint.date = moment.tz(point.date, config.TIMEZONE).unix();
+                    outPoint.dateOffset = timezone.offset(outPoint.date*1000)
+                    outPoint.muniTime = point.muniTime || "";
+                    outPoint.totalTime = point.totalTime || "";
+                    outPoint.userId = point.phone ? "phone" + point.phone : "ip"+point.ip;
+                    logData.push(outPoint);
+                }
+                else {
+                    index = -1 // the requests have gotten too old. break out of the loop
                 }
             }
-            return false;
-        }).forEach(function(point) {
-            var hitType = "browser";
-            if (point.hasOwnProperty("phone")) {
-                hitType = "sms"
-            }
-            var outPoint = {};
-            outPoint.type = hitType;
-            outPoint.date = moment.tz(point.date, config.TIMEZONE).unix();
-            outPoint.dateOffset = timezone.offset(outPoint.date*1000)
-            outPoint.muniTime = point.muniTime || "";
-            outPoint.totalTime = point.totalTime || "";
-            outPoint.userId = point.phone ? "phone" + point.phone : "ip"+point.ip;
-            logData.push(outPoint);
-        })
+
+            index--
+        }
     }
     res.send(logData);
 });
