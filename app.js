@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var rollbar = require("rollbar");
+rollbar.init(process.env.ROLLBAR_TOKEN);
 
 var routes = require('./routes/index');
 
@@ -31,29 +33,10 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        console.log(err.message);
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
-
+app.use(rollbar.errorHandler(process.env.ROLLBAR_TOKEN));
+rollbar.handleUncaughtExceptionsAndRejections(
+    process.env.ROLLBAR_TOKEN,
+    {exitOnUncaughtException: true}
+);
 
 module.exports = app;
