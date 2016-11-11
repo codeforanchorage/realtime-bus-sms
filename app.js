@@ -5,7 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var rollbar = require("rollbar");
-rollbar.init(process.env.ROLLBAR_TOKEN);
+var config = require('./lib/config');
+
+rollbar.init(config.ROLLBAR_TOKEN);
 
 var routes = require('./routes/index');
 
