@@ -1,6 +1,7 @@
 node_modules
 config.js
 *.swp
+*.DS_Store
 
 public/db.json
 
