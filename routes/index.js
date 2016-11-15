@@ -69,7 +69,7 @@ router.post('/', function(req, res, next) {
     req.start = Date.now();
     var mySendIt = sendIt.bind(null,req,res,next);
 
-    var message = req.body.Body;
+    var message = req.body.Body || '';
 
 
 
