@@ -66,7 +66,7 @@ textarea:focus, input:focus {
  #main-content{
     margin:auto;
     width:95%;
-    max-width: 600px;
+    max-width: 500px;
     font-size: 6vw;
  }
  #headline {
