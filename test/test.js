@@ -53,11 +53,12 @@ function testAddress(test, res, address) {
 }
 
 function testStopId(test, res, stopId) {
-    test.ok(res.body.indexOf("stop " + stopId) > -1, "Test stop ID entry");
+    test.ok(res.body.indexOf("Stop " + stopId) > -1, "Test stop ID entry");
     test.done()
 }
 
 function testOutage(test, res) {
+    console.log("BODY: ",res.body)
     test.ok(res.body.indexOf("Bustracker is down") > -1, "Test outage");
     test.done()
 }

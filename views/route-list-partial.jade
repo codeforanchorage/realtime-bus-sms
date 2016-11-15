@@ -1,0 +1,19 @@
+if returnHTML
+    b  Enter one of these stop numbers for details:
+    p  
+      each route, i in routes.data.stops
+        p
+          b Stop: !{route.stopId}
+          |  - !{route.route} - (!{route.distance.toFixed(1)} miles -  
+          a(href='https://maps.google.com/?q=' + route.ll) map)
+else
+    | Enter one of these stop numbers for details:
+    | 
+    | 
+    each route, i in routes.data.stops
+        | * Stop: !{route.stopId} - !{route.route} - (!{route.distance.toFixed(1)} miles) *
+        | 
+      
+
+
+

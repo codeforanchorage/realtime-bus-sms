@@ -1,0 +1,10 @@
+if returnHTML
+    div 
+        if message.name
+            b #{message.name}
+            br 
+        | #{message.message}
+else
+    if message.name
+        |#{message.name} 
+    | #{message.message}  

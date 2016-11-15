@@ -15,108 +15,149 @@ var fs = require('fs');
 var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
 
 
+/* QUESTIONS
+    What should be logged - i.e. errors, about page, lat/lon requests etc.
+    It would probably be nice to put logging in it's own module
+    Do we need to include empty fields such as phone on web requests?
+*/
+
 // Log format:
 // message is whatever the user sends
 // stop is the stop that we've parsed from the message
 // data is the current datetime
 // if it's sent from twiliio, we store a human-readable hash of the #
-function logRequest(entry) {
-    entry.date = new Date();
+
+
+
+function logRequest(locals) {
+    var entry = {
+        date     : new Date(), // Why not Date.now() to avoid allocating object?
+        totalTime: Date.now() - locals.startTime, // TODO: should this be more accurate?
+        input    : this.body.Body, // this refers to the request object.
+        phone    : this.body.From,
+        ip       : this.connection.remoteAddress
+    }
+    if (locals.routes){ // only here when finding bus routes, not feedback, etc.
+        var routes            = locals.routes;
+        entry.stop            = routes.data.stopId || "";
+        entry.geocodedAddress = routes.data.geocodedAddress;
+        entry.muniTime        = routes.muniTime;
+        entry.geocodeTime     = routes.geocodeTime;
+    }
+    
     db_private('requests').push(entry);
     var entry2 = JSON.parse(JSON.stringify(entry)); // Required because of async mode of lowdb
     if (entry.phone) {
         entry2.phone = hashwords.hashStr(entry.phone);
     }
     entry2.ip = "";
-    db('requests').push(entry2);
+    db('requests').push(entry2); 
+    
 }
 
-function sendIt(req, res, next, err, data, geocodedAddress, altInput, returnHtml, muniTime) {
-    if (err) {
-        return next(err)
+
+/* 
+MIDDLEWARE FUNCTIONS 
+*/
+
+function aboutResponder(req, res, next){
+    var message = req.body.Body;
+    if (message.trim().toLowerCase() === 'about') {
+       req.logRequest(res.locals)
+       res.render('about-partial');     
+       return;  
     }
-
-    if (!returnHtml) {
-        res.set('Content-Type', 'text/plain');
-    }
-
-    res.send(data);
-
-    // log info about this lookup
-    var entry = {
-        input: altInput || req.body.Body,
-        stop: data.route,
-        phone: req.body.From,
-        ip: req.connection.remoteAddress,
-        geocodedAddress: geocodedAddress,
-        totalTime: req.start ? (Date.now() - req.start) : "",  // Should really go on res.on('finish'), but do we want to only log on successful sends?
-        muniTime: muniTime || ""
-    };
-    logRequest(entry)
+    next();
 }
 
+function getRoutes(req, res, next){
+    lib.parseInputReturnBusTimes(req.body.Body)
+    .then((routeObject) => {
+        res.locals.routes = routeObject;
+        req.logRequest(res.locals);
+        res.render('routes');
+    })
+    .catch((err) => {
+        res.render('message', {message: err})
+        req.logRequest(res.locals);
+    });
+}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index');
 });
 
+/* Setup Routing */
+router.use(function(req, res, next){ 
+    res.locals.startTime = Date.now();
+    req.logRequest = logRequest;
+    next();
+
+}); 
 
 // Twilio hits this endpoint. The user's text message is
 // in the POST body.
 // TODO: better error messages
-router.post('/', function(req, res, next) {
-    req.start = Date.now();
-    var mySendIt = sendIt.bind(null,req,res,next);
-
-    var message = req.body.Body;
-
-
-
-    if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
-        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req, mySendIt, false);
-        return;
-    }
-
-    lib.parseInputReturnBusTimes(message, mySendIt, false);
-});
-
+router.post('/',
+    function (req, res, next){
+        var message = req.body.Body;
+        if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
+            lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
+            .then((data)=>res.send("Thanks for the feedback"))
+            .catch((err)=>console.log("Feedback error: ", err));
+            return;
+        }
+        next();
+    },
+    aboutResponder,
+    getRoutes
+);
 
 // This is what the browser hits
-router.post('/ajax', function(req, res, next) {
-    req.start = Date.now();
-    var mySendIt = sendIt.bind(null, req, res, next)
-    lib.parseInputReturnBusTimes(req.body.Body, mySendIt, true);
-});
-
+router.post('/ajax', 
+    function (req, res, next) {
+        res.locals.returnHTML = 1;
+        next()
+    },
+    aboutResponder,
+    getRoutes
+);
 
 // a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
-    req.start = Date.now();
-    var output = "";
+    res.locals.returnHTML = 1;
+
     if (lib.serviceExceptions()) {
-        output = "No Service - Holiday";
-        sendIt(req, res, next, null, output)
-    } else {
-
-        var data = lib.findNearestStops(req.query.lat, req.query.lon);
-
-        // format the data if it's not just an error string
-        output = data;
-        if (typeof(data) === 'object') {
-            output = lib.formatStopData(data, true);
-        }
-        sendIt(req, res, next, null, output, null, req.query.lat + ', ' + req.query.lon, true)
+        res.locals.error = {message:'No Service - Holiday'};
+        res.render('message')
+        return;
     }
+    if (!req.query.lat || !req.query.lon){
+        res.render('message', {message: {message: "Can't determine your location"}});
+        return;
+     }
+     var data = lib.findNearestStops(req.query.lat, req.query.lon);
+     if (!data || data.length == 0){
+         res.render('message', {message: {message: "No routes found near you"}});
+         return;
+     }
+    var data = lib.findNearestStops(req.query.lat, req.query.lon);
 
+     req.logRequest(res.locals);
+     res.render('route-list-partial', {routes: {data: {stops: data}} });
+     
 
 });
 
 
 // feedback form endpoint
-router.post('/feedback', function(req, res, next) {
-    var mySendIt = sendIt.bind(null,req,res,next);
-    lib.processFeedback(req.body.comment, req, mySendIt, true);
+router.post('/feedback', function(req, res) {
+    res.locals.returnHTML = 1
+    lib.processFeedback(req.body.comment, req)
+    .then(() => req.logRequest(res.locals))
+    .catch((err)=> console.log("feedback/ error ", err)); // TODO - tell users if there is a problem or fail silently?
+    res.render('message', {message: {message:'Thanks for the feedback'}});
 });
 
 // Respond to feedback over SMS
@@ -150,7 +191,7 @@ router.post('/respond', function(req, res, next) {
                                     response: req.body.response,
                                     to_phone: comments.comments[i].phone
                                 };
-                                logRequest(entry);
+                                req.logRequest(entry);
                                 res.render("response", {pageData: {err: null}});
                             } else {
                                 console.log(err.message)
