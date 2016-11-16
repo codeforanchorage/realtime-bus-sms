@@ -101,7 +101,7 @@ router.use(function(req, res, next){
 // TODO: better error messages
 router.post('/',
     function (req, res, next){
-        var message = req.body.Body;
+        var message = req.body.Body || '';
         if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
             lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
             .then((data)=>res.send("Thanks for the feedback"))
