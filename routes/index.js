@@ -16,7 +16,7 @@ var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AU
 
 
 /* QUESTIONS
-    What should be logged - i.e. errors, about page, lat/lon requests etc.
+    What should be logged - i.e. errors, about page, lat/lon requests, geocode time etc.
     It would probably be nice to put logging in it's own module
     Do we need to include empty fields such as phone on web requests?
 */
