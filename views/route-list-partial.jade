@@ -4,7 +4,7 @@ if returnHTML
       each route, i in routes.data.stops
         div(class="route")
           div(class="bus-number") !{route.stopId}
-          div #{route.route} (!{route.distance.toFixed(1)} miles -  
+          div !{route.route} (!{route.distance.toFixed(1)} miles -  
             a(href='https://maps.google.com/?q=' + route.ll) map)
 else
     | Enter one of these stop numbers for details:

@@ -57,6 +57,11 @@ function testStopId(test, res, stopId) {
     test.done()
 }
 
+function testBrowserStopId(test, res, stopId) {
+    test.ok(res.body.indexOf("stop<br /> " + stopId) > -1, "Test stop ID entry");
+    test.done()
+}
+
 function testOutage(test, res) {
     console.log("BODY: ",res.body)
     test.ok(res.body.indexOf("Bustracker is down") > -1, "Test outage");
@@ -121,7 +126,7 @@ exports.group = {
 //Test the home page
     test_browserHome: function (test) {
         api.get(test, '/', function (res) {
-            test.ok(res.body.indexOf("When\'s the next bus?") > -1, "Test homepage heading");
+            test.ok(res.body.indexOf("When’s the<br />next bus?") > -1, "Test homepage heading");
             test.done()
         });
 
@@ -151,7 +156,7 @@ exports.group = {
         api.post(test, '/ajax', {
             data: {Body: stopId}
         }, function (res) {
-            testStopId(test, res, stopId)
+            testBrowserStopId(test, res, stopId)
         });
     },
     test_smsStopId: function (test) {
