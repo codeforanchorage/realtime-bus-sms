@@ -88,7 +88,7 @@ router.get('/', function(req, res, next) {
     res.render('index');
 });
 
-/* Setup Routing */
+/* Setup Logging */
 router.use(function(req, res, next){ 
     res.locals.startTime = Date.now();
     req.logRequest = logRequest;
@@ -96,11 +96,36 @@ router.use(function(req, res, next){
 
 }); 
 
+/* Routes to allow direct access via url with either address, stop number, or about.*/
+router.get('/find/about', function(req, res, next) {
+    res.locals.returnHTML = 1;
+    req.logRequest(res.locals);
+    res.render('index');
+
+});
+
+/* :query will be treated the same as a texted message */
+router.get('/:query', function(req, res, next) {
+    res.locals.returnHTML = 1;
+    lib.parseInputReturnBusTimes(req.params.query)
+    .then((routeObject) => {
+        res.locals.routes = routeObject;
+        req.logRequest(res.locals);
+        res.render('routes-non-ajax');
+    })
+    .catch((err) => {
+        res.render('message-non-ajax', {message: err})
+        req.logRequest(res.locals);
+    });
+});
+
+
 // Twilio hits this endpoint. The user's text message is
 // in the POST body.
 // TODO: better error messages
 router.post('/',
     function (req, res, next){
+        console.log("here:")
         var message = req.body.Body || '';
         if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
             lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
@@ -246,7 +271,9 @@ router.get('/logplot', function(req, res, next) {
     res.render('logplot');
 });
 
-
+router.get('*', function(req, res){
+  res.render('index', 404); // This could be a better message
+});
 
 
 

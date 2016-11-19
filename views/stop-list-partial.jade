@@ -9,9 +9,9 @@ if returnHTML
                     div(class="bus-number") #{stop.number}
                     div #{stop.name} #{stop.times[0]}
 else
-    |Stop #{routes.data.stopId} - #{routes.data.stop}
+    |* Stop #{routes.data.stopId} - #{routes.data.stop} *
     | 
     | 
     each stop in routes.data.stops
-        |* #{stop.name} - #{stop.times[0]} *
+        |#{stop.name} - #{stop.times[0]}
         | 
