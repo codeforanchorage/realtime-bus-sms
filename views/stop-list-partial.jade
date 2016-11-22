@@ -3,9 +3,9 @@ if returnHTML
         div(id="stop")
             h2(id="stop-number") stop<br /> #{routes.data.stopId}
             h3(id="stop-name") #{routes.data.stop}
-        ul(id="routelist") 
+        ul 
             each stop in routes.data.stops
-                li(class="route")
+                li
                     div #{stop.number}
                     div #{stop.name} #{stop.times[0]}
 else

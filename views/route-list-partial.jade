@@ -3,8 +3,8 @@ if returnHTML
       h4  Enter one of these stop numbers for details:
       ul
         each route, i in routes.data.stops
-          li(class="route" )
-            div(class="stop-number" onclick='makeRequest("#{route.stopId}")') !{route.stopId}
+          li
+            div(onclick='makeRequest("#{route.stopId}")') !{route.stopId}
             div !{route.route} (!{route.distance.toFixed(1)} miles -  
               a(href='https://maps.google.com/?q=' + route.ll) map)
 else

@@ -5,14 +5,9 @@ body {
 /* Primaryily to force Firefox to inheret font in text area and input */
 * { 
   font-family: inherit;
-  margin: 0;
+  margin:0;
 }
-* + * {
-  margin-top:1em;
-}
-body, br, li, dt, dd, th, td, option, button, li>div {
-  margin-top: 0;
-}
+p {margin-top: 1em;}
 
 a {
     color: #3d457b;
@@ -66,13 +61,14 @@ input, textarea{
 input {
     height:3em;
 }
+
 button {
     width:100%;
     background-color: #666;
     border:none;
     box-sizing: border-box;
     border: solid 1px #dbdc1e;
-    color:#fff;
+    color:#fff !important;
     font-weight: 700;
     text-transform: uppercase;
     padding: 10px;
@@ -81,9 +77,31 @@ button {
     border-radius: 5px;
  }
 
-#output{
-    margin-bottom:1.2em;
+ul{
+    font-size: 1em;
+    padding: 0px;
+    list-style-type: none;
+ }
+
+li{
+    display:flex;
+    padding-top: 1.2em;
+    padding-bottom: 1.2em;
+    border-bottom: 1px solid #ddd;
+ }
+
+li div {
+  flex: 3;
 }
+
+li div:first-of-type {
+    font-weight: 700;
+    flex-shrink: 0;
+    text-align: right;
+    flex:1;
+    padding-right: 20px;
+}
+
 
 form input:focus ~ button,
 textarea:focus ~ button {
@@ -107,70 +125,49 @@ textarea:focus, input:focus {
     outline:none;
 }
 
+#output{
+    margin-top:1em;
+    margin-bottom:1.2em;
+}
 
 #stop{
    font-size: 1.2em;
    display:flex;
-   align-content: flex-start;
-   margin-top: .75em;
    line-height: 100%;
-   padding-top: .25em;
-   padding-bottom: .25em;
+   padding-top: .5em;
+   padding-bottom: .5em;
    border-top: 1px solid #ddd;
    border-bottom: 1px solid #ddd;
-   margin-bottom: .75em;
 }
+
 #stop-name {
    flex: 3;
    margin-left:15px;
-   margin-top:0px;
    font-size: 1em;
    padding-top: .5em;
    padding-bottom: .5em;
-   margin-bottom:0;
 }
+
 #stop-number {
    flex:1;
    text-transform: uppercase;
    text-align: right;
    padding-right: 5%;
    border-right:3px solid #333;
-   margin-top: 0px;
    font-size: 1em;
    padding-top: .5em;
-   padding-bottom: .5em;
-   margin-bottom:0;
 }
+
 #stop-list{
     margin-top:15px;
     font-size: .9em;
  }
 
-ul{
-    font-size: 1em;
-    padding: 0px;
- }
-li{
-    display:flex;
-    align-content: flex-start;
-    line-height: 120%;
-    padding-top: 1.2em;
-    padding-bottom: 1.2em;
-    border-bottom: 1px solid #ddd;
- }
-li div:first-of-type {
-    font-weight: 700;
-    flex-shrink: 0;
-    text-align: right;
-    flex:1;
-    padding-right: 20px;
-
-}
-
 #info{
     margin-top:1em;
     border-top: 1px solid #ddd
  }
+
 #footer{
     margin-top:20px;
     padding: 10px 0 10px 0;
@@ -179,37 +176,33 @@ li div:first-of-type {
     display:flex;
     font-size: .9em;
  }
+#footer div {
+    padding-top:15px;
+}
+
 #footer div:first-child {
     margin-right: 20px; 
     border-right: 1px solid #666;
     padding-right:20px;
     padding-top:10px;
 }
-#footer div {
-    padding-top:15px;
-}
 
 #feedback textarea{
     height:6em;
 }
-button.feedback{
+#feedback button[type="submit"]{
     width:65%;
     margin-right: 3%;
 }
-
-button.cancel{
+#feedback button[type="reset"] {
     width:32%;
-}
-
-div.message{
-    margin:1em 0 1em 0;
 }
 
 @media screen and (min-width: 500px) {
     body > div {
         font-size: 1.5em;
     }
-    .route div{
+    li div{
         flex:6;
     }
     #stop-name{
