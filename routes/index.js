@@ -105,7 +105,7 @@ router.get('/find/about', function(req, res, next) {
 });
 
 /* :query will be treated the same as a texted message */
-router.get('/:query', function(req, res, next) {
+router.get('/find/:query', function(req, res, next) {
     res.locals.returnHTML = 1;
     lib.parseInputReturnBusTimes(req.params.query)
     .then((routeObject) => {
