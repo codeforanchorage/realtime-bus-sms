@@ -1,11 +1,12 @@
 if returnHTML
     div(id="stop-list")  
       h4  Enter one of these stop numbers for details:
-      each route, i in routes.data.stops
-        div(class="route" )
-          div(class="stop-number" onclick='makeRequest("#{route.stopId}")') !{route.stopId}
-          div !{route.route} (!{route.distance.toFixed(1)} miles -  
-            a(href='https://maps.google.com/?q=' + route.ll) map)
+      ul
+        each route, i in routes.data.stops
+          li(class="route" )
+            div(class="stop-number" onclick='makeRequest("#{route.stopId}")') !{route.stopId}
+            div !{route.route} (!{route.distance.toFixed(1)} miles -  
+              a(href='https://maps.google.com/?q=' + route.ll) map)
 else
     | Enter one of these stop numbers for details:
     | 

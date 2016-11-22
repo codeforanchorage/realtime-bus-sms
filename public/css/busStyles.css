@@ -2,16 +2,57 @@ body {
     margin: 20px;
     font-family: 'PT Sans', 'Arial Narrow', sans-serif;
 }
+/* Primaryily to force Firefox to inheret font in text area and input */
+* { 
+  font-family: inherit;
+  margin: 0;
+}
+* + * {
+  margin-top:1em;
+}
+body, br, li, dt, dd, th, td, option, button, li>div {
+  margin-top: 0;
+}
+
 a {
     color: #3d457b;
 }
 a:visited{
     color: #3d457b;
 }
+[onclick] {
+    color: #3d457b;
+    cursor: pointer;
+}
+[onclick]:hover{
+    color:unset;
+ }
+
+body > div{
+    margin:auto;
+    width:95%;
+    max-width: 500px;
+    font-size: 6vw;
+}
+
+h1 {
+    font-size: 15vw;
+    text-transform: uppercase;
+    line-height: 85%;
+    margin-bottom: .35em;
+    width: 100%;
+    margin-top:10px;
+}
+
+h1:first-line{
+    font-size: 88%;
+}
+
 h3 {
     font-size: 1.25em;
     margin-bottom:0;
 }
+
 input, textarea{
     border: solid 5px #d4d31e;
     transition: border 0.3s;
@@ -20,7 +61,6 @@ input, textarea{
     padding-left: .5em;
     width:100%;
     margin-bottom: .35em;
-    font-family: 'PT Sans', 'Arial Narrow', sans-serif; /* Firefox ignores body font in textareas */
  }
 
 input {
@@ -40,9 +80,11 @@ button {
     transition: background-color 0.3s;
     border-radius: 5px;
  }
+
 #output{
     margin-bottom:1.2em;
 }
+
 form input:focus ~ button,
 textarea:focus ~ button {
     background-color: #d4d31e;
@@ -65,23 +107,7 @@ textarea:focus, input:focus {
     outline:none;
 }
 
-#main-content{
-    margin:auto;
-    width:95%;
-    max-width: 500px;
-    font-size: 6vw;
- }
-#headline {
-    font-size: 15vw;
-    text-transform: uppercase;
-    line-height: 85%;
-    margin-bottom: .35em;
-    width: 100%;
-    margin-top:10px;
-}
-#headline:first-line{
-    font-size: 88%;
-}
+
 #stop{
    font-size: 1.2em;
    display:flex;
@@ -120,11 +146,11 @@ textarea:focus, input:focus {
     font-size: .9em;
  }
 
-#routelist{
-    margin-top:15px;
+ul{
     font-size: 1em;
+    padding: 0px;
  }
-.route {
+li{
     display:flex;
     align-content: flex-start;
     line-height: 120%;
@@ -132,25 +158,15 @@ textarea:focus, input:focus {
     padding-bottom: 1.2em;
     border-bottom: 1px solid #ddd;
  }
-
-.route div{
-    flex:3;
- }
-
-.route .bus-number, .route .stop-number {
+li div:first-of-type {
     font-weight: 700;
     flex-shrink: 0;
     text-align: right;
     flex:1;
     padding-right: 20px;
- }
-.route .stop-number {
-    color: #3d457b;
-    cursor: pointer;
+
 }
- .stop-number:hover{
-    color:unset;
- }
+
 #info{
     margin-top:1em;
     border-top: 1px solid #ddd
@@ -190,7 +206,7 @@ div.message{
 }
 
 @media screen and (min-width: 500px) {
-    #main-content {
+    body > div {
         font-size: 1.5em;
     }
     .route div{
