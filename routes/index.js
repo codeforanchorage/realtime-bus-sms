@@ -125,7 +125,7 @@ router.get('/find/:query', function(req, res, next) {
 // TODO: better error messages
 router.post('/',
     function (req, res, next){
-        console.log("here:")
+        res.set('Content-Type', 'text/plain');
         var message = req.body.Body || '';
         if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
             lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
