@@ -19,7 +19,27 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+logger.token('stop', function(req, res){
+    if(res.locals.routes){
+        return res.locals.routes.data.stopId || ""
+    }
+    return "";
+})
+logger.token('geoCodedAddress', function(req, res){
+    if(res.locals.routes){
+        return res.locals.routes.data.geocodedAddress || ""
+    }
+    return "";
+})
+//app.use(logger('common'));
+app.use(logger(':remote-addr - [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :stop :geoCodedAddress ', 
+    {
+        skip: function(req, res) {
+                return res.statusCode < 400 && ( req.url.startsWith('/css') || req.url.startsWith('/javascripts') || req.url.startsWith('/img'))
+        }
+    }));
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

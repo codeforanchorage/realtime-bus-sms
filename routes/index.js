@@ -272,7 +272,8 @@ router.get('/logplot', function(req, res, next) {
 });
 
 router.get('*', function(req, res){
-  res.render('index', 404); // This could be a better message
+    res.status(404)
+    res.render('error-404', {}); // This could be a better message
 });
 
 
