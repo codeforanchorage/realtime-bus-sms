@@ -4,6 +4,21 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "6TH AVENUE & C STREET ESE",
+        "stop_id": "0002",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.886091,
+          61.216517
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "C STREET & 7TH AVENUE SSW",
         "stop_id": "0003",
         "stop_code": null
@@ -12,7 +27,7 @@
         "type": "Point",
         "coordinates": [
           -149.887389,
-          61.215112
+          61.215111
         ]
       }
     },
@@ -27,7 +42,7 @@
         "type": "Point",
         "coordinates": [
           -149.887517,
-          61.212407
+          61.212406
         ]
       }
     },
@@ -41,8 +56,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.887484,
-          61.210297
+          -149.887483,
+          61.210296
         ]
       }
     },
@@ -56,8 +71,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.887494,
-          61.20868
+          -149.887493,
+          61.208679
         ]
       }
     },
@@ -71,8 +86,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.887536,
-          61.20577
+          -149.887535,
+          61.205769
         ]
       }
     },
@@ -101,8 +116,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.88753,
-          61.20084
+          -149.887529,
+          61.200839
         ]
       }
     },
@@ -117,7 +132,7 @@
         "type": "Point",
         "coordinates": [
           -149.88703,
-          61.197747
+          61.197746
         ]
       }
     },
@@ -132,7 +147,7 @@
         "type": "Point",
         "coordinates": [
           -149.886782,
-          61.194452
+          61.194451
         ]
       }
     },
@@ -147,14 +162,14 @@
         "type": "Point",
         "coordinates": [
           -149.886782,
-          61.19271
+          61.192709
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "36TH AVENUE & C STREET ESE",
+        "name": "C STREET & 36TH AVE",
         "stop_id": "0014",
         "stop_code": null
       },
@@ -162,14 +177,14 @@
         "type": "Point",
         "coordinates": [
           -149.885213,
-          61.187997
+          61.187996
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "36TH AVENUE & A STREET ESE",
+        "name": "36TH AVE & A STREET",
         "stop_id": "0015",
         "stop_code": null
       },
@@ -192,7 +207,7 @@
         "type": "Point",
         "coordinates": [
           -149.877381,
-          61.187985
+          61.187984
         ]
       }
     },
@@ -206,7 +221,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.869002,
+          -149.869001,
           61.187998
         ]
       }
@@ -251,7 +266,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.855387,
+          -149.855386,
           61.188013
         ]
       }
@@ -281,7 +296,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.838461,
+          -149.83846,
           61.187323
         ]
       }
@@ -296,8 +311,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.838381,
-          61.185758
+          -149.83838,
+          61.185757
         ]
       }
     },
@@ -319,14 +334,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "LAKE OTIS & TUDOR SSW",
+        "name": "LAKE OTIS & TUDOR",
         "stop_id": "0026",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.838407,
+          -149.838406,
           61.179662
         ]
       }
@@ -341,7 +356,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.838305,
+          -149.838304,
           61.177118
         ]
       }
@@ -356,8 +371,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.838437,
-          61.174352
+          -149.838436,
+          61.174351
         ]
       }
     },
@@ -371,8 +386,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.838337,
-          61.171577
+          -149.838336,
+          61.171576
         ]
       }
     },
@@ -394,7 +409,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "LAKE OTIS & DOWLING SSW",
+        "name": "LAKE OTIS & DOWLING",
         "stop_id": "0031",
         "stop_code": null
       },
@@ -402,7 +417,7 @@
         "type": "Point",
         "coordinates": [
           -149.838429,
-          61.165866
+          61.165865
         ]
       }
     },
@@ -416,8 +431,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.835965,
-          61.163457
+          -149.835964,
+          61.163456
         ]
       }
     },
@@ -431,7 +446,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.834451,
+          -149.83445,
           61.158822
         ]
       }
@@ -462,7 +477,7 @@
         "type": "Point",
         "coordinates": [
           -149.834421,
-          61.151458
+          61.151457
         ]
       }
     },
@@ -507,7 +522,7 @@
         "type": "Point",
         "coordinates": [
           -149.834389,
-          61.140783
+          61.140782
         ]
       }
     },
@@ -522,7 +537,7 @@
         "type": "Point",
         "coordinates": [
           -149.841718,
-          61.134678
+          61.134677
         ]
       }
     },
@@ -551,8 +566,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.845924,
-          61.130331
+          -149.845923,
+          61.13033
         ]
       }
     },
@@ -566,7 +581,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.845565,
+          -149.845564,
           61.128495
         ]
       }
@@ -596,7 +611,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.848115,
+          -149.848114,
           61.12522
         ]
       }
@@ -626,8 +641,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.85608,
-          61.123212
+          -149.856079,
+          61.123211
         ]
       }
     },
@@ -642,7 +657,7 @@
         "type": "Point",
         "coordinates": [
           -149.863409,
-          61.123595
+          61.123594
         ]
       }
     },
@@ -679,6 +694,21 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "JAMESTOWN & RED CEDAR SSW",
+        "stop_id": "0054",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.848113,
+          61.126583
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "OLD SEWARD & ABBOTT NNE",
         "stop_id": "0055",
         "stop_code": null
@@ -686,8 +716,23 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.863757,
-          61.1379
+          -149.863756,
+          61.137899
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "DIMOND TRANSIT CENTER",
+        "stop_id": "0057",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.871953,
+          61.142763
         ]
       }
     },
@@ -702,7 +747,7 @@
         "type": "Point",
         "coordinates": [
           -149.864123,
-          61.133199
+          61.133198
         ]
       }
     },
@@ -747,7 +792,7 @@
         "type": "Point",
         "coordinates": [
           -149.864178,
-          61.129562
+          61.129561
         ]
       }
     },
@@ -761,7 +806,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.864139,
+          -149.864138,
           61.127452
         ]
       }
@@ -776,8 +821,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.860897,
-          61.122972
+          -149.860896,
+          61.122971
         ]
       }
     },
@@ -791,8 +836,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.850715,
-          61.123772
+          -149.850714,
+          61.123771
         ]
       }
     },
@@ -836,7 +881,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.845261,
+          -149.84526,
           61.129296
         ]
       }
@@ -851,7 +896,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.845695,
+          -149.845694,
           61.131217
         ]
       }
@@ -866,8 +911,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.844029,
-          61.13268
+          -149.844028,
+          61.132679
         ]
       }
     },
@@ -881,7 +926,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.841703,
+          -149.841702,
           61.133822
         ]
       }
@@ -889,14 +934,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "LAKE OTIS & ABBOTT NNE",
+        "name": "LAKE OTIS & ABBOTT",
         "stop_id": "0075",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.833852,
+          -149.833851,
           61.138063
         ]
       }
@@ -912,7 +957,7 @@
         "type": "Point",
         "coordinates": [
           -149.83388,
-          61.141627
+          61.141626
         ]
       }
     },
@@ -927,7 +972,7 @@
         "type": "Point",
         "coordinates": [
           -149.833938,
-          61.143467
+          61.143466
         ]
       }
     },
@@ -972,7 +1017,7 @@
         "type": "Point",
         "coordinates": [
           -149.833987,
-          61.156035
+          61.156034
         ]
       }
     },
@@ -986,7 +1031,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.833996,
+          -149.833995,
           61.159673
         ]
       }
@@ -1009,7 +1054,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "LAKE OTIS & DOWLING NNE",
+        "name": "LAKE OTIS & DOWLING",
         "stop_id": "0083",
         "stop_code": null
       },
@@ -1031,7 +1076,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.837984,
+          -149.837983,
           61.168973
         ]
       }
@@ -1046,8 +1091,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.837991,
-          61.17212
+          -149.83799,
+          61.172119
         ]
       }
     },
@@ -1061,8 +1106,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.837927,
-          61.175673
+          -149.837926,
+          61.175672
         ]
       }
     },
@@ -1077,14 +1122,14 @@
         "type": "Point",
         "coordinates": [
           -149.837896,
-          61.178336
+          61.178335
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "LAKE OTIS & TUDOR NNE",
+        "name": "LAKE OTIS & TUDOR",
         "stop_id": "0088",
         "stop_code": null
       },
@@ -1092,7 +1137,7 @@
         "type": "Point",
         "coordinates": [
           -149.83782,
-          61.181575
+          61.181574
         ]
       }
     },
@@ -1106,7 +1151,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.838011,
+          -149.83801,
           61.183027
         ]
       }
@@ -1151,7 +1196,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.85022,
+          -149.850219,
           61.188129
         ]
       }
@@ -1182,22 +1227,22 @@
         "type": "Point",
         "coordinates": [
           -149.878195,
-          61.188197
+          61.188196
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "A STREET & 36TH AVENUE NNE",
+        "name": "A STREET & 36TH AVE",
         "stop_id": "0099",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.88289,
-          61.189005
+          -149.882889,
+          61.189004
         ]
       }
     },
@@ -1211,7 +1256,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.88293,
+          -149.882929,
           61.192401
         ]
       }
@@ -1241,8 +1286,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.882807,
-          61.19917
+          -149.882806,
+          61.199169
         ]
       }
     },
@@ -1272,7 +1317,7 @@
         "type": "Point",
         "coordinates": [
           -149.882898,
-          61.20683
+          61.206829
         ]
       }
     },
@@ -1287,7 +1332,7 @@
         "type": "Point",
         "coordinates": [
           -149.883095,
-          61.210195
+          61.210194
         ]
       }
     },
@@ -1301,7 +1346,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.883277,
+          -149.883276,
           61.212138
         ]
       }
@@ -1339,14 +1384,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "SPENARD & BENSON NNW",
+        "name": "SPENARD & NORTHERN LIGHTS",
         "stop_id": "0129",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.905787,
+          -149.905786,
           61.194405
         ]
       }
@@ -1362,7 +1407,7 @@
         "type": "Point",
         "coordinates": [
           -149.905774,
-          61.193006
+          61.193005
         ]
       }
     },
@@ -1376,7 +1421,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.907482,
+          -149.907481,
           61.190675
         ]
       }
@@ -1391,8 +1436,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.908678,
-          61.189042
+          -149.908677,
+          61.189041
         ]
       }
     },
@@ -1407,7 +1452,7 @@
         "type": "Point",
         "coordinates": [
           -149.912189,
-          61.186984
+          61.186983
         ]
       }
     },
@@ -1474,15 +1519,15 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "SPENARD & WISCONSIN SSW",
+        "name": "SPENARD & WISCONSIN",
         "stop_id": "0141",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.939618,
-          61.178722
+          -149.939617,
+          61.178721
         ]
       }
     },
@@ -1496,7 +1541,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.942042,
+          -149.942041,
           61.177061
         ]
       }
@@ -1541,7 +1586,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.942722,
+          -149.942721,
           61.166328
         ]
       }
@@ -1616,7 +1661,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.945457,
+          -149.945456,
           61.159343
         ]
       }
@@ -1632,7 +1677,7 @@
         "type": "Point",
         "coordinates": [
           -149.95201,
-          61.158085
+          61.158084
         ]
       }
     },
@@ -1647,7 +1692,7 @@
         "type": "Point",
         "coordinates": [
           -149.952108,
-          61.153931
+          61.15393
         ]
       }
     },
@@ -1714,14 +1759,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "88TH AVENUE & JEWEL LAKE ESE",
+        "name": "JEWEL LAKE & 88TH AVE",
         "stop_id": "0162",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.94999,
+          -149.949989,
           61.141015
         ]
       }
@@ -1781,7 +1826,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.933042,
+          -149.933041,
           61.141015
         ]
       }
@@ -1797,7 +1842,7 @@
         "type": "Point",
         "coordinates": [
           -149.929531,
-          61.138401
+          61.1384
         ]
       }
     },
@@ -1811,7 +1856,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.919242,
+          -149.919241,
           61.137278
         ]
       }
@@ -1826,7 +1871,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.90525,
+          -149.905249,
           61.140868
         ]
       }
@@ -1841,7 +1886,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.914885,
+          -149.914884,
           61.13814
         ]
       }
@@ -1856,8 +1901,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.87267,
-          61.144917
+          -149.872669,
+          61.144916
         ]
       }
     },
@@ -1872,7 +1917,7 @@
         "type": "Point",
         "coordinates": [
           -149.888768,
-          61.144912
+          61.144911
         ]
       }
     },
@@ -1886,8 +1931,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.9054,
-          61.141257
+          -149.905399,
+          61.141256
         ]
       }
     },
@@ -1901,8 +1946,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.915182,
-          61.138602
+          -149.915181,
+          61.138601
         ]
       }
     },
@@ -1931,7 +1976,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.933542,
+          -149.933541,
           61.14115
         ]
       }
@@ -1961,7 +2006,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.941505,
+          -149.941504,
           61.141195
         ]
       }
@@ -1976,7 +2021,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.94666,
+          -149.946659,
           61.14118
         ]
       }
@@ -1999,14 +2044,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "JEWEL LAKE & 88TH AVENUE NNE",
+        "name": "JEWEL LAKE & 88TH AVE",
         "stop_id": "0210",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.951685,
+          -149.951684,
           61.141705
         ]
       }
@@ -2022,7 +2067,7 @@
         "type": "Point",
         "coordinates": [
           -149.951693,
-          61.144537
+          61.144536
         ]
       }
     },
@@ -2052,7 +2097,7 @@
         "type": "Point",
         "coordinates": [
           -149.951648,
-          61.149122
+          61.149121
         ]
       }
     },
@@ -2096,7 +2141,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.951649,
+          -149.951648,
           61.156645
         ]
       }
@@ -2111,7 +2156,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.950402,
+          -149.950401,
           61.159048
         ]
       }
@@ -2126,7 +2171,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.945903,
+          -149.945902,
           61.159134
         ]
       }
@@ -2171,8 +2216,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.938342,
-          61.162802
+          -149.938341,
+          61.162801
         ]
       }
     },
@@ -2201,7 +2246,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.942513,
+          -149.942512,
           61.166285
         ]
       }
@@ -2232,7 +2277,7 @@
         "type": "Point",
         "coordinates": [
           -149.943772,
-          61.17512
+          61.175119
         ]
       }
     },
@@ -2254,7 +2299,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "SPENARD & WISCONSIN NNE",
+        "name": "SPENARD & WISCONSIN",
         "stop_id": "0229",
         "stop_code": null
       },
@@ -2277,7 +2322,7 @@
         "type": "Point",
         "coordinates": [
           -149.926171,
-          61.183984
+          61.183983
         ]
       }
     },
@@ -2307,7 +2352,7 @@
         "type": "Point",
         "coordinates": [
           -149.916088,
-          61.186327
+          61.186326
         ]
       }
     },
@@ -2352,7 +2397,7 @@
         "type": "Point",
         "coordinates": [
           -149.906626,
-          61.191293
+          61.191292
         ]
       }
     },
@@ -2366,7 +2411,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.905291,
+          -149.90529,
           61.193564
         ]
       }
@@ -2374,14 +2419,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "SPENARD & NORTHERN LIGHTS NNE",
+        "name": "SPENARD & NORTHERN LIGHTS",
         "stop_id": "0239",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.905288,
+          -149.905287,
           61.195857
         ]
       }
@@ -2396,7 +2441,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.905387,
+          -149.905386,
           61.197453
         ]
       }
@@ -2412,7 +2457,7 @@
         "type": "Point",
         "coordinates": [
           -149.892528,
-          61.205239
+          61.205238
         ]
       }
     },
@@ -2426,7 +2471,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.883119,
+          -149.883118,
           61.215023
         ]
       }
@@ -2441,8 +2486,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.904488,
-          61.193943
+          -149.904487,
+          61.193942
         ]
       }
     },
@@ -2457,7 +2502,7 @@
         "type": "Point",
         "coordinates": [
           -149.896939,
-          61.194139
+          61.194138
         ]
       }
     },
@@ -2486,22 +2531,22 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.88993,
-          61.194168
+          -149.889929,
+          61.194167
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "BENSON & C STREET ESE",
+        "name": "BENSON & C ST",
         "stop_id": "0279",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.885681,
+          -149.88568,
           61.194147
         ]
       }
@@ -2517,7 +2562,7 @@
         "type": "Point",
         "coordinates": [
           -149.879827,
-          61.193691
+          61.19369
         ]
       }
     },
@@ -2531,8 +2576,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.87513,
-          61.193382
+          -149.875129,
+          61.193381
         ]
       }
     },
@@ -2546,8 +2591,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.866475,
-          61.193323
+          -149.866474,
+          61.193322
         ]
       }
     },
@@ -2562,7 +2607,7 @@
         "type": "Point",
         "coordinates": [
           -149.85976,
-          61.194517
+          61.194516
         ]
       }
     },
@@ -2591,8 +2636,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.846589,
-          61.195224
+          -149.846588,
+          61.195223
         ]
       }
     },
@@ -2607,7 +2652,7 @@
         "type": "Point",
         "coordinates": [
           -149.842519,
-          61.19522
+          61.195219
         ]
       }
     },
@@ -2622,7 +2667,7 @@
         "type": "Point",
         "coordinates": [
           -149.828212,
-          61.187901
+          61.1879
         ]
       }
     },
@@ -2644,6 +2689,21 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "BONIFACE & NORTHERN LIGHTS NNE",
+        "stop_id": "0302",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.778172,
+          61.195917
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "BONIFACE & 24TH AVENUE SSE",
         "stop_id": "0303",
         "stop_code": null
@@ -2652,7 +2712,7 @@
         "type": "Point",
         "coordinates": [
           -149.778171,
-          61.198303
+          61.198302
         ]
       }
     },
@@ -2667,7 +2727,7 @@
         "type": "Point",
         "coordinates": [
           -149.777904,
-          61.200348
+          61.200347
         ]
       }
     },
@@ -2696,8 +2756,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.774433,
-          61.204108
+          -149.774585,
+          61.20417
         ]
       }
     },
@@ -2711,8 +2771,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.772307,
-          61.20459
+          -149.772306,
+          61.204589
         ]
       }
     },
@@ -2726,23 +2786,23 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.769914,
-          61.207598
+          -149.769913,
+          61.207597
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "NUNAKA & DEBARR SSE",
+        "name": "NUNAKA & DEBARR",
         "stop_id": "0309",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.769919,
-          61.209235
+          -149.769918,
+          61.209234
         ]
       }
     },
@@ -2802,7 +2862,7 @@
         "type": "Point",
         "coordinates": [
           -149.7445,
-          61.1998
+          61.199799
         ]
       }
     },
@@ -2831,8 +2891,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.744487,
-          61.203331
+          -149.744486,
+          61.20333
         ]
       }
     },
@@ -2846,7 +2906,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.748303,
+          -149.748302,
           61.203858
         ]
       }
@@ -2862,7 +2922,7 @@
         "type": "Point",
         "coordinates": [
           -149.748294,
-          61.206028
+          61.206027
         ]
       }
     },
@@ -2891,7 +2951,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.747608,
+          -149.747607,
           61.209649
         ]
       }
@@ -2906,8 +2966,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.741853,
-          61.20966
+          -149.741852,
+          61.209659
         ]
       }
     },
@@ -2929,6 +2989,21 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "DEBARR & MULDOON",
+        "stop_id": "0355",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.73524,
+          61.209843
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "DEBARR & CREEKSIDE CTR ENE",
         "stop_id": "0356",
         "stop_code": null
@@ -2936,7 +3011,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.740572,
+          -149.740571,
           61.209853
         ]
       }
@@ -2951,8 +3026,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.748511,
-          61.208911
+          -149.74851,
+          61.20891
         ]
       }
     },
@@ -2967,7 +3042,7 @@
         "type": "Point",
         "coordinates": [
           -149.748513,
-          61.205968
+          61.205967
         ]
       }
     },
@@ -2981,7 +3056,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.745098,
+          -149.745097,
           61.203389
         ]
       }
@@ -2996,8 +3071,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.742006,
-          61.201805
+          -149.742005,
+          61.201804
         ]
       }
     },
@@ -3011,8 +3086,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.744775,
-          61.199678
+          -149.744774,
+          61.199677
         ]
       }
     },
@@ -3041,7 +3116,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.744502,
+          -149.744501,
           61.19545
         ]
       }
@@ -3049,15 +3124,15 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "NORTHERN LIGHTS & PATTERSON WNW",
+        "name": "PATTERSON & NORTHERN LIGHTS",
         "stop_id": "0365",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.749775,
-          61.195522
+          -149.749774,
+          61.195521
         ]
       }
     },
@@ -3071,8 +3146,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.755352,
-          61.195497
+          -149.755351,
+          61.195496
         ]
       }
     },
@@ -3087,7 +3162,7 @@
         "type": "Point",
         "coordinates": [
           -149.759163,
-          61.195452
+          61.195451
         ]
       }
     },
@@ -3116,7 +3191,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.769305,
+          -149.769304,
           61.195348
         ]
       }
@@ -3146,8 +3221,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.7573,
-          61.209842
+          -149.757299,
+          61.209841
         ]
       }
     },
@@ -3169,14 +3244,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "NUNAKA & DEBARR SSW",
+        "name": "NUNAKA & DEBARR",
         "stop_id": "0375",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.770232,
+          -149.770231,
           61.209018
         ]
       }
@@ -3191,7 +3266,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.770178,
+          -149.770177,
           61.207347
         ]
       }
@@ -3221,8 +3296,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.773158,
-          61.204161
+          -149.773246,
+          61.204049
         ]
       }
     },
@@ -3236,8 +3311,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.77618,
-          61.204646
+          -149.776161,
+          61.204593
         ]
       }
     },
@@ -3266,7 +3341,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.778045,
+          -149.778044,
           61.2
         ]
       }
@@ -3281,7 +3356,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.77865,
+          -149.778649,
           61.198325
         ]
       }
@@ -3289,7 +3364,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "NORTHERN LIGHTS & BONIFACE WNW",
+        "name": "NORTHERN LIGHTS & BONIFACE",
         "stop_id": "0385",
         "stop_code": null
       },
@@ -3311,7 +3386,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.79,
+          -149.789999,
           61.195305
         ]
       }
@@ -3326,15 +3401,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.8014,
-          61.199067
+          -149.801399,
+          61.199066
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "NORTHERN LIGHTS & BRAGAW WNW",
+        "name": "NORTHERN LIGHTS & BRAGAW",
         "stop_id": "0388",
         "stop_code": null
       },
@@ -3371,7 +3446,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.82331,
+          -149.823309,
           61.19092
         ]
       }
@@ -3387,7 +3462,7 @@
         "type": "Point",
         "coordinates": [
           -149.83798,
-          61.188701
+          61.1887
         ]
       }
     },
@@ -3402,7 +3477,7 @@
         "type": "Point",
         "coordinates": [
           -149.83806,
-          61.191391
+          61.19139
         ]
       }
     },
@@ -3416,8 +3491,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.839335,
-          61.19553
+          -149.839334,
+          61.195529
         ]
       }
     },
@@ -3431,8 +3506,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.846752,
-          61.195528
+          -149.846751,
+          61.195527
         ]
       }
     },
@@ -3462,7 +3537,7 @@
         "type": "Point",
         "coordinates": [
           -149.861679,
-          61.19531
+          61.195309
         ]
       }
     },
@@ -3476,7 +3551,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.869879,
+          -149.869878,
           61.195373
         ]
       }
@@ -3506,7 +3581,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.87924,
+          -149.879239,
           61.195355
         ]
       }
@@ -3522,14 +3597,14 @@
         "type": "Point",
         "coordinates": [
           -149.883969,
-          61.195353
+          61.195352
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "NORTHERN LIGHTS & C STREET WNW",
+        "name": "NORTHERN LIGHTS & C ST",
         "stop_id": "0406",
         "stop_code": null
       },
@@ -3551,7 +3626,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.89513,
+          -149.895129,
           61.195371
         ]
       }
@@ -3566,8 +3641,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.898737,
-          61.195351
+          -149.898736,
+          61.19535
         ]
       }
     },
@@ -3581,7 +3656,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.906828,
+          -149.906827,
           61.195379
         ]
       }
@@ -3627,7 +3702,7 @@
         "type": "Point",
         "coordinates": [
           -149.865558,
-          61.213602
+          61.213601
         ]
       }
     },
@@ -3641,7 +3716,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.861597,
+          -149.861596,
           61.213578
         ]
       }
@@ -3702,7 +3777,7 @@
         "type": "Point",
         "coordinates": [
           -149.857968,
-          61.204812
+          61.204811
         ]
       }
     },
@@ -3732,21 +3807,21 @@
         "type": "Point",
         "coordinates": [
           -149.835445,
-          61.207752
+          61.207751
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "ALASKA REGIONAL HOSPITAL S",
+        "name": "ALASKA REGIONAL HOSPITAL",
         "stop_id": "0438",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.826404,
+          -149.826403,
           61.210158
         ]
       }
@@ -3761,7 +3836,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.820792,
+          -149.820791,
           61.215448
         ]
       }
@@ -3784,7 +3859,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "PENLAND PKWY & NORTHWAY ESE",
+        "name": "PENLAND & NORTHWAY",
         "stop_id": "0443",
         "stop_code": null
       },
@@ -3792,7 +3867,7 @@
         "type": "Point",
         "coordinates": [
           -149.812121,
-          61.215806
+          61.215805
         ]
       }
     },
@@ -3806,7 +3881,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.80846,
+          -149.808459,
           61.213638
         ]
       }
@@ -3821,7 +3896,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.808464,
+          -149.808463,
           61.211849
         ]
       }
@@ -3836,7 +3911,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.80723,
+          -149.807229,
           61.209575
         ]
       }
@@ -3897,7 +3972,7 @@
         "type": "Point",
         "coordinates": [
           -149.779258,
-          61.209649
+          61.209648
         ]
       }
     },
@@ -3911,7 +3986,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.775917,
+          -149.775916,
           61.209635
         ]
       }
@@ -3956,8 +4031,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.762602,
-          61.208797
+          -149.762601,
+          61.208796
         ]
       }
     },
@@ -3972,7 +4047,7 @@
         "type": "Point",
         "coordinates": [
           -149.762543,
-          61.205682
+          61.205681
         ]
       }
     },
@@ -3987,7 +4062,7 @@
         "type": "Point",
         "coordinates": [
           -149.762553,
-          61.202157
+          61.202156
         ]
       }
     },
@@ -4002,7 +4077,7 @@
         "type": "Point",
         "coordinates": [
           -149.763508,
-          61.198892
+          61.198891
         ]
       }
     },
@@ -4024,14 +4099,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "BAXTER & NORTHERN LIGHTS SSW",
+        "name": "BAXTER & NORTHERN LIGHTS",
         "stop_id": "0460",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.763505,
+          -149.763504,
           61.194653
         ]
       }
@@ -4046,8 +4121,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.76357,
-          61.193195
+          -149.763488,
+          61.193201
         ]
       }
     },
@@ -4061,8 +4136,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.763553,
-          61.191351
+          -149.763472,
+          61.191352
         ]
       }
     },
@@ -4076,8 +4151,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.763535,
-          61.18909
+          -149.763469,
+          61.18975
         ]
       }
     },
@@ -4091,8 +4166,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.763187,
-          61.184465
+          -149.763225,
+          61.183855
         ]
       }
     },
@@ -4106,8 +4181,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.76358,
-          61.184355
+          -149.763516,
+          61.18369
         ]
       }
     },
@@ -4152,7 +4227,37 @@
         "type": "Point",
         "coordinates": [
           -149.763267,
-          61.181326
+          61.181325
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BAXTER & HAMPTON SSE",
+        "stop_id": "0490",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.763285,
+          61.185699
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BAXTER & VILLAGE NNE",
+        "stop_id": "0491",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.763296,
+          61.188302
         ]
       }
     },
@@ -4166,8 +4271,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.763308,
-          61.189156
+          -149.763281,
+          61.189606
         ]
       }
     },
@@ -4181,8 +4286,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.763256,
-          61.191238
+          -149.763285,
+          61.191899
         ]
       }
     },
@@ -4196,15 +4301,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.763276,
-          61.193904
+          -149.763275,
+          61.193903
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "BAXTER & NORTHERN LIGHTS NNE",
+        "name": "BAXTER & NORTHERN LIGHTS",
         "stop_id": "0495",
         "stop_code": null
       },
@@ -4226,7 +4331,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.763327,
+          -149.763326,
           61.199555
         ]
       }
@@ -4241,8 +4346,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.762327,
-          61.203002
+          -149.762326,
+          61.203001
         ]
       }
     },
@@ -4256,7 +4361,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.762357,
+          -149.762356,
           61.205915
         ]
       }
@@ -4272,7 +4377,7 @@
         "type": "Point",
         "coordinates": [
           -149.762333,
-          61.208967
+          61.208966
         ]
       }
     },
@@ -4301,7 +4406,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.774827,
+          -149.774826,
           61.209805
         ]
       }
@@ -4316,7 +4421,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.77975,
+          -149.779749,
           61.209853
         ]
       }
@@ -4407,7 +4512,7 @@
         "type": "Point",
         "coordinates": [
           -149.808149,
-          61.213234
+          61.213233
         ]
       }
     },
@@ -4466,7 +4571,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.824578,
+          -149.824577,
           61.215012
         ]
       }
@@ -4474,14 +4579,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "ALASKA REGIONAL HOSPITAL N",
+        "name": "ALASKA REGIONAL HOSPITAL",
         "stop_id": "0517",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.826221,
+          -149.82622,
           61.210218
         ]
       }
@@ -4496,8 +4601,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.831827,
-          61.209447
+          -149.831826,
+          61.209446
         ]
       }
     },
@@ -4526,7 +4631,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.858705,
+          -149.858704,
           61.205965
         ]
       }
@@ -4601,7 +4706,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.858675,
+          -149.858674,
           61.208605
         ]
       }
@@ -4646,7 +4751,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.861645,
+          -149.861644,
           61.21369
         ]
       }
@@ -4676,7 +4781,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.87905,
+          -149.879049,
           61.21454
         ]
       }
@@ -4691,7 +4796,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.879318,
+          -149.879317,
           61.212347
         ]
       }
@@ -4706,8 +4811,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.87933,
-          61.211372
+          -149.879329,
+          61.211371
         ]
       }
     },
@@ -4744,7 +4849,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "13TH AVENUE & GAMBELL ESE",
+        "name": "13TH & GAMBELL",
         "stop_id": "0553",
         "stop_code": null
       },
@@ -4766,8 +4871,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.869659,
-          61.207585
+          -149.869658,
+          61.207584
         ]
       }
     },
@@ -4827,7 +4932,7 @@
         "type": "Point",
         "coordinates": [
           -149.844498,
-          61.207632
+          61.207631
         ]
       }
     },
@@ -4841,8 +4946,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.826421,
-          61.203897
+          -149.82642,
+          61.203896
         ]
       }
     },
@@ -4856,8 +4961,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.82703,
-          61.20255
+          -149.827029,
+          61.202549
         ]
       }
     },
@@ -4916,8 +5021,23 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.838437,
+          -149.838436,
           61.19794
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "PROVIDENCE & PROVIDENCE HOSPITAL",
+        "stop_id": "0575",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.816965,
+          61.189759
         ]
       }
     },
@@ -4932,14 +5052,14 @@
         "type": "Point",
         "coordinates": [
           -149.80895,
-          61.184921
+          61.18492
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "TUDOR & ELMORE ESE",
+        "name": "TUDOR & ELMORE",
         "stop_id": "0580",
         "stop_code": null
       },
@@ -4961,8 +5081,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.785475,
-          61.182845
+          -149.785589,
+          61.182804
         ]
       }
     },
@@ -4976,8 +5096,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.784705,
-          61.187095
+          -149.784815,
+          61.186986
         ]
       }
     },
@@ -4991,7 +5111,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.779711,
+          -149.77971,
           61.189674
         ]
       }
@@ -5006,7 +5126,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.778123,
+          -149.778122,
           61.19048
         ]
       }
@@ -5021,8 +5141,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.7781,
-          61.193094
+          -149.778099,
+          61.193093
         ]
       }
     },
@@ -5036,8 +5156,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.76872,
-          61.195167
+          -149.768719,
+          61.195166
         ]
       }
     },
@@ -5052,7 +5172,7 @@
         "type": "Point",
         "coordinates": [
           -149.77861,
-          61.189863
+          61.189862
         ]
       }
     },
@@ -5066,8 +5186,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.781022,
-          61.189687
+          -149.781021,
+          61.189686
         ]
       }
     },
@@ -5081,8 +5201,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.785815,
-          61.189015
+          -149.785903,
+          61.189171
         ]
       }
     },
@@ -5096,8 +5216,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.785815,
-          61.186571
+          -149.785013,
+          61.18676
         ]
       }
     },
@@ -5111,8 +5231,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.785745,
-          61.183415
+          -149.785674,
+          61.183353
         ]
       }
     },
@@ -5126,7 +5246,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.810213,
+          -149.810212,
           61.188319
         ]
       }
@@ -5201,8 +5321,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.828685,
-          61.2024
+          -149.828684,
+          61.202399
         ]
       }
     },
@@ -5217,7 +5337,7 @@
         "type": "Point",
         "coordinates": [
           -149.826636,
-          61.202995
+          61.202994
         ]
       }
     },
@@ -5247,7 +5367,7 @@
         "type": "Point",
         "coordinates": [
           -149.856665,
-          61.207792
+          61.207791
         ]
       }
     },
@@ -5261,7 +5381,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.85957,
+          -149.859569,
           61.207778
         ]
       }
@@ -5284,7 +5404,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "13TH AVENUE & GAMBELL ENE",
+        "name": "13TH & GAMBELL",
         "stop_id": "0634",
         "stop_code": null
       },
@@ -5336,7 +5456,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.879021,
+          -149.87902,
           61.211585
         ]
       }
@@ -5366,8 +5486,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.87905,
-          61.216944
+          -149.879049,
+          61.216943
         ]
       }
     },
@@ -5396,7 +5516,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.8916,
+          -149.891599,
           61.212813
         ]
       }
@@ -5426,7 +5546,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.89153,
+          -149.891529,
           61.208295
         ]
       }
@@ -5441,8 +5561,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.89349,
-          61.205257
+          -149.893489,
+          61.205256
         ]
       }
     },
@@ -5456,7 +5576,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.897905,
+          -149.897904,
           61.203142
         ]
       }
@@ -5486,8 +5606,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.89808,
-          61.198122
+          -149.898079,
+          61.198121
         ]
       }
     },
@@ -5509,14 +5629,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "ARCTIC & BENSON NNW",
+        "name": "ARCTIC & BENSON",
         "stop_id": "0661",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.898115,
+          -149.898114,
           61.194511
         ]
       }
@@ -5532,7 +5652,7 @@
         "type": "Point",
         "coordinates": [
           -149.898026,
-          61.192337
+          61.192336
         ]
       }
     },
@@ -5547,7 +5667,7 @@
         "type": "Point",
         "coordinates": [
           -149.898097,
-          61.188981
+          61.18898
         ]
       }
     },
@@ -5561,8 +5681,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.898118,
-          61.187569
+          -149.898117,
+          61.187568
         ]
       }
     },
@@ -5576,8 +5696,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.898122,
-          61.186477
+          -149.898121,
+          61.186476
         ]
       }
     },
@@ -5591,7 +5711,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.898042,
+          -149.898041,
           61.183793
         ]
       }
@@ -5607,7 +5727,7 @@
         "type": "Point",
         "coordinates": [
           -149.898123,
-          61.179537
+          61.179536
         ]
       }
     },
@@ -5621,7 +5741,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.8981,
+          -149.898099,
           61.175565
         ]
       }
@@ -5629,7 +5749,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "ARCTIC & INTL AIRPORT SSW",
+        "name": "ARCTIC & INT'L AIRPORT RD",
         "stop_id": "0670",
         "stop_code": null
       },
@@ -5652,7 +5772,22 @@
         "type": "Point",
         "coordinates": [
           -149.898171,
-          61.170978
+          61.170977
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "ARCTIC & 46TH AVENUE SSW",
+        "stop_id": "0673",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.898034,
+          61.17853
         ]
       }
     },
@@ -5696,7 +5831,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.892282,
+          -149.892281,
           61.158515
         ]
       }
@@ -5711,7 +5846,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.892207,
+          -149.892206,
           61.15679
         ]
       }
@@ -5727,7 +5862,7 @@
         "type": "Point",
         "coordinates": [
           -149.892203,
-          61.154042
+          61.154041
         ]
       }
     },
@@ -5756,8 +5891,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.892265,
-          61.148917
+          -149.892264,
+          61.148916
         ]
       }
     },
@@ -5771,7 +5906,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.880355,
+          -149.880354,
           61.144903
         ]
       }
@@ -5786,7 +5921,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.890697,
+          -149.890696,
           61.144463
         ]
       }
@@ -5802,7 +5937,7 @@
         "type": "Point",
         "coordinates": [
           -149.885168,
-          61.144557
+          61.144556
         ]
       }
     },
@@ -5816,7 +5951,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.877425,
+          -149.877424,
           61.144568
         ]
       }
@@ -5861,8 +5996,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.89187,
-          61.152377
+          -149.891869,
+          61.152376
         ]
       }
     },
@@ -5877,7 +6012,7 @@
         "type": "Point",
         "coordinates": [
           -149.891903,
-          61.154052
+          61.154051
         ]
       }
     },
@@ -5891,7 +6026,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.891935,
+          -149.891934,
           61.155593
         ]
       }
@@ -5906,7 +6041,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.891925,
+          -149.891924,
           61.15754
         ]
       }
@@ -5921,7 +6056,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.891887,
+          -149.891886,
           61.159903
         ]
       }
@@ -5951,7 +6086,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.897784,
+          -149.897783,
           61.168739
         ]
       }
@@ -5967,21 +6102,21 @@
         "type": "Point",
         "coordinates": [
           -149.897832,
-          61.171563
+          61.171562
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "ARCTIC & INTL AIRPORT NNE",
+        "name": "ARCTIC & INT'L AIRPORT RD",
         "stop_id": "0706",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.89772,
+          -149.897719,
           61.174505
         ]
       }
@@ -5996,7 +6131,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.897742,
+          -149.897741,
           61.177043
         ]
       }
@@ -6026,8 +6161,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.897723,
-          61.181137
+          -149.897722,
+          61.181136
         ]
       }
     },
@@ -6056,7 +6191,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.897827,
+          -149.897826,
           61.187186
         ]
       }
@@ -6072,7 +6207,7 @@
         "type": "Point",
         "coordinates": [
           -149.897778,
-          61.190028
+          61.190027
         ]
       }
     },
@@ -6094,14 +6229,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "ARCTIC & NORTHERN LIGHTS SSE",
+        "name": "ARCTIC & N LIGHTS",
         "stop_id": "0714",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.897775,
+          -149.897774,
           61.195036
         ]
       }
@@ -6116,7 +6251,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.897901,
+          -149.8979,
           61.196037
         ]
       }
@@ -6131,7 +6266,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.897712,
+          -149.897711,
           61.199038
         ]
       }
@@ -6147,7 +6282,7 @@
         "type": "Point",
         "coordinates": [
           -149.897705,
-          61.201402
+          61.201401
         ]
       }
     },
@@ -6162,7 +6297,7 @@
         "type": "Point",
         "coordinates": [
           -149.897681,
-          61.203273
+          61.203272
         ]
       }
     },
@@ -6191,7 +6326,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.891335,
+          -149.891334,
           61.211014
         ]
       }
@@ -6207,7 +6342,7 @@
         "type": "Point",
         "coordinates": [
           -149.891319,
-          61.212946
+          61.212945
         ]
       }
     },
@@ -6236,8 +6371,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.876864,
-          61.216528
+          -149.876863,
+          61.216527
         ]
       }
     },
@@ -6281,7 +6416,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.857282,
+          -149.857281,
           61.217467
         ]
       }
@@ -6296,8 +6431,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.808594,
-          61.215922
+          -149.808593,
+          61.215921
         ]
       }
     },
@@ -6311,7 +6446,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.807277,
+          -149.807276,
           61.215895
         ]
       }
@@ -6326,8 +6461,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.805239,
-          61.215889
+          -149.805238,
+          61.215888
         ]
       }
     },
@@ -6341,7 +6476,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.804512,
+          -149.804511,
           61.216175
         ]
       }
@@ -6386,8 +6521,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.794197,
-          61.218667
+          -149.794196,
+          61.218666
         ]
       }
     },
@@ -6416,8 +6551,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.788401,
-          61.220211
+          -149.7884,
+          61.22021
         ]
       }
     },
@@ -6431,23 +6566,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.78423,
+          -149.784229,
           61.220518
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "BONIFACE & 4TH AVENUE SSW",
-        "stop_id": "3716",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.778706,
-          61.218398
         ]
       }
     },
@@ -6476,7 +6596,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.755917,
+          -149.755916,
           61.218403
         ]
       }
@@ -6514,14 +6634,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "OKLAHOMA ST & BOUNDARY SSW",
+        "name": "OKLAHOMA & BOUNDARY",
         "stop_id": "0773",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.744947,
+          -149.744946,
           61.223826
         ]
       }
@@ -6551,8 +6671,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.744865,
-          61.220232
+          -149.744864,
+          61.220231
         ]
       }
     },
@@ -6566,7 +6686,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.744807,
+          -149.744806,
           61.218842
         ]
       }
@@ -6597,7 +6717,7 @@
         "type": "Point",
         "coordinates": [
           -149.741557,
-          61.216819
+          61.216818
         ]
       }
     },
@@ -6611,7 +6731,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.736802,
+          -149.736801,
           61.216952
         ]
       }
@@ -6626,8 +6746,23 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.734388,
+          -149.734387,
           61.21691
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BOUNDARY & TURPIN WSW",
+        "stop_id": "0782",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.756568,
+          61.222814
         ]
       }
     },
@@ -6641,8 +6776,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.729015,
-          61.222341
+          -149.729014,
+          61.22234
         ]
       }
     },
@@ -6656,7 +6791,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.723425,
+          -149.723424,
           61.222343
         ]
       }
@@ -6672,7 +6807,7 @@
         "type": "Point",
         "coordinates": [
           -149.718922,
-          61.22234
+          61.222339
         ]
       }
     },
@@ -6688,6 +6823,21 @@
         "coordinates": [
           -149.717454,
           61.222638
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "CENTENNIAL VILLAGE",
+        "stop_id": "0788",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.714437,
+          61.225349
         ]
       }
     },
@@ -6717,7 +6867,7 @@
         "type": "Point",
         "coordinates": [
           -149.724119,
-          61.222401
+          61.2224
         ]
       }
     },
@@ -6732,7 +6882,7 @@
         "type": "Point",
         "coordinates": [
           -149.728986,
-          61.222441
+          61.22244
         ]
       }
     },
@@ -6747,7 +6897,7 @@
         "type": "Point",
         "coordinates": [
           -149.733744,
-          61.221014
+          61.221013
         ]
       }
     },
@@ -6761,7 +6911,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.733782,
+          -149.733781,
           61.218911
         ]
       }
@@ -6837,7 +6987,7 @@
         "type": "Point",
         "coordinates": [
           -149.744689,
-          61.218955
+          61.218954
         ]
       }
     },
@@ -6851,8 +7001,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.744663,
-          61.220716
+          -149.744662,
+          61.220715
         ]
       }
     },
@@ -6867,14 +7017,14 @@
         "type": "Point",
         "coordinates": [
           -149.74468,
-          61.222618
+          61.222617
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "OKLAHOMA ST & BOUNDARY SSE",
+        "name": "OKLAHOMA & BOUNDARY",
         "stop_id": "0802",
         "stop_code": null
       },
@@ -6882,7 +7032,7 @@
         "type": "Point",
         "coordinates": [
           -149.744681,
-          61.223968
+          61.223967
         ]
       }
     },
@@ -6897,7 +7047,7 @@
         "type": "Point",
         "coordinates": [
           -149.748245,
-          61.224227
+          61.224226
         ]
       }
     },
@@ -6912,7 +7062,7 @@
         "type": "Point",
         "coordinates": [
           -149.755472,
-          61.222894
+          61.222893
         ]
       }
     },
@@ -6926,8 +7076,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.756066,
-          61.220286
+          -149.756065,
+          61.220285
         ]
       }
     },
@@ -6941,7 +7091,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.756047,
+          -149.756046,
           61.21831
         ]
       }
@@ -6956,23 +7106,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.75604,
-          61.21685
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "BONIFACE & 4TH AVENUE NNE",
-        "stop_id": "3703",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.778241,
-          61.219071
+          -149.756039,
+          61.216849
         ]
       }
     },
@@ -6986,7 +7121,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.784937,
+          -149.784936,
           61.220623
         ]
       }
@@ -7001,8 +7136,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.788479,
-          61.220268
+          -149.788478,
+          61.220267
         ]
       }
     },
@@ -7031,7 +7166,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.798769,
+          -149.798768,
           61.218808
         ]
       }
@@ -7046,8 +7181,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.804719,
-          61.218552
+          -149.804718,
+          61.218551
         ]
       }
     },
@@ -7061,7 +7196,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.805231,
+          -149.80523,
           61.215987
         ]
       }
@@ -7069,14 +7204,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "PENLAND PKWY & NORTHWAY WNW",
+        "name": "PENLAND & NORTHWAY",
         "stop_id": "0826",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.813418,
+          -149.813417,
           61.215632
         ]
       }
@@ -7091,7 +7226,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.827712,
+          -149.827711,
           61.21778
         ]
       }
@@ -7137,7 +7272,7 @@
         "type": "Point",
         "coordinates": [
           -149.850925,
-          61.217632
+          61.217631
         ]
       }
     },
@@ -7167,7 +7302,7 @@
         "type": "Point",
         "coordinates": [
           -149.871758,
-          61.217632
+          61.217631
         ]
       }
     },
@@ -7182,7 +7317,7 @@
         "type": "Point",
         "coordinates": [
           -149.878198,
-          61.217762
+          61.217761
         ]
       }
     },
@@ -7211,7 +7346,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.883717,
+          -149.883716,
           61.220023
         ]
       }
@@ -7226,7 +7361,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.8726,
+          -149.872599,
           61.231075
         ]
       }
@@ -7234,7 +7369,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "BLUFF & BIRCH ESE",
+        "name": "BLUFF & BIRCH",
         "stop_id": "0853",
         "stop_code": null
       },
@@ -7242,7 +7377,7 @@
         "type": "Point",
         "coordinates": [
           -149.86963,
-          61.230867
+          61.230866
         ]
       }
     },
@@ -7301,7 +7436,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.855157,
+          -149.855156,
           61.229348
         ]
       }
@@ -7316,7 +7451,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.858245,
+          -149.858244,
           61.22828
         ]
       }
@@ -7346,22 +7481,22 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.865295,
-          61.229167
+          -149.865294,
+          61.229166
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "HOLLYWOOD & LOOP ENE",
+        "name": "HOLLYWOOD & LOOP",
         "stop_id": "0861",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.873502,
+          -149.873501,
           61.230295
         ]
       }
@@ -7377,7 +7512,7 @@
         "type": "Point",
         "coordinates": [
           -149.875,
-          61.229647
+          61.229646
         ]
       }
     },
@@ -7391,8 +7526,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.570576,
-          61.322757
+          -149.570575,
+          61.322756
         ]
       }
     },
@@ -7422,7 +7557,7 @@
         "type": "Point",
         "coordinates": [
           -149.914986,
-          61.200949
+          61.200948
         ]
       }
     },
@@ -7437,7 +7572,7 @@
         "type": "Point",
         "coordinates": [
           -149.909789,
-          61.200527
+          61.200526
         ]
       }
     },
@@ -7467,7 +7602,7 @@
         "type": "Point",
         "coordinates": [
           -149.895637,
-          61.198602
+          61.198601
         ]
       }
     },
@@ -7482,7 +7617,7 @@
         "type": "Point",
         "coordinates": [
           -149.889884,
-          61.198386
+          61.198385
         ]
       }
     },
@@ -7496,7 +7631,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.885512,
+          -149.885511,
           61.198193
         ]
       }
@@ -7511,7 +7646,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.881372,
+          -149.881371,
           61.198061
         ]
       }
@@ -7564,7 +7699,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "DENALI & BENSON SSW",
+        "name": "DENALI & BENSON",
         "stop_id": "0968",
         "stop_code": null
       },
@@ -7572,7 +7707,7 @@
         "type": "Point",
         "coordinates": [
           -149.876861,
-          61.192889
+          61.192888
         ]
       }
     },
@@ -7587,7 +7722,7 @@
         "type": "Point",
         "coordinates": [
           -149.876846,
-          61.190084
+          61.190083
         ]
       }
     },
@@ -7601,7 +7736,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.876879,
+          -149.876878,
           61.187503
         ]
       }
@@ -7617,7 +7752,7 @@
         "type": "Point",
         "coordinates": [
           -149.868383,
-          61.184303
+          61.184302
         ]
       }
     },
@@ -7639,7 +7774,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "OLD SEWARD & TUDOR SSW",
+        "name": "OLD SEWARD & TUDOR",
         "stop_id": "0974",
         "stop_code": null
       },
@@ -7647,7 +7782,7 @@
         "type": "Point",
         "coordinates": [
           -149.868336,
-          61.1796
+          61.179599
         ]
       }
     },
@@ -7662,7 +7797,7 @@
         "type": "Point",
         "coordinates": [
           -149.868346,
-          61.177351
+          61.17735
         ]
       }
     },
@@ -7691,8 +7826,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.868398,
-          61.173145
+          -149.868366,
+          61.173123
         ]
       }
     },
@@ -7706,8 +7841,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.868358,
-          61.170415
+          -149.868342,
+          61.170439
         ]
       }
     },
@@ -7721,8 +7856,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.868305,
-          61.166935
+          -149.868251,
+          61.166635
         ]
       }
     },
@@ -7751,7 +7886,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.864349,
+          -149.864348,
           61.158547
         ]
       }
@@ -7782,7 +7917,7 @@
         "type": "Point",
         "coordinates": [
           -149.864309,
-          61.154101
+          61.1541
         ]
       }
     },
@@ -7797,7 +7932,7 @@
         "type": "Point",
         "coordinates": [
           -149.864289,
-          61.148593
+          61.148592
         ]
       }
     },
@@ -7826,8 +7961,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.870387,
-          61.144547
+          -149.870386,
+          61.144546
         ]
       }
     },
@@ -7841,8 +7976,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.864385,
-          61.144021
+          -149.864384,
+          61.14402
         ]
       }
     },
@@ -7856,8 +7991,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.876117,
-          61.115878
+          -149.876116,
+          61.115877
         ]
       }
     },
@@ -7901,7 +8036,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.878853,
+          -149.878852,
           61.105128
         ]
       }
@@ -7917,7 +8052,7 @@
         "type": "Point",
         "coordinates": [
           -149.877568,
-          61.103517
+          61.103516
         ]
       }
     },
@@ -7932,7 +8067,7 @@
         "type": "Point",
         "coordinates": [
           -149.874136,
-          61.102743
+          61.102742
         ]
       }
     },
@@ -7947,7 +8082,7 @@
         "type": "Point",
         "coordinates": [
           -149.869463,
-          61.101672
+          61.101671
         ]
       }
     },
@@ -7961,7 +8096,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.865512,
+          -149.865511,
           61.101188
         ]
       }
@@ -7977,7 +8112,7 @@
         "type": "Point",
         "coordinates": [
           -149.862186,
-          61.101348
+          61.101347
         ]
       }
     },
@@ -8006,7 +8141,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.854221,
+          -149.85422,
           61.099553
         ]
       }
@@ -8036,8 +8171,23 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.855327,
-          61.102463
+          -149.855326,
+          61.102462
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD SEWARD & BRANDON NNE",
+        "stop_id": "1013",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.857455,
+          61.104095
         ]
       }
     },
@@ -8051,7 +8201,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.862899,
+          -149.862898,
           61.107985
         ]
       }
@@ -8068,6 +8218,36 @@
         "coordinates": [
           -149.859913,
           61.108557
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "HUFFMAN BUSINESS PARK",
+        "stop_id": "1017",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.857457,
+          61.110207
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD SEWARD & BRANDON NNW",
+        "stop_id": "1020",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.857746,
+          61.103929
         ]
       }
     },
@@ -8096,8 +8276,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.853326,
-          61.100769
+          -149.853325,
+          61.100768
         ]
       }
     },
@@ -8126,8 +8306,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.855782,
-          61.099653
+          -149.855781,
+          61.099652
         ]
       }
     },
@@ -8141,8 +8321,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.860256,
-          61.101468
+          -149.860255,
+          61.101467
         ]
       }
     },
@@ -8157,7 +8337,7 @@
         "type": "Point",
         "coordinates": [
           -149.86372,
-          61.101443
+          61.101442
         ]
       }
     },
@@ -8186,7 +8366,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.873563,
+          -149.873562,
           61.102618
         ]
       }
@@ -8201,7 +8381,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.878104,
+          -149.878103,
           61.103758
         ]
       }
@@ -8216,8 +8396,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.878611,
-          61.105753
+          -149.87861,
+          61.105752
         ]
       }
     },
@@ -8231,7 +8411,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.878633,
+          -149.878632,
           61.109876
         ]
       }
@@ -8246,7 +8426,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.878671,
+          -149.87867,
           61.114024
         ]
       }
@@ -8292,7 +8472,7 @@
         "type": "Point",
         "coordinates": [
           -149.863857,
-          61.153299
+          61.153298
         ]
       }
     },
@@ -8306,7 +8486,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.863817,
+          -149.863816,
           61.154681
         ]
       }
@@ -8322,7 +8502,7 @@
         "type": "Point",
         "coordinates": [
           -149.863844,
-          61.158178
+          61.158177
         ]
       }
     },
@@ -8336,8 +8516,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.863878,
-          61.160631
+          -149.863877,
+          61.16063
         ]
       }
     },
@@ -8351,8 +8531,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.866873,
-          61.165487
+          -149.866872,
+          61.165486
         ]
       }
     },
@@ -8366,15 +8546,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.867845,
-          61.170395
+          -149.867829,
+          61.170594
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "OLD SEWARD & INTL AIRPORT NNE",
+        "name": "OLD SEWARD & INTL ARPT RD NNE",
         "stop_id": "1053",
         "stop_code": null
       },
@@ -8396,7 +8576,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.867843,
+          -149.867842,
           61.17697
         ]
       }
@@ -8426,8 +8606,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.867938,
-          61.181563
+          -149.867937,
+          61.181562
         ]
       }
     },
@@ -8441,8 +8621,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.869271,
-          61.184568
+          -149.86927,
+          61.184567
         ]
       }
     },
@@ -8531,7 +8711,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.877691,
+          -149.87769,
           61.198097
         ]
       }
@@ -8592,7 +8772,7 @@
         "type": "Point",
         "coordinates": [
           -149.90745,
-          61.200246
+          61.200245
         ]
       }
     },
@@ -8629,6 +8809,21 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "MULDOON & DEBARR WEST",
+        "stop_id": "1084",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.733821,
+          61.209295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "NORTHERN LIGHTS & MULDOON WNW",
         "stop_id": "1089",
         "stop_code": null
@@ -8636,7 +8831,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.736429,
+          -149.736428,
           61.195397
         ]
       }
@@ -8651,8 +8846,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.816942,
-          61.199012
+          -149.816941,
+          61.199011
         ]
       }
     },
@@ -8666,7 +8861,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.857073,
+          -149.857072,
           61.188141
         ]
       }
@@ -8696,8 +8891,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.869263,
-          61.188182
+          -149.869262,
+          61.188181
         ]
       }
     },
@@ -8711,7 +8906,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.88404,
+          -149.884039,
           61.188138
         ]
       }
@@ -8742,7 +8937,7 @@
         "type": "Point",
         "coordinates": [
           -149.891107,
-          61.18818
+          61.188179
         ]
       }
     },
@@ -8786,7 +8981,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.905879,
+          -149.905878,
           61.188126
         ]
       }
@@ -8816,8 +9011,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.913367,
-          61.186112
+          -149.913366,
+          61.186111
         ]
       }
     },
@@ -8846,7 +9041,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.915071,
+          -149.91507,
           61.18088
         ]
       }
@@ -8876,8 +9071,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.919521,
-          61.178503
+          -149.91952,
+          61.178502
         ]
       }
     },
@@ -8891,8 +9086,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.919421,
-          61.177444
+          -149.91942,
+          61.177443
         ]
       }
     },
@@ -8906,7 +9101,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.923207,
+          -149.923206,
           61.177265
         ]
       }
@@ -8921,8 +9116,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.9274,
-          61.177282
+          -149.927399,
+          61.177281
         ]
       }
     },
@@ -8951,7 +9146,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.927759,
+          -149.927758,
           61.182052
         ]
       }
@@ -8966,7 +9161,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.929105,
+          -149.929104,
           61.18292
         ]
       }
@@ -8981,8 +9176,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.933222,
-          61.182076
+          -149.933221,
+          61.182075
         ]
       }
     },
@@ -9011,8 +9206,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.9382,
-          61.180332
+          -149.938199,
+          61.180331
         ]
       }
     },
@@ -9026,8 +9221,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.942755,
-          61.181422
+          -149.942754,
+          61.181421
         ]
       }
     },
@@ -9042,7 +9237,7 @@
         "type": "Point",
         "coordinates": [
           -149.942733,
-          61.183377
+          61.183376
         ]
       }
     },
@@ -9071,7 +9266,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.943501,
+          -149.9435,
           61.189135
         ]
       }
@@ -9101,8 +9296,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.953659,
-          61.190001
+          -149.953658,
+          61.19
         ]
       }
     },
@@ -9116,8 +9311,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.957916,
-          61.190241
+          -149.957915,
+          61.19024
         ]
       }
     },
@@ -9191,8 +9386,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.941278,
-          61.195272
+          -149.941277,
+          61.195271
         ]
       }
     },
@@ -9206,7 +9401,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.933935,
+          -149.933934,
           61.195265
         ]
       }
@@ -9222,7 +9417,7 @@
         "type": "Point",
         "coordinates": [
           -149.92689,
-          61.195157
+          61.195156
         ]
       }
     },
@@ -9236,7 +9431,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.917854,
+          -149.917853,
           61.193762
         ]
       }
@@ -9266,7 +9461,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.89948,
+          -149.899479,
           61.208166
         ]
       }
@@ -9281,7 +9476,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.899466,
+          -149.899465,
           61.20989
         ]
       }
@@ -9297,7 +9492,7 @@
         "type": "Point",
         "coordinates": [
           -149.899458,
-          61.213314
+          61.213313
         ]
       }
     },
@@ -9327,7 +9522,7 @@
         "type": "Point",
         "coordinates": [
           -149.903807,
-          61.213312
+          61.213311
         ]
       }
     },
@@ -9357,7 +9552,7 @@
         "type": "Point",
         "coordinates": [
           -149.903821,
-          61.209409
+          61.209408
         ]
       }
     },
@@ -9371,8 +9566,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.913412,
-          61.197062
+          -149.913411,
+          61.197061
         ]
       }
     },
@@ -9386,7 +9581,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.915545,
+          -149.915544,
           61.195355
         ]
       }
@@ -9401,7 +9596,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.92234,
+          -149.922339,
           61.195368
         ]
       }
@@ -9432,7 +9627,7 @@
         "type": "Point",
         "coordinates": [
           -149.936935,
-          61.195522
+          61.195521
         ]
       }
     },
@@ -9477,7 +9672,7 @@
         "type": "Point",
         "coordinates": [
           -149.95592,
-          61.195312
+          61.195311
         ]
       }
     },
@@ -9491,7 +9686,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.957912,
+          -149.957911,
           61.190903
         ]
       }
@@ -9521,8 +9716,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.950962,
-          61.189871
+          -149.950961,
+          61.18987
         ]
       }
     },
@@ -9552,7 +9747,7 @@
         "type": "Point",
         "coordinates": [
           -149.942898,
-          61.188389
+          61.188388
         ]
       }
     },
@@ -9566,7 +9761,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.942907,
+          -149.942906,
           61.18639
         ]
       }
@@ -9581,7 +9776,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.942915,
+          -149.942914,
           61.18265
         ]
       }
@@ -9596,7 +9791,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.942457,
+          -149.942456,
           61.180263
         ]
       }
@@ -9656,7 +9851,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.927882,
+          -149.927881,
           61.179168
         ]
       }
@@ -9671,7 +9866,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.927012,
+          -149.927011,
           61.17712
         ]
       }
@@ -9716,7 +9911,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.919347,
+          -149.919346,
           61.179888
         ]
       }
@@ -9746,8 +9941,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.912906,
-          61.182449
+          -149.912905,
+          61.182448
         ]
       }
     },
@@ -9761,7 +9956,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.912815,
+          -149.912814,
           61.184515
         ]
       }
@@ -9806,8 +10001,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.895912,
-          61.188017
+          -149.895911,
+          61.188016
         ]
       }
     },
@@ -9822,7 +10017,7 @@
         "type": "Point",
         "coordinates": [
           -149.890015,
-          61.187981
+          61.18798
         ]
       }
     },
@@ -9844,6 +10039,21 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "PROVIDENCE & ALUMNI",
+        "stop_id": "1223",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.8169,
+          61.189969
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "NORTHERN LIGHTS & BRAGAW ESE",
         "stop_id": "1228",
         "stop_code": null
@@ -9851,8 +10061,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.806727,
-          61.198717
+          -149.806726,
+          61.198716
         ]
       }
     },
@@ -9867,7 +10077,7 @@
         "type": "Point",
         "coordinates": [
           -149.786908,
-          61.195107
+          61.195106
         ]
       }
     },
@@ -9896,7 +10106,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.775527,
+          -149.775526,
           61.195095
         ]
       }
@@ -9926,7 +10136,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.757335,
+          -149.757334,
           61.195175
         ]
       }
@@ -9957,7 +10167,7 @@
         "type": "Point",
         "coordinates": [
           -149.747078,
-          61.195187
+          61.195186
         ]
       }
     },
@@ -9971,8 +10181,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.741497,
-          61.195212
+          -149.741496,
+          61.195211
         ]
       }
     },
@@ -9987,7 +10197,7 @@
         "type": "Point",
         "coordinates": [
           -149.733247,
-          61.196312
+          61.196311
         ]
       }
     },
@@ -10001,8 +10211,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.883157,
-          61.217302
+          -149.883156,
+          61.217301
         ]
       }
     },
@@ -10031,8 +10241,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.878647,
-          61.218492
+          -149.878646,
+          61.218491
         ]
       }
     },
@@ -10076,7 +10286,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.862052,
+          -149.862051,
           61.218518
         ]
       }
@@ -10091,8 +10301,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.8571,
-          61.219411
+          -149.857099,
+          61.21941
         ]
       }
     },
@@ -10166,8 +10376,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.83126,
-          61.221527
+          -149.831259,
+          61.221526
         ]
       }
     },
@@ -10197,7 +10407,7 @@
         "type": "Point",
         "coordinates": [
           -149.823434,
-          61.224073
+          61.224072
         ]
       }
     },
@@ -10211,8 +10421,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.816917,
-          61.224052
+          -149.816916,
+          61.224051
         ]
       }
     },
@@ -10241,8 +10451,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.808352,
-          61.228222
+          -149.808351,
+          61.228221
         ]
       }
     },
@@ -10272,7 +10482,7 @@
         "type": "Point",
         "coordinates": [
           -149.803793,
-          61.229552
+          61.229551
         ]
       }
     },
@@ -10286,8 +10496,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.798502,
-          61.229557
+          -149.798501,
+          61.229556
         ]
       }
     },
@@ -10302,7 +10512,7 @@
         "type": "Point",
         "coordinates": [
           -149.79732,
-          61.227962
+          61.227961
         ]
       }
     },
@@ -10346,8 +10556,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.791872,
-          61.223557
+          -149.791871,
+          61.223556
         ]
       }
     },
@@ -10361,8 +10571,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.792702,
-          61.221382
+          -149.792701,
+          61.221381
         ]
       }
     },
@@ -10376,8 +10586,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.808196,
-          61.224851
+          -149.808195,
+          61.22485
         ]
       }
     },
@@ -10391,8 +10601,23 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.800905,
+          -149.800904,
           61.218318
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "HOYT & 6TH AVENUE NNW",
+        "stop_id": "1284",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.800843,
+          61.217011
         ]
       }
     },
@@ -10407,7 +10632,7 @@
         "type": "Point",
         "coordinates": [
           -149.800778,
-          61.215097
+          61.215096
         ]
       }
     },
@@ -10437,7 +10662,7 @@
         "type": "Point",
         "coordinates": [
           -149.812688,
-          61.215287
+          61.215286
         ]
       }
     },
@@ -10466,7 +10691,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.811247,
+          -149.811246,
           61.211551
         ]
       }
@@ -10511,8 +10736,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.808577,
-          61.203568
+          -149.808576,
+          61.203567
         ]
       }
     },
@@ -10526,7 +10751,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.808542,
+          -149.808541,
           61.202078
         ]
       }
@@ -10556,8 +10781,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.838425,
-          61.191708
+          -149.838424,
+          61.191707
         ]
       }
     },
@@ -10572,7 +10797,7 @@
         "type": "Point",
         "coordinates": [
           -149.836927,
-          61.187886
+          61.187885
         ]
       }
     },
@@ -10602,7 +10827,7 @@
         "type": "Point",
         "coordinates": [
           -149.825309,
-          61.188503
+          61.188502
         ]
       }
     },
@@ -10618,6 +10843,21 @@
         "coordinates": [
           -149.832517,
           61.188195
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "PROVIDENCE & SPIRIT WSW",
+        "stop_id": "1310",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.824707,
+          61.188344
         ]
       }
     },
@@ -10646,7 +10886,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.816012,
+          -149.816011,
           61.198743
         ]
       }
@@ -10692,7 +10932,7 @@
         "type": "Point",
         "coordinates": [
           -149.807993,
-          61.207003
+          61.207002
         ]
       }
     },
@@ -10736,7 +10976,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.81198,
+          -149.811979,
           61.214623
         ]
       }
@@ -10751,7 +10991,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.812432,
+          -149.812431,
           61.215578
         ]
       }
@@ -10782,7 +11022,7 @@
         "type": "Point",
         "coordinates": [
           -149.800503,
-          61.215352
+          61.215351
         ]
       }
     },
@@ -10842,7 +11082,7 @@
         "type": "Point",
         "coordinates": [
           -149.791543,
-          61.223632
+          61.223631
         ]
       }
     },
@@ -10858,6 +11098,21 @@
         "coordinates": [
           -149.794511,
           61.226337
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "LANE & MOUNTAIN VIEW NNE",
+        "stop_id": "1333",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.797055,
+          61.226681
         ]
       }
     },
@@ -10901,7 +11156,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.804127,
+          -149.804126,
           61.22966
         ]
       }
@@ -10931,7 +11186,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.808595,
+          -149.808594,
           61.229065
         ]
       }
@@ -10946,7 +11201,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.808537,
+          -149.808536,
           61.227228
         ]
       }
@@ -10976,8 +11231,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.810072,
-          61.224232
+          -149.810071,
+          61.224231
         ]
       }
     },
@@ -10991,7 +11246,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.812987,
+          -149.812986,
           61.224248
         ]
       }
@@ -11006,7 +11261,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.818149,
+          -149.818148,
           61.224239
         ]
       }
@@ -11021,7 +11276,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.824119,
+          -149.824118,
           61.224224
         ]
       }
@@ -11036,7 +11291,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.829955,
+          -149.829954,
           61.222583
         ]
       }
@@ -11066,7 +11321,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.83379,
+          -149.833789,
           61.220305
         ]
       }
@@ -11081,7 +11336,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.842287,
+          -149.842286,
           61.2196
         ]
       }
@@ -11096,7 +11351,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.850442,
+          -149.850441,
           61.2194
         ]
       }
@@ -11111,8 +11366,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.855362,
-          61.219542
+          -149.855361,
+          61.219541
         ]
       }
     },
@@ -11126,7 +11381,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.860538,
+          -149.860537,
           61.21961
         ]
       }
@@ -11141,7 +11396,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.863555,
+          -149.863554,
           61.219595
         ]
       }
@@ -11156,7 +11411,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.8719,
+          -149.871899,
           61.219595
         ]
       }
@@ -11186,7 +11441,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.879116,
+          -149.879115,
           61.219558
         ]
       }
@@ -11202,7 +11457,7 @@
         "type": "Point",
         "coordinates": [
           -149.881998,
-          61.219607
+          61.219606
         ]
       }
     },
@@ -11216,8 +11471,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.887517,
-          61.218042
+          -149.887516,
+          61.218041
         ]
       }
     },
@@ -11231,8 +11486,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.898591,
-          61.217639
+          -149.89859,
+          61.217638
         ]
       }
     },
@@ -11247,7 +11502,7 @@
         "type": "Point",
         "coordinates": [
           -149.900784,
-          61.216499
+          61.216498
         ]
       }
     },
@@ -11292,7 +11547,7 @@
         "type": "Point",
         "coordinates": [
           -149.462411,
-          61.398444
+          61.398443
         ]
       }
     },
@@ -11306,8 +11561,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.455023,
-          61.405658
+          -149.455022,
+          61.405657
         ]
       }
     },
@@ -11329,6 +11584,21 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "OLD GLENN & LAKE HILL SSW",
+        "stop_id": "1405",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.428552,
+          61.420971
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "OLD GLENN & CLOVERLEAF SSW",
         "stop_id": "1407",
         "stop_code": null
@@ -11338,6 +11608,21 @@
         "coordinates": [
           -149.435393,
           61.416975
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VOYLES & BILL STEPHENS",
+        "stop_id": "1411",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.443386,
+          61.410602
         ]
       }
     },
@@ -11381,8 +11666,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.574745,
-          61.326396
+          -149.574744,
+          61.326395
         ]
       }
     },
@@ -11396,7 +11681,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.838728,
+          -149.838727,
           61.217658
         ]
       }
@@ -11413,6 +11698,21 @@
         "coordinates": [
           -149.846821,
           61.217645
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "CITY HALL",
+        "stop_id": "1450",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.894746,
+          61.216565
         ]
       }
     },
@@ -11441,8 +11741,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.862329,
-          61.107305
+          -149.862328,
+          61.107304
         ]
       }
     },
@@ -11456,8 +11756,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.863561,
-          61.116379
+          -149.86356,
+          61.116378
         ]
       }
     },
@@ -11472,7 +11772,7 @@
         "type": "Point",
         "coordinates": [
           -149.863556,
-          61.120333
+          61.120332
         ]
       }
     },
@@ -11487,7 +11787,7 @@
         "type": "Point",
         "coordinates": [
           -149.863707,
-          61.135037
+          61.135036
         ]
       }
     },
@@ -11517,7 +11817,7 @@
         "type": "Point",
         "coordinates": [
           -149.866872,
-          61.141181
+          61.14118
         ]
       }
     },
@@ -11531,7 +11831,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.864032,
+          -149.864031,
           61.120331
         ]
       }
@@ -11546,7 +11846,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.864136,
+          -149.864135,
           61.11654
         ]
       }
@@ -11561,8 +11861,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.861393,
-          61.10902
+          -149.861392,
+          61.109019
         ]
       }
     },
@@ -11576,7 +11876,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.835388,
+          -149.835387,
           61.13764
         ]
       }
@@ -11621,7 +11921,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.897789,
+          -149.897788,
           61.216522
         ]
       }
@@ -11644,6 +11944,21 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "5TH AVENUE & REEVE BLVD WSW",
+        "stop_id": "1746",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.837435,
+          61.21739
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "5TH AVENUE & AIRPORT HGTS ESE",
         "stop_id": "1747",
         "stop_code": null
@@ -11651,8 +11966,23 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.82403,
+          -149.824029,
           61.2174
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BOUNDARY & BONIFACE",
+        "stop_id": "1755",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.777365,
+          61.223304
         ]
       }
     },
@@ -11726,8 +12056,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.563042,
-          61.33671
+          -149.563041,
+          61.336709
         ]
       }
     },
@@ -11741,8 +12071,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.551732,
-          61.346078
+          -149.551731,
+          61.346077
         ]
       }
     },
@@ -11758,6 +12088,21 @@
         "coordinates": [
           -149.543788,
           61.351002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD GLENN & DON NNE",
+        "stop_id": "1777",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.538813,
+          61.353265
         ]
       }
     },
@@ -11787,7 +12132,7 @@
         "type": "Point",
         "coordinates": [
           -149.523346,
-          61.359022
+          61.359021
         ]
       }
     },
@@ -11801,8 +12146,23 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.516696,
+          -149.516695,
           61.363187
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NORTH BIRCHWOOD PARK & RIDE",
+        "stop_id": "1806",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.468106,
+          61.402892
         ]
       }
     },
@@ -11816,8 +12176,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.44957,
-          61.407674
+          -149.449569,
+          61.407673
         ]
       }
     },
@@ -11839,6 +12199,36 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "OLD GLENN & W LAKE RIDGE SSW",
+        "stop_id": "1821",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.5504,
+          61.34716
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD GLENN & W LAKE RIDGE NNE",
+        "stop_id": "1822",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.549797,
+          61.34727
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "BIRCHWOOD LP N & CHUGK ELEM EAST",
         "stop_id": "1824",
         "stop_code": null
@@ -11847,7 +12237,7 @@
         "type": "Point",
         "coordinates": [
           -149.46604,
-          61.399927
+          61.399926
         ]
       }
     },
@@ -11861,8 +12251,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.516814,
-          61.36347
+          -149.516813,
+          61.363469
         ]
       }
     },
@@ -11899,7 +12289,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "OLD GLENN & ER ACCESS RD N SSW",
+        "name": "OLD GLENN & N ER ACCESS RD SSW",
         "stop_id": "1857",
         "stop_code": null
       },
@@ -11921,7 +12311,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.563715,
+          -149.563714,
           61.336053
         ]
       }
@@ -11952,7 +12342,7 @@
         "type": "Point",
         "coordinates": [
           -149.568114,
-          61.32983
+          61.329829
         ]
       }
     },
@@ -11967,7 +12357,7 @@
         "type": "Point",
         "coordinates": [
           -149.569565,
-          61.329888
+          61.329887
         ]
       }
     },
@@ -11981,8 +12371,23 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.572675,
+          -149.572674,
           61.328675
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "EAGLE RIVER TRANSIT CENTER",
+        "stop_id": "1863",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.573676,
+          61.327765
         ]
       }
     },
@@ -11996,7 +12401,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.733845,
+          -149.733844,
           61.223411
         ]
       }
@@ -12056,7 +12461,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.886757,
+          -149.886756,
           61.183706
         ]
       }
@@ -12071,7 +12476,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.885032,
+          -149.885031,
           61.180571
         ]
       }
@@ -12087,7 +12492,7 @@
         "type": "Point",
         "coordinates": [
           -149.877511,
-          61.180655
+          61.180654
         ]
       }
     },
@@ -12101,8 +12506,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.873753,
-          61.180638
+          -149.873752,
+          61.180637
         ]
       }
     },
@@ -12117,7 +12522,7 @@
         "type": "Point",
         "coordinates": [
           -149.866479,
-          61.180638
+          61.180637
         ]
       }
     },
@@ -12132,7 +12537,7 @@
         "type": "Point",
         "coordinates": [
           -149.854151,
-          61.1807
+          61.180699
         ]
       }
     },
@@ -12161,8 +12566,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.835259,
-          61.180708
+          -149.835258,
+          61.180707
         ]
       }
     },
@@ -12177,7 +12582,7 @@
         "type": "Point",
         "coordinates": [
           -149.824316,
-          61.180725
+          61.180724
         ]
       }
     },
@@ -12191,8 +12596,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.817488,
-          61.18072
+          -149.817487,
+          61.180719
         ]
       }
     },
@@ -12206,7 +12611,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.811722,
+          -149.811721,
           61.180683
         ]
       }
@@ -12222,7 +12627,7 @@
         "type": "Point",
         "coordinates": [
           -149.794075,
-          61.180602
+          61.180601
         ]
       }
     },
@@ -12236,7 +12641,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.785138,
+          -149.785137,
           61.180639
         ]
       }
@@ -12251,7 +12656,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.776901,
+          -149.7769,
           61.180601
         ]
       }
@@ -12266,8 +12671,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.768846,
-          61.180635
+          -149.768845,
+          61.180634
         ]
       }
     },
@@ -12282,7 +12687,7 @@
         "type": "Point",
         "coordinates": [
           -149.761633,
-          61.180655
+          61.180654
         ]
       }
     },
@@ -12297,7 +12702,7 @@
         "type": "Point",
         "coordinates": [
           -149.748246,
-          61.181995
+          61.181994
         ]
       }
     },
@@ -12311,7 +12716,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.74834,
+          -149.748339,
           61.184526
         ]
       }
@@ -12341,8 +12746,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.74232,
-          61.187939
+          -149.742319,
+          61.187938
         ]
       }
     },
@@ -12357,7 +12762,7 @@
         "type": "Point",
         "coordinates": [
           -149.738492,
-          61.187945
+          61.187944
         ]
       }
     },
@@ -12371,8 +12776,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.733222,
-          61.190502
+          -149.733221,
+          61.190501
         ]
       }
     },
@@ -12386,7 +12791,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.733264,
+          -149.733263,
           61.193142
         ]
       }
@@ -12402,7 +12807,7 @@
         "type": "Point",
         "coordinates": [
           -149.733253,
-          61.201072
+          61.201071
         ]
       }
     },
@@ -12416,8 +12821,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.733292,
-          61.202959
+          -149.733291,
+          61.202958
         ]
       }
     },
@@ -12439,6 +12844,21 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "MULDOON & DEBARR EAST",
+        "stop_id": "1951",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.733229,
+          61.210862
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "MULDOON & OLD HARBOR SSE",
         "stop_id": "1952",
         "stop_code": null
@@ -12447,7 +12867,7 @@
         "type": "Point",
         "coordinates": [
           -149.733279,
-          61.213639
+          61.213638
         ]
       }
     },
@@ -12461,8 +12881,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.73326,
-          61.217407
+          -149.733259,
+          61.217406
         ]
       }
     },
@@ -12506,7 +12926,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.733252,
+          -149.733251,
           61.223725
         ]
       }
@@ -12536,7 +12956,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.733721,
+          -149.73372,
           61.213771
         ]
       }
@@ -12581,7 +13001,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.733832,
+          -149.733831,
           61.199705
         ]
       }
@@ -12596,8 +13016,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.733806,
-          61.196509
+          -149.733805,
+          61.196508
         ]
       }
     },
@@ -12611,8 +13031,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.733743,
-          61.194496
+          -149.733742,
+          61.194495
         ]
       }
     },
@@ -12716,8 +13136,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.74863,
-          61.181342
+          -149.748629,
+          61.181341
         ]
       }
     },
@@ -12761,7 +13181,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.781219,
+          -149.781218,
           61.180848
         ]
       }
@@ -12806,7 +13226,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.810174,
+          -149.810173,
           61.180914
         ]
       }
@@ -12821,7 +13241,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.814464,
+          -149.814463,
           61.180915
         ]
       }
@@ -12836,7 +13256,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.819593,
+          -149.819592,
           61.180923
         ]
       }
@@ -12851,8 +13271,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.825768,
-          61.180933
+          -149.825767,
+          61.180932
         ]
       }
     },
@@ -12867,7 +13287,7 @@
         "type": "Point",
         "coordinates": [
           -149.831551,
-          61.180925
+          61.180924
         ]
       }
     },
@@ -12882,7 +13302,7 @@
         "type": "Point",
         "coordinates": [
           -149.835398,
-          61.180995
+          61.180994
         ]
       }
     },
@@ -12927,7 +13347,7 @@
         "type": "Point",
         "coordinates": [
           -149.850799,
-          61.180943
+          61.180942
         ]
       }
     },
@@ -12941,8 +13361,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.854788,
-          61.180888
+          -149.854787,
+          61.180887
         ]
       }
     },
@@ -12957,7 +13377,7 @@
         "type": "Point",
         "coordinates": [
           -149.865246,
-          61.1809
+          61.180899
         ]
       }
     },
@@ -12971,8 +13391,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.869338,
-          61.180905
+          -149.869337,
+          61.180904
         ]
       }
     },
@@ -13017,7 +13437,7 @@
         "type": "Point",
         "coordinates": [
           -149.886195,
-          61.181415
+          61.181414
         ]
       }
     },
@@ -13032,7 +13452,7 @@
         "type": "Point",
         "coordinates": [
           -149.885745,
-          61.185035
+          61.185034
         ]
       }
     },
@@ -13046,7 +13466,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.883777,
+          -149.883776,
           61.186716
         ]
       }
@@ -13063,6 +13483,21 @@
         "coordinates": [
           -149.882915,
           61.190573
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "DOWNTOWN TRANSIT CENTER",
+        "stop_id": "2051",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.896764,
+          61.216552
         ]
       }
     },
@@ -13107,7 +13542,7 @@
         "type": "Point",
         "coordinates": [
           -149.847794,
-          61.140884
+          61.140883
         ]
       }
     },
@@ -13121,8 +13556,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.845374,
-          61.138287
+          -149.845373,
+          61.138286
         ]
       }
     },
@@ -13166,8 +13601,218 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.847276,
-          61.14172
+          -149.847275,
+          61.141719
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BOUNDARY & NEWELL ESE",
+        "stop_id": "2185",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.770654,
+          61.224126
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD INTL AIR & 4100 S",
+        "stop_id": "2191",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.964418,
+          61.174125
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD INTL AIR & 3850 S",
+        "stop_id": "2192",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.956998,
+          61.174123
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "AIRCRAFT & OLD INTL ARPT NNW",
+        "stop_id": "2193",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.968249,
+          61.174831
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "19TH AVENUE & CHUGACH MANOR",
+        "stop_id": "2195",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.858078,
+          61.20346
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD GLENN & DEL'S LANE SSE",
+        "stop_id": "2199",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.518713,
+          61.361072
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD GLENN & MONASTERY SSW",
+        "stop_id": "2200",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.519225,
+          61.361052
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD GLENN & SAMPSON SSW",
+        "stop_id": "2201",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.431659,
+          61.419082
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NORTHERN LIGHTS & COPE WNW",
+        "stop_id": "2202",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.902734,
+          61.195372
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "ARCTIC & DIMOND NNW",
+        "stop_id": "2203",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.892341,
+          61.146526
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "ARCTIC & 36TH AVENUE NNE",
+        "stop_id": "2204",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.897804,
+          61.188517
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "MULDOON & HERITAGE CTR WNW",
+        "stop_id": "2205",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.738035,
+          61.231093
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "MULDOON & ZUCKERT ESE",
+        "stop_id": "2207",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.740357,
+          61.231044
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VA OUTPATIENT CLINIC",
+        "stop_id": "2209",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.743568,
+          61.232413
         ]
       }
     },
@@ -13227,7 +13872,7 @@
         "type": "Point",
         "coordinates": [
           -149.807528,
-          61.183326
+          61.183325
         ]
       }
     },
@@ -13241,8 +13886,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.807175,
-          61.183267
+          -149.807174,
+          61.183266
         ]
       }
     },
@@ -13279,7 +13924,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "DIPLOMACY & ANMC N",
+        "name": "AK NATIVE MED CENTER",
         "stop_id": "3010",
         "stop_code": null
       },
@@ -13287,7 +13932,7 @@
         "type": "Point",
         "coordinates": [
           -149.801485,
-          61.181944
+          61.181943
         ]
       }
     },
@@ -13302,7 +13947,7 @@
         "type": "Point",
         "coordinates": [
           -149.80846,
-          61.184874
+          61.184873
         ]
       }
     },
@@ -13317,7 +13962,7 @@
         "type": "Point",
         "coordinates": [
           -149.717297,
-          61.222857
+          61.222856
         ]
       }
     },
@@ -13331,8 +13976,23 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.837562,
+          -149.837561,
           61.21959
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "AIRPORT SOUTH TERMINAL",
+        "stop_id": "3024",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.979292,
+          61.173144
         ]
       }
     },
@@ -13354,7 +14014,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "INTERNATIONAL ARPT & RR XING WSW",
+        "name": "INTL ARPT RD & RR XING WSW",
         "stop_id": "3033",
         "stop_code": null
       },
@@ -13362,7 +14022,7 @@
         "type": "Point",
         "coordinates": [
           -149.953271,
-          61.174779
+          61.174778
         ]
       }
     },
@@ -13436,7 +14096,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.571321,
+          -149.57132,
           61.320228
         ]
       }
@@ -13444,15 +14104,15 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "OLD SEWARD & 100TH AV NNE",
+        "name": "OLD SEWARD & 100TH AVE NNE",
         "stop_id": "3050",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.863746,
-          61.130876
+          -149.863745,
+          61.130875
         ]
       }
     },
@@ -13467,7 +14127,7 @@
         "type": "Point",
         "coordinates": [
           -149.864378,
-          61.140837
+          61.140836
         ]
       }
     },
@@ -13496,8 +14156,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.967964,
-          61.175154
+          -149.967963,
+          61.175153
         ]
       }
     },
@@ -13511,8 +14171,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.776515,
-          61.2041
+          -149.776557,
+          61.204146
         ]
       }
     },
@@ -13526,8 +14186,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.798885,
-          61.183555
+          -149.798884,
+          61.183554
         ]
       }
     },
@@ -13556,7 +14216,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.94273,
+          -149.942729,
           61.185013
         ]
       }
@@ -13586,7 +14246,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.941505,
+          -149.941504,
           61.179973
         ]
       }
@@ -13617,7 +14277,7 @@
         "type": "Point",
         "coordinates": [
           -149.441857,
-          61.40857
+          61.408569
         ]
       }
     },
@@ -13632,7 +14292,7 @@
         "type": "Point",
         "coordinates": [
           -149.44233,
-          61.408579
+          61.408578
         ]
       }
     },
@@ -13647,7 +14307,7 @@
         "type": "Point",
         "coordinates": [
           -149.782016,
-          61.189669
+          61.189668
         ]
       }
     },
@@ -13661,8 +14321,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.792438,
-          61.219244
+          -149.792437,
+          61.219243
         ]
       }
     },
@@ -13684,22 +14344,22 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "INTERNATIONAL ARPT & AIRCRFT ESE",
+        "name": "INTL ARPT RD & AIRCRAFT ESE",
         "stop_id": "3511",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.966894,
-          61.176544
+          -149.966893,
+          61.176543
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "OLD INTL AIR & JEWEL LAKE NNE",
+        "name": "OLD INTL ARPT & JEWEL LAKE NNE",
         "stop_id": "3514",
         "stop_code": null
       },
@@ -13707,7 +14367,7 @@
         "type": "Point",
         "coordinates": [
           -149.943918,
-          61.173253
+          61.173252
         ]
       }
     },
@@ -13721,7 +14381,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.956885,
+          -149.956884,
           61.17423
         ]
       }
@@ -13736,8 +14396,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.964219,
-          61.174239
+          -149.964218,
+          61.174238
         ]
       }
     },
@@ -13751,7 +14411,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.977945,
+          -149.977944,
           61.177805
         ]
       }
@@ -13781,8 +14441,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.898559,
-          61.213708
+          -149.898558,
+          61.213707
         ]
       }
     },
@@ -13797,7 +14457,22 @@
         "type": "Point",
         "coordinates": [
           -149.894411,
-          61.213682
+          61.213681
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "AK NATIVE MED CENTER - SOUTH",
+        "stop_id": "3528",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.800618,
+          61.18183
         ]
       }
     },
@@ -13827,7 +14502,7 @@
         "type": "Point",
         "coordinates": [
           -149.795793,
-          61.181782
+          61.181781
         ]
       }
     },
@@ -13841,7 +14516,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.85562,
+          -149.855619,
           61.122955
         ]
       }
@@ -13856,7 +14531,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.872375,
+          -149.872374,
           61.115869
         ]
       }
@@ -13872,7 +14547,7 @@
         "type": "Point",
         "coordinates": [
           -149.871358,
-          61.115782
+          61.115781
         ]
       }
     },
@@ -13901,8 +14576,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.921811,
-          61.150991
+          -149.92181,
+          61.15099
         ]
       }
     },
@@ -13917,7 +14592,7 @@
         "type": "Point",
         "coordinates": [
           -149.922138,
-          61.147744
+          61.147743
         ]
       }
     },
@@ -13932,7 +14607,7 @@
         "type": "Point",
         "coordinates": [
           -149.921863,
-          61.148027
+          61.148026
         ]
       }
     },
@@ -13947,7 +14622,7 @@
         "type": "Point",
         "coordinates": [
           -149.922336,
-          61.144904
+          61.144903
         ]
       }
     },
@@ -13961,8 +14636,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.921917,
-          61.14632
+          -149.921916,
+          61.146319
         ]
       }
     },
@@ -13976,7 +14651,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.922129,
+          -149.922128,
           61.142852
         ]
       }
@@ -14006,8 +14681,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.929587,
-          61.140174
+          -149.929586,
+          61.140173
         ]
       }
     },
@@ -14021,7 +14696,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.928452,
+          -149.928451,
           61.14103
         ]
       }
@@ -14051,8 +14726,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.946605,
-          61.166637
+          -149.946604,
+          61.166636
         ]
       }
     },
@@ -14081,8 +14756,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.952057,
-          61.163937
+          -149.952056,
+          61.163936
         ]
       }
     },
@@ -14096,8 +14771,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.952075,
-          61.160922
+          -149.952074,
+          61.160921
         ]
       }
     },
@@ -14112,7 +14787,7 @@
         "type": "Point",
         "coordinates": [
           -149.880981,
-          61.213675
+          61.213674
         ]
       }
     },
@@ -14142,7 +14817,7 @@
         "type": "Point",
         "coordinates": [
           -149.870506,
-          61.20778
+          61.207779
         ]
       }
     },
@@ -14156,7 +14831,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.876486,
+          -149.876485,
           61.207746
         ]
       }
@@ -14172,7 +14847,7 @@
         "type": "Point",
         "coordinates": [
           -149.874438,
-          61.207657
+          61.207656
         ]
       }
     },
@@ -14186,8 +14861,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.879086,
-          61.208604
+          -149.879085,
+          61.208603
         ]
       }
     },
@@ -14201,8 +14876,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.879343,
-          61.208183
+          -149.879342,
+          61.208182
         ]
       }
     },
@@ -14216,7 +14891,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.730932,
+          -149.730931,
           61.224231
         ]
       }
@@ -14232,7 +14907,7 @@
         "type": "Point",
         "coordinates": [
           -149.748226,
-          61.196317
+          61.196316
         ]
       }
     },
@@ -14247,7 +14922,7 @@
         "type": "Point",
         "coordinates": [
           -149.929344,
-          61.138857
+          61.138856
         ]
       }
     },
@@ -14291,8 +14966,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.823258,
-          61.20826
+          -149.823257,
+          61.208259
         ]
       }
     },
@@ -14307,7 +14982,7 @@
         "type": "Point",
         "coordinates": [
           -149.823376,
-          61.20901
+          61.209009
         ]
       }
     },
@@ -14321,7 +14996,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.868897,
+          -149.868896,
           61.211958
         ]
       }
@@ -14381,7 +15056,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.804027,
+          -149.804026,
           61.188561
         ]
       }
@@ -14396,8 +15071,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.805703,
-          61.188355
+          -149.805702,
+          61.188354
         ]
       }
     },
@@ -14428,6 +15103,21 @@
         "coordinates": [
           -149.801917,
           61.18965
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "ALASKA PACIFIC UNIVERSITY",
+        "stop_id": "3574",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.803076,
+          61.191014
         ]
       }
     },
@@ -14486,7 +15176,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.937627,
+          -149.937626,
           61.151985
         ]
       }
@@ -14516,7 +15206,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.936642,
+          -149.936641,
           61.151935
         ]
       }
@@ -14531,8 +15221,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.943862,
-          61.151882
+          -149.943861,
+          61.151881
         ]
       }
     },
@@ -14562,7 +15252,7 @@
         "type": "Point",
         "coordinates": [
           -149.92441,
-          61.151912
+          61.151911
         ]
       }
     },
@@ -14591,8 +15281,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.778605,
-          61.194787
+          -149.778604,
+          61.194786
         ]
       }
     },
@@ -14607,7 +15297,7 @@
         "type": "Point",
         "coordinates": [
           -149.778631,
-          61.192213
+          61.192212
         ]
       }
     },
@@ -14629,14 +15319,14 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "OLD SEWARD & 104TH AV SSW",
+        "name": "OLD SEWARD & 104TH AVE SSW",
         "stop_id": "3588",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.864069,
+          -149.864068,
           61.125889
         ]
       }
@@ -14652,7 +15342,7 @@
         "type": "Point",
         "coordinates": [
           -149.892212,
-          61.160805
+          61.160804
         ]
       }
     },
@@ -14666,8 +15356,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.905757,
-          61.199487
+          -149.905756,
+          61.199486
         ]
       }
     },
@@ -14681,8 +15371,23 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.808549,
+          -149.808548,
           61.20859
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BONIFACE INTERCHANGE",
+        "stop_id": "3594",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.779401,
+          61.225275
         ]
       }
     },
@@ -14696,7 +15401,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.94409,
+          -149.944089,
           61.141218
         ]
       }
@@ -14727,7 +15432,7 @@
         "type": "Point",
         "coordinates": [
           -149.504523,
-          61.374766
+          61.374765
         ]
       }
     },
@@ -14786,7 +15491,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.731982,
+          -149.731981,
           61.222331
         ]
       }
@@ -14801,7 +15506,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.770651,
+          -149.77065,
           61.206001
         ]
       }
@@ -14854,126 +15559,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "HOYT & 6TH AVENUE NNW",
-        "stop_id": "1284",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.800843,
-          61.217011
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & DON NNE",
-        "stop_id": "1777",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.538813,
-          61.353265
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "BOUNDARY & NEWELL ESE",
-        "stop_id": "2185",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.770654,
-          61.224126
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD INTL AIR & 4100 S",
-        "stop_id": "2191",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.964418,
-          61.174125
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD INTL AIR & 3850 S",
-        "stop_id": "2192",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.956998,
-          61.174123
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "AIRCRAFT & OLD INTL ARPT NNW",
-        "stop_id": "2193",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.96825,
-          61.174832
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "19TH AVENUE & CHUGACH MANOR",
-        "stop_id": "2195",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.858078,
-          61.20346
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NORTHERN LIGHTS & COPE WNW",
-        "stop_id": "2202",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.902734,
-          61.195373
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "3RD AVENUE & SITKA ESE",
         "stop_id": "3688",
         "stop_code": null
@@ -14981,8 +15566,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.844865,
-          61.219451
+          -149.844864,
+          61.21945
         ]
       }
     },
@@ -15019,7 +15604,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "INTERNATIONAL ARPT & RUTAN WNW",
+        "name": "INTL ARPT RD & RUTAN WNW",
         "stop_id": "3696",
         "stop_code": null
       },
@@ -15034,306 +15619,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "OLD GLENN & NORTHGATE NNE",
-        "stop_id": "6576",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.559687,
-          61.341018
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & SKYVIEW NNE",
-        "stop_id": "6578",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.463447,
-          61.394692
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "HOMESTEAD & SETTLERS WSW",
-        "stop_id": "6580",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.427872,
-          61.411679
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & DOLLY SSW",
-        "stop_id": "6581",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.438182,
-          61.415053
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & DARBY SSW",
-        "stop_id": "6584",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.524332,
-          61.358638
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & E LAKE RIDGE SSW",
-        "stop_id": "6585",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.539695,
-          61.353141
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & SKYVIEW NNW",
-        "stop_id": "6587",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.463842,
-          61.394589
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & 19000 OLD GLENN WEST",
-        "stop_id": "6588",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.472641,
-          61.39048
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & BENDING BIRCH WNW",
-        "stop_id": "6589",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.481965,
-          61.388271
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & LAUGHLIN SSW",
-        "stop_id": "6590",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.511232,
-          61.368223
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "SETTLERS & CHUGIAK DR SSE",
-        "stop_id": "7012",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.427533,
-          61.415322
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & DEL'S LANE SSE",
-        "stop_id": "2199",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.518714,
-          61.361072
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & MONASTERY SSW",
-        "stop_id": "2200",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.519225,
-          61.361052
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & SAMPSON SSW",
-        "stop_id": "2201",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.431659,
-          61.419082
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "ARCTIC & DIMOND NNW",
-        "stop_id": "2203",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.892342,
-          61.146527
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "ARCTIC & 36TH AVENUE NNE",
-        "stop_id": "2204",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.897804,
-          61.188518
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "LANE & MOUNTAIN VIEW NNE",
-        "stop_id": "1333",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.797055,
-          61.226681
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "MULDOON & ZUCKERT ESE",
-        "stop_id": "2207",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.740357,
-          61.231044
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "JAMESTOWN & RED CEDAR SSW",
-        "stop_id": "0054",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.848113,
-          61.126583
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "BOUNDARY & TURPIN WSW",
-        "stop_id": "0782",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.756569,
-          61.222814
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "CREEKSIDE CTR & CLEARWATER ESE",
         "stop_id": "3699",
         "stop_code": null
@@ -15341,98 +15626,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.737297,
+          -149.737296,
           61.206955
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & LAKE HILL SSW",
-        "stop_id": "1405",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.428552,
-          61.420972
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "ARCTIC & 46TH AVENUE SSW",
-        "stop_id": "0673",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.898034,
-          61.17853
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & W LAKE RIDGE SSW",
-        "stop_id": "1821",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.5504,
-          61.34716
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD GLENN & W LAKE RIDGE NNE",
-        "stop_id": "1822",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.549797,
-          61.34727
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "GAMBELL & 4TH AVENUE SSW",
-        "stop_id": "6593",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.871166,
-          61.218175
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "INGRA & 6TH AVENUE NNE",
-        "stop_id": "6594",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.866742,
-          61.217142
         ]
       }
     },
@@ -15454,90 +15649,15 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "PROVIDENCE & SPIRIT WSW",
-        "stop_id": "1310",
+        "name": "UNIVERSITY DR & ELMORE ENE",
+        "stop_id": "3701",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.824708,
-          61.188344
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "MULDOON & ZUCKERT WNW",
-        "stop_id": "3711",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.74189,
-          61.231259
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "DEBARR & CREEKSIDE CTR WNW",
-        "stop_id": "3710",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.743744,
-          61.209908
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "CAMELOT & LIONHEART ENE",
-        "stop_id": "3713",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.780112,
-          61.220401
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "TURPIN & 9TH AVENUE SSW",
-        "stop_id": "3707",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.756038,
-          61.213712
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "TURPIN & 12TH AVENUE SSW",
-        "stop_id": "3708",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.756105,
-          61.210533
+          -149.8101,
+          61.188761
         ]
       }
     },
@@ -15553,6 +15673,21 @@
         "coordinates": [
           -149.778158,
           61.216741
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BONIFACE & 4TH AVENUE NNE",
+        "stop_id": "3703",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.778241,
+          61.219071
         ]
       }
     },
@@ -15589,6 +15724,36 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "TURPIN & 9TH AVENUE SSW",
+        "stop_id": "3707",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.756038,
+          61.213712
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "TURPIN & 12TH AVENUE SSW",
+        "stop_id": "3708",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.756105,
+          61.210533
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "TURPIN & 9TH AVENUE NNE",
         "stop_id": "3709",
         "stop_code": null
@@ -15598,6 +15763,36 @@
         "coordinates": [
           -149.755794,
           61.214112
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "DEBARR & CREEKSIDE CTR WNW",
+        "stop_id": "3710",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.743744,
+          61.209908
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "MULDOON & ZUCKERT WNW",
+        "stop_id": "3711",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.74189,
+          61.231259
         ]
       }
     },
@@ -15619,15 +15814,30 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "UNIVERSITY DR & ELMORE ENE",
-        "stop_id": "3701",
+        "name": "CAMELOT & LIONHEART ENE",
+        "stop_id": "3713",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.8101,
-          61.188761
+          -149.780112,
+          61.220401
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BONIFACE & 4TH AVENUE SSW",
+        "stop_id": "3716",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.778706,
+          61.218398
         ]
       }
     },
@@ -15709,375 +15919,30 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "6TH AVENUE & C STREET ESE",
-        "stop_id": "0002",
+        "name": "OLD GLENN & NORTHGATE NNE",
+        "stop_id": "6576",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.886091,
-          61.216517
+          -149.559687,
+          61.341017
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "DIMOND TRANSIT CENTER",
-        "stop_id": "0057",
+        "name": "OLD GLENN & SKYVIEW NNE",
+        "stop_id": "6578",
         "stop_code": null
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.871953,
-          61.142764
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "BONIFACE & NORTHERN LIGHTS NNE",
-        "stop_id": "0302",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.778173,
-          61.195917
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "DEBARR & MULDOON",
-        "stop_id": "0355",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.73524,
-          61.209843
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "PROVIDENCE & PROVIDENCE HOSPITAL",
-        "stop_id": "0575",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.816965,
-          61.18976
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "CENTENNIAL VILLAGE",
-        "stop_id": "0788",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.714437,
-          61.22535
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD SEWARD & BRANDON NNE",
-        "stop_id": "1013",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.857455,
-          61.104095
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "HUFFMAN BUSINESS PARK",
-        "stop_id": "1017",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.857457,
-          61.110207
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "OLD SEWARD & BRANDON NNW",
-        "stop_id": "1020",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.857746,
-          61.103929
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "PROVIDENCE & ALUMNI",
-        "stop_id": "1223",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.8169,
-          61.189969
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "VOYLES & BILL STEPHENS",
-        "stop_id": "1411",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.443386,
-          61.410603
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "CITY HALL",
-        "stop_id": "1450",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.894747,
-          61.216565
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "5TH AVENUE & REEVE BLVD WSW",
-        "stop_id": "1746",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.837435,
-          61.21739
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "BOUNDARY & BONIFACE",
-        "stop_id": "1755",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.777366,
-          61.223304
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "NORTH BIRCHWOOD PARK & RIDE",
-        "stop_id": "1806",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.468107,
-          61.402893
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "EAGLE RIVER TRANSIT CENTER",
-        "stop_id": "1863",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.573677,
-          61.327765
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "MULDOON & DEBARR EAST",
-        "stop_id": "1951",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.73323,
-          61.210862
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "MULDOON & DEBARR WEST",
-        "stop_id": "1084",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.733821,
-          61.209295
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "DOWNTOWN TRANSIT CENTER",
-        "stop_id": "2051",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.896764,
-          61.216553
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "MULDOON & HERITAGE CTR WNW",
-        "stop_id": "2205",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.738035,
-          61.231093
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "VA OUTPATIENT CLINIC",
-        "stop_id": "2209",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.743568,
-          61.232413
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "AIRPORT SOUTH TERMINAL",
-        "stop_id": "3024",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.979292,
-          61.173144
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "AK NATIVE MED CENTER - SOUTH",
-        "stop_id": "3528",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.800618,
-          61.18183
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "ALASKA PACIFIC UNIVERSITY",
-        "stop_id": "3574",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.803077,
-          61.191015
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "BONIFACE INTERCHANGE",
-        "stop_id": "3594",
-        "stop_code": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.779402,
-          61.225275
+          -149.463446,
+          61.394691
         ]
       }
     },
@@ -16091,8 +15956,173 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.436157,
-          61.410573
+          -149.436156,
+          61.410572
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "HOMESTEAD & SETTLERS WSW",
+        "stop_id": "6580",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.427872,
+          61.411678
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD GLENN & DOLLY SSW",
+        "stop_id": "6581",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.438181,
+          61.415052
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD GLENN & DARBY SSW",
+        "stop_id": "6584",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.524331,
+          61.358637
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD GLENN & E LAKE RIDGE SSW",
+        "stop_id": "6585",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.539695,
+          61.353141
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD GLENN & SKYVIEW NNW",
+        "stop_id": "6587",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.463842,
+          61.394588
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD GLENN & 19000 OLD GLENN WEST",
+        "stop_id": "6588",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.472641,
+          61.39048
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD GLENN & BENDING BIRCH WNW",
+        "stop_id": "6589",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.481965,
+          61.388271
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OLD GLENN & LAUGHLIN SSW",
+        "stop_id": "6590",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.511232,
+          61.368223
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "GAMBELL & 4TH AVENUE SSW",
+        "stop_id": "6593",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.871166,
+          61.218174
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "INGRA & 6TH AVENUE NNE",
+        "stop_id": "6594",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.866741,
+          61.217141
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "SETTLERS & CHUGIAK DR SSE",
+        "stop_id": "7012",
+        "stop_code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.427533,
+          61.415321
         ]
       }
     }

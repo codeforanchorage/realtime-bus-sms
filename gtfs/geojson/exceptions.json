@@ -1,34 +1,89 @@
 {
   "exceptions": [
     {
-      "date": "20151224",
-      "service_id": "1",
+      "date": "20161225",
+      "service_id": "3a",
       "exception_type": "2"
     },
     {
-      "date": "20151224",
-      "service_id": "91",
+      "date": "20170101",
+      "service_id": "3a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20180528",
+      "service_id": "1a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20160905",
+      "service_id": "1a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20170529",
+      "service_id": "1a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20170102",
+      "service_id": "1a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20161226",
+      "service_id": "1a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20170704",
+      "service_id": "1a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20180101",
+      "service_id": "1a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20170904",
+      "service_id": "1a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20161124",
+      "service_id": "1a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20171225",
+      "service_id": "1a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20171123",
+      "service_id": "1a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20161224",
+      "service_id": "2a",
+      "exception_type": "2"
+    },
+    {
+      "date": "20170102",
+      "service_id": "2a",
       "exception_type": "1"
     },
     {
-      "date": "20151225",
-      "service_id": "1",
-      "exception_type": "2"
+      "date": "20161226",
+      "service_id": "2a",
+      "exception_type": "1"
     },
     {
-      "date": "20160101",
-      "service_id": "1",
-      "exception_type": "2"
-    },
-    {
-      "date": "20160530",
-      "service_id": "1",
-      "exception_type": "2"
-    },
-    {
-      "date": "20160704",
-      "service_id": "1",
-      "exception_type": "2"
+      "date": "20161224",
+      "service_id": "92",
+      "exception_type": "1"
     }
   ]
 }
