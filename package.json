@@ -30,12 +30,16 @@
     "morgan": "~1.5.1",
     "node-geocoder": "~2.16.0",
     "nodemailer": "^2.0.0",
+    "on-finished": "^2.3.0",
+    "on-headers": "^1.0.1",
     "request": "^2.51.0",
     "rollbar": "^0.6.2",
     "serve-favicon": "~2.2.0",
     "turf": "~1.4.0",
     "turf-nearest": "~1.0.2",
-    "twilio": "^3.3.0-edge"
+    "twilio": "^3.3.0-edge",
+    "universal-analytics": "^0.4.8",
+    "winston": "^2.3.0"
   },
   "devDependencies": {
     "nodeunit-httpclient": "^0.2.1",
