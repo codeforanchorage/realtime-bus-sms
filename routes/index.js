@@ -188,6 +188,7 @@ router.post('/',
         }
         next();
     },
+    askWatson,
     aboutResponder,
     getRoutes
 );
