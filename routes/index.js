@@ -63,60 +63,51 @@ MIDDLEWARE FUNCTIONS
 function aboutResponder(req, res, next){
     var message = req.body.Body;
     if (message.trim().toLowerCase() === 'about') {
-       req.logRequest(res.locals)
-       res.render('about-partial');     
-       return;  
+        res.locals.action = 'About'
+        res.render('about-partial');     
+        return;  
     }
     next();
 }
 
 function getRoutes(req, res, next){
-    lib.parseInputReturnBusTimes(req.body.Body)
-    .then((routeObject) => {
-        res.locals.routes = routeObject;
-        req.logRequest(res.locals);
-        res.render('routes');
-    })
-    .catch((err) => {
-        res.render('message', {message: err})
-        req.logRequest(res.locals);
-    });
+    var input = req.body.Body;
+    if (!input || /^\s*$/.test(input)) {
+        res.locals.action = 'Empty Input'
+        res.locals.message = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'}
+        return res.render('message')
+    }
+
+    var stopRequest = input.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
+    if (/^\d+$/.test(stopRequest)) {
+        res.locals.action = 'Stop Lookup'
+        lib.getStopFromStopNumber(parseInt(stopRequest))
+        .then((routeObject) => {
+            res.locals.routes = routeObject;
+            res.render('routes');
+        })
+        .catch((err) => {
+            res.locals.action = 'Failed Stop Lookup'
+            res.render('message', {message: err})
+        })
+    }
+    else {
+        res.locals.action = 'Address Lookup'
+        lib.getStopsFromAddress(input)
+        .then((routeObject) => {
+            res.locals.routes = routeObject;
+            res.render('routes');
+        })
+        .catch((err) => {
+            res.locals.action = 'Failed Address Lookup'
+            res.render('message', {message: err})
+        })
+    }
 }
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index');
-});
-
-/* Setup Logging */
-router.use(function(req, res, next){ 
-    res.locals.startTime = Date.now();
-    req.logRequest = logRequest;
-    next();
-
-}); 
-
-/* Routes to allow direct access via url with either address, stop number, or about.*/
-router.get('/find/about', function(req, res, next) {
-    res.locals.returnHTML = 1;
-    req.logRequest(res.locals);
-    res.render('index');
-
-});
-
-/* :query will be treated the same as a texted message */
-router.get('/find/:query', function(req, res, next) {
-    res.locals.returnHTML = 1;
-    lib.parseInputReturnBusTimes(req.params.query)
-    .then((routeObject) => {
-        res.locals.routes = routeObject;
-        req.logRequest(res.locals);
-        res.render('routes-non-ajax');
-    })
-    .catch((err) => {
-        res.render('message-non-ajax', {message: err})
-        req.logRequest(res.locals);
-    });
 });
 
 
@@ -149,6 +140,46 @@ router.post('/ajax',
     getRoutes
 );
 
+ 
+// Routes to allow direct access via url with 
+// either address, stop number, or about.
+
+router.get('/find/about', function(req, res, next) {
+    res.locals.returnHTML = 1;
+    res.locals.action = "About"
+    res.render('index');
+
+});
+
+// :query should be a stop number searches 
+router.get('/find/:query(\\d+)', function(req, res, next) {
+    res.locals.action = 'Stop Lookup'
+    res.locals.returnHTML = 1;
+    lib.getStopFromStopNumber(parseInt(req.params.query))
+    .then((routeObject) => {
+        res.locals.routes = routeObject;
+        res.render('routes-non-ajax');
+    })
+    .catch((err) => {
+        res.render('message-non-ajax', {message: err})
+    });
+});
+
+// :query should be everything other than a stop number - assumes address search 
+router.get('/find/:query', function(req, res, next) {
+    res.locals.action = 'Address Lookup'
+    res.locals.returnHTML = 1;
+    lib.getStopsFromAddress(req.params.query)
+    .then((routeObject) => {
+        res.locals.routes = routeObject;
+        res.render('routes-non-ajax');
+    })
+    .catch((err) => {
+        res.render('message-non-ajax', {message: err})
+    });
+});
+
+
 // a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
     res.locals.returnHTML = 1;
@@ -169,7 +200,6 @@ router.get('/byLatLon', function(req, res, next) {
      }
     var data = lib.findNearestStops(req.query.lat, req.query.lon);
 
-     req.logRequest(res.locals);
      res.render('route-list-partial', {routes: {data: {stops: data}} });
      
 
@@ -180,7 +210,7 @@ router.get('/byLatLon', function(req, res, next) {
 router.post('/feedback', function(req, res) {
     res.locals.returnHTML = 1
     lib.processFeedback(req.body.comment, req)
-    .then(() => req.logRequest(res.locals))
+    .then()
     .catch((err)=> console.log("feedback/ error ", err)); // TODO - tell users if there is a problem or fail silently?
     res.render('message', {message: {message:'Thanks for the feedback'}});
 });
@@ -216,7 +246,6 @@ router.post('/respond', function(req, res, next) {
                                     response: req.body.response,
                                     to_phone: comments.comments[i].phone
                                 };
-                                req.logRequest(entry);
                                 res.render("response", {pageData: {err: null}});
                             } else {
                                 console.log(err.message)
