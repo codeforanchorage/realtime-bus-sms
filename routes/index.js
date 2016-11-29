@@ -13,7 +13,7 @@ var db_private = low('./db_private.json');
 var fs = require('fs');
 
 var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
-
+var logger = require('../lib/logTransport').logger
 
 /* QUESTIONS
     What should be logged - i.e. errors, about page, lat/lon requests, geocode time etc.
@@ -56,9 +56,9 @@ function logRequest(locals) {
 }
 
 
-/* 
-MIDDLEWARE FUNCTIONS 
-*/
+//
+// MIDDLEWARE FUNCTIONS 
+//
 
 function aboutResponder(req, res, next){
     var message = req.body.Body;
@@ -73,7 +73,8 @@ function aboutResponder(req, res, next){
 function getRoutes(req, res, next){
     var input = req.body.Body;
     if (!input || /^\s*$/.test(input)) {
-        res.locals.action = 'Empty Input'
+        // res.locals.action is caching the event type which we can use later when logging anlytics
+        res.locals.action = 'Empty Input' 
         res.locals.message = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'}
         return res.render('message')
     }
@@ -105,8 +106,9 @@ function getRoutes(req, res, next){
     }
 }
 
-/* GET home page. */
+// GET home page. 
 router.get('/', function(req, res, next) {
+    
     res.render('index');
 });
 
@@ -161,6 +163,7 @@ router.get('/find/:query(\\d+)', function(req, res, next) {
         res.render('routes-non-ajax');
     })
     .catch((err) => {
+        res.locals.action = 'Failed Stop Lookup'
         res.render('message-non-ajax', {message: err})
     });
 });
@@ -175,6 +178,7 @@ router.get('/find/:query', function(req, res, next) {
         res.render('routes-non-ajax');
     })
     .catch((err) => {
+        res.locals.action = 'Failed Address Lookup'
         res.render('message-non-ajax', {message: err})
     });
 });
