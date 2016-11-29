@@ -59,6 +59,66 @@ function logRequest(locals) {
 //
 // MIDDLEWARE FUNCTIONS 
 //
+var watson = require('watson-developer-cloud');
+
+function askWatson(req, res, next){
+    var input = req.body.Body;
+    var conversation = watson.conversation({
+        username: "4b82d873-e9a1-4193-aa77-61437fe60986",
+            password: "F0TlBPomlPcU",
+          version: 'v1',
+        version_date: '2016-09-20'
+    })
+
+    var context = {};
+
+    conversation.message({
+        workspace_id: '3c0af131-83a9-4ac4-aff7-c020477f5e44',
+        input: {'text': input},
+        context: context
+    },  function(err, response) {
+      if (err)
+        console.log('error:', err);
+      else {
+        var intent = response.intents[0]['intent']
+        console.log("intent", intent)
+        switch(intent) {
+            case "next_bus": 
+                var stops = response.entities.filter((element) => {return element['entity'] == "sys-number"}  );
+                console.log(stops)
+                var stop = stops[0]
+                if (!stop) break;
+                lib.getStopFromStopNumber(parseInt(stops[0].value))
+                .then((routeObject) => {
+                    res.locals.routes = routeObject;
+                    res.render('routes');
+                })
+                .catch((err) => {
+                    res.locals.action = 'Failed Stop Lookup'
+                    res.render('message', {message: err})
+                })
+                return;
+            case("address"):
+                lib.getStopsFromAddress(response.input.text)
+                .then((routeObject) => {
+                    res.locals.routes = routeObject;
+                    res.render('routes');
+                })
+                .catch((err) => {
+                    res.locals.action = 'Failed Address Lookup'
+                    res.render('message', {message: err})
+                })
+                return
+            default:
+                console.log(response)
+                res.locals.message = {message:response.output.text.join(' ')}
+                return res.render('message')
+
+        }
+    }
+    next();
+    });
+}
 
 function aboutResponder(req, res, next){
     var message = req.body.Body;
@@ -138,6 +198,7 @@ router.post('/ajax',
         res.locals.returnHTML = 1;
         next()
     },
+    askWatson,
     aboutResponder,
     getRoutes
 );
