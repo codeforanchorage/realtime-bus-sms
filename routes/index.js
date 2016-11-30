@@ -62,7 +62,7 @@ function logRequest(locals) {
 var watson = require('watson-developer-cloud');
 
 function askWatson(req, res, next){
-    var input = req.body.Body;
+    var input = req.body.Body.replace(/['"]+/g, '');
     var conversation = watson.conversation({
         username: "4b82d873-e9a1-4193-aa77-61437fe60986",
             password: "F0TlBPomlPcU",
@@ -87,18 +87,21 @@ function askWatson(req, res, next){
                 var stops = response.entities.filter((element) => {return element['entity'] == "sys-number"}  );
                 console.log(stops)
                 var stop = stops[0]
-                if (!stop) break;
-                lib.getStopFromStopNumber(parseInt(stops[0].value))
-                .then((routeObject) => {
-                    res.locals.routes = routeObject;
-                    res.render('routes');
-                })
-                .catch((err) => {
-                    res.locals.action = 'Failed Stop Lookup'
-                    res.render('message', {message: err})
-                })
-                return;
+                if (stop) {
+                    res.locals.action = 'Stop Lookup'
+                    lib.getStopFromStopNumber(parseInt(stops[0].value))
+                    .then((routeObject) => {
+                        res.locals.routes = routeObject;
+                        res.render('routes');
+                    })
+                    .catch((err) => {
+                        res.locals.action = 'Failed Stop Lookup'
+                        res.render('message', {message: err})
+                    })
+                    return;
+                }
             case("address"):
+                res.locals.action = 'Address Lookup'
                 lib.getStopsFromAddress(response.input.text)
                 .then((routeObject) => {
                     res.locals.routes = routeObject;
