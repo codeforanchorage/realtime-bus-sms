@@ -8,3 +8,5 @@ public/db.json
 comments.json
 
 db_private.json
+
+.DS_Store
