@@ -64,8 +64,8 @@ var watson = require('watson-developer-cloud');
 function askWatson(req, res, next){
     var input = req.body.Body.replace(/['"]+/g, '');
     var conversation = watson.conversation({
-        username: "4b82d873-e9a1-4193-aa77-61437fe60986",
-            password: "F0TlBPomlPcU",
+        username: config.WATSON_USER,
+            password: config.WATSON_PASSWORD,
           version: 'v1',
         version_date: '2016-09-20'
     })
