@@ -25,15 +25,15 @@ function askWatson(req, res, next){
     var input = req.body.Body.replace(/['"]+/g, '');
     var conversation = watson.conversation({
         username: config.WATSON_USER,
-            password: config.WATSON_PASSWORD,
-          version: 'v1',
+        password: config.WATSON_PASSWORD,
+        version: 'v1',
         version_date: '2016-09-20'
     })
 
     var context = {};
 
     conversation.message( {
-        workspace_id: '3c0af131-83a9-4ac4-aff7-c020477f5e44',
+        workspace_id: config.WATSON_WORKPLACE,
         input: {'text': input},
         context: context
         }, function(err, response) {
