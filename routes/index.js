@@ -77,7 +77,7 @@ function askWatson(req, res, next){
                     })
                     return
                 default:
-                    logger.debug('response', response)
+                    logger.debug("winston repsone: ", response)
                     res.locals.message = {message:response.output.text.join(' ')}
                     return res.render('message')
 
