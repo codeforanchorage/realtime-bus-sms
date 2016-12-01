@@ -1,64 +1,19 @@
 var express = require('express');
 var low = require('lowdb')
-var hashwords = require('hashwords')()
 var router = express.Router();
 var stop_number_lookup = require('../lib/stop_number_lookup');
 var debug = require('debug')('routes/index.js');
 var lib = require('../lib/index');
 var config = require('../lib/config');
-var moment = require('moment-timezone');
 
-var db = low('./public/db.json');
-var db_private = low('./db_private.json');
+var db = low('./public/db.json', { storage: require('lowdb/lib/file-async') });
+var db_private = low('./db_private.json', { storage: require('lowdb/lib/file-async') });
 var fs = require('fs');
 
 var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
-var logger = require('../lib/logTransport').logger
+var logTransport = require('../lib/logTransport')
+var logger = logTransport.logger;
 
-/* QUESTIONS
-    What should be logged - i.e. errors, about page, lat/lon requests, geocode time etc.
-    It would probably be nice to put logging in it's own module
-    Do we need to include empty fields such as phone on web requests?
-*/
-
-// Log format:
-// message is whatever the user sends
-// stop is the stop that we've parsed from the message
-// data is the current datetime
-// if it's sent from twiliio, we store a human-readable hash of the #
-
-
-
-function logRequest(locals) {
-    var entry = {
-        date     : new Date(), // Why not Date.now() to avoid allocating object?
-        totalTime: Date.now() - locals.startTime, // TODO: should this be more accurate?
-        input    : this.body.Body, // this refers to the request object.
-        phone    : this.body.From,
-        ip       : this.connection.remoteAddress
-    }
-    if (locals.routes){ // only here when finding bus routes, not feedback, etc.
-        var routes            = locals.routes;
-        entry.stop            = routes.data.stopId || "";
-        entry.geocodedAddress = routes.data.geocodedAddress;
-        entry.muniTime        = routes.muniTime;
-        entry.geocodeTime     = routes.geocodeTime;
-    }
-    
-    db_private('requests').push(entry);
-    var entry2 = JSON.parse(JSON.stringify(entry)); // Required because of async mode of lowdb
-    if (entry.phone) {
-        entry2.phone = hashwords.hashStr(entry.phone);
-    }
-    entry2.ip = "";
-    db('requests').push(entry2); 
-    
-}
-
-
-//
-// MIDDLEWARE FUNCTIONS 
-//
 var watson = require('watson-developer-cloud');
 
 function askWatson(req, res, next){
@@ -123,6 +78,15 @@ function askWatson(req, res, next){
     });
 }
 
+/*
+     MIDDLEWARE FUNCTIONS 
+     These are primarily concerned with parsing the input the comes in from the POST
+     body and deciding how to handle it. 
+     To help logging this sets res.locals.action to one of
+     '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
+
+*/
+
 function aboutResponder(req, res, next){
     var message = req.body.Body;
     if (message.trim().toLowerCase() === 'about') {
@@ -170,23 +134,25 @@ function getRoutes(req, res, next){
 }
 
 // GET home page. 
-router.get('/', function(req, res, next) {
-    
+router.get('/', function(req, res, next) { 
     res.render('index');
 });
 
 
-// Twilio hits this endpoint. The user's text message is
-// in the POST body.
-// TODO: better error messages
+/*  
+    Twilio hits this endpoint. The user's text message is
+    in the POST body.
+    TODO: better error messages
+*/
 router.post('/',
     function (req, res, next){
         res.set('Content-Type', 'text/plain');
         var message = req.body.Body || '';
         if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
+            res.locals.action = 'Feedback'
             lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
             .then((data)=>res.send("Thanks for the feedback"))
-            .catch((err)=>console.log("Feedback error: ", err));
+            .catch((err)=>logger.warn("Feedback error: ", err));
             return;
         }
         next();
@@ -225,7 +191,7 @@ router.get('/find/:query(\\d+)', function(req, res, next) {
     lib.getStopFromStopNumber(parseInt(req.params.query))
     .then((routeObject) => {
         res.locals.routes = routeObject;
-        res.render('routes-non-ajax');
+        res.render('stop-list-non-ajax');
     })
     .catch((err) => {
         res.locals.action = 'Failed Stop Lookup'
@@ -233,14 +199,15 @@ router.get('/find/:query(\\d+)', function(req, res, next) {
     });
 });
 
-// :query should be everything other than a stop number - assumes address search 
+// :query should be everything other than a stop number
+// - assumes address search 
 router.get('/find/:query', function(req, res, next) {
     res.locals.action = 'Address Lookup'
     res.locals.returnHTML = 1;
     lib.getStopsFromAddress(req.params.query)
     .then((routeObject) => {
         res.locals.routes = routeObject;
-        res.render('routes-non-ajax');
+        res.render('route-list-non-ajax');
     })
     .catch((err) => {
         res.locals.action = 'Failed Address Lookup'
@@ -280,7 +247,7 @@ router.post('/feedback', function(req, res) {
     res.locals.returnHTML = 1
     lib.processFeedback(req.body.comment, req)
     .then()
-    .catch((err)=> console.log("feedback/ error ", err)); // TODO - tell users if there is a problem or fail silently?
+    .catch((err)=> logger.warn("feedback/ error ", err)); // TODO - tell users if there is a problem or fail silently?
     res.render('message', {message: {message:'Thanks for the feedback'}});
 });
 
@@ -317,7 +284,7 @@ router.post('/respond', function(req, res, next) {
                                 };
                                 res.render("response", {pageData: {err: null}});
                             } else {
-                                console.log(err.message)
+                                logger.warn(err.message)
                                 res.render("response", {pageData: {err: err}});
                             }
                         }
@@ -330,39 +297,10 @@ router.post('/respond', function(req, res, next) {
 
 
 
-// Log get
+// Log data used by /logplot called from client script.
 router.get('/logData', function(req, res, next) {
-    var daysBack = req.query.daysBack || config.LOG_DAYS_BACK;
-    var type = req.query.type;
-    var logData = [];
-    var timezone = moment.tz.zone(config.TIMEZONE);
-    if (type == "hits") {
-        var dateTz = null;
-        db_private('requests').filter(function(point) {
-            if (point.date) {
-                var nowTz = moment.tz(new Date(), config.TIMEZONE);
-                dateTz = moment.tz(point.date, config.TIMEZONE);
-                if (moment.duration(nowTz.diff(dateTz)).asDays() <= daysBack) {
-                    return true;
-                }
-            }
-            return false;
-        }).forEach(function(point) {
-            var hitType = "browser";
-            if (point.hasOwnProperty("phone")) {
-                hitType = "sms"
-            }
-            var outPoint = {};
-            outPoint.type = hitType;
-            outPoint.date = moment.tz(point.date, config.TIMEZONE).unix();
-            outPoint.dateOffset = timezone.offset(outPoint.date*1000)
-            outPoint.muniTime = point.muniTime || "";
-            outPoint.totalTime = point.totalTime || "";
-            outPoint.userId = point.phone ? "phone" + point.phone : "ip"+point.ip;
-            logData.push(outPoint);
-        })
-    }
-    res.send(logData);
+    data = logTransport.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
+    res.send(data)
 });
 
 router.get('/logplot', function(req, res, next) {
@@ -373,7 +311,5 @@ router.get('*', function(req, res){
     res.status(404)
     res.render('error-404', {}); // This could be a better message
 });
-
-
 
 module.exports = router;

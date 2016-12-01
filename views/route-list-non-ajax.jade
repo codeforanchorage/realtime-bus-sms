@@ -3,8 +3,4 @@
 
 extends index.jade
 block info
-
-    if routes.data.stopId
-        include stop-list-partial
-    else
-        include route-list-partial
+    include route-list-partial
