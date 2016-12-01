@@ -71,6 +71,7 @@ function getRoutes(req, res, next){
 
 // GET home page. 
 router.get('/', function(req, res, next) { 
+    logger.debug("Cookies: ", req.cookies)
     res.render('index');
 });
 
