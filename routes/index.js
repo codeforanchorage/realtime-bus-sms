@@ -5,18 +5,23 @@ var stop_number_lookup = require('../lib/stop_number_lookup');
 var debug = require('debug')('routes/index.js');
 var lib = require('../lib/index');
 var config = require('../lib/config');
-
 var db = low('./public/db.json', { storage: require('lowdb/lib/file-async') });
 var db_private = low('./db_private.json', { storage: require('lowdb/lib/file-async') });
 var fs = require('fs');
 
 var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
 var logTransport = require('../lib/logTransport')
-var logger = logTransport.logger;
-
+var loggerTransport = logTransport;
+var logger = loggerTransport.logger;
 var watson = require('watson-developer-cloud');
 
+/* 
+    WATSON MIDDLE WARE 
+    TODO track sessions - twilio accepts cookies for this - so we can make converstations that hold state
+    Test intent confidence to decide to help decide flow
+*/
 function askWatson(req, res, next){
+    logger.debug("Calling Watson")
     var input = req.body.Body.replace(/['"]+/g, '');
     var conversation = watson.conversation({
         username: config.WATSON_USER,
@@ -27,52 +32,56 @@ function askWatson(req, res, next){
 
     var context = {};
 
-    conversation.message({
+    conversation.message( {
         workspace_id: '3c0af131-83a9-4ac4-aff7-c020477f5e44',
         input: {'text': input},
         context: context
-    },  function(err, response) {
-      if (err)
-        console.log('error:', err);
-      else {
-        var intent = response.intents[0]['intent']
-        console.log("intent", intent)
-        switch(intent) {
-            case "next_bus": 
-                var stops = response.entities.filter((element) => {return element['entity'] == "sys-number"}  );
-                console.log(stops)
-                var stop = stops[0]
-                if (stop) {
-                    res.locals.action = 'Stop Lookup'
-                    lib.getStopFromStopNumber(parseInt(stops[0].value))
+        }, function(err, response) {
+            if (err) {
+                logger.error('watson error:', err); // TODO this should go to Rollbar in production
+                return res.render('message', {message: 'Bustracker is having a problem right now'})
+            } else {
+                var intent = response.intents[0]['intent']
+                logger.debug("intent", intent)
+                switch(intent) {
+                    case "next_bus": 
+                        var stops = response.entities.filter((element) =>  element['entity'] == "sys-number"  );
+                        logger.debug("stops: ", stops)
+                        var stop = stops[0]
+                        if (stop) {
+                            res.locals.action = 'Stop Lookup'
+                            lib.getStopFromStopNumber(parseInt(stops[0].value))
+                            .then((routeObject) => {
+                                res.locals.routes = routeObject;
+                                res.render('routes');
+                            })
+                            .catch((err) => {
+                                res.locals.action = 'Failed Stop Lookup'
+                                res.render('message', {message: err})
+                            })
+                            return;
+                        } else {
+                            //this shouldn't ever happen
+                            logger.error("Watson returned a next_bus intent with no stops.")
+                        }
+                case("address"):
+                    res.locals.action = 'Address Lookup'
+                    lib.getStopsFromAddress(response.input.text)
                     .then((routeObject) => {
                         res.locals.routes = routeObject;
                         res.render('routes');
                     })
                     .catch((err) => {
-                        res.locals.action = 'Failed Stop Lookup'
+                        res.locals.action = 'Failed Address Lookup'
                         res.render('message', {message: err})
                     })
-                    return;
-                }
-            case("address"):
-                res.locals.action = 'Address Lookup'
-                lib.getStopsFromAddress(response.input.text)
-                .then((routeObject) => {
-                    res.locals.routes = routeObject;
-                    res.render('routes');
-                })
-                .catch((err) => {
-                    res.locals.action = 'Failed Address Lookup'
-                    res.render('message', {message: err})
-                })
-                return
-            default:
-                console.log(response)
-                res.locals.message = {message:response.output.text.join(' ')}
-                return res.render('message')
+                    return
+                default:
+                    logger.debug('response', response)
+                    res.locals.message = {message:response.output.text.join(' ')}
+                    return res.render('message')
 
-        }
+            }
     }
     next();
     });
@@ -87,7 +96,7 @@ function askWatson(req, res, next){
 
 */
 
-function aboutResponder(req, res, next){
+function handleAbout(req, res, next){
     var message = req.body.Body;
     if (message.trim().toLowerCase() === 'about') {
         res.locals.action = 'About'
@@ -97,7 +106,7 @@ function aboutResponder(req, res, next){
     next();
 }
 
-function getRoutes(req, res, next){
+function handleBlank(req,res,next){
     var input = req.body.Body;
     if (!input || /^\s*$/.test(input)) {
         // res.locals.action is caching the event type which we can use later when logging anlytics
@@ -105,7 +114,11 @@ function getRoutes(req, res, next){
         res.locals.message = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'}
         return res.render('message')
     }
+    next()
+}
 
+function handleStopNumber(req,res, next){
+    var input = req.body.Body;
     var stopRequest = input.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
     if (/^\d+$/.test(stopRequest)) {
         res.locals.action = 'Stop Lookup'
@@ -118,20 +131,25 @@ function getRoutes(req, res, next){
             res.locals.action = 'Failed Stop Lookup'
             res.render('message', {message: err})
         })
+        return;
     }
-    else {
-        res.locals.action = 'Address Lookup'
-        lib.getStopsFromAddress(input)
-        .then((routeObject) => {
-            res.locals.routes = routeObject;
-            res.render('routes');
-        })
-        .catch((err) => {
-            res.locals.action = 'Failed Address Lookup'
-            res.render('message', {message: err})
-        })
-    }
+    next()
 }
+/* Watson does this now
+function getRoutes(req, res, next){
+    res.locals.action = 'Address Lookup'
+    lib.getStopsFromAddress(input)
+    .then((routeObject) => {
+        res.locals.routes = routeObject;
+        res.render('routes');
+    })
+    .catch((err) => {
+        res.locals.action = 'Failed Address Lookup'
+        res.render('message', {message: err})
+    })
+    return;  
+}
+*/
 
 // GET home page. 
 router.get('/', function(req, res, next) { 
@@ -157,9 +175,10 @@ router.post('/',
         }
         next();
     },
-    askWatson,
-    aboutResponder,
-    getRoutes
+    handleBlank,
+    handleAbout,
+    handleStopNumber,
+    askWatson
 );
 
 // This is what the browser hits
@@ -168,9 +187,10 @@ router.post('/ajax',
         res.locals.returnHTML = 1;
         next()
     },
-    askWatson,
-    aboutResponder,
-    getRoutes
+    handleBlank,
+    handleAbout,
+    handleStopNumber,
+    askWatson
 );
 
  
@@ -184,7 +204,7 @@ router.get('/find/about', function(req, res, next) {
 
 });
 
-// :query should be a stop number searches 
+// :query should be a plain stop number 
 router.get('/find/:query(\\d+)', function(req, res, next) {
     res.locals.action = 'Stop Lookup'
     res.locals.returnHTML = 1;
@@ -201,6 +221,8 @@ router.get('/find/:query(\\d+)', function(req, res, next) {
 
 // :query should be everything other than a stop number
 // - assumes address search 
+
+/* TODO integrate Watson here so page refreshes and bookmarks use flow */
 router.get('/find/:query', function(req, res, next) {
     res.locals.action = 'Address Lookup'
     res.locals.returnHTML = 1;
