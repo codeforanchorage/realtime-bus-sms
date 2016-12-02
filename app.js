@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logs = require('./lib/logTransport');
 var logger = require('./lib/logTransport').logger;
 var cookieParser = require('cookie-parser');
+var UUID = require("pure-uuid");
 var bodyParser = require('body-parser');
 var rollbar = require("rollbar");
 var config = require('./lib/config');
@@ -26,6 +27,16 @@ app.use(logs.log)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// set simple session cookie - used to determine new vs returning users
+app.use(function(req, res, next){
+    if(!(req.cookies) || !('uuid' in req.cookies)) {
+        var uuid = new UUID(4); //v4 UUID are random
+        res.cookie('uuid', uuid.format(), {expires: new Date(2147483648000)}) // essentially never
+    }
+    next();
+})
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
