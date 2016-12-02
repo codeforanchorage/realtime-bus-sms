@@ -64,8 +64,12 @@ function askWatson(req, res, next){
                 res.cookie('context', JSON.stringify(response.context))
 
                 logger.debug("Context: ", JSON.stringify(response.context) )
-  
-                switch(intent) {
+                if (!response.context.action) {
+                    res.locals.message = {message:response.output.text.join(' ')}
+                    return res.render('message')
+                }
+
+                switch(response.context.action) {
                     case "next_bus": 
                         var stops = response.entities.filter((element) =>  element['entity'] == "sys-number"  );
                         logger.debug("stops: ", stops)
@@ -86,22 +90,22 @@ function askWatson(req, res, next){
                             //this shouldn't ever happen
                             logger.error("Watson returned a next_bus intent with no stops.")
                         }
-                case("address"):
-                    res.locals.action = 'Address Lookup'
-                    lib.getStopsFromAddress(response.input.text)
-                    .then((routeObject) => {
-                        res.locals.routes = routeObject;
-                        res.render('routes');
-                    })
-                    .catch((err) => {
-                        res.locals.action = 'Failed Address Lookup'
-                        res.render('message', {message: err})
-                    })
-                    return
-                default:
-                    logger.debug("winston repsone: ", response.context)
-                    res.locals.message = {message:response.output.text.join(' ')}
-                    return res.render('message')
+                    case("address"):
+                        res.locals.action = 'Address Lookup'
+                        lib.getStopsFromAddress(response.input.text)
+                        .then((routeObject) => {
+                            res.locals.routes = routeObject;
+                            res.render('routes');
+                        })
+                        .catch((err) => {
+                            res.locals.action = 'Failed Address Lookup'
+                            res.render('message', {message: err})
+                        })
+                        return
+                    default:
+                        logger.debug("winston repsone: ", response.context)
+                        res.locals.message = {message:response.output.text.join(' ')}
+                        return res.render('message')
 
             }
     }
