@@ -15,6 +15,12 @@ var loggerTransport = logTransport;
 var logger = loggerTransport.logger;
 var watson = require('watson-developer-cloud');
 
+/* Get Watson Context from cookie
+    Twilio will set a cookie and track changes for 4 hours 
+    So hopefully we can treat web and twilio user the same
+*/
+
+
 /* 
     WATSON MIDDLE WARE 
     TODO track sessions - twilio accepts cookies for this - so we can make converstations that hold state
@@ -22,7 +28,7 @@ var watson = require('watson-developer-cloud');
 */
 function askWatson(req, res, next){
     logger.debug("Calling Watson")
-    var input = req.body.Body.replace(/['"]+/g, '');
+    var input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so I'm catches a number
     var conversation = watson.conversation({
         username: config.WATSON_USER,
         password: config.WATSON_PASSWORD,
@@ -30,7 +36,16 @@ function askWatson(req, res, next){
         version_date: '2016-09-20'
     })
 
-    var context = {};
+    /* TODO - this is probably not the best way to do this
+        If we want to be able to have conversation beyond a stateless 
+        question & answer, we need to be able to pass the context that Watson sends
+        back to Watson. The context object isn't very big, so it fits within the 4k limit 
+        on cookies imposed by browsers, but this might be fragile.
+        A more solid approach might be to use sessions and store the context with a session id.
+        But for right now th cookie approach is working.
+    */
+    var context  = JSON.parse(req.cookies['context'] || '{}');
+    logger.debug("Context from Cookie: ", context);
 
     conversation.message( {
         workspace_id: config.WATSON_WORKPLACE,
@@ -42,7 +57,14 @@ function askWatson(req, res, next){
                 return res.render('message', {message: 'Bustracker is having a problem right now'})
             } else {
                 var intent = response.intents[0]['intent']
-                logger.debug("intent", intent)
+
+                // Setting cookie to value of returned conversation_id
+                // will allow continuation of conversations that are otherwise
+                // stateless.
+                res.cookie('context', JSON.stringify(response.context))
+
+                logger.debug("Context: ", JSON.stringify(response.context) )
+  
                 switch(intent) {
                     case "next_bus": 
                         var stops = response.entities.filter((element) =>  element['entity'] == "sys-number"  );
@@ -77,7 +99,7 @@ function askWatson(req, res, next){
                     })
                     return
                 default:
-                    logger.debug("winston repsone: ", response)
+                    logger.debug("winston repsone: ", response.context)
                     res.locals.message = {message:response.output.text.join(' ')}
                     return res.render('message')
 
