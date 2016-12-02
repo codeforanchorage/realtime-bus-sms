@@ -65,12 +65,13 @@ function askWatson(req, res, next){
 
                 logger.debug("Context: ", JSON.stringify(response.context) )
                 if (!response.context.action) {
+                    res.locals.action = 'Watson Chat'
                     res.locals.message = {message:response.output.text.join(' ')}
                     return res.render('message')
                 }
 
                 switch(response.context.action) {
-                    case "next_bus": 
+                    case "Stop Lookup": 
                         var stops = response.entities.filter((element) =>  element['entity'] == "sys-number"  );
                         logger.debug("stops: ", stops)
                         var stop = stops[0]
@@ -90,7 +91,7 @@ function askWatson(req, res, next){
                             //this shouldn't ever happen
                             logger.error("Watson returned a next_bus intent with no stops.")
                         }
-                    case("address"):
+                    case("Address Lookup"):
                         res.locals.action = 'Address Lookup'
                         lib.getStopsFromAddress(response.input.text)
                         .then((routeObject) => {
@@ -103,10 +104,10 @@ function askWatson(req, res, next){
                         })
                         return
                     default:
+                        res.locals.action = 'Watson Chat'
                         logger.debug("winston repsone: ", response.context)
                         res.locals.message = {message:response.output.text.join(' ')}
                         return res.render('message')
-
             }
     }
     next();
