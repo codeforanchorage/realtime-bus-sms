@@ -23,6 +23,19 @@ var logger = logTransport.logger;
 
 */
 
+function sessionID(req,res,next){
+    //logger.debug('cookies:', req.cookies)
+    if('test_cookie' in req.cookies) {
+        logger.debug("cookie found: ", req.cookies['test_cookie']);
+        logger.debug('cookies: ', req.cookies)
+    } else {
+        logger.debug('no cookie')
+         logger.debug('cookies: ', req.cookies)
+    }
+    
+    next();
+}
+
 function aboutResponder(req, res, next){
     var message = req.body.Body;
     if (message.trim().toLowerCase() === 'about') {
@@ -71,9 +84,9 @@ function getRoutes(req, res, next){
 
 // GET home page. 
 router.get('/', function(req, res, next) { 
-    logger.debug("Cookies: ", req.cookies)
-    res.render('index');
-});
+        res.render('index');
+    }
+);
 
 
 /*  

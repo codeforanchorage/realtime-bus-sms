@@ -32,6 +32,7 @@
     "nodemailer": "^2.0.0",
     "on-finished": "^2.3.0",
     "on-headers": "^1.0.1",
+    "pure-uuid": "^1.4.2",
     "request": "^2.51.0",
     "rollbar": "^0.6.2",
     "serve-favicon": "~2.2.0",
