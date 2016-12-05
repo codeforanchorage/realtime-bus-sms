@@ -11,8 +11,7 @@ var db_private = low('./db_private.json', { storage: require('lowdb/lib/file-asy
 var fs = require('fs');
 
 var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
-var logTransport = require('../lib/logTransport')
-var logger = logTransport.logger;
+var logger = require('../lib/logTransport')
 
 /*
      MIDDLEWARE FUNCTIONS 
@@ -247,7 +246,7 @@ router.post('/respond', function(req, res, next) {
 
 // Log data used by /logplot called from client script.
 router.get('/logData', function(req, res, next) {
-    data = logTransport.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
+    data = logger.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
     res.send(data)
 });
 

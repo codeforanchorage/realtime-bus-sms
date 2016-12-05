@@ -1,8 +1,9 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logs = require('./lib/logTransport');
-var logger = require('./lib/logTransport').logger;
+//var logs = require('./lib/logTransport');
+//var logger = require('./lib/logTransport').logger;
+var logger = require('./lib/logTransport');
 var cookieParser = require('cookie-parser');
 var UUID = require("pure-uuid");
 var bodyParser = require('body-parser');
@@ -22,7 +23,7 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 
-app.use(logs.log)
+app.use(logger.startlog)
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
