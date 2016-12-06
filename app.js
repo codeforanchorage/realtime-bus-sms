@@ -50,7 +50,7 @@ logs.initGoogleAnalytics((logFields) => {
     var category = logFields.phone ? "sms" : "web";
     if (category == "sms"){
         var ns = "deebee62-076c-47ef-ad02-2509e2d4f839" // this random namespace is hashed (using SHA-1) with phone number to create UUID
-        uuid = new UUID(5, ns, meta.phone).format()
+        uuid = new UUID(5, ns, logFields.phone).format()
     }
     return {
         trackingCode: config.GOOGLE_ANALYTICS_ID,
