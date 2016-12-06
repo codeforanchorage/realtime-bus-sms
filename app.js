@@ -52,7 +52,6 @@ logs.initGoogleAnalytics((logFields) => {
         var ns = "deebee62-076c-47ef-ad02-2509e2d4f839" // this random namespace is hashed (using SHA-1) with phone number to create UUID
         uuid = new UUID(5, ns, logFields.phone).format()
     }
-    logger.debug("muni time: ", logFields.muniTime)
     return {
         trackingCode: config.GOOGLE_ANALYTICS_ID,
         category:     category,
