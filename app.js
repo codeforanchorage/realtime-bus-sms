@@ -1,8 +1,7 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logs = require('./lib/logTransport');
-var logger = require('./lib/logTransport').logger;
+var logs = require('./lib/logger');
 var cookieParser = require('cookie-parser');
 var UUID = require("pure-uuid");
 var bodyParser = require('body-parser');
@@ -45,7 +44,8 @@ app.use(logs.initialize((req, res) => {
 
 */
 logs.initGoogleAnalytics((logFields) => {
-    // UUID helps seperate new and returning users on Twilio
+    // There shoudl be a UUID in the req.cookie 
+    // But Twilios expire after 4 hous so we'll make a more stable phone-based one
     var uuid;
     var category = logFields.phone ? "sms" : "web";
     if (category == "sms"){
@@ -56,25 +56,24 @@ logs.initGoogleAnalytics((logFields) => {
         trackingCode: config.GOOGLE_ANALYTICS_ID,
         category:     category,
         action:       logFields.action,
-        label:        logFields.stopId 
-                      || logFields.geocodedAddress 
-                      || (logFields.input ? logFields.input.trim().toLowerCase(): ""),
+        label:        logFields.stopId || logFields.geocodedAddress  || (logFields.input ? logFields.input.trim().toLowerCase(): ""),
         value:        logFields.responseTime,
         uuid:         uuid,
         timings:      [{name: "muniTime", time: logFields.muniTime }]
-
     }
 })
+logs.add(require('./lib/lowdb_log_transport'), {}) // add custom transport for logging to lowDB
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// set simple session cookie - used to determine new vs returning users
+// set simple session cookie
+// used to determine new vs returning web users
 app.use(function(req, res, next){
     if(!(req.cookies) || !('uuid' in req.cookies)) {
         var uuid = new UUID(4); //v4 UUID are random
-        res.cookie('uuid', uuid.format(), {expires: new Date(2147483648000)}) // essentially never
+        res.cookie('uuid', uuid.format(), {expires: new Date(2147483648000)}) // way in the future
     }
     next();
 })
