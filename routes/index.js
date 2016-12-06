@@ -54,7 +54,7 @@ function askWatson(req, res, next){
         }, function(err, response) {
             if (err) {
                 logger.error('watson error:', err); // TODO this should go to Rollbar in production
-                return res.render('message', {message: 'Bustracker is having a problem right now'})
+                return res.render('message', {message: "I'm sorry, the mustracker is having a problem right now"})
             } else {
                 var intent = response.intents[0]['intent']
 
