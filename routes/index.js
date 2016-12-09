@@ -1,13 +1,8 @@
 var express = require('express');
-var low = require('lowdb')
 var router = express.Router();
-var stop_number_lookup = require('../lib/stop_number_lookup');
 var debug = require('debug')('routes/index.js');
 var lib = require('../lib/index');
 var config = require('../lib/config');
-
-var db = low('./public/db.json', { storage: require('lowdb/lib/file-async') });
-var db_private = low('./db_private.json', { storage: require('lowdb/lib/file-async') });
 var fs = require('fs');
 
 var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
@@ -22,19 +17,6 @@ var lowdb_log = require('../lib/lowdb_log_transport')
      '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
 
 */
-
-function sessionID(req,res,next){
-    //logger.debug('cookies:', req.cookies)
-    if('test_cookie' in req.cookies) {
-        logger.debug("cookie found: ", req.cookies['test_cookie']);
-        logger.debug('cookies: ', req.cookies)
-    } else {
-        logger.debug('no cookie')
-         logger.debug('cookies: ', req.cookies)
-    }
-    
-    next();
-}
 
 function aboutResponder(req, res, next){
     var message = req.body.Body;
@@ -82,7 +64,7 @@ function getRoutes(req, res, next){
     }
 }
 
-// GET home page. 
+/* GET HOME PAGE */
 router.get('/', function(req, res, next) { 
         res.render('index');
     }
@@ -90,7 +72,8 @@ router.get('/', function(req, res, next) {
 
 
 /*  
-    Twilio hits this endpoint. The user's text message is
+    TWILIO ENDPOINT
+    The user's text message is
     in the POST body.
     TODO: better error messages
 */
@@ -111,7 +94,7 @@ router.post('/',
     getRoutes
 );
 
-// This is what the browser hits
+/* BROWSER AJAX ENDPOINT */
 router.post('/ajax', 
     function (req, res, next) {
         res.locals.returnHTML = 1;
@@ -122,9 +105,10 @@ router.post('/ajax',
 );
 
  
-// Routes to allow direct access via url with 
-// either address, stop number, or about.
-
+/*  DIRECT URL ACCESS
+    Routes to allow deep linking and bookmarks via url with 
+    either address, stop number, or about.
+*/
 router.get('/find/about', function(req, res, next) {
     res.locals.returnHTML = 1;
     res.locals.action = "About"
