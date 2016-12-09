@@ -18,16 +18,6 @@ var lowdb_log = require('../lib/lowdb_log_transport')
 
 */
 
-function aboutResponder(req, res, next){
-    var message = req.body.Body;
-    if (message.trim().toLowerCase() === 'about') {
-        res.locals.action = 'About'
-        res.render('about-partial');     
-        return;  
-    }
-    next();
-}
-
 function getRoutes(req, res, next){
     var input = req.body.Body;
     if (!input || /^\s*$/.test(input)) {
@@ -116,7 +106,7 @@ router.get('/find/about', function(req, res, next) {
 
 });
 
-// :query should be a stop number searches 
+//  :query should be a stop number searches 
 router.get('/find/:query(\\d+)', function(req, res, next) {
     res.locals.action = 'Stop Lookup'
     res.locals.returnHTML = 1;
@@ -131,8 +121,8 @@ router.get('/find/:query(\\d+)', function(req, res, next) {
     });
 });
 
-// :query should be everything other than a stop number
-// - assumes address search 
+//  :query should be everything other than a stop number
+//  - assumes address search 
 router.get('/find/:query', function(req, res, next) {
     res.locals.action = 'Address Lookup'
     res.locals.returnHTML = 1;
@@ -148,7 +138,7 @@ router.get('/find/:query', function(req, res, next) {
 });
 
 
-// a browser with location service enabled can hit this
+//  a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
     res.locals.returnHTML = 1;
 
@@ -183,7 +173,7 @@ router.post('/feedback', function(req, res) {
     res.render('message', {message: {message:'Thanks for the feedback'}});
 });
 
-// Respond to feedback over SMS
+//  Respond to feedback over SMS
 router.get('/respond', function(req, res, next) {
     var comments = JSON.parse(fs.readFileSync('./comments.json'));
     for(var i=comments.comments.length-1; i >= 0; i--) {
