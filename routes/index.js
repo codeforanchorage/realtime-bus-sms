@@ -18,6 +18,16 @@ var lowdb_log = require('../lib/lowdb_log_transport')
 
 */
 
+function aboutResponder(req, res, next){
+    var message = req.body.Body;
+    if (message.trim().toLowerCase() === 'about') {
+        res.locals.action = 'About'
+        res.render('about-partial');     
+        return;  
+    }
+    next();
+}
+
 function getRoutes(req, res, next){
     var input = req.body.Body;
     if (!input || /^\s*$/.test(input)) {
