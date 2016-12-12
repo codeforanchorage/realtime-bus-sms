@@ -17,7 +17,16 @@ var lowdb_log = require('../lib/lowdb_log_transport')
      '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
 
 */
-
+function blankInputRepsonder(req, res, next){
+    var input = req.body.Body;
+    if (!input || /^\s*$/.test(input)) {
+        // res.locals.action is caching the event type which we can use later when logging anlytics
+        res.locals.action = 'Empty Input' 
+        res.locals.message = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'}
+        return res.render('message')
+    }
+    next();
+}
 function aboutResponder(req, res, next){
     var message = req.body.Body;
     if (message.trim().toLowerCase() === 'about') {
@@ -30,13 +39,6 @@ function aboutResponder(req, res, next){
 
 function getRoutes(req, res, next){
     var input = req.body.Body;
-    if (!input || /^\s*$/.test(input)) {
-        // res.locals.action is caching the event type which we can use later when logging anlytics
-        res.locals.action = 'Empty Input' 
-        res.locals.message = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'}
-        return res.render('message')
-    }
-
     var stopRequest = input.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
     if (/^\d+$/.test(stopRequest)) {
         res.locals.action = 'Stop Lookup'
@@ -90,6 +92,7 @@ router.post('/',
         }
         next();
     },
+    blankInputRepsonder,
     aboutResponder,
     getRoutes
 );
@@ -100,6 +103,7 @@ router.post('/ajax',
         res.locals.returnHTML = 1;
         next()
     },
+    blankInputRepsonder,
     aboutResponder,
     getRoutes
 );
