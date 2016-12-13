@@ -42,7 +42,6 @@ app.use(logs.initialize((req, res) => {
     action: actions are set by the router depending on what the user was looking for
            currently: '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
     label: the actual search: the stop number, geocoded address, or the raw input if lookup failed
-
 */
 logs.initGoogleAnalytics((logFields) => {
     // There shoudl be a UUID in the req.cookie 
