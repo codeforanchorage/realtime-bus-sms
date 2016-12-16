@@ -134,7 +134,7 @@ exports.group = {
 
 // Test an address entry
     test_browserAddressEntry: function (test) {
-        var address = "5th Avenue and G street";
+        var address = "36th Avenue";
         api.post(test, '/ajax', {
             data: {Body: address}
         }, function (res) {
@@ -142,7 +142,7 @@ exports.group = {
         });
     },
     test_smsAddressEntry: function (test) {
-        var address = "5th Avenue and G street";
+        var address = "36th Avenue";
         api.post(test, '/', {
             data: {Body: address}
         }, function (res) {
