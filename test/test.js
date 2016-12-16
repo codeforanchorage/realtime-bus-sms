@@ -6,10 +6,12 @@ app.set('port', port);
 var server = http.createServer(app);
 
 var config = require('../lib/config');
+var lib = require('../lib/index')
 var stop_number_lookup = require('../lib/stop_number_lookup');
 var hashwords = require('hashwords')();
 var fs = require('fs');
 var crypto = require('crypto');
+var sandbox = require('sinon').sandbox.create();
 
 
 
@@ -44,11 +46,6 @@ function testFeedback(test, res, feedbackString, phone, email) {
 
 function testAbout(test, res) {
     test.ok(res.body.indexOf("Get bus ETAs") > -1, "Test about");
-    test.done()
-}
-
-function testAddress(test, res, address) {
-    test.ok(res.body.includes("Address not found"), "Test simple address entry");
     test.done()
 }
 
@@ -115,11 +112,34 @@ exports.group = {
         api = require('nodeunit-httpclient').create({
             port: port
         });
+
+        // mock geocoding output
+        var fake_geocoding_output = {
+            data:
+            {
+                latitude: 61.1465158,
+                longitude: -149.9518964,
+                country: 'United States',
+                city: 'Anchorage',
+                state: 'Alaska',
+                stateCode: 'AK',
+                zipcode: '99502',
+                streetName: 'Jewel Lake Road',
+                streetNumber: null,
+                countryCode: 'US'
+            },
+            asyncTime: 686
+        }
+        sandbox.stub(lib, 'getGeocodedAddress').returns(
+            Promise.resolve(fake_geocoding_output)
+        )
+
         done();
     },
 
     tearDown: function (done) {
         server.close();
+        sandbox.restore();
         done();
     },
 
@@ -134,19 +154,27 @@ exports.group = {
 
 // Test an address entry
     test_browserAddressEntry: function (test) {
-        var address = "5th Avenue";
+        var address = "JEWEL LAKE & 82ND";
         api.post(test, '/ajax', {
             data: {Body: address}
         }, function (res) {
-            testAddress(test, res, address)
+            test.ok(
+                res.body.includes('JEWEL LAKE & 82ND AVENUE NNE'),
+                "Test simple address entry"
+            )
+            test.done()
         });
     },
     test_smsAddressEntry: function (test) {
-        var address = "5th Avenue";
+        var address = "JEWEL LAKE & 82ND";
         api.post(test, '/', {
             data: {Body: address}
         }, function (res) {
-            testAddress(test, res, address)
+            test.ok(
+                res.body.includes('0213 - JEWEL LAKE & 82ND AVENUE NNE'),
+                "Test simple address entry"
+            )
+            test.done()
         });
     },
 
