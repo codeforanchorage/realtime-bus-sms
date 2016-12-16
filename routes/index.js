@@ -173,7 +173,7 @@ router.get('/byLatLon', function(req, res, next) {
     var data = lib.findNearestStops(req.query.lat, req.query.lon);
 
      res.render('route-list-partial', {routes: {data: {stops: data}} });
-     
+
 
 });
 

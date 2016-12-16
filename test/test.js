@@ -48,7 +48,7 @@ function testAbout(test, res) {
 }
 
 function testAddress(test, res, address) {
-    test.ok(res.body.indexOf(address.toUpperCase() + " & ") > -1, "Test simple address entry");
+    test.ok(res.body.includes("Address not found"), "Test simple address entry");
     test.done()
 }
 
@@ -89,7 +89,7 @@ function testLogging(test, res, input, phone) {
     db = JSON.parse(fs.readFileSync('./db_private.json'));
     test.ok(function() {
         for(var i=0; i < db.requests.length; i++) {
-            console.log(db.requests[i].input);
+            // console.log(db.requests[i].input);
             if (db.requests[i].input == input ) {
                 if (phone) {
                     if (db.requests[i].phone == phone) {
@@ -134,7 +134,7 @@ exports.group = {
 
 // Test an address entry
     test_browserAddressEntry: function (test) {
-        var address = "36th Avenue";
+        var address = "5th Avenue";
         api.post(test, '/ajax', {
             data: {Body: address}
         }, function (res) {
@@ -142,7 +142,7 @@ exports.group = {
         });
     },
     test_smsAddressEntry: function (test) {
-        var address = "36th Avenue";
+        var address = "5th Avenue";
         api.post(test, '/', {
             data: {Body: address}
         }, function (res) {
@@ -240,7 +240,7 @@ exports.group = {
             data: {Body: input,
                 From: phone}
         }, function (res) {
-            setTimeout(function () {testLogging(test, res, input, phone)}, 5000);  //Delay to make sure logging saves
+            setTimeout(function () {testLogging(test, res, input, phone)}, 500);  //Delay to make sure logging saves
         });
     },
     test_browserLogging: function (test) {
@@ -248,7 +248,7 @@ exports.group = {
         api.post(test, '/ajax', {
             data: {Body: input}
         }, function (res) {
-            setTimeout(function () {testLogging(test, res, input)}, 5000);  //Delay to make sure logging saves
+            setTimeout(function () {testLogging(test, res, input)}, 500);  //Delay to make sure logging saves
         });
     },
 
@@ -287,7 +287,7 @@ exports.group = {
             data: {comment: feedbackString,
                    email: email}
         }, function (res) {
-            setTimeout(function () {testFeedback(test, res, feedbackString, null, email)}, 5000);  //Delay to make sure logging saves
+            setTimeout(function () {testFeedback(test, res, feedbackString, null, email)}, 500);  //Delay to make sure logging saves
         });
     },
     test_smsFeedback: function (test) {
@@ -297,7 +297,7 @@ exports.group = {
             data: {Body: config.FEEDBACK_TRIGGER + feedbackString,
                 From: phone}
         }, function (res) {
-            setTimeout(function () {testFeedback(test, res, feedbackString, phone)}, 5000);  //Delay to make sure logging saves
+            setTimeout(function () {testFeedback(test, res, feedbackString, phone)}, 500);  //Delay to make sure logging saves
         });
 
     },
@@ -348,7 +348,7 @@ exports.group = {
                                 return false
                             });
                             test.done();
-                        }, 5000);  //Delay to make sure logging saves
+                        }, 500);  //Delay to make sure logging saves
                 });
             }
         }
@@ -408,4 +408,3 @@ exports.group = {
 
 
 };
-
