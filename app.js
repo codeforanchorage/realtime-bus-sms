@@ -21,7 +21,12 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 
-
+/*
+    SETUP LOGGING
+    This sets which fields in addition to the defaults in logger.js should be logged
+    After these values are logged other transports such as Google Analytics can
+    choose to send them so other services. 
+*/
 app.use(logs.initialize((req, res) => {
     var routes = res.locals.routes
     return {
@@ -36,16 +41,17 @@ app.use(logs.initialize((req, res) => {
 }));
 
 /*  
-    Setup Google Analytics
+    SETUP GOOGLE ANALYTICS
     The convention used here is:
     category: 'sms | 'web'
     action: actions are set by the router depending on what the user was looking for
-           currently: '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
-    label: the actual search: the stop number, geocoded address, or the raw input if lookup failed
+            currently: '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
+    label:  the actual search: the stop number, geocoded address, or the raw input if lookup failed
 */
 logs.initGoogleAnalytics((logFields) => {
-    // There shoudl be a UUID in the req.cookie 
-    // But Twilios expire after 4 hous so we'll make a more stable phone-based one
+    //  There should be a UUID in the req.cookie which will be found by default
+    //  But Twilio's expires after 4 hours so we'll make a more stable phone-based 
+    //  one for SMS users
     var uuid;
     var category = logFields.phone ? "sms" : "web";
     if (category == "sms"){
@@ -62,7 +68,10 @@ logs.initGoogleAnalytics((logFields) => {
         timings:      [{name: "muniTime", time: logFields.muniTime }]
     }
 })
-logs.add(require('./lib/lowdb_log_transport'), {}) // add custom transport for logging to lowDB
+//  Add custom transport for logging to lowDB
+//  This is in its own module becuase rather than the logger module
+//  because it's all very specific to the bus app.
+logs.add(require('./lib/lowdb_log_transport'), {}) 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
