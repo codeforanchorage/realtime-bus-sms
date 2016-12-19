@@ -1,8 +1,9 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
+var logs = require('./lib/logger');
 var cookieParser = require('cookie-parser');
+var UUID = require("pure-uuid");
 var bodyParser = require('body-parser');
 var rollbar = require("rollbar");
 var config = require('./lib/config');
@@ -19,10 +20,73 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+
+/*
+    SETUP LOGGING
+    This sets which fields in addition to the defaults in logger.js should be logged
+    After these values are logged other transports such as Google Analytics can
+    choose to send them so other services. 
+*/
+app.use(logs.initialize((req, res) => {
+    var routes = res.locals.routes
+    return {
+        input:           req.body.Body,
+        phone:           req.body.From,
+        muniTime:        routes ? routes.muniTime: undefined,
+        geocodeTime:     routes ? routes.geocodeTime: undefined,
+        stopId:          routes ? routes.data.stopId: undefined,
+        geocodedAddress: routes ? routes.data.geocodedAddress: undefined,
+        action:          res.locals.action,
+    }
+}));
+
+/*  
+    SETUP GOOGLE ANALYTICS
+    The convention used here is:
+    category: 'sms | 'web'
+    action: actions are set by the router depending on what the user was looking for
+            currently: '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
+    label:  the actual search: the stop number, geocoded address, or the raw input if lookup failed
+*/
+logs.initGoogleAnalytics((logFields) => {
+    //  There should be a UUID in the req.cookie which will be found by default
+    //  But Twilio's expires after 4 hours so we'll make a more stable phone-based 
+    //  one for SMS users
+    var uuid;
+    var category = logFields.phone ? "sms" : "web";
+    if (category == "sms"){
+        var ns = "deebee62-076c-47ef-ad02-2509e2d4f839" // this random namespace is hashed (using SHA-1) with phone number to create UUID
+        uuid = new UUID(5, ns, logFields.phone).format()
+    }
+    return {
+        trackingCode: config.GOOGLE_ANALYTICS_ID,
+        category:     category,
+        action:       logFields.action,
+        label:        logFields.stopId || logFields.geocodedAddress  || (logFields.input ? logFields.input.trim().toLowerCase(): ""),
+        value:        logFields.responseTime,
+        uuid:         uuid,
+        timings:      [{name: "muniTime", time: logFields.muniTime }]
+    }
+})
+//  Add custom transport for logging to lowDB
+//  This is in its own module becuase rather than the logger module
+//  because it's all very specific to the bus app.
+logs.add(require('./lib/lowdb_log_transport'), {}) 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// set simple session cookie
+// used to determine new vs returning web users
+app.use(function(req, res, next){
+    if(!(req.cookies) || !('uuid' in req.cookies)) {
+        var uuid = new UUID(4); //v4 UUID are random
+        res.cookie('uuid', uuid.format(), {expires: new Date(2147483648000)}) // way in the future
+    }
+    next();
+})
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);

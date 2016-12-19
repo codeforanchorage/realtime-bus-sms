@@ -120,7 +120,7 @@ html
 
         function makeRequest(query){
             var payload = {Body: query || document.getElementsByName('Body')[0].value};
-            history.pushState(payload, "BusTracker", "/find/"+payload.Body)
+            history.pushState(payload, "BusTracker", "/find/"+encodeURIComponent(payload.Body))
             postIt(payload);
             return false;
         }
