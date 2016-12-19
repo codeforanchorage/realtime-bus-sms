@@ -181,6 +181,7 @@ router.get('/byLatLon', function(req, res, next) {
 // feedback form endpoint
 router.post('/feedback', function(req, res) {
     res.locals.returnHTML = 1
+    res.locals.action = 'Feedback'
     lib.processFeedback(req.body.comment, req)
     .then()
     .catch((err)=> logger.warn("feedback/ error ", err)); // TODO - tell users if there is a problem or fail silently?
