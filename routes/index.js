@@ -1,12 +1,8 @@
 var express = require('express');
-var low = require('lowdb')
 var router = express.Router();
-var stop_number_lookup = require('../lib/stop_number_lookup');
 var debug = require('debug')('routes/index.js');
 var lib = require('../lib/index');
 var config = require('../lib/config');
-var db = low('./public/db.json', { storage: require('lowdb/lib/file-async') });
-var db_private = low('./db_private.json', { storage: require('lowdb/lib/file-async') });
 var fs = require('fs');
 
 var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
@@ -114,6 +110,7 @@ function askWatson(req, res, next){
     });
 }
 
+
 /*
      MIDDLEWARE FUNCTIONS 
      These are primarily concerned with parsing the input the comes in from the POST
@@ -122,18 +119,7 @@ function askWatson(req, res, next){
      '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
 
 */
-
-function handleAbout(req, res, next){
-    var message = req.body.Body;
-    if (message.trim().toLowerCase() === 'about') {
-        res.locals.action = 'About'
-        res.render('about-partial');     
-        return;  
-    }
-    next();
-}
-
-function handleBlank(req,res,next){
+function blankInputRepsonder(req, res, next){
     var input = req.body.Body;
     if (!input || /^\s*$/.test(input)) {
         // res.locals.action is caching the event type which we can use later when logging anlytics
@@ -141,7 +127,16 @@ function handleBlank(req,res,next){
         res.locals.message = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'}
         return res.render('message')
     }
-    next()
+    next();
+}
+function aboutResponder(req, res, next){
+    var message = req.body.Body;
+    if (message.trim().toLowerCase() === 'about') {
+        res.locals.action = 'About'
+        res.render('about-partial');     
+        return;  
+    }
+    next();
 }
 
 function handleStopNumber(req,res, next){
@@ -175,10 +170,11 @@ function getRoutes(req, res, next){
         res.render('message', {message: err})
     })
     return;  
+
 }
 */
 
-// GET home page. 
+/* GET HOME PAGE */
 router.get('/', function(req, res, next) { 
         res.render('index');
     }
@@ -186,7 +182,8 @@ router.get('/', function(req, res, next) {
 
 
 /*  
-    Twilio hits this endpoint. The user's text message is
+    TWILIO ENDPOINT
+    The user's text message is
     in the POST body.
     TODO: better error messages
 */
@@ -203,27 +200,29 @@ router.post('/',
         }
         next();
     },
-    handleBlank,
-    handleAbout,
+    blankInputRepsonder,
+    aboutResponder,
     handleStopNumber,
     askWatson
 );
 
-// This is what the browser hits
+/* BROWSER AJAX ENDPOINT */
 router.post('/ajax', 
     function (req, res, next) {
         res.locals.returnHTML = 1;
         next()
     },
-    handleBlank,
-    handleAbout,
+    blankInputRepsonder,
+    aboutResponder,
     handleStopNumber,
     askWatson
 );
 
  
-// Routes to allow direct access via url with 
-// either address, stop number, or about.
+/*  DIRECT URL ACCESS
+    Routes to allow deep linking and bookmarks via url with 
+    either address, stop number, or about.
+*/
 
 router.get('/find/about', function(req, res, next) {
     res.locals.returnHTML = 1;
@@ -232,7 +231,7 @@ router.get('/find/about', function(req, res, next) {
 
 });
 
-// :query should be a plain stop number 
+//  :query should be a stop number  
 router.get('/find/:query(\\d+)', function(req, res, next) {
     res.locals.action = 'Stop Lookup'
     res.locals.returnHTML = 1;
@@ -265,8 +264,7 @@ router.get('/find/:query', function(req, res, next) {
     });
 });
 
-
-// a browser with location service enabled can hit this
+//  a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
     res.locals.returnHTML = 1;
 
@@ -287,7 +285,7 @@ router.get('/byLatLon', function(req, res, next) {
     var data = lib.findNearestStops(req.query.lat, req.query.lon);
 
      res.render('route-list-partial', {routes: {data: {stops: data}} });
-     
+
 
 });
 
@@ -295,13 +293,14 @@ router.get('/byLatLon', function(req, res, next) {
 // feedback form endpoint
 router.post('/feedback', function(req, res) {
     res.locals.returnHTML = 1
+    res.locals.action = 'Feedback'
     lib.processFeedback(req.body.comment, req)
     .then()
     .catch((err)=> logger.warn("feedback/ error ", err)); // TODO - tell users if there is a problem or fail silently?
     res.render('message', {message: {message:'Thanks for the feedback'}});
 });
 
-// Respond to feedback over SMS
+//  Respond to feedback over SMS
 router.get('/respond', function(req, res, next) {
     var comments = JSON.parse(fs.readFileSync('./comments.json'));
     for(var i=comments.comments.length-1; i >= 0; i--) {
