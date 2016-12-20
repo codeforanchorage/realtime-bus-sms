@@ -11,16 +11,9 @@ var lowdb_log = require('../lib/lowdb_log_transport')
 
 var watson = require('watson-developer-cloud');
 
-/* Get Watson Context from cookie
-    Twilio will set a cookie and track changes for 4 hours 
-    So hopefully we can treat web and twilio user the same
-*/
-
-
 /* 
     WATSON MIDDLE WARE 
-    TODO track sessions - twilio accepts cookies for this - so we can make converstations that hold state
-    Test intent confidence to decide to help decide flow
+    TODO Test intent confidence to decide to help decide flow
 */
 function askWatson(req, res, next){
     logger.debug("Calling Watson")
@@ -41,7 +34,6 @@ function askWatson(req, res, next){
         But for right now th cookie approach is working.
     */
     var context  = JSON.parse(req.cookies['context'] || '{}');
-    logger.debug("Context from Cookie: ", context);
 
     conversation.message( {
         workspace_id: config.WATSON_WORKPLACE,
@@ -54,12 +46,10 @@ function askWatson(req, res, next){
             } else {
                 var intent = response.intents[0]['intent']
 
-                // Setting cookie to value of returned conversation_id
-                // will allow continuation of conversations that are otherwise
-                // stateless.
+                // Setting cookie to value of returned conversation_id will allow
+                // continuation of conversations that are otherwise stateless
                 res.cookie('context', JSON.stringify(response.context))
 
-                logger.debug("Context: ", JSON.stringify(response.context) )
                 if (!response.context.action) {
                     res.locals.action = 'Watson Chat'
                     res.locals.message = {message:response.output.text.join(' ')}
@@ -68,8 +58,9 @@ function askWatson(req, res, next){
 
                 switch(response.context.action) {
                     case "Stop Lookup": 
+                        // Earlier middleware should catch plain stop numbers
+                        // But a query like "I'm at stop 36" should end up here
                         var stops = response.entities.filter((element) =>  element['entity'] == "sys-number"  );
-                        logger.debug("stops: ", stops)
                         var stop = stops[0]
                         if (stop) {
                             res.locals.action = 'Stop Lookup'
@@ -88,18 +79,14 @@ function askWatson(req, res, next){
                             logger.error("Watson returned a next_bus intent with no stops.")
                         }
                     case("Address Lookup"):
-                        res.locals.action = 'Address Lookup'
-                        lib.getStopsFromAddress(response.input.text)
-                        .then((routeObject) => {
-                            res.locals.routes = routeObject;
-                            res.render('routes');
-                        })
-                        .catch((err) => {
-                            res.locals.action = 'Failed Address Lookup'
-                            res.render('message', {message: err})
-                        })
+                        // The geocoder has already failed to lookup
+                        // but Watson thinks this is an address  
+                        res.locals.action = 'Failed Address Lookup'
+                        res.locals.message = {message:response.output.text.join(' ')}
+                        return res.render('message')
                         return
                     default:
+                        // For everything else .
                         res.locals.action = 'Watson Chat'
                         logger.debug("winston repsone: ", response.context)
                         res.locals.message = {message:response.output.text.join(' ')}
@@ -110,14 +97,12 @@ function askWatson(req, res, next){
     });
 }
 
-
 /*
      MIDDLEWARE FUNCTIONS 
      These are primarily concerned with parsing the input the comes in from the POST
      body and deciding how to handle it. 
      To help logging this sets res.locals.action to one of
      '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
-
 */
 function blankInputRepsonder(req, res, next){
     var input = req.body.Body;
@@ -157,22 +142,28 @@ function handleStopNumber(req,res, next){
     }
     next()
 }
-/* Watson does this now
+
 function getRoutes(req, res, next){
+    var input = req.body.Body;    
     res.locals.action = 'Address Lookup'
     lib.getStopsFromAddress(input)
     .then((routeObject) => {
+        if (routeObject.data.stops.length < 1) { // Address found, but no stops near address
+            res.locals.message = { name: "No Stops", message: `No stops found within ${config.NEAREST_BUFFER} mile` + ((config.NEAREST_BUFFER != 1) ? 's' : '')}
+            res.render('message')
+            return
+        }
         res.locals.routes = routeObject;
         res.render('routes');
     })
     .catch((err) => {
+        if (err.type == 'NOT_FOUND') return next() // Address not found pass to Watson      
+ 
         res.locals.action = 'Failed Address Lookup'
         res.render('message', {message: err})
     })
     return;  
-
 }
-*/
 
 /* GET HOME PAGE */
 router.get('/', function(req, res, next) { 
@@ -203,6 +194,7 @@ router.post('/',
     blankInputRepsonder,
     aboutResponder,
     handleStopNumber,
+    getRoutes,
     askWatson
 );
 
@@ -215,6 +207,7 @@ router.post('/ajax',
     blankInputRepsonder,
     aboutResponder,
     handleStopNumber,
+    getRoutes,
     askWatson
 );
 
@@ -251,7 +244,6 @@ router.get('/find/:query(\\d+)', function(req, res, next) {
 
 /* TODO integrate Watson here so page refreshes and bookmarks use flow */
 router.get('/find/:query', function(req, res, next) {
-    res.locals.action = 'Address Lookup'
     res.locals.returnHTML = 1;
     lib.getStopsFromAddress(req.params.query)
     .then((routeObject) => {
