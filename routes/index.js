@@ -25,7 +25,7 @@ function askWatson(req, res, next){
         version_date: '2016-09-20'
     })
 
-    /* TODO - this is probably not the best way to do this
+    /* TODO - this is probably not the best way to do maintain state
         If we want to be able to have conversation beyond a stateless 
         question & answer, we need to be able to pass the context that Watson sends
         back to Watson. The context object isn't very big, so it fits within the 4k limit 
@@ -67,7 +67,7 @@ function askWatson(req, res, next){
                             lib.getStopFromStopNumber(parseInt(stops[0].value))
                             .then((routeObject) => {
                                 res.locals.routes = routeObject;
-                                res.render('routes');
+                                res.render('stop-list');
                             })
                             .catch((err) => {
                                 res.locals.action = 'Failed Stop Lookup'
@@ -79,8 +79,8 @@ function askWatson(req, res, next){
                             logger.error("Watson returned a next_bus intent with no stops.")
                         }
                     case("Address Lookup"):
-                        // The geocoder has already failed to lookup
-                        // but Watson thinks this is an address  
+                        // The geocoder has already tried and failed to lookup
+                        // but Watson thinks this is an address
                         res.locals.action = 'Failed Address Lookup'
                         res.locals.message = {message:response.output.text.join(' ')}
                         return res.render('message')
@@ -124,7 +124,7 @@ function aboutResponder(req, res, next){
     next();
 }
 
-function handleStopNumber(req,res, next){
+function stopNumberResponder(req,res, next){
     var input = req.body.Body;
     var stopRequest = input.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
     if (/^\d+$/.test(stopRequest)) {
@@ -132,7 +132,7 @@ function handleStopNumber(req,res, next){
         lib.getStopFromStopNumber(parseInt(stopRequest))
         .then((routeObject) => {
             res.locals.routes = routeObject;
-            res.render('routes');
+            res.render('stop-list');
         })
         .catch((err) => {
             res.locals.action = 'Failed Stop Lookup'
@@ -143,7 +143,7 @@ function handleStopNumber(req,res, next){
     next()
 }
 
-function getRoutes(req, res, next){
+function addressResponder(req, res, next){
     var input = req.body.Body;    
     res.locals.action = 'Address Lookup'
     lib.getStopsFromAddress(input)
@@ -154,7 +154,7 @@ function getRoutes(req, res, next){
             return
         }
         res.locals.routes = routeObject;
-        res.render('routes');
+        res.render('route-list');
     })
     .catch((err) => {
         if (err.type == 'NOT_FOUND') return next() // Address not found pass to Watson      
@@ -193,8 +193,8 @@ router.post('/',
     },
     blankInputRepsonder,
     aboutResponder,
-    handleStopNumber,
-    getRoutes,
+    stopNumberResponder,
+    addressResponder,
     askWatson
 );
 
@@ -206,8 +206,8 @@ router.post('/ajax',
     },
     blankInputRepsonder,
     aboutResponder,
-    handleStopNumber,
-    getRoutes,
+    stopNumberResponder,
+    addressResponder,
     askWatson
 );
 
@@ -226,35 +226,29 @@ router.get('/find/about', function(req, res, next) {
 
 //  :query should be a stop number  
 router.get('/find/:query(\\d+)', function(req, res, next) {
-    res.locals.action = 'Stop Lookup'
-    res.locals.returnHTML = 1;
-    lib.getStopFromStopNumber(parseInt(req.params.query))
-    .then((routeObject) => {
-        res.locals.routes = routeObject;
-        res.render('stop-list-non-ajax');
-    })
-    .catch((err) => {
-        res.locals.action = 'Failed Stop Lookup'
-        res.render('message-non-ajax', {message: err})
-    });
-});
+        req.body.Body = req.params.query;
+        res.locals.returnHTML = 1;
+        res.locals.renderWholePage = 1;
+        next();
+    },
+    stopNumberResponder
+);
 
 // :query should be everything other than a stop number
 // - assumes address search 
 
 /* TODO integrate Watson here so page refreshes and bookmarks use flow */
 router.get('/find/:query', function(req, res, next) {
-    res.locals.returnHTML = 1;
-    lib.getStopsFromAddress(req.params.query)
-    .then((routeObject) => {
-        res.locals.routes = routeObject;
-        res.render('route-list-non-ajax');
-    })
-    .catch((err) => {
-        res.locals.action = 'Failed Address Lookup'
-        res.render('message-non-ajax', {message: err})
-    });
-});
+        req.body.Body = req.params.query;
+        res.locals.returnHTML = 1;
+        res.locals.renderWholePage = 1;
+        next();
+    },
+    blankInputRepsonder,
+    aboutResponder,
+    addressResponder,
+    askWatson
+);
 
 //  a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
