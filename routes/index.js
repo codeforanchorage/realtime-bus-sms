@@ -44,40 +44,40 @@ function logRequest(locals) {
         entry.muniTime        = routes.muniTime;
         entry.geocodeTime     = routes.geocodeTime;
     }
-    
+
     db_private('requests').push(entry);
     var entry2 = JSON.parse(JSON.stringify(entry)); // Required because of async mode of lowdb
     if (entry.phone) {
         entry2.phone = hashwords.hashStr(entry.phone);
     }
     entry2.ip = "";
-    db('requests').push(entry2); 
-    
+    db('requests').push(entry2);
+
 }
 
 
-/* 
-MIDDLEWARE FUNCTIONS 
+/*
+MIDDLEWARE FUNCTIONS
 */
 
 function aboutResponder(req, res, next){
     var message = req.body.Body;
     if (message.trim().toLowerCase() === 'about') {
        req.logRequest(res.locals)
-       res.render('about-partial');     
-       return;  
+       res.render('about-partial');
+       return;
     }
     next();
 }
 
 function getRoutes(req, res, next){
     lib.parseInputReturnBusTimes(req.body.Body)
-    .then((routeObject) => {
+    .then(function(routeObject) {
         res.locals.routes = routeObject;
         req.logRequest(res.locals);
         res.render('routes');
     })
-    .catch((err) => {
+    .catch(function(err) {
         res.render('message', {message: err})
         req.logRequest(res.locals);
     });
@@ -89,12 +89,12 @@ router.get('/', function(req, res, next) {
 });
 
 /* Setup Logging */
-router.use(function(req, res, next){ 
+router.use(function(req, res, next){
     res.locals.startTime = Date.now();
     req.logRequest = logRequest;
     next();
 
-}); 
+});
 
 /* Routes to allow direct access via url with either address, stop number, or about.*/
 router.get('/find/about', function(req, res, next) {
@@ -140,7 +140,7 @@ router.post('/',
 );
 
 // This is what the browser hits
-router.post('/ajax', 
+router.post('/ajax',
     function (req, res, next) {
         res.locals.returnHTML = 1;
         next()
@@ -171,7 +171,7 @@ router.get('/byLatLon', function(req, res, next) {
 
      req.logRequest(res.locals);
      res.render('route-list-partial', {routes: {data: {stops: data}} });
-     
+
 
 });
 

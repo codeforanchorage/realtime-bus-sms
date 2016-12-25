@@ -10,3 +10,7 @@ comments.json
 db_private.json
 
 .DS_Store
+
+.~db_private.json
+
+public/.~db.json
