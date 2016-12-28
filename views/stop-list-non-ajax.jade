@@ -1,0 +1,6 @@
+// - This file allows template inheritance when a direct url (i.e. http://localhost:8080/find/1433) is used
+// - becuase jade does not allow dynamic template inheritance.
+
+extends index.jade
+block info
+    include stop-list-partial
