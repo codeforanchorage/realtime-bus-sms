@@ -17,7 +17,7 @@ var watson = require('watson-developer-cloud');
 */
 function askWatson(req, res, next){
     logger.debug("Calling Watson")
-    var input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so I'm catches a number
+    var input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so things like "I'm" returns an unwanted number
     var conversation = watson.conversation({
         username: config.WATSON_USER,
         password: config.WATSON_PASSWORD,
@@ -41,59 +41,70 @@ function askWatson(req, res, next){
         context: context
         }, function(err, response) {
             if (err) {
-                logger.error('watson error:', err); // TODO this should go to Rollbar in production
-                return res.render('message', {message: "I'm sorry, the mustracker is having a problem right now"})
-            } else {
-                var intent = response.intents[0]['intent']
+                logger.error('watson error:', err);
+                return res.render('message', {message: "I'm sorry, the bustracker is having a problem right now"})
+            }
 
-                // Setting cookie to value of returned conversation_id will allow
-                // continuation of conversations that are otherwise stateless
-                res.cookie('context', JSON.stringify(response.context))
+            // Setting cookie to value of returned conversation_id will allow
+            // continuation of conversations that are otherwise stateless
+            res.cookie('context', JSON.stringify(response.context))
 
-                if (!response.context.action) {
-                    res.locals.action = 'Watson Chat'
+            // The context.action is set in the Watson Conversation Nodes when we know
+            // we need to respond with additional data or our own message.  
+            // If it's not set, we use the response sent from Watson.
+            if (!response.context.action) {
+                res.locals.action = 'Watson Chat'
+                res.locals.message = {message:response.output.text.join(' ')}
+                return res.render('message')
+            }
+
+            switch(response.context.action) {
+                case "Stop Lookup": 
+                    // Earlier middleware should catch plain stop numbers
+                    // But a query like "I'm at stop 36" should end up here
+                    // Watson should identify the number for use as an entity
+                    var stops = response.entities.filter((element) =>  element['entity'] == "sys-number"  );
+
+                    // It's possible to have more than one number in a user query
+                    // If that happens we take the first number and hope it's right
+                    var stop = stops[0]
+
+                    if (stop) {
+                        res.locals.action = 'Stop Lookup'
+                        lib.getStopFromStopNumber(parseInt(stops[0].value))
+                        .then((routeObject) => {
+                            res.locals.routes = routeObject;
+                            res.render('stop-list');
+                        })
+                        .catch((err) => {
+                            res.locals.action = 'Failed Stop Lookup'
+                            res.render('message', {message: err})
+                        })
+                        return;
+                    } else {
+                        // This shouldn't ever happen.
+                        res.locals.action = 'Watson Error'
+                        logger.error("Watson returned a next_bus intent with no stops.")
+                        res.locals.message = {name: "Bustracker Error", message:"I'm sorry an error occured." }
+                        return res.render('message')
+                    }
+                case("Address Lookup"):
+                    // The geocoder has already tried and failed to lookup
+                    // but Watson thinks this is an address. It's only a seperate 
+                    // case so we can log a failed address lookup
+                    res.locals.action = 'Failed Address Lookup'
                     res.locals.message = {message:response.output.text.join(' ')}
                     return res.render('message')
-                }
 
-                switch(response.context.action) {
-                    case "Stop Lookup": 
-                        // Earlier middleware should catch plain stop numbers
-                        // But a query like "I'm at stop 36" should end up here
-                        var stops = response.entities.filter((element) =>  element['entity'] == "sys-number"  );
-                        var stop = stops[0]
-                        if (stop) {
-                            res.locals.action = 'Stop Lookup'
-                            lib.getStopFromStopNumber(parseInt(stops[0].value))
-                            .then((routeObject) => {
-                                res.locals.routes = routeObject;
-                                res.render('stop-list');
-                            })
-                            .catch((err) => {
-                                res.locals.action = 'Failed Stop Lookup'
-                                res.render('message', {message: err})
-                            })
-                            return;
-                        } else {
-                            //this shouldn't ever happen
-                            logger.error("Watson returned a next_bus intent with no stops.")
-                        }
-                    case("Address Lookup"):
-                        // The geocoder has already tried and failed to lookup
-                        // but Watson thinks this is an address
-                        res.locals.action = 'Failed Address Lookup'
-                        res.locals.message = {message:response.output.text.join(' ')}
-                        return res.render('message')
-                        return
-                    default:
-                        // For everything else .
-                        res.locals.action = 'Watson Chat'
-                        logger.debug("winston repsone: ", response.context)
-                        res.locals.message = {message:response.output.text.join(' ')}
-                        return res.render('message')
+                default:
+                    // For everything else .
+                    res.locals.action = 'Watson Chat'
+                    logger.debug("winston repsone: ", response.context)
+                    res.locals.message = {message:response.output.text.join(' ')}
+                    return res.render('message')
+        
             }
-    }
-    next();
+        next();
     });
 }
 
@@ -114,6 +125,7 @@ function blankInputRepsonder(req, res, next){
     }
     next();
 }
+
 function aboutResponder(req, res, next){
     var message = req.body.Body;
     if (message.trim().toLowerCase() === 'about') {
