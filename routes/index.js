@@ -136,11 +136,16 @@ function aboutResponder(req, res, next){
     next();
 }
 
+
 function stopNumberResponder(req,res, next){
     var input = req.body.Body;
     var stopRequest = input.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
     if (/^\d+$/.test(stopRequest)) {
         res.locals.action = 'Stop Lookup'
+        if (lib.serviceExceptions()){
+           res.locals.message = {name: "Holiday", message:'There is no bus service today.'} 
+           return res.render('message')
+        }
         lib.getStopFromStopNumber(parseInt(stopRequest))
         .then((routeObject) => {
             res.locals.routes = routeObject;
