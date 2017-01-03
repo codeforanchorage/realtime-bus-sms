@@ -21,7 +21,6 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 
-app.use(cookieParser());
 
 // set simple session cookie
 // used to determine new vs returning web users
@@ -32,6 +31,7 @@ app.use(function(req, res, next){
     }
     next();
 })
+app.use(cookieParser());
 
 /*
     SETUP LOGGING
