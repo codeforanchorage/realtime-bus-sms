@@ -6,10 +6,12 @@ app.set('port', port);
 var server = http.createServer(app);
 
 var config = require('../lib/config');
+var lib = require('../lib/index')
 var stop_number_lookup = require('../lib/stop_number_lookup');
 var hashwords = require('hashwords')();
 var fs = require('fs');
 var crypto = require('crypto');
+var sandbox = require('sinon').sandbox.create();
 
 
 
@@ -44,11 +46,6 @@ function testFeedback(test, res, feedbackString, phone, email) {
 
 function testAbout(test, res) {
     test.ok(res.body.indexOf("Get bus ETAs") > -1, "Test about");
-    test.done()
-}
-
-function testAddress(test, res, address) {
-    test.ok(res.body.indexOf(address.toUpperCase() + " & ") > -1, "Test simple address entry");
     test.done()
 }
 
@@ -89,7 +86,7 @@ function testLogging(test, res, input, phone) {
     db = JSON.parse(fs.readFileSync('./db_private.json'));
     test.ok(function() {
         for(var i=0; i < db.requests.length; i++) {
-            console.log(db.requests[i].input);
+            // console.log(db.requests[i].input);
             if (db.requests[i].input == input ) {
                 if (phone) {
                     if (db.requests[i].phone == phone) {
@@ -115,11 +112,34 @@ exports.group = {
         api = require('nodeunit-httpclient').create({
             port: port
         });
+
+        // mock geocoding output
+        var fake_geocoding_output = {
+            data:
+            {
+                latitude: 61.1465158,
+                longitude: -149.9518964,
+                country: 'United States',
+                city: 'Anchorage',
+                state: 'Alaska',
+                stateCode: 'AK',
+                zipcode: '99502',
+                streetName: 'Jewel Lake Road',
+                streetNumber: null,
+                countryCode: 'US'
+            },
+            asyncTime: 686
+        }
+        sandbox.stub(lib, 'getGeocodedAddress').returns(
+            Promise.resolve(fake_geocoding_output)
+        )
+
         done();
     },
 
     tearDown: function (done) {
         server.close();
+        sandbox.restore();
         done();
     },
 
@@ -134,19 +154,27 @@ exports.group = {
 
 // Test an address entry
     test_browserAddressEntry: function (test) {
-        var address = "5th Avenue";
+        var address = "JEWEL LAKE & 82ND";
         api.post(test, '/ajax', {
             data: {Body: address}
         }, function (res) {
-            testAddress(test, res, address)
+            test.ok(
+                res.body.includes('JEWEL LAKE & 82ND AVENUE NNE'),
+                "Test simple address entry"
+            )
+            test.done()
         });
     },
     test_smsAddressEntry: function (test) {
-        var address = "5th Avenue";
+        var address = "JEWEL LAKE & 82ND";
         api.post(test, '/', {
             data: {Body: address}
         }, function (res) {
-            testAddress(test, res, address)
+            test.ok(
+                res.body.includes('0213 - JEWEL LAKE & 82ND AVENUE NNE'),
+                "Test simple address entry"
+            )
+            test.done()
         });
     },
 
@@ -240,7 +268,7 @@ exports.group = {
             data: {Body: input,
                 From: phone}
         }, function (res) {
-            setTimeout(function () {testLogging(test, res, input, phone)}, 5000);  //Delay to make sure logging saves
+            setTimeout(function () {testLogging(test, res, input, phone)}, 500);  //Delay to make sure logging saves
         });
     },
     test_browserLogging: function (test) {
@@ -248,7 +276,7 @@ exports.group = {
         api.post(test, '/ajax', {
             data: {Body: input}
         }, function (res) {
-            setTimeout(function () {testLogging(test, res, input)}, 5000);  //Delay to make sure logging saves
+            setTimeout(function () {testLogging(test, res, input)}, 500);  //Delay to make sure logging saves
         });
     },
 
@@ -287,7 +315,7 @@ exports.group = {
             data: {comment: feedbackString,
                    email: email}
         }, function (res) {
-            setTimeout(function () {testFeedback(test, res, feedbackString, null, email)}, 5000);  //Delay to make sure logging saves
+            setTimeout(function () {testFeedback(test, res, feedbackString, null, email)}, 500);  //Delay to make sure logging saves
         });
     },
     test_smsFeedback: function (test) {
@@ -297,7 +325,7 @@ exports.group = {
             data: {Body: config.FEEDBACK_TRIGGER + feedbackString,
                 From: phone}
         }, function (res) {
-            setTimeout(function () {testFeedback(test, res, feedbackString, phone)}, 5000);  //Delay to make sure logging saves
+            setTimeout(function () {testFeedback(test, res, feedbackString, phone)}, 500);  //Delay to make sure logging saves
         });
 
     },
@@ -348,7 +376,7 @@ exports.group = {
                                 return false
                             });
                             test.done();
-                        }, 5000);  //Delay to make sure logging saves
+                        }, 500);  //Delay to make sure logging saves
                 });
             }
         }
@@ -408,4 +436,3 @@ exports.group = {
 
 
 };
-
