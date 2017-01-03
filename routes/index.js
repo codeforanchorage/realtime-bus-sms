@@ -164,7 +164,7 @@ function addressResponder(req, res, next){
     lib.getStopsFromAddress(input)
     .then((routeObject) => {
         if (routeObject.data.stops.length < 1) { // Address found, but no stops near address
-            res.locals.message = { name: "No Stops", message: `No stops found within ${config.NEAREST_BUFFER} mile` + ((config.NEAREST_BUFFER != 1) ? 's' : '')}
+            res.locals.message = { name: "No Stops", message: `Sorry, no stops were found within ${config.NEAREST_BUFFER} mile` + ((config.NEAREST_BUFFER != 1) ? 's' : '')}
             res.render('message')
             return
         }
