@@ -125,7 +125,6 @@ function blankInputRepsonder(req, res, next){
     }
     next();
 }
-
 function aboutResponder(req, res, next){
     var message = req.body.Body;
     if (message.trim().toLowerCase() === 'about') {
@@ -135,7 +134,6 @@ function aboutResponder(req, res, next){
     }
     next();
 }
-
 
 function stopNumberResponder(req,res, next){
     var input = req.body.Body;
@@ -233,7 +231,6 @@ router.post('/ajax',
     Routes to allow deep linking and bookmarks via url with 
     either address, stop number, or about.
 */
-
 router.get('/find/about', function(req, res, next) {
     res.locals.returnHTML = 1;
     res.locals.action = "About"
@@ -254,7 +251,6 @@ router.get('/find/:query(\\d+)', function(req, res, next) {
 // :query should be everything other than a stop number
 // - assumes address search 
 
-/* TODO integrate Watson here so page refreshes and bookmarks use flow */
 router.get('/find/:query', function(req, res, next) {
         req.body.Body = req.params.query;
         res.locals.returnHTML = 1;
