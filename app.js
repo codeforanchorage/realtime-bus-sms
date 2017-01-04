@@ -9,11 +9,6 @@ var rollbar = require("rollbar");
 var config = require('./lib/config');
 var lib = require('./lib/index');
 
-// Facebook requirements
-var https = require('https');
-var crypto = require('crypto');
-var request = require('request');
-
 rollbar.init(config.ROLLBAR_TOKEN);
 
 var routes = require('./routes/index');

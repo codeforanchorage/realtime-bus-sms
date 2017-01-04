@@ -6,8 +6,13 @@ var config = require('../lib/config');
 var fs = require('fs');
 
 var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
-var logger = require('../lib/logger')
-var lowdb_log = require('../lib/lowdb_log_transport')
+var logger = require('../lib/logger');
+var lowdb_log = require('../lib/lowdb_log_transport');
+// Facebook requirements
+var request = require('request');
+var https = require('https');
+
+
 
 /*
  MIDDLEWARE FUNCTIONS
