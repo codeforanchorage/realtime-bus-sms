@@ -207,6 +207,7 @@ function sendFBMessage(recipientId, messageText) {
             metadata: "DEVELOPER_DEFINED_METADATA"
         }
     };
+    console.log("Trying to send message \"%s\" to recipient %s", messageText, recipientId );
 
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
