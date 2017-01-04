@@ -131,7 +131,7 @@ router.get('/', function(req, res, next) {
  */
 router.get('/fbhook', function(req, res) {
     if (req.query['hub.mode'] === 'subscribe' &&
-        req.query['hub.verify_token'] === FB_VALIDATION_TOKEN) {
+        req.query['hub.verify_token'] === config.FB_VALIDATION_TOKEN) {
         logger.info("Validating webhook");
         res.status(200).send(req.query['hub.challenge']);
     } else {
@@ -204,7 +204,7 @@ function sendFBMessage(recipientId, messageText) {
 
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: { access_token: FB_PAGE_ACCESS_TOKEN },
+        qs: { access_token: config.FB_PAGE_ACCESS_TOKEN },
         method: 'POST',
         json: messageData
 
