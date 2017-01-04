@@ -8,6 +8,11 @@ var bodyParser = require('body-parser');
 var rollbar = require("rollbar");
 var config = require('./lib/config');
 
+// Facebook requirements
+var https = require('https');
+var crypto = require('crypto');
+var request = require('request');
+
 rollbar.init(config.ROLLBAR_TOKEN);
 
 var routes = require('./routes/index');
@@ -71,9 +76,10 @@ logs.initGoogleAnalytics((logFields) => {
 //  Add custom transport for logging to lowDB
 //  This is in its own module becuase rather than the logger module
 //  because it's all very specific to the bus app.
-logs.add(require('./lib/lowdb_log_transport'), {}) 
+logs.add(require('./lib/lowdb_log_transport'), {})
 
 app.use(bodyParser.json());
+app.use('/fbhook', bodyParser.json({ verify: verifyRequestSignature }));  //For Facebook requests
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 

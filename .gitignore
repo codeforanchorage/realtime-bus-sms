@@ -2,15 +2,9 @@ node_modules
 config.js
 *.swp
 *.DS_Store
-
+.idea
 public/db.json
 
 comments.json
 
 db_private.json
-
-.DS_Store
-
-.~db_private.json
-
-public/.~db.json

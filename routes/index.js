@@ -10,29 +10,61 @@ var logger = require('../lib/logger')
 var lowdb_log = require('../lib/lowdb_log_transport')
 
 /*
-     MIDDLEWARE FUNCTIONS 
-     These are primarily concerned with parsing the input the comes in from the POST
-     body and deciding how to handle it. 
-     To help logging this sets res.locals.action to one of
-     '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
+ MIDDLEWARE FUNCTIONS
+ These are primarily concerned with parsing the input the comes in from the POST
+ body and deciding how to handle it.
+ To help logging this sets res.locals.action to one of
+ '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
 
-*/
+ */
+
+function feedbackResponder(req, res, next) {
+    res.set('Content-Type', 'text/plain');
+    var message = req.body.Body || '';
+    if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
+        res.locals.action = 'Feedback';
+        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
+            .then((data)=> {
+                if (res.locals.isFB) {
+                    sendFBMessage(req.body.From, "Thanks for the feedback");
+                } else {
+                    res.send("Thanks for the feedback")
+                }
+            })
+            .catch((err)=>logger.warn("Feedback error: ", err));
+        return;
+    }
+    next();
+}
+
 function blankInputRepsonder(req, res, next){
     var input = req.body.Body;
     if (!input || /^\s*$/.test(input)) {
         // res.locals.action is caching the event type which we can use later when logging anlytics
-        res.locals.action = 'Empty Input' 
+        res.locals.action = 'Empty Input'
         res.locals.message = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'}
-        return res.render('message')
+        return res.render('message', function(err, rendered) {
+            if (res.locals.isFB) {
+                sendFBMessage(req.body.From, rendered);
+            } else {
+                res.send(rendered);
+            }
+        })
     }
     next();
 }
 function aboutResponder(req, res, next){
     var message = req.body.Body;
     if (message.trim().toLowerCase() === 'about') {
-        res.locals.action = 'About'
-        res.render('about-partial');     
-        return;  
+        res.locals.action = 'About';
+        res.render('about-partial', function(err, rendered) {
+            if (res.locals.isFB) {
+                sendFBMessage(req.body.From, rendered);
+            } else {
+                res.send(rendered);
+            }
+        });
+        return;
     }
     next();
 }
@@ -41,64 +73,208 @@ function getRoutes(req, res, next){
     var input = req.body.Body;
     var stopRequest = input.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
     if (/^\d+$/.test(stopRequest)) {
-        res.locals.action = 'Stop Lookup'
+        res.locals.action = 'Stop Lookup';
         lib.getStopFromStopNumber(parseInt(stopRequest))
-        .then((routeObject) => {
-            res.locals.routes = routeObject;
-            res.render('routes');
-        })
-        .catch((err) => {
-            res.locals.action = 'Failed Stop Lookup'
-            res.render('message', {message: err})
-        })
+            .then((routeObject) => {
+                res.locals.routes = routeObject;
+                res.render('routes');
+            })
+            .catch((err) => {
+                res.locals.action = 'Failed Stop Lookup';
+                res.render('message', {message: err}, function(err, rendered) {
+                    if (res.locals.isFB) {
+                        sendFBMessage(req.body.From, rendered);
+                    } else {
+                        res.send(rendered);
+                    }
+                })
+            })
     }
     else {
-        res.locals.action = 'Address Lookup'
+        res.locals.action = 'Address Lookup';
         lib.getStopsFromAddress(input)
-        .then((routeObject) => {
-            res.locals.routes = routeObject;
-            res.render('routes');
-        })
-        .catch((err) => {
-            res.locals.action = 'Failed Address Lookup'
-            res.render('message', {message: err})
-        })
+            .then((routeObject) => {
+                res.locals.routes = routeObject;
+                res.render('routes', function(err, rendered) {
+                    if (res.locals.isFB) {
+                        sendFBMessage(req.body.From, rendered);
+                    } else {
+                        res.send(rendered);
+                    }
+                });
+            })
+            .catch((err) => {
+                res.locals.action = 'Failed Address Lookup';
+                res.render('message', {message: err}, function(err, rendered) {
+                    if (res.locals.isFB) {
+                        sendFBMessage(req.body.From, rendered);
+                    } else {
+                        res.send(rendered);
+                    }
+                })
+            })
     }
 }
 
+/*
+ * Verify that the callback came from Facebook. Using the App Secret from
+ * the App Dashboard, we can verify the signature that is sent with each
+ * callback in the x-hub-signature field, located in the header.
+ *
+ * https://developers.facebook.com/docs/graph-api/webhooks#setup
+ *
+ */
+function verifyRequestSignature(req, res, buf) {
+    var signature = req.headers["x-hub-signature"];
+
+    if (!signature) {
+        // For testing, let's log an error. In production, you should throw an
+        // error.
+        throw new Error("Couldn't validate the signature.");
+    } else {
+        var elements = signature.split('=');
+        var method = elements[0];
+        var signatureHash = elements[1];
+
+        var expectedHash = crypto.createHmac('sha1', APP_SECRET)
+            .update(buf)
+            .digest('hex');
+
+        if (signatureHash != expectedHash) {
+            throw new Error("Couldn't validate the request signature.");
+        }
+    }
+}
+
+
 /* GET HOME PAGE */
-router.get('/', function(req, res, next) { 
+router.get('/', function(req, res, next) {
         res.render('index');
     }
 );
 
+/*
+
+ Facebook Hooks
+ GET is to do the initial app validation in the Facebook Page setup.
+ POST is the actual Facebook message handling
+
+ */
+router.get('/fbhook', function(req, res) {
+    if (req.query['hub.mode'] === 'subscribe' &&
+        req.query['hub.verify_token'] === FB_VALIDATION_TOKEN) {
+        logger.info("Validating webhook");
+        res.status(200).send(req.query['hub.challenge']);
+    } else {
+        logger.warn("Failed validation. Make sure the validation tokens match.");
+        res.sendStatus(403);
+    }
+});
+
+router.post('/fbhook', function (req, res) {
+    var data = req.body;
+
+    // Make sure this is a page subscription
+    if (data.object == 'page') {
+        // Iterate over each entry
+        // There may be multiple if batched
+        data.entry.forEach(function(pageEntry) {
+            var pageID = pageEntry.id;
+            var timeOfEvent = pageEntry.time;
+
+            // Iterate over each messaging event
+            pageEntry.messaging.forEach(function(messagingEvent) {
+                if (messagingEvent.message) {
+                    receivedFBMessage(req, res, messagingEvent);
+                } else {
+                    logger.warn("fbhook received unknown messagingEvent: ", messagingEvent);
+                }
+            });
+        });
+
+        // Assume all went well.
+        //
+        // You must send back a 200, within 20 seconds, to let us know you've
+        // successfully received the callback. Otherwise, the request will time out.
+        res.sendStatus(200);
+    }
+});
+
+function receivedFBMessage(req, res, event) {
+    var senderID = event.sender.id;
+    var recipientID = event.recipient.id;
+    var timeOfMessage = event.timestamp;
+    var message = event.message;
+
+    console.log("Received message for user %d and page %d at %d with message:",
+        senderID, recipientID, timeOfMessage);
+    console.log(JSON.stringify(message));
+
+    // You may get a text or attachment but not both
+    var messageText = message.text;
+
+    if (messageText) {
+        req.body.From = recipientID;
+        req.body.Body = messageText;
+        res.locals.recipientID = recipientID;
+        feedbackResponder(req, res, function() { blankInputRepsonder(req, res, function() { aboutResponder(req, res, function () { getRoutes(req, res) })})})
+        // sendMessage(senderID, messageText);
+    }
+}
+
+function sendFBMessage(recipientId, messageText) {
+    var messageData = {
+        recipient: {
+            id: recipientId
+        },
+        message: {
+            text: messageText,
+            metadata: "DEVELOPER_DEFINED_METADATA"
+        }
+    };
+
+    request({
+        uri: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: { access_token: PAGE_ACCESS_TOKEN },
+        method: 'POST',
+        json: messageData
+
+    }, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var recipientId = body.recipient_id;
+            var messageId = body.message_id;
+
+            if (messageId) {
+                console.log("Successfully sent message with id %s to recipient %s",
+                    messageId, recipientId);
+            } else {
+                console.log("Successfully called Send API for recipient %s",
+                    recipientId);
+            }
+        } else {
+            console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
+        }
+    });
+
+}
+
+
 
 /*  
-    TWILIO ENDPOINT
-    The user's text message is
-    in the POST body.
-    TODO: better error messages
-*/
+ TWILIO ENDPOINT
+ The user's text message is
+ in the POST body.
+ TODO: better error messages
+ */
 router.post('/',
-    function (req, res, next){
-        res.set('Content-Type', 'text/plain');
-        var message = req.body.Body || '';
-        if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
-            res.locals.action = 'Feedback'
-            lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
-            .then((data)=>res.send("Thanks for the feedback"))
-            .catch((err)=>logger.warn("Feedback error: ", err));
-            return;
-        }
-        next();
-    },
+    feedbackResponder,
     blankInputRepsonder,
     aboutResponder,
     getRoutes
 );
 
 /* BROWSER AJAX ENDPOINT */
-router.post('/ajax', 
+router.post('/ajax',
     function (req, res, next) {
         res.locals.returnHTML = 1;
         next()
@@ -108,11 +284,11 @@ router.post('/ajax',
     getRoutes
 );
 
- 
+
 /*  DIRECT URL ACCESS
-    Routes to allow deep linking and bookmarks via url with 
-    either address, stop number, or about.
-*/
+ Routes to allow deep linking and bookmarks via url with
+ either address, stop number, or about.
+ */
 router.get('/find/about', function(req, res, next) {
     res.locals.returnHTML = 1;
     res.locals.action = "About"
@@ -125,14 +301,14 @@ router.get('/find/:query(\\d+)', function(req, res, next) {
     res.locals.action = 'Stop Lookup'
     res.locals.returnHTML = 1;
     lib.getStopFromStopNumber(parseInt(req.params.query))
-    .then((routeObject) => {
-        res.locals.routes = routeObject;
-        res.render('stop-list-non-ajax');
-    })
-    .catch((err) => {
-        res.locals.action = 'Failed Stop Lookup'
-        res.render('message-non-ajax', {message: err})
-    });
+        .then((routeObject) => {
+            res.locals.routes = routeObject;
+            res.render('stop-list-non-ajax');
+        })
+        .catch((err) => {
+            res.locals.action = 'Failed Stop Lookup'
+            res.render('message-non-ajax', {message: err})
+        });
 });
 
 //  :query should be everything other than a stop number
@@ -141,14 +317,14 @@ router.get('/find/:query', function(req, res, next) {
     res.locals.action = 'Address Lookup'
     res.locals.returnHTML = 1;
     lib.getStopsFromAddress(req.params.query)
-    .then((routeObject) => {
-        res.locals.routes = routeObject;
-        res.render('route-list-non-ajax');
-    })
-    .catch((err) => {
-        res.locals.action = 'Failed Address Lookup'
-        res.render('message-non-ajax', {message: err})
-    });
+        .then((routeObject) => {
+            res.locals.routes = routeObject;
+            res.render('route-list-non-ajax');
+        })
+        .catch((err) => {
+            res.locals.action = 'Failed Address Lookup'
+            res.render('message-non-ajax', {message: err})
+        });
 });
 
 
@@ -164,15 +340,15 @@ router.get('/byLatLon', function(req, res, next) {
     if (!req.query.lat || !req.query.lon){
         res.render('message', {message: {message: "Can't determine your location"}});
         return;
-     }
-     var data = lib.findNearestStops(req.query.lat, req.query.lon);
-     if (!data || data.length == 0){
-         res.render('message', {message: {message: "No routes found near you"}});
-         return;
-     }
+    }
+    var data = lib.findNearestStops(req.query.lat, req.query.lon);
+    if (!data || data.length == 0){
+        res.render('message', {message: {message: "No routes found near you"}});
+        return;
+    }
     var data = lib.findNearestStops(req.query.lat, req.query.lon);
 
-     res.render('route-list-partial', {routes: {data: {stops: data}} });
+    res.render('route-list-partial', {routes: {data: {stops: data}} });
 
 
 });
@@ -183,8 +359,8 @@ router.post('/feedback', function(req, res) {
     res.locals.returnHTML = 1
     res.locals.action = 'Feedback'
     lib.processFeedback(req.body.comment, req)
-    .then()
-    .catch((err)=> logger.warn("feedback/ error ", err)); // TODO - tell users if there is a problem or fail silently?
+        .then()
+        .catch((err)=> logger.warn("feedback/ error ", err)); // TODO - tell users if there is a problem or fail silently?
     res.render('message', {message: {message:'Thanks for the feedback'}});
 });
 
@@ -211,9 +387,9 @@ router.post('/respond', function(req, res, next) {
                 foundIt = true;
                 if (req.body.response) {
                     twilioClient.messages.create({
-                        to: comments.comments[i].phone,
-                        from: config.MY_PHONE,
-                        body: req.body.response }, function(err, message) {
+                            to: comments.comments[i].phone,
+                            from: config.MY_PHONE,
+                            body: req.body.response }, function(err, message) {
                             if (!err) {
                                 var entry = {
                                     response: req.body.response,
