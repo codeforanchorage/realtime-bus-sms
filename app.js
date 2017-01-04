@@ -7,7 +7,7 @@ var UUID = require("pure-uuid");
 var bodyParser = require('body-parser');
 var rollbar = require("rollbar");
 var config = require('./lib/config');
-var lib = require('../lib/index');
+var lib = require('./lib/index');
 
 // Facebook requirements
 var https = require('https');
