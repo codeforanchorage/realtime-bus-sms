@@ -7,6 +7,7 @@ var UUID = require("pure-uuid");
 var bodyParser = require('body-parser');
 var rollbar = require("rollbar");
 var config = require('./lib/config');
+var lib = require('../lib/index');
 
 // Facebook requirements
 var https = require('https');
@@ -79,7 +80,7 @@ logs.initGoogleAnalytics((logFields) => {
 logs.add(require('./lib/lowdb_log_transport'), {})
 
 app.use(bodyParser.json());
-app.use('/fbhook', bodyParser.json({ verify: verifyRequestSignature }));  //For Facebook requests
+app.use('/fbhook', bodyParser.json({ verify: lib.verifyFBRequestSignature }));  //For Facebook requests
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
