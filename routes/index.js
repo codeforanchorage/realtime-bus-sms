@@ -88,6 +88,7 @@ function getRoutes(req, res, next){
                     } else {
                         res.send(rendered);
                     }
+                })
             })
             .catch((err) => {
                 res.locals.action = 'Failed Stop Lookup';
