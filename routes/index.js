@@ -82,7 +82,12 @@ function getRoutes(req, res, next){
         lib.getStopFromStopNumber(parseInt(stopRequest))
             .then((routeObject) => {
                 res.locals.routes = routeObject;
-                res.render('routes');
+                res.render('routes', function(err, rendered) {
+                    if (res.locals.isFB) {
+                        sendFBMessage(req.body.From, rendered);
+                    } else {
+                        res.send(rendered);
+                    }
             })
             .catch((err) => {
                 res.locals.action = 'Failed Stop Lookup';
