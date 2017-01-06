@@ -233,7 +233,8 @@ function sendFBMessage(recipientId, messageText) {
                     recipientId);
             }
         } else {
-            console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
+            console.error("Failed calling Send API: ", error.message);
+            console.error("Failed calling Send API", response.statusCode, response.statusMessage);
         }
     });
 

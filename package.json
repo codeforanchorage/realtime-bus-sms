@@ -40,7 +40,9 @@
     "turf-nearest": "~1.0.2",
     "twilio": "^3.3.0-edge",
     "universal-analytics": "^0.4.8",
-    "winston": "^2.3.0"
+    "winston": "^2.3.0",
+    "nock": "9.x"
+
   },
   "devDependencies": {
     "nodeunit": "^0.9.1",

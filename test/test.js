@@ -12,10 +12,53 @@ var hashwords = require('hashwords')();
 var fs = require('fs');
 var crypto = require('crypto');
 var sandbox = require('sinon').sandbox.create();
+var nock = require('nock');
 
-
+// For FB testing
+nock.enableNetConnect();
+nock('https://graph.facebook.com').log(console.log);
+var FBUser = "123456";   // FB User to receive messages on outgoing responses
 
 // Helper functions
+
+/*
+    Facebook handling - "message" is from user, "response" is expected response. Can be regex
+ */
+function testFBMsgResponse(test, message, response) {
+    var FBOut = nock('https://graph.facebook.com')
+        .post('/v2.6/me/messages', {
+            recipient: {
+                id: FBUser
+            },
+            message: {
+                text: response,
+                metadata: "DEVELOPER_DEFINED_METADATA"
+            }
+        })
+        .reply(200, {"status":200}, { 'access-control-allow-credentials': 'true'}).log((data) => console.log(data));
+    var data = {
+        object: "page",
+        entry: [{
+            id: 1,
+            time: Date.now(),
+            messaging: [{
+                sender: {id: FBUser},
+                recipient: {id: "1234567"},
+                timestamp: Date.now(),
+                message: { text: message }
+            }]
+        }]
+    };
+    api.post(test, '/fbhook', {
+        data: data
+    }, function (res) {
+        setTimeout(function(){
+            FBOut.done();
+            test.done();
+        }, 2000);
+    });
+}
+
 function testFeedback(test, res, feedbackString, phone, email) {
     test.ok(res.body.indexOf("Thanks for the feedback") > -1, "Test feedback response");
     var comments = JSON.parse(fs.readFileSync('./comments.json'));
@@ -177,6 +220,9 @@ exports.group = {
             test.done()
         });
     },
+    test_fbAddressEntry: function(test) {
+        testFBMsgResponse(test, "JEWEL LAKE & 82ND", /0213 - JEWEL LAKE & 82ND AVENUE NNE/ )
+    },
 
 // Test Stop ID (Hard-coded stopIds should probably be read from list)
     test_browserStopId: function (test) {
@@ -195,8 +241,12 @@ exports.group = {
             testStopId(test, res, stopId)
         });
     },
+    test_fbStopId: function(test) {
+        for (var stopId in stop_number_lookup) break;
+        testFBMsgResponse(test, stopId, new RegExp("Stop " + stopId))
+    },
 
-// Alternate stopId combos (Assume browser same as SMS)
+// Alternate stopId combos (Assume browser and FB same as SMS)
     test_smsHashStopId: function (test) {
         for (var stopId in stop_number_lookup) break;
         var altStopId = "#" + stopId;
@@ -259,6 +309,9 @@ exports.group = {
             testAbout(test, res)
         });
     },
+    test_fbAbout: function (test) {
+        testFBMsgResponse(test, "about",/Get bus ETAs/)
+    },
 
 // Test logging
     test_smsLogging: function (test) {
@@ -279,6 +332,17 @@ exports.group = {
             setTimeout(function () {testLogging(test, res, input)}, 500);  //Delay to make sure logging saves
         });
     },
+    test_fbLogging: function(test) {
+        var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
+        var fbUser = "123214555";
+        var phone = "";
+        api.post(test, '/ajax', {
+            data: {Body: input}
+        }, function (res) {
+            setTimeout(function () {testLogging(test, res, input, phone, fbUser)}, 500);  //Delay to make sure logging saves
+        });
+    },
+
 
 // Log Plots
     //Test the plot page
@@ -293,7 +357,7 @@ exports.group = {
     test_getLogData: function (test) {
         api.get(test, '/logData/', {
             data: {type: "hits",
-                   daysBack: "20"}
+                daysBack: "20"}
         }, function(res) {
             var logData = JSON.parse(res.body);
             test.ok(logData.length > 0, "Have log data");
@@ -313,14 +377,14 @@ exports.group = {
         var email = "test@example.com";
         api.post(test, '/feedback', {
             data: {comment: feedbackString,
-                   email: email}
+                email: email}
         }, function (res) {
             setTimeout(function () {testFeedback(test, res, feedbackString, null, email)}, 500);  //Delay to make sure logging saves
         });
     },
     test_smsFeedback: function (test) {
         var feedbackString = "Test Feedback " + (new Date().toISOString());
-        var phone = "608-432-5799";
+        var phone = "608-555-1212";
         api.post(test, '/', {
             data: {Body: config.FEEDBACK_TRIGGER + feedbackString,
                 From: phone}
@@ -362,21 +426,21 @@ exports.group = {
                 console.log("Posting reponse")
                 api.post(test,"/respond", {
                     data: {hash: comments.comments[i].response_hash,
-                           response: response}
-                    }, function(res) {
-                        setTimeout(function () {   // Did we log our response?
-                            test.ok(function() {
-                                console.log("Checking for reponse in log");
-                                for (var j = comments.comments.length-1; j >= 0 ; j--) {
-                                    if (comments.comments[j].response && comments.comments[j].response.indexOf(response) > -1) {
-                                        console.log("Got right response in log")
-                                        return true;
-                                    }
+                        response: response}
+                }, function(res) {
+                    setTimeout(function () {   // Did we log our response?
+                        test.ok(function() {
+                            console.log("Checking for reponse in log");
+                            for (var j = comments.comments.length-1; j >= 0 ; j--) {
+                                if (comments.comments[j].response && comments.comments[j].response.indexOf(response) > -1) {
+                                    console.log("Got right response in log")
+                                    return true;
                                 }
-                                return false
-                            });
-                            test.done();
-                        }, 500);  //Delay to make sure logging saves
+                            }
+                            return false
+                        });
+                        test.done();
+                    }, 500);  //Delay to make sure logging saves
                 });
             }
         }
