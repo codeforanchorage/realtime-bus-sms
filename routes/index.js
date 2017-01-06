@@ -125,6 +125,15 @@ function blankInputRepsonder(req, res, next){
     }
     next();
 }
+
+function checkServiceExceptions(req, res, next){
+    if (lib.serviceExceptions()){
+           res.locals.message = {name: "Holiday", message:'There is no bus service today.'} 
+           return res.render('message')
+        }
+    next()
+}
+
 function aboutResponder(req, res, next){
     var message = req.body.Body;
     if (message.trim().toLowerCase() === 'about') {
@@ -140,10 +149,6 @@ function stopNumberResponder(req,res, next){
     var stopRequest = input.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
     if (/^\d+$/.test(stopRequest)) {
         res.locals.action = 'Stop Lookup'
-        if (lib.serviceExceptions()){
-           res.locals.message = {name: "Holiday", message:'There is no bus service today.'} 
-           return res.render('message')
-        }
         lib.getStopFromStopNumber(parseInt(stopRequest))
         .then((routeObject) => {
             res.locals.routes = routeObject;
@@ -206,6 +211,7 @@ router.post('/',
         }
         next();
     },
+    checkServiceExceptions,
     blankInputRepsonder,
     aboutResponder,
     stopNumberResponder,
@@ -219,6 +225,7 @@ router.post('/ajax',
         res.locals.returnHTML = 1;
         next()
     },
+    checkServiceExceptions,
     blankInputRepsonder,
     aboutResponder,
     stopNumberResponder,
@@ -245,6 +252,7 @@ router.get('/find/:query(\\d+)', function(req, res, next) {
         res.locals.renderWholePage = 1;
         next();
     },
+    checkServiceExceptions,
     stopNumberResponder
 );
 
@@ -257,6 +265,7 @@ router.get('/find/:query', function(req, res, next) {
         res.locals.renderWholePage = 1;
         next();
     },
+    checkServiceExceptions,
     blankInputRepsonder,
     aboutResponder,
     addressResponder,
