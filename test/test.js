@@ -54,7 +54,7 @@ function testFBMsgResponse(test, message, response) {
     }, function (res) {
         setTimeout(function(){
             FBOut.done();
-            test.done();
+            if (test) test.done();
         }, 2000);
     });
 }
@@ -108,13 +108,19 @@ function testOutage(test, res) {
     test.done()
 }
 
-function testLogging(test, res, input, phone) {
+function testLogging(test, res, input, phone, fbUser) {
     var db = JSON.parse(fs.readFileSync('./public/db.json'));
     test.ok(function() {
         for(var i=0; i < db.requests.length; i++) {
             if (db.requests[i].input == input ) {
                 if (phone) {
                     if (db.requests[i].phone == hashwords.hashStr(phone)) {
+                        return true
+                    } else {
+                        return false
+                    }
+                } else if (fbUser) {
+                    if (db.requests[i].fbUser == hashwords.hashStr(fbUser)) {
                         return true
                     } else {
                         return false
@@ -133,6 +139,12 @@ function testLogging(test, res, input, phone) {
             if (db.requests[i].input == input ) {
                 if (phone) {
                     if (db.requests[i].phone == phone) {
+                        return true
+                    } else {
+                        return false
+                    }
+                } else if (fbUser) {
+                    if (db.requests[i].fbUser == hashwords.hashStr(fbUser)) {
                         return true
                     } else {
                         return false
@@ -316,7 +328,7 @@ exports.group = {
 // Test logging
     test_smsLogging: function (test) {
         var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
-        var phone = "608-432-5799";
+        var phone = "608-555-1212";
         api.post(test, '/', {
             data: {Body: input,
                 From: phone}
@@ -334,12 +346,8 @@ exports.group = {
     },
     test_fbLogging: function(test) {
         var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
-        var fbUser = "123214555";
-        var phone = "";
-        api.post(test, '/ajax', {
-            data: {Body: input}
-        }, function (res) {
-            setTimeout(function () {testLogging(test, res, input, phone, fbUser)}, 500);  //Delay to make sure logging saves
+        testFBMsgResponse(undefined, input, /Stop/);
+        setTimeout(function () {testLogging(test, res, input, undefined, fbUser)}, 500);  //Delay to make sure logging saves
         });
     },
 
@@ -390,6 +398,17 @@ exports.group = {
                 From: phone}
         }, function (res) {
             setTimeout(function () {testFeedback(test, res, feedbackString, phone)}, 500);  //Delay to make sure logging saves
+        });
+
+    },
+    test_fbFeedback: function (test) {
+        var feedbackString = "Test Feedback " + (new Date().toISOString());
+        var fbUser = "123445667";
+        api.post(test, '/', {
+            data: {Body: config.FEEDBACK_TRIGGER + feedbackString,
+                From: phone}
+        }, function (res) {
+            setTimeout(function () {testFeedback(test, res, feedbackString, undefined, undefined, fbUser)}, 500);  //Delay to make sure logging saves
         });
 
     },
