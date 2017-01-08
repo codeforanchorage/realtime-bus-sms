@@ -22,7 +22,7 @@ var FBUser = "123456";   // FB User to receive messages on outgoing responses
 // Helper functions
 
 /*
-    Facebook handling - "message" is from user, "response" is expected response. Can be regex
+ Facebook handling - "message" is from user, "response" is expected response. Can be regex
  */
 function testFBMsgResponse(test, message, response) {
     var FBOut = nock('https://graph.facebook.com')
@@ -55,12 +55,12 @@ function testFBMsgResponse(test, message, response) {
         setTimeout(function(){
             FBOut.done();
             if (test) test.done();
-        }, 2000);
+        }, 500);
     });
 }
 
-function testFeedback(test, res, feedbackString, phone, email) {
-    test.ok(res.body.indexOf("Thanks for the feedback") > -1, "Test feedback response");
+function testFeedback(test, res, feedbackString, phone, email, fbUser) {
+    if (!fbUser) test.ok(res.body.indexOf("Thanks for the feedback") > -1, "Test feedback response");
     var comments = JSON.parse(fs.readFileSync('./comments.json'));
     test.ok(function() {
         for(var i=0; i < comments.comments.length; i++) {
@@ -78,8 +78,15 @@ function testFeedback(test, res, feedbackString, phone, email) {
                     } else {
                         return false
                     }
+                } else if (fbUser) {
+                    if (comments.comments[i].fbUser == fbUser) {
+                        return true
+                    } else {
+                        return false
+                    }
+                } else {
+                    return true
                 }
-                return true
             }
         }
         return false
@@ -108,7 +115,7 @@ function testOutage(test, res) {
     test.done()
 }
 
-function testLogging(test, res, input, phone, fbUser) {
+function testLogging(test, input, phone, fbUser) {
     var db = JSON.parse(fs.readFileSync('./public/db.json'));
     test.ok(function() {
         for(var i=0; i < db.requests.length; i++) {
@@ -144,7 +151,7 @@ function testLogging(test, res, input, phone, fbUser) {
                         return false
                     }
                 } else if (fbUser) {
-                    if (db.requests[i].fbUser == hashwords.hashStr(fbUser)) {
+                    if (db.requests[i].fbUser == fbUser) {
                         return true
                     } else {
                         return false
@@ -322,7 +329,7 @@ exports.group = {
         });
     },
     test_fbAbout: function (test) {
-        testFBMsgResponse(test, "about",/Get bus ETAs/)
+        testFBMsgResponse(test, "about", /Get bus ETAs/)
     },
 
 // Test logging
@@ -333,7 +340,7 @@ exports.group = {
             data: {Body: input,
                 From: phone}
         }, function (res) {
-            setTimeout(function () {testLogging(test, res, input, phone)}, 500);  //Delay to make sure logging saves
+            setTimeout(function () {testLogging(test, input, phone)}, 500);  //Delay to make sure logging saves
         });
     },
     test_browserLogging: function (test) {
@@ -341,14 +348,13 @@ exports.group = {
         api.post(test, '/ajax', {
             data: {Body: input}
         }, function (res) {
-            setTimeout(function () {testLogging(test, res, input)}, 500);  //Delay to make sure logging saves
+            setTimeout(function () {testLogging(test, input)}, 500);  //Delay to make sure logging saves
         });
     },
     test_fbLogging: function(test) {
         var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
         testFBMsgResponse(undefined, input, /Stop/);
-        setTimeout(function () {testLogging(test, res, input, undefined, fbUser)}, 500);  //Delay to make sure logging saves
-        });
+        setTimeout(function () {testLogging(test, input, undefined, FBUser)}, 500);  //Delay to make sure logging saves
     },
 
 
@@ -368,9 +374,10 @@ exports.group = {
                 daysBack: "20"}
         }, function(res) {
             var logData = JSON.parse(res.body);
+            console.log("Plot response: ", res.body);
             test.ok(logData.length > 0, "Have log data");
             var sampleRequest = logData[0];
-            test.ok(sampleRequest.hasOwnProperty('type'), "Type present (Browser or SMS)");
+            test.ok(sampleRequest.hasOwnProperty('type'), "Type present (Browser, SMS, or Facebook)");
             test.ok(sampleRequest.hasOwnProperty('date'), "Date present");
             test.ok(sampleRequest.hasOwnProperty('totalTime'), "Total response time present");
             test.ok(sampleRequest.hasOwnProperty('muniTime'), 'Muni response time present');
@@ -403,13 +410,8 @@ exports.group = {
     },
     test_fbFeedback: function (test) {
         var feedbackString = "Test Feedback " + (new Date().toISOString());
-        var fbUser = "123445667";
-        api.post(test, '/', {
-            data: {Body: config.FEEDBACK_TRIGGER + feedbackString,
-                From: phone}
-        }, function (res) {
-            setTimeout(function () {testFeedback(test, res, feedbackString, undefined, undefined, fbUser)}, 500);  //Delay to make sure logging saves
-        });
+        testFBMsgResponse(undefined, config.FEEDBACK_TRIGGER + feedbackString, /Thanks for the feedback/);
+        setTimeout(function () {testFeedback(test, undefined, feedbackString, undefined, undefined, FBUser)}, 500);  //Delay to make sure logging saves
 
     },
     test_feedbackResponseValidGet: function(test) {
@@ -483,7 +485,7 @@ exports.group = {
     test_browserNetworkFailure: function(test) {
         config.MUNI_URL = '';
         for (var stopId in stop_number_lookup) break;
-        api.post(test, '/', {
+        api.post(test, '/ajax', {
             data: {Body: stopId}
         }, function (res) {
             testOutage(test, res)
@@ -497,6 +499,11 @@ exports.group = {
         }, function (res) {
             testOutage(test, res)
         });
+    },
+    test_fbNetworkFailure: function(test) {
+        config.MUNI_URL = '';
+        for (var stopId in stop_number_lookup) break;
+        testFBMsgResponse(test, stopId, /Bustracker is down/);
     },
     test_browserOutage: function(test) {
         config.MUNI_URL = "http://bustracker.muni.org/InfoPoint/departure.aspx?stopid=";  //"departures.aspx" spelled wrong
@@ -515,6 +522,11 @@ exports.group = {
         }, function (res) {
             testOutage(test, res)
         });
+    },
+    test_fbOutage: function(test) {
+        config.MUNI_URL = "http://bustracker.muni.org/InfoPoint/departure.aspx?stopid=";  //"departures.aspx" spelled wrong
+        for (var stopId in stop_number_lookup) break;
+        testFBMsgResponse(test, stopId, /Bustracker is down/);
     }
 
 

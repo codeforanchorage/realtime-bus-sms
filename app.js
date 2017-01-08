@@ -54,10 +54,10 @@ logs.initGoogleAnalytics((logFields) => {
     //  But Twilio's expires after 4 hours so we'll make a more stable phone-based 
     //  one for SMS users
     var uuid;
-    var category = logFields.phone ? "sms" : "web";
-    if (category == "sms"){
+    var category = logFields.phone ? "sms" : (logFields.fbUser ? "fb" : "web");
+    if ((category == "sms") || (category == "fb")){
         var ns = "deebee62-076c-47ef-ad02-2509e2d4f839" // this random namespace is hashed (using SHA-1) with phone number to create UUID
-        uuid = new UUID(5, ns, logFields.phone).format()
+        uuid = new UUID(5, ns, logFields.phone || logFields.fbUser).format()
     }
     return {
         trackingCode: config.GOOGLE_ANALYTICS_ID,

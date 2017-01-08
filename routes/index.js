@@ -197,6 +197,8 @@ function receivedFBMessage(req, res, event) {
         req.body.From = senderID;
         req.body.Body = messageText;
         res.locals.isFB = true;
+        req.locals = {};
+        req.locals.isFB = true;
         feedbackResponder(req, res, function() { blankInputRepsonder(req, res, function() { aboutResponder(req, res, function () { getRoutes(req, res) })})})
         // sendMessage(senderID, messageText);
     }
