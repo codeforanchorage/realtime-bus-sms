@@ -28,6 +28,7 @@
     "mocha": "~2.1.0",
     "moment-timezone": "^0.5.0",
     "morgan": "~1.5.1",
+    "nock": "9.x",
     "node-geocoder": "~2.16.0",
     "nodemailer": "^2.0.0",
     "on-finished": "^2.3.0",
@@ -35,14 +36,13 @@
     "pure-uuid": "^1.4.2",
     "request": "^2.51.0",
     "rollbar": "^0.6.2",
+    "run-middleware": "^0.6.6",
     "serve-favicon": "~2.2.0",
     "turf": "~1.4.0",
     "turf-nearest": "~1.0.2",
     "twilio": "^3.3.0-edge",
     "universal-analytics": "^0.4.8",
-    "winston": "^2.3.0",
-    "nock": "9.x"
-
+    "winston": "^2.3.0"
   },
   "devDependencies": {
     "nodeunit": "^0.9.1",

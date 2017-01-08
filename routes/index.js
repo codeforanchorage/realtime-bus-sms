@@ -15,6 +15,7 @@ var https = require('https');
 
 
 
+
 /*
  MIDDLEWARE FUNCTIONS
  These are primarily concerned with parsing the input the comes in from the POST
@@ -45,6 +46,7 @@ function feedbackResponder(req, res, next) {
 
 function blankInputRepsonder(req, res, next){
     var input = req.body.Body;
+    console.log("BI_R: ", req.body)
     if (!input || /^\s*$/.test(input)) {
         // res.locals.action is caching the event type which we can use later when logging anlytics
         res.locals.action = 'Empty Input'
@@ -162,13 +164,20 @@ router.post('/fbhook', function (req, res) {
         data.entry.forEach(function(pageEntry) {
             var pageID = pageEntry.id;
             var timeOfEvent = pageEntry.time;
-
+            console.log("messaging: ", pageEntry.messaging)
             // Iterate over each messaging event
             pageEntry.messaging.forEach(function(messagingEvent) {
                 if (messagingEvent.message) {
                     //var reqClone = Object.assign({}, req);  // Need copies for each handled message
                     //var resClone = Object.assign({}, res);
-                    receivedFBMessage(req, res, messagingEvent);
+                    //receivedFBMessage(req, res, messagingEvent);
+                    req.runMiddleware('/', {
+                        method:'post',
+                        body: {Body: messagingEvent.message.text}
+                    },function(code, data, headers){
+                        //data has response from express
+                        sendFBMessage(messagingEvent.recipient.id, data)
+                    })
                 } else {
                     logger.warn("fbhook received unknown messagingEvent: ", messagingEvent);
                 }
@@ -183,29 +192,8 @@ router.post('/fbhook', function (req, res) {
     }
 });
 
-function receivedFBMessage(req, res, event) {
-    var senderID = event.sender.id;
-    var recipientID = event.recipient.id;
-    var timeOfMessage = event.timestamp;
-    var message = event.message;
 
-    console.log("Received message for user %d and page %d at %d with message:",
-        senderID, recipientID, timeOfMessage);
-    console.log(JSON.stringify(message));
 
-    // You may get a text or attachment but not both
-    var messageText = message.text;
-
-    if (messageText) {
-        req.body.From = senderID;
-        req.body.Body = messageText;
-        res.locals.isFB = true;
-        req.locals = {};
-        req.locals.isFB = true;
-        feedbackResponder(req, res, function() { blankInputRepsonder(req, res, function() { aboutResponder(req, res, function () { getRoutes(req, res) })})})
-        // sendMessage(senderID, messageText);
-    }
-}
 
 function sendFBMessage(recipientId, messageText) {
     var messageData = {
