@@ -14,6 +14,7 @@ var https = require('https');
 
 
 
+
 /*
  MIDDLEWARE FUNCTIONS
  These are primarily concerned with parsing the input the comes in from the POST
@@ -24,7 +25,7 @@ var https = require('https');
  */
 
 function feedbackResponder(req, res, next) {
-    res.set('Content-Type', 'text/plain');
+    if (!res.locals.isFB) res.set('Content-Type', 'text/plain');
     var message = req.body.Body || '';
     if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
         res.locals.action = 'Feedback';
@@ -165,6 +166,8 @@ router.post('/fbhook', function (req, res) {
             // Iterate over each messaging event
             pageEntry.messaging.forEach(function(messagingEvent) {
                 if (messagingEvent.message) {
+                    //var reqClone = Object.assign({}, req);  // Need copies for each handled message
+                    //var resClone = Object.assign({}, res);
                     receivedFBMessage(req, res, messagingEvent);
                 } else {
                     logger.warn("fbhook received unknown messagingEvent: ", messagingEvent);

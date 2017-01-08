@@ -32,7 +32,8 @@ app.use(logs.initialize((req, res) => {
     var routes = res.locals.routes
     return {
         input:           req.body.Body,
-        phone:           req.body.From,
+        phone:           res.locals.isFB ? undefined : req.body.From,
+        fbUser:          res.locals.isFB ? req.body.From : undefined,
         muniTime:        routes ? routes.muniTime: undefined,
         geocodeTime:     routes ? routes.geocodeTime: undefined,
         stopId:          routes ? routes.data.stopId: undefined,
@@ -44,7 +45,7 @@ app.use(logs.initialize((req, res) => {
 /*  
     SETUP GOOGLE ANALYTICS
     The convention used here is:
-    category: 'sms | 'web'
+    category: 'sms | 'web' | 'fb'
     action: actions are set by the router depending on what the user was looking for
             currently: '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
     label:  the actual search: the stop number, geocoded address, or the raw input if lookup failed

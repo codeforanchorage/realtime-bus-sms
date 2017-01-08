@@ -481,6 +481,61 @@ exports.group = {
         });
     },
 
+    // Test FB message batching
+    testFBMsgBatching(test) {
+        var FBOut1 = nock('https://graph.facebook.com')
+            .post('/v2.6/me/messages', {
+                recipient: {
+                    id: FBUser + "1"
+                },
+                message: {
+                    text: /Stop 99/,
+                    metadata: "DEVELOPER_DEFINED_METADATA"
+                }
+            })
+            .reply(200, {"status":200}, { 'access-control-allow-credentials': 'true'}).log((data) => console.log(data));
+        var FBOut2 = nock('https://graph.facebook.com')
+            .post('/v2.6/me/messages', {
+                recipient: {
+                    id: FBUser + "2"
+                },
+                message: {
+                    text: /Stop 100/,
+                    metadata: "DEVELOPER_DEFINED_METADATA"
+                }
+            })
+            .reply(200, {"status":200}, { 'access-control-allow-credentials': 'true'}).log((data) => console.log(data));
+        var data = {
+            object: "page",
+            entry: [{
+                id: 1,
+                time: Date.now(),
+                messaging: [
+                    {
+                        sender: {id: FBUser + "1"},
+                        recipient: {id: "1234567"},
+                        timestamp: Date.now(),
+                        message: { text: "99" }
+                    },
+                    {
+                        sender: {id: FBUser + "2"},
+                        recipient: {id: "1234567"},
+                        timestamp: Date.now(),
+                        message: { text: "100" }
+                    }]
+            }]
+        };
+        api.post(test, '/fbhook', {
+            data: data
+        }, function (res) {
+            setTimeout(function(){
+                FBOut1.done();
+                FBOut2.done();
+            }, 500);
+        });
+    },
+
+
 // Bustracker failure
     test_browserNetworkFailure: function(test) {
         config.MUNI_URL = '';
@@ -528,6 +583,8 @@ exports.group = {
         for (var stopId in stop_number_lookup) break;
         testFBMsgResponse(test, stopId, /Bustracker is down/);
     }
+
+
 
 
 };
