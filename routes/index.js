@@ -26,18 +26,14 @@ var https = require('https');
  */
 
 function feedbackResponder(req, res, next) {
-    if (!res.locals.isFB) res.set('Content-Type', 'text/plain');
+    res.set('Content-Type', 'text/plain');
     var message = req.body.Body || '';
     if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
         res.locals.action = 'Feedback';
         lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
             .then((data)=> {
-                if (res.locals.isFB) {
-                    sendFBMessage(req.body.From, "Thanks for the feedback");
-                } else {
                     res.send("Thanks for the feedback")
-                }
-            })
+             })
             .catch((err)=>logger.warn("Feedback error: ", err));
         return;
     }
@@ -52,11 +48,7 @@ function blankInputRepsonder(req, res, next){
         res.locals.action = 'Empty Input'
         res.locals.message = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'}
         return res.render('message', function(err, rendered) {
-            if (res.locals.isFB) {
-                sendFBMessage(req.body.From, rendered);
-            } else {
-                res.send(rendered);
-            }
+                 res.send(rendered);
         })
     }
     next();
@@ -66,11 +58,7 @@ function aboutResponder(req, res, next){
     if (message.trim().toLowerCase() === 'about') {
         res.locals.action = 'About';
         res.render('about-partial', function(err, rendered) {
-            if (res.locals.isFB) {
-                sendFBMessage(req.body.From, rendered);
-            } else {
                 res.send(rendered);
-            }
         });
         return;
     }
@@ -86,21 +74,13 @@ function getRoutes(req, res, next){
             .then((routeObject) => {
                 res.locals.routes = routeObject;
                 res.render('routes', function(err, rendered) {
-                    if (res.locals.isFB) {
-                        sendFBMessage(req.body.From, rendered);
-                    } else {
                         res.send(rendered);
-                    }
                 })
             })
             .catch((err) => {
                 res.locals.action = 'Failed Stop Lookup';
                 res.render('message', {message: err}, function(err, rendered) {
-                    if (res.locals.isFB) {
-                        sendFBMessage(req.body.From, rendered);
-                    } else {
-                        res.send(rendered);
-                    }
+                         res.send(rendered);
                 })
             })
     }
@@ -110,21 +90,13 @@ function getRoutes(req, res, next){
             .then((routeObject) => {
                 res.locals.routes = routeObject;
                 res.render('routes', function(err, rendered) {
-                    if (res.locals.isFB) {
-                        sendFBMessage(req.body.From, rendered);
-                    } else {
                         res.send(rendered);
-                    }
-                });
+                 });
             })
             .catch((err) => {
                 res.locals.action = 'Failed Address Lookup';
                 res.render('message', {message: err}, function(err, rendered) {
-                    if (res.locals.isFB) {
-                        sendFBMessage(req.body.From, rendered);
-                    } else {
                         res.send(rendered);
-                    }
                 })
             })
     }
@@ -173,10 +145,12 @@ router.post('/fbhook', function (req, res) {
                     //receivedFBMessage(req, res, messagingEvent);
                     req.runMiddleware('/', {
                         method:'post',
-                        body: {Body: messagingEvent.message.text}
+                        body: {Body: messagingEvent.message.text,
+                               From: messagingEvent.sender.id,
+                               isFB: true}
                     },function(code, data, headers){
                         //data has response from express
-                        sendFBMessage(messagingEvent.recipient.id, data)
+                        sendFBMessage(messagingEvent.sender.id, data)
                     })
                 } else {
                     logger.warn("fbhook received unknown messagingEvent: ", messagingEvent);

@@ -18,7 +18,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-require('run-middleware')(app)
+require('run-middleware')(app);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -33,8 +33,8 @@ app.use(logs.initialize((req, res) => {
     var routes = res.locals.routes
     return {
         input:           req.body.Body,
-        phone:           res.locals.isFB ? undefined : req.body.From,
-        fbUser:          res.locals.isFB ? req.body.From : undefined,
+        phone:           req.body.isFB ? undefined : req.body.From,
+        fbUser:          req.body.isFB ? req.body.From : undefined,
         muniTime:        routes ? routes.muniTime: undefined,
         geocodeTime:     routes ? routes.geocodeTime: undefined,
         stopId:          routes ? routes.data.stopId: undefined,

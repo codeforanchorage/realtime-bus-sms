@@ -493,7 +493,7 @@ exports.group = {
                     metadata: "DEVELOPER_DEFINED_METADATA"
                 }
             })
-            .reply(200, {"status":200}, { 'access-control-allow-credentials': 'true'}).log((data) => console.log(data));
+            .reply(200, {"status":200}, { 'access-control-allow-credentials': 'true'}).log((data) => console.log("Nock: " + data));
         var FBOut2 = nock('https://graph.facebook.com')
             .post('/v2.6/me/messages', {
                 recipient: {
@@ -504,7 +504,7 @@ exports.group = {
                     metadata: "DEVELOPER_DEFINED_METADATA"
                 }
             })
-            .reply(200, {"status":200}, { 'access-control-allow-credentials': 'true'}).log((data) => console.log(data));
+            .reply(200, {"status":200}, { 'access-control-allow-credentials': 'true'}).log((data) => console.log("Nock: " + data));
         var data = {
             object: "page",
             entry: [{
@@ -529,8 +529,9 @@ exports.group = {
             data: data
         }, function (res) {
             setTimeout(function(){
-                FBOut1.done();
                 FBOut2.done();
+                FBOut1.done();
+                test.done();
             }, 500);
         });
     },
