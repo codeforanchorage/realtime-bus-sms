@@ -18,6 +18,7 @@ var watson = require('watson-developer-cloud');
 function askWatson(req, res, next){
     logger.debug("Calling Watson")
     var input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so things like "I'm" returns an unwanted number
+
     var conversation = watson.conversation({
         username: config.WATSON_USER,
         password: config.WATSON_PASSWORD,
@@ -45,7 +46,7 @@ function askWatson(req, res, next){
                 return res.render('message', {message: "I'm sorry, the bustracker is having a problem right now"})
             }
 
-            // Setting cookie to value of returned conversation_id will allow
+            // Set cookie to value of returned conversation_id will allow
             // continuation of conversations that are otherwise stateless
             res.cookie('context', JSON.stringify(response.context))
 
@@ -84,7 +85,7 @@ function askWatson(req, res, next){
                     } else {
                         // This shouldn't ever happen.
                         res.locals.action = 'Watson Error'
-                        logger.error("Watson returned a next_bus intent with no stops.")
+                        logger.error("Watson returned a next_bus intent with no stops.", {input: input})
                         res.locals.message = {name: "Bustracker Error", message:"I'm sorry an error occured." }
                         return res.render('message')
                     }
@@ -99,7 +100,6 @@ function askWatson(req, res, next){
                 default:
                     // For everything else .
                     res.locals.action = 'Watson Chat'
-                    logger.debug("winston repsone: ", response.context)
                     res.locals.message = {message:response.output.text.join(' ')}
                     return res.render('message')
         
