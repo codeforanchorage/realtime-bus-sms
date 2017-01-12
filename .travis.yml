@@ -1,3 +1,5 @@
 language: node_js
 node_js:
   - "6"
+env:
+  - FB_APP_SECRET=secret
