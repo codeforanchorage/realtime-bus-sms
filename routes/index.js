@@ -42,7 +42,7 @@ function askWatson(req, res, next){
         context: context
         }, function(err, response) {
             if (err) {
-                logger.error('watson error:', err);
+                logger.error(err);
                 return res.render('message', {message: "I'm sorry, the bustracker is having a problem right now"})
             }
 
@@ -206,7 +206,7 @@ router.post('/',
             res.locals.action = 'Feedback'
             lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
             .then((data)=>res.send("Thanks for the feedback"))
-            .catch((err)=>logger.warn("Feedback error: ", err));
+            .catch((err)=>logger.error(err));
             return;
         }
         next();
@@ -304,7 +304,7 @@ router.post('/feedback', function(req, res) {
     res.locals.action = 'Feedback'
     lib.processFeedback(req.body.comment, req)
     .then()
-    .catch((err)=> logger.warn("feedback/ error ", err)); // TODO - tell users if there is a problem or fail silently?
+    .catch((err)=> logger.error(err)); // TODO - tell users if there is a problem or fail silently?
     res.render('message', {message: {message:'Thanks for the feedback'}});
 });
 
@@ -341,7 +341,7 @@ router.post('/respond', function(req, res, next) {
                                 };
                                 res.render("response", {pageData: {err: null}});
                             } else {
-                                logger.warn(err.message)
+                                logger.error(err)
                                 res.render("response", {pageData: {err: err}});
                             }
                         }
