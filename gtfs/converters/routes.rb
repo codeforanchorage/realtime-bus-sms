@@ -6,7 +6,7 @@ shape_id = nil
 
 coordinates = []
 
-CSV.foreach('../raw/shapes.txt', headers: true) do |shaperow|
+CSV.foreach('raw/shapes.txt', headers: true) do |shaperow|
   if shaperow['shape_id'] != shape_id
     if shape_id
       shapecache[shape_id] = coordinates
@@ -21,9 +21,9 @@ features = []
 shape_id = nil
 route_id = nil
 
-CSV.foreach('../raw/trips.txt', headers: true) do |triprow|
+CSV.foreach('raw/trips.txt', headers: true) do |triprow|
   if triprow['shape_id'] != shape_id or triprow['route_id'] != route_id
-    CSV.foreach('../raw/routes.txt', headers: true) do |routerow|
+    CSV.foreach('raw/routes.txt', headers: true) do |routerow|
       if routerow['route_id'] = triprow['route_id']
         features << {
           type: 'Feature',
@@ -48,6 +48,6 @@ CSV.foreach('../raw/trips.txt', headers: true) do |triprow|
   route_id = triprow['route_id']
 end
 
-File.open('../geojson/routes.json', 'w') do |f|
+File.open('geojson/routes.json', 'w') do |f|
   f.write(JSON.pretty_generate({type: 'FeatureCollection', features: features}))
 end
