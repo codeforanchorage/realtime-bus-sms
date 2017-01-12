@@ -49,8 +49,14 @@ function testFBMsgResponse(test, message, response) {
             }]
         }]
     };
+    var verifyBuf = new Buffer(JSON.stringify(data), "utf-8");
+    var verifyHash = crypto.createHmac('sha1', config.FB_APP_SECRET)
+        .update(verifyBuf)
+        .digest('hex');
+    console.log("VerifyHash: " + verifyHash);
     api.post(test, '/fbhook', {
-        data: data
+        data: data,
+        headers: { 'x-hub-signature' : 'sha1='+verifyHash }
     }, function (res) {
         setTimeout(function(){
             FBOut.done();
@@ -525,14 +531,20 @@ exports.group = {
                     }]
             }]
         };
+        var verifyBuf = new Buffer(JSON.stringify(data), "utf-8");
+        var verifyHash = crypto.createHmac('sha1', config.FB_APP_SECRET)
+            .update(verifyBuf)
+            .digest('hex');
+        console.log("VerifyHash: " + verifyHash);
         api.post(test, '/fbhook', {
-            data: data
+            data: data,
+            headers: { 'x-hub-signature' : 'sha1='+verifyHash }
         }, function (res) {
             setTimeout(function(){
                 FBOut2.done();
                 FBOut1.done();
                 test.done();
-            }, 500);
+            }, 1000);
         });
     },
 

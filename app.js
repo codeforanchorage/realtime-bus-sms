@@ -76,8 +76,8 @@ logs.initGoogleAnalytics((logFields) => {
 //  because it's all very specific to the bus app.
 logs.add(require('./lib/lowdb_log_transport'), {})
 
-app.use(bodyParser.json());
 app.use('/fbhook', bodyParser.json({ verify: lib.verifyFBRequestSignature }));  //For Facebook requests
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
