@@ -19,12 +19,19 @@ function askWatson(req, res, next){
     logger.debug("Calling Watson")
     var input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so things like "I'm" returns an unwanted number
 
-    var conversation = watson.conversation({
-        username: config.WATSON_USER,
-        password: config.WATSON_PASSWORD,
-        version: 'v1',
-        version_date: '2016-09-20'
-    })
+    try {
+        // conversation() will just throw and error if credentials are missing
+        var conversation = watson.conversation({
+            username: config.WATSON_USER,
+            password: config.WATSON_PASSWORD,
+            version: 'v1',
+            version_date: '2016-09-20'
+        })
+    } catch(err) {
+        logger.error(err, {input: input});
+        res.locals.message = {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`}
+        return res.render('message')
+    }
 
     /* TODO - this is probably not the best way to do maintain state
         If we want to be able to have conversation beyond a stateless 
@@ -42,8 +49,10 @@ function askWatson(req, res, next){
         context: context
         }, function(err, response) {
             if (err) {
-                logger.error(err);
-                return res.render('message', {message: "I'm sorry, the bustracker is having a problem right now"})
+                logger.error(err, {input: input});
+                // At this point we know the request isn't a bus number or address. If Watson sends an error fall back to older behavior.
+                res.locals.message = {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`}
+                return res.render('message')
             }
 
             // Set cookie to value of returned conversation_id will allow
