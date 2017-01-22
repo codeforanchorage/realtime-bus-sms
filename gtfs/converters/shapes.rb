@@ -8,7 +8,7 @@ features = []
 
 coordinates = []
 shape_id = nil 
-CSV.foreach('../raw/shapes.txt', headers: true) do |row|  
+CSV.foreach('raw/shapes.txt', headers: true) do |row|  
   if row['shape_id'] != shape_id
     # new shape!    
     if shape_id
@@ -30,6 +30,6 @@ CSV.foreach('../raw/shapes.txt', headers: true) do |row|
   coordinates << [row['shape_pt_lon'].to_f, row['shape_pt_lat'].to_f]
 end
 
-File.open('../geojson/shapes.json', 'w') do |f|
+File.open('geojson/shapes.json', 'w') do |f|
   f.write(JSON.pretty_generate({type: 'FeatureCollection', features: features}))
 end

@@ -115,18 +115,9 @@ exports.group = {
 
         // mock geocoding output
         var fake_geocoding_output = {
-            data:
-            {
-                latitude: 61.1465158,
-                longitude: -149.9518964,
-                country: 'United States',
-                city: 'Anchorage',
-                state: 'Alaska',
-                stateCode: 'AK',
-                zipcode: '99502',
-                streetName: 'Jewel Lake Road',
-                streetNumber: null,
-                countryCode: 'US'
+            data:{ 
+                location: { lat: 61.1465158, lng: -149.9518964 },
+                formatted_address: 'Jewel Lake Rd & W 82nd Ave, Anchorage, AK 99502, USA' 
             },
             asyncTime: 686
         }

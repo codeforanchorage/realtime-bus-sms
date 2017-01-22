@@ -21,6 +21,22 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 
+app.use(cookieParser());
+
+// set simple session cookie
+// used to determine new vs returning web users
+app.use(function(req, res, next){
+    if(!(req.cookies) || !('uuid' in req.cookies)) {
+        var uuid = new UUID(4); //v4 UUID are random
+        res.cookie('uuid', uuid.format(), {expires: new Date(2147483648000)}) // way in the future
+        res.session = uuid;
+    }
+    else {
+        res.session = req.cookies['uuid']
+    }
+    next();
+})
+
 /*
     SETUP LOGGING
     This sets which fields in addition to the defaults in logger.js should be logged
@@ -49,7 +65,7 @@ app.use(logs.initialize((req, res) => {
     label:  the actual search: the stop number, geocoded address, or the raw input if lookup failed
 */
 logs.initGoogleAnalytics((logFields) => {
-    //  There should be a UUID in the req.cookie which will be found by default
+    //  There should be a UUID in the req.session which will be found by default
     //  But Twilio's expires after 4 hours so we'll make a more stable phone-based 
     //  one for SMS users
     var uuid;
@@ -75,17 +91,6 @@ logs.add(require('./lib/lowdb_log_transport'), {})
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-// set simple session cookie
-// used to determine new vs returning web users
-app.use(function(req, res, next){
-    if(!(req.cookies) || !('uuid' in req.cookies)) {
-        var uuid = new UUID(4); //v4 UUID are random
-        res.cookie('uuid', uuid.format(), {expires: new Date(2147483648000)}) // way in the future
-    }
-    next();
-})
 
 app.use(express.static(path.join(__dirname, 'public')));
 
