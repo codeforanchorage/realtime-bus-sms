@@ -130,7 +130,7 @@ function askWatson(req, res, next){
 
  */
 
-function (req, res, next){
+function feedbackResponder(req, res, next){
         res.set('Content-Type', 'text/plain');
         var message = req.body.Body || '';
         if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
