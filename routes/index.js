@@ -12,11 +12,116 @@ var lowdb_log = require('../lib/lowdb_log_transport');
 var request = require('request');
 var https = require('https');
 
+var watson = require('watson-developer-cloud');
 
+/* 
+    WATSON MIDDLE WARE 
+    TODO Test intent confidence to decide to help decide flow
+*/
+function askWatson(req, res, next){
+    logger.debug("Calling Watson")
+    var input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so things like "I'm" returns an unwanted number
 
+    try {
+        // conversation() will just throw and error if credentials are missing
+        var conversation = watson.conversation({
+            username: config.WATSON_USER,
+            password: config.WATSON_PASSWORD,
+            version: 'v1',
+            version_date: '2016-09-20'
+        })
+    } catch(err) {
+        logger.error(err, {input: input});
+        res.locals.message = {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`}
+        return res.render('message')
+    }
 
+    /* TODO - this is probably not the best way to do maintain state
+        If we want to be able to have conversation beyond a stateless 
+        question & answer, we need to be able to pass the context that Watson sends
+        back to Watson. The context object isn't very big, so it fits within the 4k limit 
+        on cookies imposed by browsers, but this might be fragile.
+        A more solid approach might be to use sessions and store the context with a session id.
+        But for right now th cookie approach is working.
+    */
+    var context  = JSON.parse(req.cookies['context'] || '{}');
+
+    conversation.message( {
+        workspace_id: config.WATSON_WORKPLACE,
+        input: {'text': input},
+        context: context
+        }, function(err, response) {
+            if (err) {
+                logger.error(err, {input: input});
+                // At this point we know the request isn't a bus number or address. If Watson sends an error fall back to older behavior.
+                res.locals.message = {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`}
+                return res.render('message')
+            }
+
+            // Set cookie to value of returned conversation_id will allow
+            // continuation of conversations that are otherwise stateless
+            res.cookie('context', JSON.stringify(response.context))
+
+            // The context.action is set in the Watson Conversation Nodes when we know
+            // we need to respond with additional data or our own message.  
+            // If it's not set, we use the response sent from Watson.
+            if (!response.context.action) {
+                res.locals.action = 'Watson Chat'
+                res.locals.message = {message:response.output.text.join(' ')}
+                return res.render('message')
+            }
+
+            switch(response.context.action) {
+                case "Stop Lookup": 
+                    // Earlier middleware should catch plain stop numbers
+                    // But a query like "I'm at stop 36" should end up here
+                    // Watson should identify the number for use as an entity
+                    var stops = response.entities.filter((element) =>  element['entity'] == "sys-number"  );
+
+                    // It's possible to have more than one number in a user query
+                    // If that happens we take the first number and hope it's right
+                    var stop = stops[0]
+
+                    if (stop) {
+                        res.locals.action = 'Stop Lookup'
+                        lib.getStopFromStopNumber(parseInt(stops[0].value))
+                        .then((routeObject) => {
+                            res.locals.routes = routeObject;
+                            res.render('stop-list');
+                        })
+                        .catch((err) => {
+                            res.locals.action = 'Failed Stop Lookup'
+                            res.render('message', {message: err})
+                        })
+                        return;
+                    } else {
+                        // This shouldn't ever happen.
+                        res.locals.action = 'Watson Error'
+                        logger.error("Watson returned a next_bus intent with no stops.", {input: input})
+                        res.locals.message = {name: "Bustracker Error", message:"I'm sorry an error occured." }
+                        return res.render('message')
+                    }
+                case("Address Lookup"):
+                    // The geocoder has already tried and failed to lookup
+                    // but Watson thinks this is an address. It's only a seperate 
+                    // case so we can log a failed address lookup
+                    res.locals.action = 'Failed Address Lookup'
+                    res.locals.message = {message:response.output.text.join(' ')}
+                    return res.render('message')
+
+                default:
+                    // For everything else .
+                    res.locals.action = 'Watson Chat'
+                    res.locals.message = {message:response.output.text.join(' ')}
+                    return res.render('message')
+        
+            }
+        next();
+    });
+}
 
 /*
+
  MIDDLEWARE FUNCTIONS
  These are primarily concerned with parsing the input the comes in from the POST
  body and deciding how to handle it.
@@ -25,20 +130,18 @@ var https = require('https');
 
  */
 
-function feedbackResponder(req, res, next) {
-    res.set('Content-Type', 'text/plain');
-    var message = req.body.Body || '';
-    if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
-        res.locals.action = 'Feedback';
-        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
-            .then((data)=> {
-                    res.send("Thanks for the feedback")
-             })
-            .catch((err)=>logger.warn("Feedback error: ", err));
-        return;
+function (req, res, next){
+        res.set('Content-Type', 'text/plain');
+        var message = req.body.Body || '';
+        if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
+            res.locals.action = 'Feedback'
+            lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
+            .then((data)=>res.send("Thanks for the feedback"))
+            .catch((err)=>logger.error(err));
+            return;
+        }
+        next();
     }
-    next();
-}
 
 function blankInputRepsonder(req, res, next){
     var input = req.body.Body;
@@ -53,6 +156,15 @@ function blankInputRepsonder(req, res, next){
     }
     next();
 }
+
+function checkServiceExceptions(req, res, next){
+    if (lib.serviceExceptions()){
+           res.locals.message = {name: "Holiday", message:'There is no bus service today.'} 
+           return res.render('message')
+        }
+    next()
+}
+
 function aboutResponder(req, res, next){
     var message = req.body.Body;
     if (message.trim().toLowerCase() === 'about') {
@@ -65,41 +177,46 @@ function aboutResponder(req, res, next){
     next();
 }
 
-function getRoutes(req, res, next){
+function stopNumberResponder(req,res, next){
     var input = req.body.Body;
     var stopRequest = input.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
     if (/^\d+$/.test(stopRequest)) {
         res.locals.action = 'Stop Lookup';
         lib.getStopFromStopNumber(parseInt(stopRequest))
-            .then((routeObject) => {
-                res.locals.routes = routeObject;
-                res.render('routes', function(err, rendered) {
-                        res.send(rendered);
-                })
-            })
-            .catch((err) => {
-                res.locals.action = 'Failed Stop Lookup';
-                res.render('message', {message: err}, function(err, rendered) {
-                         res.send(rendered);
-                })
-            })
+
+        .then((routeObject) => {
+            res.locals.routes = routeObject;
+            res.render('stop-list');
+        })
+        .catch((err) => {
+            res.locals.action = 'Failed Stop Lookup'
+            res.render('message', {message: err})
+        })
+        return;
     }
-    else {
-        res.locals.action = 'Address Lookup';
-        lib.getStopsFromAddress(input)
-            .then((routeObject) => {
-                res.locals.routes = routeObject;
-                res.render('routes', function(err, rendered) {
-                        res.send(rendered);
-                 });
-            })
-            .catch((err) => {
-                res.locals.action = 'Failed Address Lookup';
-                res.render('message', {message: err}, function(err, rendered) {
-                        res.send(rendered);
-                })
-            })
-    }
+    next()
+}
+
+function addressResponder(req, res, next){
+    var input = req.body.Body;    
+    res.locals.action = 'Address Lookup'
+    lib.getStopsFromAddress(input)
+    .then((routeObject) => {
+        if (routeObject.data.stops.length < 1) { // Address found, but no stops near address
+            res.locals.message = { name: "No Stops", message: `Sorry, no stops were found within ${config.NEAREST_BUFFER} mile` + ((config.NEAREST_BUFFER != 1) ? 's' : '' + '.')}
+            res.render('message')
+            return
+        }
+        res.locals.routes = routeObject;
+        res.render('route-list');
+    })
+    .catch((err) => {
+        if (err.type == 'NOT_FOUND') return next() // Address not found pass to Watson      
+ 
+        res.locals.action = 'Failed Address Lookup'
+        res.render('message', {message: err})
+    })
+    return;  
 }
 
 /* GET HOME PAGE */
@@ -217,9 +334,12 @@ function sendFBMessage(recipientId, messageText) {
  */
 router.post('/',
     feedbackResponder,
+    checkServiceExceptions,
     blankInputRepsonder,
     aboutResponder,
-    getRoutes
+    stopNumberResponder,
+    addressResponder,
+    askWatson
 );
 
 /* BROWSER AJAX ENDPOINT */
@@ -228,9 +348,12 @@ router.post('/ajax',
         res.locals.returnHTML = 1;
         next()
     },
+    checkServiceExceptions,
     blankInputRepsonder,
     aboutResponder,
-    getRoutes
+    stopNumberResponder,
+    addressResponder,
+    askWatson
 );
 
 
@@ -245,37 +368,31 @@ router.get('/find/about', function(req, res, next) {
 
 });
 
-//  :query should be a stop number searches 
+//  :query should be a stop number  
 router.get('/find/:query(\\d+)', function(req, res, next) {
-    res.locals.action = 'Stop Lookup'
-    res.locals.returnHTML = 1;
-    lib.getStopFromStopNumber(parseInt(req.params.query))
-        .then((routeObject) => {
-            res.locals.routes = routeObject;
-            res.render('stop-list-non-ajax');
-        })
-        .catch((err) => {
-            res.locals.action = 'Failed Stop Lookup'
-            res.render('message-non-ajax', {message: err})
-        });
-});
+        req.body.Body = req.params.query;
+        res.locals.returnHTML = 1;
+        res.locals.renderWholePage = 1;
+        next();
+    },
+    checkServiceExceptions,
+    stopNumberResponder
+);
 
-//  :query should be everything other than a stop number
-//  - assumes address search 
+// :query should be everything other than a stop number
+// - assumes address search 
 router.get('/find/:query', function(req, res, next) {
-    res.locals.action = 'Address Lookup'
-    res.locals.returnHTML = 1;
-    lib.getStopsFromAddress(req.params.query)
-        .then((routeObject) => {
-            res.locals.routes = routeObject;
-            res.render('route-list-non-ajax');
-        })
-        .catch((err) => {
-            res.locals.action = 'Failed Address Lookup'
-            res.render('message-non-ajax', {message: err})
-        });
-});
-
+        req.body.Body = req.params.query;
+        res.locals.returnHTML = 1;
+        res.locals.renderWholePage = 1;
+        next();
+    },
+    checkServiceExceptions,
+    blankInputRepsonder,
+    aboutResponder,
+    addressResponder,
+    askWatson
+);
 
 //  a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
@@ -308,8 +425,8 @@ router.post('/feedback', function(req, res) {
     res.locals.returnHTML = 1
     res.locals.action = 'Feedback'
     lib.processFeedback(req.body.comment, req)
-        .then()
-        .catch((err)=> logger.warn("feedback/ error ", err)); // TODO - tell users if there is a problem or fail silently?
+    .then()
+    .catch((err)=> logger.error(err)); // TODO - tell users if there is a problem or fail silently?
     res.render('message', {message: {message:'Thanks for the feedback'}});
 });
 
@@ -346,7 +463,7 @@ router.post('/respond', function(req, res, next) {
                                 };
                                 res.render("response", {pageData: {err: null}});
                             } else {
-                                logger.warn(err.message)
+                                logger.error(err)
                                 res.render("response", {pageData: {err: err}});
                             }
                         }
