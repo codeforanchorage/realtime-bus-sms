@@ -1,3 +1,10 @@
+// For FB testing
+var nock = require('nock');
+process.env.FB_APP_SECRET = 'secret' // note: this must be set before requiring app code
+nock.enableNetConnect();
+nock('https://graph.facebook.com').log(console.log);
+var FBUser = "123456";   // FB User to receive messages on outgoing responses
+
 // Server config
 var port = 8080;
 var app = require('../app');
@@ -12,12 +19,7 @@ var hashwords = require('hashwords')();
 var fs = require('fs');
 var crypto = require('crypto');
 var sandbox = require('sinon').sandbox.create();
-var nock = require('nock');
 
-// For FB testing
-nock.enableNetConnect();
-nock('https://graph.facebook.com').log(console.log);
-var FBUser = "123456";   // FB User to receive messages on outgoing responses
 
 // Helper functions
 
@@ -183,9 +185,9 @@ exports.group = {
 
         // mock geocoding output
         var fake_geocoding_output = {
-            data:{ 
+            data:{
                 location: { lat: 61.1465158, lng: -149.9518964 },
-                formatted_address: 'Jewel Lake Rd & W 82nd Ave, Anchorage, AK 99502, USA' 
+                formatted_address: 'Jewel Lake Rd & W 82nd Ave, Anchorage, AK 99502, USA'
             },
             asyncTime: 686
         }
