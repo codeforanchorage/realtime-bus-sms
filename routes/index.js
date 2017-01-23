@@ -137,7 +137,10 @@ function feedbackResponder(req, res, next){
             res.locals.action = 'Feedback'
             lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
             .then((data)=>res.send("Thanks for the feedback"))
-            .catch((err)=>logger.error(err));
+            .catch((err)=>{
+                res.send("Error saving feedback, administrator notified.");
+                logger.error(err)
+            });
             return;
         }
         next();
@@ -145,14 +148,11 @@ function feedbackResponder(req, res, next){
 
 function blankInputRepsonder(req, res, next){
     var input = req.body.Body;
-    console.log("BI_R: ", req.body)
     if (!input || /^\s*$/.test(input)) {
         // res.locals.action is caching the event type which we can use later when logging anlytics
         res.locals.action = 'Empty Input'
         res.locals.message = {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'}
-        return res.render('message', function(err, rendered) {
-                 res.send(rendered);
-        })
+        return res.render('message');
     }
     next();
 }
@@ -169,9 +169,7 @@ function aboutResponder(req, res, next){
     var message = req.body.Body;
     if (message.trim().toLowerCase() === 'about') {
         res.locals.action = 'About';
-        res.render('about-partial', function(err, rendered) {
-                res.send(rendered);
-        });
+        res.render('about-partial');
         return;
     }
     next();
@@ -270,7 +268,7 @@ router.post('/fbhook', function (req, res) {
                         sendFBMessage(messagingEvent.sender.id, data)
                     })
                 } else {
-                    logger.warn("fbhook received unknown messagingEvent: ", messagingEvent);
+                    logger.warn("fbhook received unknown messagingEvent: ", JSON.stringify(messagingEvent));
                 }
             });
         });
