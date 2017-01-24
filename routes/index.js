@@ -294,7 +294,7 @@ function sendFBMessage(recipientId, messageText) {
             metadata: "DEVELOPER_DEFINED_METADATA"
         }
     };
-    console.log("Trying to send message \"%s\" to recipient %s", messageText, recipientId );
+    //console.log("Trying to send message \"%s\" to recipient %s", messageText, recipientId );
 
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
@@ -303,20 +303,9 @@ function sendFBMessage(recipientId, messageText) {
         json: messageData
 
     }, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var recipientId = body.recipient_id;
-            var messageId = body.message_id;
-
-            if (messageId) {
-                console.log("Successfully sent message with id %s to recipient %s",
-                    messageId, recipientId);
-            } else {
-                console.log("Successfully called Send API for recipient %s",
-                    recipientId);
-            }
-        } else {
-            console.error("Failed calling Send API: ", error.message);
-            console.error("Failed calling Send API", response.statusCode, response.statusMessage);
+        if (error || (response.statusCode != 200)) {
+            logger.error("Failed calling Send API: ", error.message);
+            logger.error("Failed calling Send API", response.statusCode, response.statusMessage);
         }
     });
 
