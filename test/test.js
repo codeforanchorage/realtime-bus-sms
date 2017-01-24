@@ -1,3 +1,10 @@
+// For FB testing
+var nock = require('nock');
+process.env.FB_APP_SECRET = 'secret' // note: this must be set before requiring app code
+nock.enableNetConnect();
+nock('https://graph.facebook.com').log(console.log);
+var FBUser = "123456";   // FB User to receive messages on outgoing responses
+
 // Server config
 var port = 8080;
 var app = require('../app');
@@ -14,10 +21,54 @@ var crypto = require('crypto');
 var sandbox = require('sinon').sandbox.create();
 
 
-
 // Helper functions
-function testFeedback(test, res, feedbackString, phone, email) {
-    test.ok(res.body.indexOf("Thanks for the feedback") > -1, "Test feedback response");
+
+/*
+ Facebook handling - "message" is from user, "response" is expected response. Can be regex
+ */
+function testFBMsgResponse(test, message, response) {
+    var FBOut = nock('https://graph.facebook.com')
+        .post('/v2.6/me/messages', {
+            recipient: {
+                id: FBUser
+            },
+            message: {
+                text: response,
+                metadata: "DEVELOPER_DEFINED_METADATA"
+            }
+        })
+        .reply(200, {"status":200}, { 'access-control-allow-credentials': 'true'}).log((data) => console.log(data));
+    var data = {
+        object: "page",
+        entry: [{
+            id: 1,
+            time: Date.now(),
+            messaging: [{
+                sender: {id: FBUser},
+                recipient: {id: "1234567"},
+                timestamp: Date.now(),
+                message: { text: message }
+            }]
+        }]
+    };
+    var verifyBuf = new Buffer(JSON.stringify(data), "utf-8");
+    var verifyHash = crypto.createHmac('sha1', config.FB_APP_SECRET)
+        .update(verifyBuf)
+        .digest('hex');
+    console.log("VerifyHash: " + verifyHash);
+    api.post(test, '/fbhook', {
+        data: data,
+        headers: { 'x-hub-signature' : 'sha1='+verifyHash }
+    }, function (res) {
+        setTimeout(function(){
+            FBOut.done();
+            if (test) test.done();
+        }, 500);
+    });
+}
+
+function testFeedback(test, res, feedbackString, phone, email, fbUser) {
+    if (!fbUser) test.ok(res.body.indexOf("Thanks for the feedback") > -1, "Test feedback response");
     var comments = JSON.parse(fs.readFileSync('./comments.json'));
     test.ok(function() {
         for(var i=0; i < comments.comments.length; i++) {
@@ -35,8 +86,15 @@ function testFeedback(test, res, feedbackString, phone, email) {
                     } else {
                         return false
                     }
+                } else if (fbUser) {
+                    if (comments.comments[i].fbUser == fbUser) {
+                        return true
+                    } else {
+                        return false
+                    }
+                } else {
+                    return true
                 }
-                return true
             }
         }
         return false
@@ -65,13 +123,19 @@ function testOutage(test, res) {
     test.done()
 }
 
-function testLogging(test, res, input, phone) {
+function testLogging(test, input, phone, fbUser) {
     var db = JSON.parse(fs.readFileSync('./public/db.json'));
     test.ok(function() {
         for(var i=0; i < db.requests.length; i++) {
             if (db.requests[i].input == input ) {
                 if (phone) {
                     if (db.requests[i].phone == hashwords.hashStr(phone)) {
+                        return true
+                    } else {
+                        return false
+                    }
+                } else if (fbUser) {
+                    if (db.requests[i].fbUser == hashwords.hashStr(fbUser)) {
                         return true
                     } else {
                         return false
@@ -90,6 +154,12 @@ function testLogging(test, res, input, phone) {
             if (db.requests[i].input == input ) {
                 if (phone) {
                     if (db.requests[i].phone == phone) {
+                        return true
+                    } else {
+                        return false
+                    }
+                } else if (fbUser) {
+                    if (db.requests[i].fbUser == fbUser) {
                         return true
                     } else {
                         return false
@@ -115,9 +185,9 @@ exports.group = {
 
         // mock geocoding output
         var fake_geocoding_output = {
-            data:{ 
+            data:{
                 location: { lat: 61.1465158, lng: -149.9518964 },
-                formatted_address: 'Jewel Lake Rd & W 82nd Ave, Anchorage, AK 99502, USA' 
+                formatted_address: 'Jewel Lake Rd & W 82nd Ave, Anchorage, AK 99502, USA'
             },
             asyncTime: 686
         }
@@ -168,6 +238,9 @@ exports.group = {
             test.done()
         });
     },
+    test_fbAddressEntry: function(test) {
+        testFBMsgResponse(test, "JEWEL LAKE & 82ND", /0213 - JEWEL LAKE & 82ND AVENUE NNE/ )
+    },
 
 // Test Stop ID (Hard-coded stopIds should probably be read from list)
     test_browserStopId: function (test) {
@@ -186,8 +259,12 @@ exports.group = {
             testStopId(test, res, stopId)
         });
     },
+    test_fbStopId: function(test) {
+        for (var stopId in stop_number_lookup) break;
+        testFBMsgResponse(test, stopId, new RegExp("Stop " + stopId))
+    },
 
-// Alternate stopId combos (Assume browser same as SMS)
+// Alternate stopId combos (Assume browser and FB same as SMS)
     test_smsHashStopId: function (test) {
         for (var stopId in stop_number_lookup) break;
         var altStopId = "#" + stopId;
@@ -250,16 +327,33 @@ exports.group = {
             testAbout(test, res)
         });
     },
+    test_smsHello: function (test) {
+        api.post(test, '/', {
+            data: {Body: "hello"}
+        }, function (res) {
+            testAbout(test, res)
+        });
+    },
+    test_smsHi: function (test) {
+        api.post(test, '/', {
+            data: {Body: "hi"}
+        }, function (res) {
+            testAbout(test, res)
+        });
+    },
+    test_fbAbout: function (test) {
+        testFBMsgResponse(test, "about", /Get bus ETAs/)
+    },
 
 // Test logging
     test_smsLogging: function (test) {
         var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
-        var phone = "608-432-5799";
+        var phone = "608-555-1212";
         api.post(test, '/', {
             data: {Body: input,
                 From: phone}
         }, function (res) {
-            setTimeout(function () {testLogging(test, res, input, phone)}, 500);  //Delay to make sure logging saves
+            setTimeout(function () {testLogging(test, input, phone)}, 500);  //Delay to make sure logging saves
         });
     },
     test_browserLogging: function (test) {
@@ -267,9 +361,15 @@ exports.group = {
         api.post(test, '/ajax', {
             data: {Body: input}
         }, function (res) {
-            setTimeout(function () {testLogging(test, res, input)}, 500);  //Delay to make sure logging saves
+            setTimeout(function () {testLogging(test, input)}, 500);  //Delay to make sure logging saves
         });
     },
+    test_fbLogging: function(test) {
+        var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
+        testFBMsgResponse(undefined, input, /Stop/);
+        setTimeout(function () {testLogging(test, input, undefined, FBUser)}, 500);  //Delay to make sure logging saves
+    },
+
 
 // Log Plots
     //Test the plot page
@@ -284,12 +384,13 @@ exports.group = {
     test_getLogData: function (test) {
         api.get(test, '/logData/', {
             data: {type: "hits",
-                   daysBack: "20"}
+                daysBack: "20"}
         }, function(res) {
             var logData = JSON.parse(res.body);
+            console.log("Plot response: ", res.body);
             test.ok(logData.length > 0, "Have log data");
             var sampleRequest = logData[0];
-            test.ok(sampleRequest.hasOwnProperty('type'), "Type present (Browser or SMS)");
+            test.ok(sampleRequest.hasOwnProperty('type'), "Type present (Browser, SMS, or Facebook)");
             test.ok(sampleRequest.hasOwnProperty('date'), "Date present");
             test.ok(sampleRequest.hasOwnProperty('totalTime'), "Total response time present");
             test.ok(sampleRequest.hasOwnProperty('muniTime'), 'Muni response time present');
@@ -304,20 +405,26 @@ exports.group = {
         var email = "test@example.com";
         api.post(test, '/feedback', {
             data: {comment: feedbackString,
-                   email: email}
+                email: email}
         }, function (res) {
             setTimeout(function () {testFeedback(test, res, feedbackString, null, email)}, 500);  //Delay to make sure logging saves
         });
     },
     test_smsFeedback: function (test) {
         var feedbackString = "Test Feedback " + (new Date().toISOString());
-        var phone = "608-432-5799";
+        var phone = "608-555-1212";
         api.post(test, '/', {
             data: {Body: config.FEEDBACK_TRIGGER + feedbackString,
                 From: phone}
         }, function (res) {
             setTimeout(function () {testFeedback(test, res, feedbackString, phone)}, 500);  //Delay to make sure logging saves
         });
+
+    },
+    test_fbFeedback: function (test) {
+        var feedbackString = "Test Feedback " + (new Date().toISOString());
+        testFBMsgResponse(undefined, config.FEEDBACK_TRIGGER + feedbackString, /Thanks for the feedback/);
+        setTimeout(function () {testFeedback(test, undefined, feedbackString, undefined, undefined, FBUser)}, 500);  //Delay to make sure logging saves
 
     },
     test_feedbackResponseValidGet: function(test) {
@@ -353,21 +460,21 @@ exports.group = {
                 console.log("Posting reponse")
                 api.post(test,"/respond", {
                     data: {hash: comments.comments[i].response_hash,
-                           response: response}
-                    }, function(res) {
-                        setTimeout(function () {   // Did we log our response?
-                            test.ok(function() {
-                                console.log("Checking for reponse in log");
-                                for (var j = comments.comments.length-1; j >= 0 ; j--) {
-                                    if (comments.comments[j].response && comments.comments[j].response.indexOf(response) > -1) {
-                                        console.log("Got right response in log")
-                                        return true;
-                                    }
+                        response: response}
+                }, function(res) {
+                    setTimeout(function () {   // Did we log our response?
+                        test.ok(function() {
+                            console.log("Checking for reponse in log");
+                            for (var j = comments.comments.length-1; j >= 0 ; j--) {
+                                if (comments.comments[j].response && comments.comments[j].response.indexOf(response) > -1) {
+                                    console.log("Got right response in log")
+                                    return true;
                                 }
-                                return false
-                            });
-                            test.done();
-                        }, 500);  //Delay to make sure logging saves
+                            }
+                            return false
+                        });
+                        test.done();
+                    }, 500);  //Delay to make sure logging saves
                 });
             }
         }
@@ -387,11 +494,73 @@ exports.group = {
         });
     },
 
+    // Test FB message batching
+    testFBMsgBatching(test) {
+        var FBOut1 = nock('https://graph.facebook.com')
+            .post('/v2.6/me/messages', {
+                recipient: {
+                    id: FBUser + "1"
+                },
+                message: {
+                    text: /Stop 99/,
+                    metadata: "DEVELOPER_DEFINED_METADATA"
+                }
+            })
+            .reply(200, {"status":200}, { 'access-control-allow-credentials': 'true'}).log((data) => console.log("Nock: " + data));
+        var FBOut2 = nock('https://graph.facebook.com')
+            .post('/v2.6/me/messages', {
+                recipient: {
+                    id: FBUser + "2"
+                },
+                message: {
+                    text: /Stop 100/,
+                    metadata: "DEVELOPER_DEFINED_METADATA"
+                }
+            })
+            .reply(200, {"status":200}, { 'access-control-allow-credentials': 'true'}).log((data) => console.log("Nock: " + data));
+        var data = {
+            object: "page",
+            entry: [{
+                id: 1,
+                time: Date.now(),
+                messaging: [
+                    {
+                        sender: {id: FBUser + "1"},
+                        recipient: {id: "1234567"},
+                        timestamp: Date.now(),
+                        message: { text: "99" }
+                    },
+                    {
+                        sender: {id: FBUser + "2"},
+                        recipient: {id: "1234567"},
+                        timestamp: Date.now(),
+                        message: { text: "100" }
+                    }]
+            }]
+        };
+        var verifyBuf = new Buffer(JSON.stringify(data), "utf-8");
+        var verifyHash = crypto.createHmac('sha1', config.FB_APP_SECRET)
+            .update(verifyBuf)
+            .digest('hex');
+        console.log("VerifyHash: " + verifyHash);
+        api.post(test, '/fbhook', {
+            data: data,
+            headers: { 'x-hub-signature' : 'sha1='+verifyHash }
+        }, function (res) {
+            setTimeout(function(){
+                FBOut2.done();
+                FBOut1.done();
+                test.done();
+            }, 1000);
+        });
+    },
+
+
 // Bustracker failure
     test_browserNetworkFailure: function(test) {
         config.MUNI_URL = '';
         for (var stopId in stop_number_lookup) break;
-        api.post(test, '/', {
+        api.post(test, '/ajax', {
             data: {Body: stopId}
         }, function (res) {
             testOutage(test, res)
@@ -405,6 +574,11 @@ exports.group = {
         }, function (res) {
             testOutage(test, res)
         });
+    },
+    test_fbNetworkFailure: function(test) {
+        config.MUNI_URL = '';
+        for (var stopId in stop_number_lookup) break;
+        testFBMsgResponse(test, stopId, /Bustracker is down/);
     },
     test_browserOutage: function(test) {
         config.MUNI_URL = "http://bustracker.muni.org/InfoPoint/departure.aspx?stopid=";  //"departures.aspx" spelled wrong
@@ -423,7 +597,14 @@ exports.group = {
         }, function (res) {
             testOutage(test, res)
         });
+    },
+    test_fbOutage: function(test) {
+        config.MUNI_URL = "http://bustracker.muni.org/InfoPoint/departure.aspx?stopid=";  //"departures.aspx" spelled wrong
+        for (var stopId in stop_number_lookup) break;
+        testFBMsgResponse(test, stopId, /Bustracker is down/);
     }
+
+
 
 
 };

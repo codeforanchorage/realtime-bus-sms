@@ -7,6 +7,7 @@ var UUID = require("pure-uuid");
 var bodyParser = require('body-parser');
 var rollbar = require("rollbar");
 var config = require('./lib/config');
+var lib = require('./lib/index');
 
 rollbar.init(config.ROLLBAR_TOKEN);
 
@@ -17,6 +18,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+require('run-middleware')(app);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -47,7 +49,8 @@ app.use(logs.initialize((req, res) => {
     var routes = res.locals.routes
     return {
         input:           req.body.Body,
-        phone:           req.body.From,
+        phone:           req.body.isFB ? undefined : req.body.From,
+        fbUser:          req.body.isFB ? req.body.From : undefined,
         muniTime:        routes ? routes.muniTime: undefined,
         geocodeTime:     routes ? routes.geocodeTime: undefined,
         stopId:          routes ? routes.data.stopId: undefined,
@@ -59,7 +62,7 @@ app.use(logs.initialize((req, res) => {
 /*  
     SETUP GOOGLE ANALYTICS
     The convention used here is:
-    category: 'sms | 'web'
+    category: 'sms | 'web' | 'fb'
     action: actions are set by the router depending on what the user was looking for
             currently: '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
     label:  the actual search: the stop number, geocoded address, or the raw input if lookup failed
@@ -69,10 +72,10 @@ logs.initGoogleAnalytics((logFields) => {
     //  But Twilio's expires after 4 hours so we'll make a more stable phone-based 
     //  one for SMS users
     var uuid;
-    var category = logFields.phone ? "sms" : "web";
-    if (category == "sms"){
+    var category = logFields.phone ? "sms" : (logFields.fbUser ? "fb" : "web");
+    if ((category == "sms") || (category == "fb")){
         var ns = "deebee62-076c-47ef-ad02-2509e2d4f839" // this random namespace is hashed (using SHA-1) with phone number to create UUID
-        uuid = new UUID(5, ns, logFields.phone).format()
+        uuid = new UUID(5, ns, logFields.phone || logFields.fbUser).format()
     }
     return {
         trackingCode: config.GOOGLE_ANALYTICS_ID,
@@ -87,8 +90,9 @@ logs.initGoogleAnalytics((logFields) => {
 //  Add custom transport for logging to lowDB
 //  This is in its own module becuase rather than the logger module
 //  because it's all very specific to the bus app.
-logs.add(require('./lib/lowdb_log_transport'), {}) 
+logs.add(require('./lib/lowdb_log_transport'), {})
 
+app.use('/fbhook', bodyParser.json({ verify: lib.verifyFBRequestSignature }));  //For Facebook requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
