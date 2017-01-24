@@ -327,6 +327,20 @@ exports.group = {
             testAbout(test, res)
         });
     },
+    test_smsHello: function (test) {
+        api.post(test, '/', {
+            data: {Body: "hello"}
+        }, function (res) {
+            testAbout(test, res)
+        });
+    },
+    test_smsHi: function (test) {
+        api.post(test, '/', {
+            data: {Body: "hi"}
+        }, function (res) {
+            testAbout(test, res)
+        });
+    },
     test_fbAbout: function (test) {
         testFBMsgResponse(test, "about", /Get bus ETAs/)
     },

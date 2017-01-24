@@ -167,7 +167,7 @@ function checkServiceExceptions(req, res, next){
 
 function aboutResponder(req, res, next){
     var message = req.body.Body;
-    if (message.trim().toLowerCase() === 'about') {
+    if (['about','hi','hello'].indexOf(message.trim().toLowerCase()) >= 0) {
         res.locals.action = 'About';
         res.render('about-partial');
         return;
