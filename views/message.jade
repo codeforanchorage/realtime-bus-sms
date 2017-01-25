@@ -1,11 +1,5 @@
-if returnHTML
-    div 
-        if message.name
-            b #{message.name}
-            br 
-        | #{message.message}
-        p <a href="/">About this service</a>
+if renderWholePage
+    include message-non-ajax.jade
 else
-    if message.name
-        |#{message.name} 
-    | !{message.message}  
+    include message-partial.jade  
+
