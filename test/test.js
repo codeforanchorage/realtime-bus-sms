@@ -11,6 +11,7 @@ var app = require('../app');
 var http = require('http');
 app.set('port', port);
 var server = http.createServer(app);
+var api;
 
 var config = require('../lib/config');
 var lib = require('../lib/index')
@@ -387,7 +388,7 @@ exports.group = {
                 daysBack: "20"}
         }, function(res) {
             var logData = JSON.parse(res.body);
-            console.log("Plot response: ", res.body);
+            // console.log("Plot response: ", res.body);
             test.ok(logData.length > 0, "Have log data");
             var sampleRequest = logData[0];
             test.ok(sampleRequest.hasOwnProperty('type'), "Type present (Browser, SMS, or Facebook)");
