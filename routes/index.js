@@ -54,8 +54,8 @@ function askWatson(req, res, next){
             if (err) {
                 let error_data = { input: input }
                 if (!(err instanceof Error)) {
-                    err = new Error('Watson error')
                     error_data.passed = err
+                    err = new Error('Watson error')
                 }
                 logger.error(err, error_data);
                 // At this point we know the request isn't a bus number or address. If Watson sends an error fall back to older behavior.
