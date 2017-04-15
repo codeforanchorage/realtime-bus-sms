@@ -189,7 +189,6 @@ function aboutResponder(req, res, next){
 function stopNumberResponder(req,res, next){
     var input = req.body.Body;
     var stopRequest = input.toLowerCase().replace(/\s\s+/g,'').replace("stop",'').replace("#",'');
-    console.log("stop request", stopRequest)
     if (/^\d+$/.test(stopRequest)) {
         res.locals.action = 'Stop Lookup';
         lib.getStopFromStopNumber(parseInt(stopRequest))
