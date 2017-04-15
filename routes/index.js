@@ -8,7 +8,7 @@ var fs = require('fs');
 var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
 var logger = require('../lib/logger');
 var lowdb_log = require('../lib/lowdb_log_transport');
-var emojiRegex = require('emoji-regex')
+var emojiRegex = require('emoji-regex');
 // Facebook requirements
 var request = require('request');
 var https = require('https');
@@ -130,7 +130,6 @@ function askWatson(req, res, next){
  '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
 
  */
-
 function sanitizeInput(req, res, next) {
     //[TODO: add test for this]
     // Replace tabs, carriage returns, etc with single space to prevent Watson errors. 
@@ -188,7 +187,7 @@ function aboutResponder(req, res, next){
 
 function stopNumberResponder(req,res, next){
     var input = req.body.Body;
-    var stopRequest = input.toLowerCase().replace(/\s\s+/g,'').replace("stop",'').replace("#",'');
+    var stopRequest = input.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
     if (/^\d+$/.test(stopRequest)) {
         res.locals.action = 'Stop Lookup';
         lib.getStopFromStopNumber(parseInt(stopRequest))
@@ -361,7 +360,7 @@ router.post('/ajax',
  Routes to allow deep linking and bookmarks via url with
  either address, stop number, or about.
  */
- router.get('/find/about', function(req, res, next) {
+router.get('/find/about', function(req, res, next) {
     res.locals.returnHTML = 1;
     res.locals.action = "About"
     res.render('index');
@@ -380,8 +379,7 @@ router.get('/find/:query', function(req, res, next) {
     stopNumberResponder,
     addressResponder,
     askWatson
-    );
-
+);
 
 //  a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
