@@ -131,7 +131,7 @@ function askWatson(req, res, next){
 
  */
 function sanitizeInput(req, res, next) {
-    //[TODO: add test for this]
+    // [TODO: add test for this]
     // Replace tabs, carriage returns, etc with single space to prevent Watson errors. 
     // Strip emojis
     const emoRegex = emojiRegex(); 
