@@ -8,6 +8,7 @@ var fs = require('fs');
 var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
 var logger = require('../lib/logger');
 var lowdb_log = require('../lib/lowdb_log_transport');
+var emojiRegex = require('emoji-regex')
 // Facebook requirements
 var request = require('request');
 var https = require('https');
@@ -130,6 +131,16 @@ function askWatson(req, res, next){
 
  */
 
+function sanitizeInput(req, res, next) {
+    //[TODO: add test for this]
+    // Replace tabs, carriage returns, etc with single space to prevent Watson errors. 
+    // Strip emojis
+    const emoRegex = emojiRegex(); 
+    req.body.Body = req.body.Body.replace(/\s/g, ' ').replace(emoRegex, '');  
+    next()
+    
+}
+
 function feedbackResponder(req, res, next){
         res.set('Content-Type', 'text/plain');
         var message = req.body.Body || '';
@@ -177,7 +188,8 @@ function aboutResponder(req, res, next){
 
 function stopNumberResponder(req,res, next){
     var input = req.body.Body;
-    var stopRequest = input.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
+    var stopRequest = input.toLowerCase().replace(/\s\s+/g,'').replace("stop",'').replace("#",'');
+    console.log("stop request", stopRequest)
     if (/^\d+$/.test(stopRequest)) {
         res.locals.action = 'Stop Lookup';
         lib.getStopFromStopNumber(parseInt(stopRequest))
@@ -322,6 +334,7 @@ function sendFBMessage(recipientId, messageText) {
 router.post('/',
     feedbackResponder,
     checkServiceExceptions,
+    sanitizeInput,
     blankInputRepsonder,
     aboutResponder,
     stopNumberResponder,
@@ -336,6 +349,7 @@ router.post('/ajax',
         next()
     },
     checkServiceExceptions,
+    sanitizeInput,
     blankInputRepsonder,
     aboutResponder,
     stopNumberResponder,
@@ -348,38 +362,27 @@ router.post('/ajax',
  Routes to allow deep linking and bookmarks via url with
  either address, stop number, or about.
  */
-router.get('/find/about', function(req, res, next) {
+ router.get('/find/about', function(req, res, next) {
     res.locals.returnHTML = 1;
     res.locals.action = "About"
     res.render('index');
 
 });
 
-//  :query should be a stop number  
-router.get('/find/:query(\\d+)', function(req, res, next) {
-        req.body.Body = req.params.query;
-        res.locals.returnHTML = 1;
-        res.locals.renderWholePage = 1;
-        next();
-    },
-    checkServiceExceptions,
-    stopNumberResponder
-);
-
-// :query should be everything other than a stop number
-// - assumes address search 
 router.get('/find/:query', function(req, res, next) {
-        req.body.Body = req.params.query;
-        res.locals.returnHTML = 1;
-        res.locals.renderWholePage = 1;
-        next();
+    req.body.Body = req.params.query
+    res.locals.returnHTML = 1;
+    res.locals.renderWholePage = 1;
+    next();
     },
     checkServiceExceptions,
+    sanitizeInput,
     blankInputRepsonder,
-    aboutResponder,
+    stopNumberResponder,
     addressResponder,
     askWatson
-);
+    );
+
 
 //  a browser with location service enabled can hit this
 router.get('/byLatLon', function(req, res, next) {
