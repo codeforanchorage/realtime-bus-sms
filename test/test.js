@@ -16,7 +16,6 @@ var api;
 var config = require('../lib/config');
 var lib = require('../lib/index')
 var gtfs = require('../lib/gtfs');
-//var stop_number_lookup = gtfs.stop_number_lookup;
 var hashwords = require('hashwords')();
 var fs = require('fs');
 var crypto = require('crypto');
@@ -203,6 +202,7 @@ exports.group = {
     tearDown: function (done) {
         server.close();
         sandbox.restore();
+        gtfs.cron_job.stop()
         done();
     },
 
