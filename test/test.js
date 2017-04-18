@@ -202,7 +202,6 @@ exports.group = {
     tearDown: function (done) {
         server.close();
         sandbox.restore();
-        gtfs.cron_job.stop()
         done();
     },
 
