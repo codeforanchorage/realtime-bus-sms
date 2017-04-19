@@ -20,7 +20,7 @@ var hashwords = require('hashwords')();
 var fs = require('fs');
 var crypto = require('crypto');
 var sandbox = require('sinon').sandbox.create();
-
+var sinon = require('sinon')
 
 // Helper functions
 
@@ -204,7 +204,90 @@ exports.group = {
         sandbox.restore();
         done();
     },
-
+// Test emoji Removal from User Input
+    test_emojiRemovalBrowserAddress: function(test) {
+        var input = "5th and G 💋 Street"
+        var spy = sinon.spy(lib, "getStopsFromAddress");
+        api.post(test, '/ajax', {
+            data: {Body: input}
+        }, function (res) {
+            test.ok(spy.args[0][0].indexOf("💋") == -1, "Test Browser Emoji Removal From Address");
+            lib.getStopsFromAddress.restore();
+            test.done();
+        });
+    },
+    test_emojiRemovalSMSAddress: function(test) {
+        var input = "5th and G 👍 Street"
+        var spy = sinon.spy(lib, "getStopsFromAddress");
+        api.post(test, '/', {
+            data: {Body: input}
+        }, function (res) {
+            test.ok(spy.args[0][0] == "5th and G  Street", "Test SMS Emoji Removal From Address");
+            lib.getStopsFromAddress.restore();
+            test.done();
+        });
+    },
+    test_emojiRemovalBrowserStopNumber: function(test) {
+        var input = "1066😀"
+        var spy = sinon.spy(lib, "getStopFromStopNumber");
+        api.post(test, '/ajax', {
+            data: {Body: input}
+        }, function (res) {
+            test.ok(spy.called && spy.args[0][0] == 1066, "Test Browser Emoji Removal From Stop Number");
+            lib.getStopFromStopNumber.restore();
+            test.done();
+        }); 
+    },
+    test_emojiRemovalSMSStopNumber: function(test) {
+        var input = "1066👌"
+        var spy = sinon.spy(lib, "getStopFromStopNumber");
+        api.post(test, '/', {
+            data: {Body: input}
+        }, function (res) {
+            test.ok(spy.called && spy.args[0][0] == 1066, "Test SMS Emoji Removal From Stop Number");
+            lib.getStopFromStopNumber.restore();
+            test.done();
+        });
+    },
+    test_emojiRemovalGETStopNumber: function(test) {
+        var spy = sinon.spy(lib, "getStopFromStopNumber");
+        api.get(test, "/find/1066" + encodeURIComponent('👆'), function (res) { // emoji uri encoded as high/low pair
+            test.ok(spy.called && spy.args[0][0] == 1066, "Test direct URL Emoji Removal From Stop Number");
+            lib.getStopFromStopNumber.restore();
+            test.done();
+        });
+    },
+    test_emojiRemovalGETAddress: function(test) {
+        var address = "5th and G Street"
+        var spy = sinon.spy(lib, "getStopsFromAddress");
+        api.get(test, "/find/" + encodeURIComponent('👉') + encodeURIComponent(address), function (res) { // emoji uri encoded as high/low pair
+            test.ok(spy.called && spy.args[0][0] == address, "Test direct URL Emoji Removal From Address");
+            lib.getStopsFromAddress.restore();
+            test.done();
+        });
+    },
+    test_browserWhiteSpaceRemoval: function(test) {
+        var input = "5th and G\tStreet\nSome \tOther Text";
+        var spy = sinon.spy(lib, "getStopsFromAddress");
+        api.post(test, '/ajax', {
+            data: {Body: input}
+        }, function (res) {
+            test.ok(spy.called && spy.args[0][0] == "5th and G Street", "Test Browser Removal of multi-line input");
+            lib.getStopsFromAddress.restore();
+            test.done();
+        }); 
+    },
+    test_SMSWhiteSpaceRemoval: function(test) {
+        var input = "5th\tand G Street\nSome Other\n Text";
+        var spy = sinon.spy(lib, "getStopsFromAddress");
+        api.post(test, '/', {
+            data: {Body: input}
+        }, function (res) {
+            test.ok(spy.called && spy.args[0][0] == "5th and G Street", "Test SMS Removal of multi-line input");
+            lib.getStopsFromAddress.restore();
+            test.done();
+        }); 
+    },
 //Test the home page
     test_browserHome: function (test) {
         api.get(test, '/', function (res) {

@@ -132,10 +132,13 @@ function askWatson(req, res, next){
  */
 function sanitizeInput(req, res, next) {
     // [TODO: add test for this]
-    // Replace tabs, carriage returns, etc with single space to prevent Watson errors. 
+    // Removes everything after return/carriage-return. 
     // Strip emojis
+
+    var firstLine = req.body.Body.split(/\r\n|\r|\n/, 1)[0].replace(/\t/g, " "); // Split on newline type characters and replace tabs with spaces
     const emoRegex = emojiRegex(); 
-    req.body.Body = req.body.Body.replace(/\s/g, ' ').replace(emoRegex, '');  
+
+    req.body.Body = firstLine.replace(emoRegex, '');  
     next()
     
 }
