@@ -175,7 +175,6 @@ function testLogging(test, input, phone, fbUser) {
     test.done();
 }
 
-
 exports.group = {
     // Start server and create client
     setUp: function (done) {
