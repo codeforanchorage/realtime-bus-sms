@@ -304,8 +304,12 @@ function sendFBMessage(recipientId, messageText) {
 
     }, function (error, response, body) {
         if (error || (response.statusCode != 200)) {
-            logger.error("Failed calling Send API: ", error.message);
-            logger.error("Failed calling Send API", response.statusCode, response.statusMessage);
+            if (error) {
+                logger.error("Failed calling Send API: " + error.message);
+            }
+            if (response) {
+                logger.error("Failed calling Send API: " + response.statusCode + " - " + response.statusMessage);
+            }
         }
     });
 
