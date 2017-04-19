@@ -64,7 +64,7 @@ function testFBMsgResponse(test, message, response) {
         setTimeout(function(){
             FBOut.done();
             if (test) test.done();
-        }, 500);
+        }, 1000);
     });
 }
 
