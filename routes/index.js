@@ -15,8 +15,8 @@ var https = require('https');
 
 var watson = require('watson-developer-cloud');
 
-/* 
-    WATSON MIDDLE WARE 
+/*
+    WATSON MIDDLE WARE
     TODO Test intent confidence to decide to help decide flow
 */
 function askWatson(req, res, next){
@@ -24,7 +24,7 @@ function askWatson(req, res, next){
     var input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so things like "I'm" returns an unwanted number
 
     try {
-        // conversation() will just throw and error if credentials are missing
+        // conversation() will just throw an error if credentials are missing
         var conversation = watson.conversation({
             username: config.WATSON_USER,
             password: config.WATSON_PASSWORD,
@@ -38,9 +38,9 @@ function askWatson(req, res, next){
     }
 
     /* TODO - this is probably not the best way to do maintain state
-        If we want to be able to have conversation beyond a stateless 
+        If we want to be able to have conversation beyond a stateless
         question & answer, we need to be able to pass the context that Watson sends
-        back to Watson. The context object isn't very big, so it fits within the 4k limit 
+        back to Watson. The context object isn't very big, so it fits within the 4k limit
         on cookies imposed by browsers, but this might be fragile.
         A more solid approach might be to use sessions and store the context with a session id.
         But for right now th cookie approach is working.
@@ -53,7 +53,12 @@ function askWatson(req, res, next){
         context: context
         }, function(err, response) {
             if (err) {
-                logger.error(err, {input: input});
+                let error_data = { input: input }
+                if (!(err instanceof Error)) {
+                    error_data.passed = err
+                    err = new Error('Watson error')
+                }
+                logger.error(err, error_data);
                 // At this point we know the request isn't a bus number or address. If Watson sends an error fall back to older behavior.
                 res.locals.message = {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`}
                 return res.render('message')
@@ -64,7 +69,7 @@ function askWatson(req, res, next){
             res.cookie('context', JSON.stringify(response.context))
 
             // The context.action is set in the Watson Conversation Nodes when we know
-            // we need to respond with additional data or our own message.  
+            // we need to respond with additional data or our own message.
             // If it's not set, we use the response sent from Watson.
             if (!response.context.action) {
                 res.locals.action = 'Watson Chat'
@@ -73,7 +78,7 @@ function askWatson(req, res, next){
             }
 
             switch(response.context.action) {
-                case "Stop Lookup": 
+                case "Stop Lookup":
                     // Earlier middleware should catch plain stop numbers
                     // But a query like "I'm at stop 36" should end up here
                     // Watson should identify the number for use as an entity
@@ -104,7 +109,7 @@ function askWatson(req, res, next){
                     }
                 case("Address Lookup"):
                     // The geocoder has already tried and failed to lookup
-                    // but Watson thinks this is an address. It's only a seperate 
+                    // but Watson thinks this is an address. It's only a seperate
                     // case so we can log a failed address lookup
                     res.locals.action = 'Failed Address Lookup'
                     res.locals.message = {message:response.output.text.join(' ')}
@@ -115,7 +120,7 @@ function askWatson(req, res, next){
                     res.locals.action = 'Watson Chat'
                     res.locals.message = {message:response.output.text.join(' ')}
                     return res.render('message')
-        
+
             }
         next();
     });
@@ -172,7 +177,7 @@ function blankInputRepsonder(req, res, next){
 
 function checkServiceExceptions(req, res, next){
     if (lib.serviceExceptions()){
-           res.locals.message = {name: "Holiday", message:'There is no bus service today.'} 
+           res.locals.message = {name: "Holiday", message:'There is no bus service today.'}
            return res.render('message')
         }
     next()
@@ -209,7 +214,7 @@ function stopNumberResponder(req,res, next){
 }
 
 function addressResponder(req, res, next){
-    var input = req.body.Body;    
+    var input = req.body.Body;
     res.locals.action = 'Address Lookup'
     lib.getStopsFromAddress(input)
     .then((routeObject) => {
@@ -222,12 +227,12 @@ function addressResponder(req, res, next){
         res.render('route-list');
     })
     .catch((err) => {
-        if (err.type == 'NOT_FOUND') return next() // Address not found pass to Watson      
- 
+        if (err.type == 'NOT_FOUND') return next() // Address not found pass to Watson
+
         res.locals.action = 'Failed Address Lookup'
         res.render('message', {message: err})
     })
-    return;  
+    return;
 }
 
 /* GET HOME PAGE */
@@ -317,8 +322,12 @@ function sendFBMessage(recipientId, messageText) {
 
     }, function (error, response, body) {
         if (error || (response.statusCode != 200)) {
-            logger.error("Failed calling Send API: ", error.message);
-            logger.error("Failed calling Send API", response.statusCode, response.statusMessage);
+            if (error) {
+                logger.error("Failed calling Send API: " + error.message);
+            }
+            if (response) {
+                logger.error("Failed calling Send API: " + response.statusCode + " - " + response.statusMessage);
+            }
         }
     });
 
@@ -326,7 +335,7 @@ function sendFBMessage(recipientId, messageText) {
 
 
 
-/*  
+/*
  TWILIO ENDPOINT
  The user's text message is
  in the POST body.
