@@ -7,13 +7,15 @@
 var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
 
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '8080');
-app.set('port', port);
+//app.set('port', port);
 
 /**
  * Create HTTP server.
@@ -28,6 +30,24 @@ var server = http.createServer(app);
 server.listen(port, '0.0.0.0');
 server.on('error', onError);
 server.on('listening', onListening);
+
+
+/**
+* Setup HTTPS server with self-signed certs
+* Self-signed Certs won't be trusted by browsers
+* To Generate Keys (on OS X/Linux)
+* openssl genrsa -out localhost.key 2048
+* openssl req -new -x509 -key localhost.key -out localhost.cert -days 3650 -subj /CN=localhost
+**/
+var ssl_options = {
+    key: fs.readFileSync( 'ssl/localhost.key' ),
+    cert: fs.readFileSync( 'ssl/localhost.cert' ),
+    requestCert: false,
+    rejectUnauthorized: false
+};
+var ssl_server = https.createServer(ssl_options, app).listen(8043);
+ssl_server.on('error', onError);
+ssl_server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
