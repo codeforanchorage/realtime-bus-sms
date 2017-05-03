@@ -8,6 +8,7 @@ var fs = require('fs');
 var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
 var logger = require('../lib/logger');
 var lowdb_log = require('../lib/lowdb_log_transport');
+var emojiRegex = require('emoji-regex');
 // Facebook requirements
 var request = require('request');
 var https = require('https');
@@ -134,6 +135,15 @@ function askWatson(req, res, next){
  '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
 
  */
+function sanitizeInput(req, res, next) {
+    // Removes everything after first return/carriage-return. 
+    // Strip emojis
+
+    var firstLine = req.body.Body.split(/\r\n|\r|\n/, 1)[0].replace(/\t/g, " "); // Split on newline type characters and replace tabs with spaces
+    const emoRegex = emojiRegex(); 
+    req.body.Body = firstLine.replace(emoRegex, '');  
+    next();
+}
 
 function feedbackResponder(req, res, next){
         res.set('Content-Type', 'text/plain');
@@ -331,6 +341,7 @@ function sendFBMessage(recipientId, messageText) {
 router.post('/',
     feedbackResponder,
     checkServiceExceptions,
+    sanitizeInput,
     blankInputRepsonder,
     aboutResponder,
     stopNumberResponder,
@@ -345,6 +356,7 @@ router.post('/ajax',
         next()
     },
     checkServiceExceptions,
+    sanitizeInput,
     blankInputRepsonder,
     aboutResponder,
     stopNumberResponder,
@@ -364,28 +376,16 @@ router.get('/find/about', function(req, res, next) {
 
 });
 
-//  :query should be a stop number
-router.get('/find/:query(\\d+)', function(req, res, next) {
-        req.body.Body = req.params.query;
-        res.locals.returnHTML = 1;
-        res.locals.renderWholePage = 1;
-        next();
-    },
-    checkServiceExceptions,
-    stopNumberResponder
-);
-
-// :query should be everything other than a stop number
-// - assumes address search
 router.get('/find/:query', function(req, res, next) {
-        req.body.Body = req.params.query;
-        res.locals.returnHTML = 1;
-        res.locals.renderWholePage = 1;
-        next();
+    req.body.Body = req.params.query
+    res.locals.returnHTML = 1;
+    res.locals.renderWholePage = 1;
+    next();
     },
     checkServiceExceptions,
+    sanitizeInput,
     blankInputRepsonder,
-    aboutResponder,
+    stopNumberResponder,
     addressResponder,
     askWatson
 );
