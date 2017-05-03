@@ -136,12 +136,15 @@ function askWatson(req, res, next){
 
  */
 function sanitizeInput(req, res, next) {
-    // Removes everything after first return/carriage-return. 
+    // Removes everything after first return/carriage-return.
     // Strip emojis
 
-    var firstLine = req.body.Body.split(/\r\n|\r|\n/, 1)[0].replace(/\t/g, " "); // Split on newline type characters and replace tabs with spaces
-    const emoRegex = emojiRegex(); 
-    req.body.Body = firstLine.replace(emoRegex, '');  
+    if (req.body.Body) {
+        // Split on newline type characters and replace tabs with spaces
+        var firstLine = req.body.Body.split(/\r\n|\r|\n/, 1)[0].replace(/\t/g, " ");
+        const emoRegex = emojiRegex();
+        req.body.Body = firstLine.replace(emoRegex, '');
+    }
     next();
 }
 
