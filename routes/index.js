@@ -237,6 +237,11 @@ function addressResponder(req, res, next){
 
 /* GET HOME PAGE */
 router.get('/', function(req, res, next) {
+        // redirect to https if the user is using http
+        if (req.get('X-Forwarded-Proto') && req.get('X-Forwarded-Proto') == 'http') {
+            return res.redirect('https://' + req.get('host') + req.originalUrl)
+        }
+        
         res.render('index');
     }
 );
