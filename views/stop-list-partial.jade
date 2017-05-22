@@ -1,0 +1,18 @@
+if returnHTML
+    div(id="routeInformation")
+        div(id="stop")
+            h2(id="stop-number") stop<br /> #{routes.data.stopId}
+            h3(id="stop-name") #{routes.data.stop}
+        ul 
+            each stop in routes.data.stops
+                li
+                    div #{stop.number}
+                    div #{stop.name} #{stop.times[0]}
+else
+    |* Stop #{routes.data.stopId} - #{routes.data.stop} *
+    | 
+    each stop in routes.data.stops
+        | 
+        |#{stop.number} #{stop.name} - 
+        |#{stop.times[0]}
+        | 
