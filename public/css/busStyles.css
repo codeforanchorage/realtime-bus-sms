@@ -201,10 +201,10 @@ textarea:focus, input:focus {
     display:none;
 }
 #location {
-    padding: 1px 4px;
+    padding: 0px 4px;
     background-color: #d4d31e;
     color: #fff;
-    border-radius: 15px 0px 0px 15px;
+    border-radius: 5px;
     border: 3px solid #d4d31e;
 
 }
@@ -224,7 +224,7 @@ textarea:focus, input:focus {
 }
 span.pointer {
     padding-right: 15px;
-    font-size: 2.5em;
+    font-size: 1.25em;
     border-right: 3px solid white
 }
 span.location{padding-left:15px; }

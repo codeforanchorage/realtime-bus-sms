@@ -16,6 +16,7 @@ html
             form(method="POST", onsubmit="return makeRequest()")
                 input(name="Body", placeholder="bus stop number or address")
                 button(type="submit") Get Routes
+            p#location.https_only <a onclick="locateMe()"> <span class="pointer">⊕</span> <span class="location">Find stops near you</span></a>
 
             div(id="output")
 
@@ -28,7 +29,6 @@ html
                     
                     p Also! You can text a bus stop number or intersection to <br /><b><a href="sms:907-312-2060">907-312-2060</a></b>
 
-                    p#location.https_only <a onclick="locateMe()"> <span class="pointer">⊕</span> <span class="location">Find stops near your current location</span></a>
 
             a(onclick="return openFeedback()" href="#" id="feedback_link") Give feedback
             form(method="POST", style="display:none" onsubmit="return submitFeedback()", id="feedback")
@@ -168,7 +168,15 @@ html
         function postitionError(e) {
             console.log("error: ", e)
             removeLoading();
-            var output = 'Sorry, your browser reported an error: <br><b>' + e.message +"</b><br> Make sure you have allowed location services in your privacy settings";
+            // from spec https://dev.w3.org/geo/api/spec-source.html#position_error_interface
+            var error_codes = {
+                1: "<b>Permision Denied</b><br>Make sure you have allowed location services in your privacy settings.",
+                2: "<b>Position Unavailable</b><br>The browser couldn't determine your location. This can happen if you have poor GPS coverage or are using a desktop browser.",
+                3: "A Timeout Occured",
+                'default': "An unknown error occured" 
+            }
+            var error_message = error_codes[e.code] || error_codes['default']
+            var output = 'Sorry, your browser reported an error: <p>' + error_message +"</p>";
             output = output.replace(/\n/g, '<br>');
             outputDiv.innerHTML = output;
 
