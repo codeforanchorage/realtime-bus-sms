@@ -39,16 +39,18 @@ server.on('listening', onListening);
 * openssl genrsa -out localhost.key 2048
 * openssl req -new -x509 -key localhost.key -out localhost.cert -days 3650 -subj /CN=localhost
 **/
-var ssl_options = {
-    key: fs.readFileSync( 'ssl/localhost.key' ),
-    cert: fs.readFileSync( 'ssl/localhost.cert' ),
-    requestCert: false,
-    rejectUnauthorized: false
-};
-var ssl_server = https.createServer(ssl_options, app).listen(8043);
-ssl_server.on('error', onError);
-ssl_server.on('listening', onListening);
-
+if (app.get('env') == "development") {
+  console.log("Starting https server on port 8043")
+  var ssl_options = {
+      key: fs.readFileSync( 'ssl/localhost.key' ),
+      cert: fs.readFileSync( 'ssl/localhost.cert' ),
+      requestCert: false,
+      rejectUnauthorized: false
+  };
+  var ssl_server = https.createServer(ssl_options, app).listen(8043);
+  ssl_server.on('error', onError);
+  ssl_server.on('listening', onListening);
+}
 /**
  * Normalize a port into a number, string, or false.
  */
