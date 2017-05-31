@@ -16,6 +16,7 @@ html
             form(method="POST", onsubmit="return makeRequest()")
                 input(name="Body", placeholder="bus stop number or address")
                 button(type="submit") Get Routes
+            p#location.https_only <a onclick="locateMe()"> <span class="pointer">⊕</span> <span class="location">Find stops near you</span></a>
 
             div(id="output")
 
@@ -28,6 +29,7 @@ html
                     
                     p Also! You can text a bus stop number or intersection to <br /><b><a href="sms:907-312-2060">907-312-2060</a></b>
 
+
             a(onclick="return openFeedback()" href="#" id="feedback_link") Give feedback
             form(method="POST", style="display:none" onsubmit="return submitFeedback()", id="feedback")
                 label(for='comment') Comments
@@ -38,7 +40,6 @@ html
                 br
                 button(type="submit", value="Send Feedback") Send Feedback
                 button(type="reset", value="Cancel" , onclick="closeFeedback()") Cancel 
-
             div(id="footer")
                 div
                     a(href="http://codeforanchorage.org")
@@ -51,6 +52,14 @@ html
         fitText(document.getElementById('headline'), .5);
         var interval = null;
         var outputDiv = document.getElementById('output');
+
+        if (location.protocol != 'https:'){
+            // Allow selective display of elements based on protocol (i.e. the location service)
+            document.body.className += ' ' + 'not_https';
+        }
+
+        
+
 
         function showLoading() {
             var elements = ['&bull;', '&nbsp;', '&nbsp;', '&nbsp;']
@@ -147,6 +156,7 @@ html
         }
 
         function showPosition(position) {
+            console.log("in Show position with pos = ", position)
             var http = new XMLHttpRequest();
             var url = '/byLatLon?lat=';
             url += position.coords.latitude + '&lon=' + position.coords.longitude;
@@ -155,15 +165,33 @@ html
             http.onreadystatechange = updateOutputDiv.bind(http);
             http.send();
         }
+        function postitionError(e) {
+            console.log("error: ", e)
+            removeLoading();
+            // from spec https://dev.w3.org/geo/api/spec-source.html#position_error_interface
+            var error_codes = {
+                1: "<b>Permision Denied</b><br>Make sure you have allowed location services in your privacy settings.",
+                2: "<b>Position Unavailable</b><br>The browser couldn't determine your location. This can happen if you have poor GPS coverage or are using a desktop browser.",
+                3: "A Timeout Occured",
+                'default': "An unknown error occured" 
+            }
+            var error_message = error_codes[e.code] || error_codes['default']
+            var output = 'Sorry, your browser reported an error: <p>' + error_message +"</p>";
+            output = output.replace(/\n/g, '<br>');
+            outputDiv.innerHTML = output;
 
+
+        }
 
         // if the browser is capable, get the nearest stop by geolocation
         function locateMe() {
+            console.log("in Show position with pos = ")
+
             showLoading();
 
             navigator.geolocation.getCurrentPosition(
                     showPosition,
-                    removeLoading,
+                    postitionError,
                     {
                         enableHighAccuracy: true,
                         timeout: 10000,

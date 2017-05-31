@@ -197,6 +197,37 @@ textarea:focus, input:focus {
 #feedback button[type="reset"] {
     width:32%;
 }
+.not_https #location {
+    display:none;
+}
+#location {
+    padding: 0px 4px;
+    background-color: #d4d31e;
+    color: #fff;
+    border-radius: 5px;
+    border: 3px solid #d4d31e;
+
+}
+#location:hover {
+    background-color: #fff;
+}
+#location:hover a {
+    color:#d4d31e;
+}
+ #location a {
+    display: flex;
+    align-items: center;
+    color:#fff;
+ }
+#location:hover span.pointer {
+   border-right: 3px solid #d4d31e;
+}
+span.pointer {
+    padding-right: 15px;
+    font-size: 1.25em;
+    border-right: 3px solid white
+}
+span.location{padding-left:15px; }
 
 @media screen and (min-width: 500px) {
     body > div {
