@@ -244,7 +244,10 @@ function addLinkToRequest(req,res, next){
     var single_message_limit = 160
     var segment_length = 153
 
-    var message = "\n\More features on the smart phone version: http://bit.ly/AncBus"
+    // the url with 'http://' results in a simple link on iPhones
+    // With 'http://' iphone users will see a big box that says 'tap to preview'
+    // Simple text seems more in the spirit
+    var message = "\n\More features on the smart phone version: bit.ly/AncBus"
 
     //hikack the render function
     var _render = res.render
