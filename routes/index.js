@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var debug = require('debug')('routes/index.js');
 var lib = require('../lib/index');
+var geocode = require('../lib/geocode')
 var config = require('../lib/config');
 var fs = require('fs');
 
@@ -216,7 +217,7 @@ function stopNumberResponder(req,res, next){
 function addressResponder(req, res, next){
     var input = req.body.Body;
     res.locals.action = 'Address Lookup'
-    lib.getStopsFromAddress(input)
+    geocode.stops_near_location(input)
     .then((routeObject) => {
         if (routeObject.data.stops.length < 1) { // Address found, but no stops near address
             res.locals.message = { name: "No Stops", message: `Sorry, no stops were found within ${config.NEAREST_BUFFER} mile` + ((config.NEAREST_BUFFER != 1) ? 's' : '' + '.')}
@@ -411,12 +412,11 @@ router.get('/byLatLon', function(req, res, next) {
         res.render('message', {message: {message: "Can't determine your location"}});
         return;
     }
-    var data = lib.findNearestStops(req.query.lat, req.query.lon);
+    var data = geocode.findNearestStops(req.query.lat, req.query.lon);
     if (!data || data.length == 0){
         res.render('message', {message: {message: "No stops found near you"}});
         return;
     }
-    var data = lib.findNearestStops(req.query.lat, req.query.lon);
 
     res.render('route-list-partial', {routes: {data: {stops: data}} });
 

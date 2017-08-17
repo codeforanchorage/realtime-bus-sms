@@ -29,6 +29,11 @@
       "date": "20160704",
       "service_id": "1",
       "exception_type": "2"
+    },
+    {
+      "date": "20170817",
+      "service_id": "1",
+      "exception_type": "2"
     }
   ]
 }

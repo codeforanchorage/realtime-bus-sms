@@ -3,6 +3,7 @@ config.js
 *.swp
 *.DS_Store
 .idea
+lib/.vscode
 public/db.json
 
 comments.json
