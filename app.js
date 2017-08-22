@@ -7,7 +7,7 @@ var UUID = require("pure-uuid");
 var bodyParser = require('body-parser');
 var rollbar = require("rollbar");
 var config = require('./lib/config');
-var lib = require('./lib/index');
+var lib = require('./lib/bustracker');
 
 rollbar.init(config.ROLLBAR_TOKEN);
 
@@ -44,7 +44,7 @@ app.use(function(req, res, next){
     SETUP LOGGING
     This sets which fields in addition to the defaults in logger.js should be logged
     After these values are logged other transports such as Google Analytics can
-    choose to send them so other services. 
+    choose to send them so other services.
 */
 app.use(logs.initialize((req, res) => {
     var routes = res.locals.routes
@@ -60,7 +60,7 @@ app.use(logs.initialize((req, res) => {
     }
 }));
 
-/*  
+/*
     SETUP GOOGLE ANALYTICS
     The convention used here is:
     category: 'sms | 'web' | 'fb'
@@ -70,7 +70,7 @@ app.use(logs.initialize((req, res) => {
 */
 logs.initGoogleAnalytics((logFields) => {
     //  There should be a UUID in the req.session which will be found by default
-    //  But Twilio's expires after 4 hours so we'll make a more stable phone-based 
+    //  But Twilio's expires after 4 hours so we'll make a more stable phone-based
     //  one for SMS users
     var uuid;
     var category = logFields.phone ? "sms" : (logFields.fbUser ? "fb" : "web");
@@ -78,6 +78,7 @@ logs.initGoogleAnalytics((logFields) => {
         var ns = "deebee62-076c-47ef-ad02-2509e2d4f839" // this random namespace is hashed (using SHA-1) with phone number to create UUID
         uuid = new UUID(5, ns, logFields.phone || logFields.fbUser).format()
     }
+
     return {
         trackingCode: config.GOOGLE_ANALYTICS_ID,
         category:     category,
@@ -91,7 +92,8 @@ logs.initGoogleAnalytics((logFields) => {
 //  Add custom transport for logging to lowDB
 //  This is in its own module becuase rather than the logger module
 //  because it's all very specific to the bus app.
-logs.add(require('./lib/lowdb_log_transport'), {})
+var lowDB_transport = require('./lib/lowdb_log_transport')
+logs.add(lowDB_transport(), {})
 
 app.use('/fbhook', bodyParser.json({ verify: lib.verifyFBRequestSignature }));  //For Facebook requests
 app.use(bodyParser.json());
