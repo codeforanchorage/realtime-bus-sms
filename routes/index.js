@@ -202,7 +202,7 @@ function stopNumberResponder(req,res, next){
 
         .then((routeObject) => {
             res.locals.routes = routeObject;
-            res.render('stop-list');
+            res.render('stop-list')
         })
         .catch((err) => {
             res.locals.action = 'Failed Stop Lookup'
@@ -224,7 +224,7 @@ function addressResponder(req, res, next){
             return
         }
         res.locals.routes = routeObject;
-        res.render('route-list');
+        res.render('route-list')
     })
     .catch((err) => {
         if (err.type == 'NOT_FOUND') return next() // Address not found pass to Watson
@@ -233,6 +233,37 @@ function addressResponder(req, res, next){
         res.render('message', {message: err})
     })
     return;
+}
+
+function addLinkToRequest(req,res, next){
+    // Twilio sms messages over 160 characters are split into
+    // (and charged as) smaller messages of 153 characters each.
+    // So we include the text + message if it won't push over 160 characters
+    // or if greater  it won't push over a multiple of 153
+ 
+    var single_message_limit = 160
+    var segment_length = 153
+
+    // the url with 'http://' results in a simple link on iPhones
+    // With 'http://' iphone users will see a big box that says 'tap to preview'
+    // Simple text seems more in the spirit
+    var message = "\n\More features on the smart phone version: bit.ly/AncBus"
+
+    //hikack the render function
+    var _render = res.render
+    res.render = function(view, options, callback) {
+        _render.call(this, view, options, (err, text) => {
+            if (err) return next(err)
+
+            if ( text.length + message.length <= single_message_limit ) {
+                res.send(text + message)
+            } else if ( text.length > single_message_limit 
+                        && text.length % segment_length + message.length <= segment_length ) {
+                res.send(text + message)
+            } else res.send(text)        
+        })
+    }
+    next()
 }
 
 /* GET HOME PAGE */
@@ -348,6 +379,7 @@ function sendFBMessage(recipientId, messageText) {
  */
 router.post('/',
     feedbackResponder,
+    addLinkToRequest,
     checkServiceExceptions,
     sanitizeInput,
     blankInputRepsonder,
