@@ -120,9 +120,9 @@ function send_feedback(req, res) {
     });
 }
 function feedbackResponder(req, res, next){
-    res.set('Content-Type', 'text/plain');
     var message = req.body.Body || '';
     if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
+        res.set('Content-Type', 'text/plain');
         res.locals.action = 'Feedback'
         return lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
         .then((data)=>res.send("Thanks for the feedback"))
