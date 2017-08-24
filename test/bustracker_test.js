@@ -16,7 +16,7 @@ const bustracker = require('../lib/bustracker'),
       exceptions = require('../gtfs/geojson/exceptions.json')
 
 
-describe('Test Bustracker Module', function() {
+describe('Bustracker Module', function() {
     before(function(){ nock.disableNetConnect()})
     after(function(){ nock.enableNetConnect()})
     afterEach(function(){ nock.cleanAll()})

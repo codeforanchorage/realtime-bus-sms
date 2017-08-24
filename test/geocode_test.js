@@ -8,7 +8,7 @@ const geocode = require('../lib/geocode'),
       allstops = require('../gtfs/geojson/stops.json')
 
 
-describe('Test Geocode Module', function() {
+describe('Geocode Module', function() {
     before(function(){ nock.disableNetConnect()})
     after(function(){ nock.enableNetConnect()})
     afterEach(function(){
@@ -130,6 +130,9 @@ describe('Test Geocode Module', function() {
         it('Should return an array of stops from a nearby lat/lon', function(){
             assert(Array.isArray(geocode.findNearestStops(ll[1], ll[0])))
         })
+        it('Should handle strings gracefully', function(){
+            assert(Array.isArray(geocode.findNearestStops(ll[1].toString(), ll[0].toString())))
+        })
         it('Should return an array of no more than NEAREST_MAX stops', function(){
             assert(geocode.findNearestStops(ll[1], ll[0]).length <= config.NEAREST_MAX)
         })
@@ -138,11 +141,6 @@ describe('Test Geocode Module', function() {
         })
         it('Given distant coordinates, it should return an empty array', function(){
             assert(geocode.findNearestStops(64.754780,-147.343045).length == 0) // Santa's house, North Pole
-        })
-        it('Should throw an error when given non-numeric input', function(){
-            assert.throws(() => geocode.findNearestStops('test','string'))
-            assert.throws(() => geocode.findNearestStops('test', 64.754780))
-            assert.throws(() => geocode.findNearestStops())
         })
         it('Should return an empty array when given lat lon that fall outside normal range', function(){
             var ret = geocode.findNearestStops(290, -1000)

@@ -73,7 +73,7 @@ router.get('/find/:query', function(req, res, next) {
     res.locals.renderWholePage = 1;
     next();
     },
-    mw.checkServiceExceptions,
+    // mw.checkServiceExceptions,
     mw.sanitizeInput,
     mw.blankInputRepsonder,
     mw.stopNumberResponder,
@@ -82,11 +82,14 @@ router.get('/find/:query', function(req, res, next) {
 );
 
 //  a browser with location service enabled can hit this
-router.get('/byLatLon', mw.findbyLatLon);
+router.get('/byLatLon',
+    mw.checkServiceExceptions,
+    mw.findbyLatLon
+);
 
 
 // feedback form endpoint
-router.post('/feedback', mw.send_feedback);
+router.post('/feedback', mw.checkServiceExceptions,mw.send_feedback);
 
 //  Respond to feedback over SMS
 router.get('/respond', function(req, res, next) {

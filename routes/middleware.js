@@ -96,15 +96,9 @@ function addressResponder(req, res, next){
     })
 }
 
-
-
 function findbyLatLon(req, res, next) {
     res.locals.returnHTML = 1;
 
-    if (lib.serviceExceptions()) {
-        res.locals.error = {message:'No Service - Holiday'};
-        return res.render('message')
-    }
     if (!req.query.lat || !req.query.lon){
         return res.render('message', {message: {message: "Can't determine your location"}});
     }
@@ -112,32 +106,19 @@ function findbyLatLon(req, res, next) {
     if (!data || data.length == 0){
         return res.render('message', {message: {message: "No stops found near you"}});
     }
-
     res.render('route-list-partial', {routes: {data: {stops: data}} });
-
-
-}
-function respondto_feedback(req, res, next) {
-    var comments = JSON.parse(fs.readFileSync('./comments.json'));
-    for(var i=comments.comments.length-1; i >= 0; i--) {
-        if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.query.hash)) {
-            if (comments.comments[i].phone) {
-                return res.render("respond", {pageData: {hash: comments.comments[i].response_hash, feedback: comments.comments[i].feedback, phone: comments.comments[i].phone}});
-            }
-        }
-    }
-    res.sendStatus(404);    // Simulate page not found
 }
 
 function send_feedback(req, res) {
     res.locals.returnHTML = 1
     res.locals.action = 'Feedback'
-    lib.processFeedback(req.body.comment, req)
-    .then()
-    .catch((err)=> logger.error(err)); // TODO - tell users if there is a problem or fail silently?
-    res.render('message', {message: {message:'Thanks for the feedback'}});
+    return lib.processFeedback(req)
+    .then(() => res.render('message', {message: {message:'Thanks for the feedback'}}))
+    .catch((err)=>{
+        res.render('message', {message: {message:'Error saving feedback, administrator notified'}})
+        logger.error(err)
+    });
 }
-
 function feedbackResponder(req, res, next){
     res.set('Content-Type', 'text/plain');
     var message = req.body.Body || '';
@@ -152,6 +133,19 @@ function feedbackResponder(req, res, next){
     }
     next();
 }
+function respondto_feedback(req, res, next) {
+    var comments = JSON.parse(fs.readFileSync('./comments.json'));
+    for(var i=comments.comments.length-1; i >= 0; i--) {
+        if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.query.hash)) {
+            if (comments.comments[i].phone) {
+                return res.render("respond", {pageData: {hash: comments.comments[i].response_hash, feedback: comments.comments[i].feedback, phone: comments.comments[i].phone}});
+            }
+        }
+    }
+    res.sendStatus(404);    // Simulate page not found
+}
+
+
 /*
     WATSON MIDDLE WARE
     TODO Test intent confidence to decide to help decide flow
