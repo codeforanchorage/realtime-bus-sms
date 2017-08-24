@@ -5,7 +5,7 @@ config.js
 .idea
 lib/.vscode
 public/db.json
-
+npm-debug.log
 comments.json
 
 db_private.json

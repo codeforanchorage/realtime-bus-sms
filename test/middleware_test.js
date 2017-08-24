@@ -2,13 +2,12 @@ const httpMocks = require('node-mocks-http'),
       express = require('express'),
       assert = require('assert'),
       sinon = require('sinon'),
-      lib = require('../lib/bustracker')
-      geocode = require('../lib/geocode')
-      logger = require('../lib/logger')
+      lib = require('../lib/bustracker'),
+      geocode = require('../lib/geocode'),
+      logger = require('../lib/logger'),
       config = require('../lib/config')
 
-
-const mw = require('../routes/middleware')
+const mw = require('../routes/middleware'),
       fakedata = require('./fixtures/stopdata')
 
 
@@ -19,27 +18,27 @@ describe('Middleware Function', function(){
         it('Should remove all lines except the first', function(){
             var req = {body: {Body:"Line One\nLine Two\nLine Three"} }
             mw.sanitizeInput(req, res, next)
-            assert(req.body.Body === "Line One")
+            assert.equal(req.body.Body, "Line One")
         })
         it('Should replace tabs with a single space', function(){
             var req = {body: {Body:"One\tTwo\t\t\tThree"} }
             mw.sanitizeInput(req, res, next)
-            assert(req.body.Body === "One Two Three")
+            assert.equal(req.body.Body, "One Two Three")
         })
         it('Should remove emojis', function(){
             var req = {body: {Body:"5th and G 💋Street👍"} }
             mw.sanitizeInput(req, res, next)
-            assert(req.body.Body === "5th and G Street")
+            assert.equal(req.body.Body, "5th and G Street")
         })
         it('Should not change normal input', function(){
             var req = {body: {Body:"1066"} }
             mw.sanitizeInput(req, res, next)
-            assert(req.body.Body === "1066")
+            assert.equal(req.body.Body, "1066")
         })
         it('Should call next() when finished', function(){
             var req = {body: {Body:"1066"} }
             mw.sanitizeInput(req, res, next)
-            assert(next.called)
+            sinon.assert.called(next)
         })
     })
     describe('Check Service Exceptions', function(){
@@ -55,19 +54,19 @@ describe('Middleware Function', function(){
         it('Should only call call next() when not a holiday', function(){
             libStub.returns(false)
             mw.checkServiceExceptions({}, res, next)
-            assert(res.render.notCalled)
-            assert(next.called)
+            sinon.assert.notCalled(res.render)
+            sinon.assert.called(next)
         })
         it('Should render a message on holidays', function(){
             libStub.returns(true)
             mw.checkServiceExceptions({}, res, next)
-            assert(res.render.called)
-            assert(next.notCalled)
+            sinon.assert.called(res.render)
+            sinon.assert.notCalled(next)
         })
         it('Should set res.locals on holidays', function(){
             libStub.returns(true)
             mw.checkServiceExceptions({}, res, next)
-            assert(res.locals.message && res.locals.message.hasOwnProperty('message'))
+            assert.deepEqual(res.locals.message, {name: "Holiday", message:'There is no bus service today.'})
         })
     })
     describe('Blank input responder', function(){
@@ -80,28 +79,30 @@ describe('Middleware Function', function(){
             var req = {body: {Body:""} }
             mw.blankInputRepsonder(req, res, next)
             assert(res.locals.action === 'Empty Input')
-
-            assert(next.notCalled)
-            assert(res.render.called)
+            sinon.assert.called(res.render)
+            sinon.assert.notCalled(next)
         })
         it("Should set res.locals.action with whitespace input and call render", function(){
             var req = {body: {Body:"   "} }
             mw.blankInputRepsonder(req, res, next)
-            assert(res.locals.action === 'Empty Input')
+            assert.equal(res.locals.action, 'Empty Input')
             res.locals.action = ""
 
             var req = {body: {Body:"\t\n   \r\n"} }
             mw.blankInputRepsonder(req, res, next)
-            assert(res.locals.action === 'Empty Input')
-
-            assert(next.notCalled)
-            assert(res.render.calledTwice)
+            assert.equal(res.locals.action, 'Empty Input')
+        })
+        it("Should set res.locals.message and render message tempalte", function(){
+            var req = {body: {Body:""} }
+            mw.blankInputRepsonder(req, res, next)
+            assert.deepEqual(res.locals.message, {name: "No input!", message:'Please send a stop number, intersection, or street address to get bus times.'})
+            sinon.assert.calledWith(res.render)
         })
         it('Should call next() when input is not blank', function(){
             var req = {body: {Body:"1066"} }
             mw.blankInputRepsonder(req, res, next)
-            assert(next.called)
-            assert(res.render.notCalled)
+            sinon.assert.notCalled(res.render)
+            sinon.assert.called(next)
         })
     })
     describe('About responder', function(){
@@ -118,32 +119,32 @@ describe('Middleware Function', function(){
             var req = {body: {Body:"How about some pizza"} }
             mw.aboutResponder(req, res, next)
 
-            assert(next.calledThrice)
-            assert(res.render.notCalled)
+            sinon.assert.calledThrice(next)
+            sinon.assert.notCalled(res.render)
         })
         it("Should respond to About and send proper template", function(){
             var req = {body: {Body:"About"} }
             mw.aboutResponder(req, res, next)
 
-            assert(next.notCalled)
-            assert(res.render.calledWith('about-partial'))
-            assert(res.locals.action === "About")
+            sinon.assert.notCalled(next)
+            sinon.assert.calledWith(res.render, 'about-partial')
+            assert.equal(res.locals.action, "About")
         })
         it("Should be case insensitive", function(){
             var req = {body: {Body:"abOUt"} }
             mw.aboutResponder(req, res, next)
 
-            assert(next.notCalled)
-            assert(res.render.calledWith('about-partial'))
-            assert(res.locals.action === "About")
+            sinon.assert.notCalled(next)
+            sinon.assert.calledWith(res.render, 'about-partial')
+            assert.equal(res.locals.action,  "About")
         })
         it("Should work with whitespace padding", function(){
             var req = {body: {Body:"  about  "} }
             mw.aboutResponder(req, res, next)
 
-            assert(next.notCalled)
-            assert(res.render.calledWith('about-partial'))
-            assert(res.locals.action === "About")
+            sinon.assert.notCalled(next)
+            sinon.assert.calledWith(res.render, 'about-partial')
+            assert.equal(res.locals.action, "About")
         })
     })
     describe('stopNumberResponder', function(){
@@ -161,14 +162,14 @@ describe('Middleware Function', function(){
                 input = "1066"
                 var req = {body: {Body:input} }
                 mw.stopNumberResponder(req, res, next)
-                assert(getStopsStub.calledWith(parseInt(input, 10)))
+                sinon.assert.calledWith(getStopsStub, parseInt(input, 10))
             })
             it('Should not respond to non-numeric requests', function(){
                 next = sinon.stub()
                 var req = {body: {Body:"5th and G Street"} }
                 mw.stopNumberResponder(req, res, next)
-                assert(next.called)
-                assert(getStopsStub.notCalled)
+                sinon.assert.called(next)
+                sinon.assert.notCalled(getStopsStub)
             })
             it('Should set res.locals.routes to the routes object', function(){
                 var req = {body: {Body:"1066"} }
@@ -180,32 +181,32 @@ describe('Middleware Function', function(){
             it('Should set res.locals.action to "Stop Lookup"', function(){
                 var req = {body: {Body:"99"} }
                 return mw.stopNumberResponder(req, res, next)
-                .then(() =>  assert(res.locals.action === "Stop Lookup"))
+                .then(() =>  assert.equal(res.locals.action,  "Stop Lookup"))
             })
             it('Should respond to "stop"+number', function(){
                 var req = {body: {Body:"stop 1066"} }
                 return mw.stopNumberResponder(req, res, next)
-                .then(() => assert(res.render.called))
+                .then(() => sinon.assert.called(res.render))
             })
             it('Should respond to "#"+number', function(){
                 var req = {body: {Body:"# 1066"} }
                 return mw.stopNumberResponder(req, res, next)
-                .then(() => assert(res.render.called))
+                .then(() => sinon.assert.called(res.render))
             })
             it('Should be case insensitive', function(){
                 var req = {body: {Body:"sTOp 1066"} }
                 return mw.stopNumberResponder(req, res, next)
-                .then(() => assert(res.render.called))
+                .then(() => sinon.assert.called(res.render))
             })
             it('Should ignore white space', function(){
                 var req = {body: {Body:" 1066   \n"} }
                 return mw.stopNumberResponder(req, res, next)
-                .then(() => assert(res.render.called))
+                .then(() => sinon.assert.called(res.render))
             })
             it('Should respond with the correct template', function(){
                 var req = {body: {Body:"1066"} }
                 return mw.stopNumberResponder(req, res, next)
-                .then(() => assert(res.render.calledWith('stop-list')))
+                .then(() => sinon.assert.calledWith(res.render, ('stop-list')))
             })
         })
         describe('With bad requests', function(){
@@ -221,7 +222,7 @@ describe('Middleware Function', function(){
             it('Should render the returned error message when no stops are found', function(){
                 var req = {body: {Body:"0"} }
                 return mw.stopNumberResponder(req, res, next)
-                .then(() => res.render.calledWith('message', {message: error}))
+                .then(() => sinon.assert.calledWith(res.render, 'message', {message: error}))
             })
             it('Should set res.local.action to "Failed Stop Lookup"', function(){
                 var req = {body: {Body:"0"} }
@@ -246,7 +247,7 @@ describe('Middleware Function', function(){
             getStopsStub.resolves(fakedata.stops_from_location)
             var req = {body: {Body:input} }
             return mw.addressResponder(req, res, next)
-            .then(() =>  assert(getStopsStub.calledWith(input)))
+            .then(() =>  sinon.assert.calledWith(getStopsStub, input))
         })
         it('Should set res.locals.routes to the object returned from the geocoder', function(){
             getStopsStub.resolves(fakedata.stops_from_location)
@@ -258,7 +259,7 @@ describe('Middleware Function', function(){
             getStopsStub.resolves(fakedata.stops_from_location)
             var req = {body: {Body:"5th and G Street"} }
             return mw.addressResponder(req, res, next)
-            .then(() => assert(res.render.calledWith('route-list')))
+            .then(() => sinon.assert.calledWith(res.render, 'route-list'))
         })
         it('Should send a "No Stops" message when no stops are found near location', function(){
             getStopsStub.resolves(fakedata.no_stops_near_location)
@@ -267,7 +268,7 @@ describe('Middleware Function', function(){
             .then(() => {
                 assert(res.locals.message.message.includes(`${config.NEAREST_BUFFER} mile`))
                 assert.equal(res.locals.message.name, "No Stops")
-                assert(res.render.calledWith('message'))
+                sinon.assert.calledWith(res.render, 'message')
             })
         })
         it('Should call next() when the address is not found', function(){
@@ -277,14 +278,14 @@ describe('Middleware Function', function(){
             error.type = 'NOT_FOUND'
             getStopsStub.rejects(error)
             return mw.addressResponder(req, res, next)
-            .then(() => assert(next.called))
+            .then(() => sinon.assert.called(next))
         })
         it('Should render message for other errors', function(){
             var req = {body: {Body:"1800 Citation Road"} }
             var err = new Error("some other error")
             getStopsStub.rejects(err)
             return mw.addressResponder(req, res, next)
-            .then(() => assert(res.render.calledWith('message', {message: err})))
+            .then(() => sinon.assert.calledWith(res.render, 'message', {message: err}))
         })
         it('Should set action to "Failed Address Lookup when address is not be found', function(){
             var req = {body: {Body:"1800 Citation Road"} }
@@ -308,26 +309,26 @@ describe('Middleware Function', function(){
             var [lat, lon] = ['61.2181', '149.9']
             var req = {query: {lat: lat, lon: lon} }
             mw.findbyLatLon(req, res, next)
-            assert(findStub.calledWith(lat, lon))
+            sinon.assert.calledWith(findStub, lat, lon)
         })
         it('Should return a message when location undetermined', function(){
             var req = {query: {lat: undefined, lon: undefined} }
             mw.findbyLatLon(req, res, next)
-            assert(res.render.calledWith('message', {message: {message: "Can't determine your location"}}))
+            sinon.assert.calledWith(res.render, 'message', {message: {message: "Can't determine your location"}})
         })
         it('Should return a message when location is found, but there are no stops nearby', function(){
             var [lat, lon] = ['61.2181', '149.9']
             var req = {query: {lat: lat, lon: lon} }
             findStub.returns([])
             mw.findbyLatLon(req, res, next)
-            assert(res.render.calledWith('message', {message: {message: "No stops found near you"}}))
+            sinon.assert.calledWith(res.render, 'message', {message: {message: "No stops found near you"}})
         })
         it('Should render "route-list-partial" template when stops are found', function(){
             var [lat, lon] = ['61.2181', '149.9']
             var req = {query: {lat: lat, lon: lon} }
             findStub.returns(fakedata.stops_by_lat_lon)
             mw.findbyLatLon(req, res, next)
-            assert(res.render.calledWith('route-list-partial'))
+            sinon.assert.calledWith(res.render, 'route-list-partial')
         })
         it('Should pass stops to template', function(){
             var [lat, lon] = ['61.2181', '149.9']
@@ -352,37 +353,37 @@ describe('Middleware Function', function(){
             })
             it("Should set returnHTML flag", function(){
                 feedbackStub.resolves()
-                mw.send_feedback(req, res)
+                mw.feedbackResponder_web(req, res)
                 assert.equal(res.locals.returnHTML, 1)
             })
             it('Should set actions to "feedback"', function(){
                 feedbackStub.resolves()
-                mw.send_feedback(req, res)
+                mw.feedbackResponder_web(req, res)
                 assert.equal(res.locals.action, "Feedback")
             })
             it('Should call library function with the original request', function(){
                 feedbackStub.resolves()
-                mw.send_feedback(req, res)
-                assert(feedbackStub.calledWith(req))
+                mw.feedbackResponder_web(req, res)
+                sinon.assert.calledWith(feedbackStub, req)
             })
             it('Should render message template with message', function(){
                 feedbackStub.resolves()
-                return mw.send_feedback(req, res)
-                .then(() => assert(res.render.calledWith('message', {message: {message:'Thanks for the feedback'}})))
+                return mw.feedbackResponder_web(req, res)
+                .then(() => sinon.assert.calledWith(res.render, 'message', {message: {message:'Thanks for the feedback'}}))
            })
            it('Should send a message to the user if there is an error', function(){
                 feedbackStub.rejects(new Error("feedback error"))
-                return mw.send_feedback(req, res)
-                .then(() => assert(res.render.calledWith('message', {message: {message:'Error saving feedback, administrator notified'}})))
+                return mw.feedbackResponder_web(req, res)
+                .then(() => sinon.assert.calledWith(res.render, 'message', {message: {message:'Error saving feedback, administrator notified'}}))
            })
            it('Should log an error when the feedback fails', function(){
             feedbackStub.rejects(new Error("feedback error"))
-            return mw.send_feedback(req, res)
-            .then(() => assert(logStub.called))
+            return mw.feedbackResponder_web(req, res)
+            .then(() => sinon.assert.called(logStub))
        })
         })
         describe("feedbackResponder", function(){
-            var next, comment
+            var next, comment, res, req, feedbackStub, logStub
             beforeEach(function(){
                 comment = "Some Comment"
                 req = {body: {Body: config.FEEDBACK_TRIGGER + comment}}
@@ -398,48 +399,84 @@ describe('Middleware Function', function(){
             it('Should only respond with the feedback trigger word', function(){
                 feedbackStub.resolves()
                 req = {body: {Body: "A comment"}}
-                mw.feedbackResponder(req, res, next)
-                assert(next.called)
-                assert(res.send.notCalled)
-                assert(res.set.notCalled)
+                mw.feedbackResponder_sms(req, res, next)
+                sinon.assert.called(next)
+                sinon.assert.notCalled(res.send)
+                sinon.assert.notCalled(res.set)
             })
             it("Should set content type to plain/text", function(){
                 feedbackStub.resolves()
-                mw.feedbackResponder(req, res, next)
-                assert(res.set.calledWith('Content-Type', 'text/plain'))
+                mw.feedbackResponder_sms(req, res, next)
+                sinon.assert.calledWith(res.set, 'Content-Type', 'text/plain')
             })
             it("Should set res.locals.action to 'Feedback'", function(){
                 feedbackStub.resolves()
-                mw.feedbackResponder(req, res, next)
+                mw.feedbackResponder_sms(req, res, next)
                 assert.equal(res.locals.action, "Feedback")
             })
             it("Should call the library function with the message (without the trigger word) and the original request", function(){
                 feedbackStub.resolves()
-                mw.feedbackResponder(req, res, next)
-                assert(feedbackStub.calledWith(comment, req))
+                mw.feedbackResponder_sms(req, res, next)
+                sinon.assert.calledWith(feedbackStub, comment, req)
             })
             it("Should send a response", function(){
                 feedbackStub.resolves()
-                return mw.feedbackResponder(req, res, next)
-                .then(() => assert(res.send.calledWith("Thanks for the feedback")))
+                return mw.feedbackResponder_sms(req, res, next)
+                .then(() => sinon.assert.calledWith(res.send, "Thanks for the feedback"))
             })
             it("Feedback trigger should be case insensitive ", function(){
                 var trigger = config.FEEDBACK_TRIGGER.split('').map(char => Math.random() > .5 ? char.toUpperCase() : char).join('')
                 req = {body: {Body: trigger + comment}}
                 feedbackStub.resolves()
-                mw.feedbackResponder(req, res, next)
-                .then(()=> assert(res.send.calledWith("Thanks for the feedback")))
+                mw.feedbackResponder_sms(req, res, next)
+                .then(()=> sinon.assert.calledWith(res.send, "Thanks for the feedback"))
             })
             it("Should send a response on failure", function(){
                 feedbackStub.rejects()
-                return mw.feedbackResponder(req, res, next)
-                .then(() => assert(res.send.calledWith("Error saving feedback, administrator notified.")))
+                return mw.feedbackResponder_sms(req, res, next)
+                .then(() => sinon.assert.calledWith(res.send, "Error saving feedback, administrator notified."))
             })
             it("Should log an error on failure", function(){
                 var error = new Error("Feedback Error")
                 feedbackStub.rejects(error)
-                return mw.feedbackResponder(req, res, next)
-                .then(() => assert(logStub.calledWith(error)))
+                return mw.feedbackResponder_sms(req, res, next)
+                .then(() => sinon.assert.calledWith(logStub, error))
+            })
+        })
+        describe("feedback_response_get_form", function(){
+            var  comment, res, jsonStub
+            const comment_fixture = require('./fixtures/comments.json')
+            const next = sinon.stub()
+            beforeEach(function(){
+                res = {render: sinon.stub(), sendStatus: sinon.stub()}
+                jsonStub = sinon.stub(JSON, 'parse').returns(comment_fixture)
+            })
+            afterEach(function(){
+                feedbackStub.restore()
+                jsonStub.restore()
+            })
+            it('Should respond with the correct comment found from given hash', function(){
+                var expected_obj = {
+                    pageData: {
+                        feedback: 'Findme',
+                        hash: "7d93f9a99c766418a33e5f334ad973a3e1da4494",
+                        phone: '9078548077'
+                    }}
+                var req = {query:{hash: expected_obj.pageData.hash}}
+                mw.feedback_get_form(req, res, next)
+                sinon.assert.calledWith(res.render, 'respond', expected_obj)
+            })
+            it('Should return 404 if comment is not found', function(){
+                var req = {query: {hash: "0093f9a99c766418jk4e5f334ad973a3e1da1234"}}
+                mw.feedback_get_form(req, res, next)
+                sinon.assert.notCalled(res.render)
+                sinon.assert.calledWith(res.sendStatus, 404)
+            })
+            it('Should return 404 for found comments without phone', function(){
+                var req = {query: {hash: "7d6a9ecc52f3e9bd86868a878fbd4chfa06dd822"}}
+                mw.feedback_get_form(req, res, next)
+                sinon.assert.notCalled(res.render)
+                sinon.assert.calledWith(res.sendStatus, 404)
             })
         })
     })

@@ -3,7 +3,9 @@ const watson = require('watson-developer-cloud')
       config = require('../lib/config'),
       lib = require('../lib/bustracker'),
       geocode = require('../lib/geocode'),
-      emojiRegex = require('emoji-regex');
+      emojiRegex = require('emoji-regex'),
+      fs = require('fs'),
+      twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN)
 
       // Facebook requirements
 const request = require('request');
@@ -109,7 +111,7 @@ function findbyLatLon(req, res, next) {
     res.render('route-list-partial', {routes: {data: {stops: data}} });
 }
 
-function send_feedback(req, res) {
+function feedbackResponder_web(req, res) {
     res.locals.returnHTML = 1
     res.locals.action = 'Feedback'
     return lib.processFeedback(req)
@@ -119,7 +121,7 @@ function send_feedback(req, res) {
         logger.error(err)
     });
 }
-function feedbackResponder(req, res, next){
+function feedbackResponder_sms(req, res, next){
     var message = req.body.Body || '';
     if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
         res.set('Content-Type', 'text/plain');
@@ -133,7 +135,9 @@ function feedbackResponder(req, res, next){
     }
     next();
 }
-function respondto_feedback(req, res, next) {
+
+/* This creates an html form that allows admin to respond to feedback */
+function feedback_get_form(req, res, next) {
     var comments = JSON.parse(fs.readFileSync('./comments.json'));
     for(var i=comments.comments.length-1; i >= 0; i--) {
         if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.query.hash)) {
@@ -142,8 +146,39 @@ function respondto_feedback(req, res, next) {
             }
         }
     }
-    res.sendStatus(404);    // Simulate page not found
+    res.sendStatus(404);
 }
+/* This posts feedback from the form created by feedback_get_form() */
+function send_feedback_response(req, res, next) {
+    var comments = JSON.parse(fs.readFileSync('./comments.json'));
+    var foundIt = false;
+    for(let i=comments.comments.length-1; i >= 0 && !foundIt; i--) {
+        if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.body.hash)) {
+            if (comments.comments[i].phone) {
+                foundIt = true;
+                if (req.body.response) {
+                    twilioClient.messages.create({
+                            to: comments.comments[i].phone,
+                            from: config.MY_PHONE,
+                            body: req.body.response }, function(err, message) {
+                            if (!err) {
+                                var entry = {
+                                    response: req.body.response,
+                                    to_phone: comments.comments[i].phone
+                                };
+                                res.render("response", {pageData: {err: null}});
+                            } else {
+                                logger.error(err)
+                                res.render("response", {pageData: {err: err}});
+                            }
+                        }
+                    );
+                }
+            }
+        }
+    }
+}
+
 
 
 /*
@@ -356,7 +391,8 @@ module.exports = {
     findbyLatLon: findbyLatLon,
     facebook_verify:facebook_verify,
     facebook_update:facebook_update,
-    feedbackResponder:feedbackResponder,
-    send_feedback:send_feedback,
-    respondto_feedback:respondto_feedback
+    feedbackResponder_sms:feedbackResponder_sms,
+    feedbackResponder_web:feedbackResponder_web,
+    feedback_get_form:feedback_get_form,
+    send_feedback_response: send_feedback_response
 }

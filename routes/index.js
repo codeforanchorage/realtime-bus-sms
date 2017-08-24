@@ -3,8 +3,6 @@ var router = express.Router();
 var debug = require('debug')('routes/index.js');
 var lib = require('../lib/bustracker');
 var config = require('../lib/config');
-var fs = require('fs');
-var twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
 var logger = require('../lib/logger');
 var lowdb_log = require('../lib/lowdb_log_transport');
 var mw = require('./middleware')
@@ -30,7 +28,7 @@ router.post('/fbhook', mw.facebook_update);
  TODO: better error messages
  */
 router.post('/',
-    mw.feedbackResponder,
+    mw.feedbackResponder_sms,
     mw.checkServiceExceptions,
     mw.sanitizeInput,
     mw.blankInputRepsonder,
@@ -89,51 +87,15 @@ router.get('/byLatLon',
 
 
 // feedback form endpoint
-router.post('/feedback', mw.checkServiceExceptions,mw.send_feedback);
+router.post('/feedback',
+    mw.checkServiceExceptions,
+    mw.feedbackResponder_web
+);
 
-//  Respond to feedback over SMS
-router.get('/respond', function(req, res, next) {
-    var comments = JSON.parse(fs.readFileSync('./comments.json'));
-    for(var i=comments.comments.length-1; i >= 0; i--) {
-        if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.query.hash)) {
-            if (comments.comments[i].phone) {
-                res.render("respond", {pageData: {hash: comments.comments[i].response_hash, feedback: comments.comments[i].feedback, phone: comments.comments[i].phone}});
-                return
-            }
-        }
-    }
-    res.sendStatus(404);    // Simulate page not found
-});
+//  Respond to feedback from SMS
 
-router.post('/respond', function(req, res, next) {
-    var comments = JSON.parse(fs.readFileSync('./comments.json'));
-    var foundIt = false;
-    for(var i=comments.comments.length-1; i >= 0 && !foundIt; i--) {
-        if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.body.hash)) {
-            if (comments.comments[i].phone) {
-                foundIt = true;
-                if (req.body.response) {
-                    twilioClient.messages.create({
-                            to: comments.comments[i].phone,
-                            from: config.MY_PHONE,
-                            body: req.body.response }, function(err, message) {
-                            if (!err) {
-                                var entry = {
-                                    response: req.body.response,
-                                    to_phone: comments.comments[i].phone
-                                };
-                                res.render("response", {pageData: {err: null}});
-                            } else {
-                                logger.error(err)
-                                res.render("response", {pageData: {err: err}});
-                            }
-                        }
-                    );
-                }
-            }
-        }
-    }
-});
+router.get('/respond', mw.feedback_get_form); // Make reponse form
+router.post('/respond', mw.send_feedback_response); // Handle posts from response form an send
 
 
 
