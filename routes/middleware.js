@@ -39,57 +39,6 @@ function checkServiceExceptions(req, res, next){
     next()
 }
 
-function addressResponder(req, res, next){
-    var input = req.body.Body;
-    res.locals.action = 'Address Lookup'
-    geocode.stops_near_location(input)
-    .then((routeObject) => {
-        if (routeObject.data.stops.length < 1) { // Address found, but no stops near address
-            res.locals.message = { name: "No Stops", message: `Sorry, no stops were found within ${config.NEAREST_BUFFER} mile` + ((config.NEAREST_BUFFER != 1) ? 's' : '' + '.')}
-            res.render('message')
-            return
-        }
-        res.locals.routes = routeObject;
-        res.render('route-list');
-    })
-    .catch((err) => {
-        if (err.type == 'NOT_FOUND') return next() // Address not found pass to Watson
-
-        res.locals.action = 'Failed Address Lookup'
-        res.render('message', {message: err})
-    })
-    return;
-}
-
-function stopNumberResponder(req,res, next){
-    var input = req.body.Body;
-    var stopRequest = input.toLowerCase().replace(/ /g,'').replace("stop",'').replace("#",'');
-    if (/^\d+$/.test(stopRequest)) {
-        res.locals.action = 'Stop Lookup';
-        lib.getStopFromStopNumber(parseInt(stopRequest))
-
-        .then((routeObject) => {
-            res.locals.routes = routeObject;
-            res.render('stop-list');
-        })
-        .catch((err) => {
-            res.locals.action = 'Failed Stop Lookup'
-            res.render('message', {message: err})
-        })
-        return;
-    }
-    next()
-}
-function aboutResponder(req, res, next){
-    var message = req.body.Body;
-    if (['about','hi','hello'].indexOf(message.trim().toLowerCase()) >= 0) {
-        res.locals.action = 'About';
-        res.render('about-partial');
-        return;
-    }
-    next();
-}
-
 function blankInputRepsonder(req, res, next){
     var input = req.body.Body;
     if (!input || /^\s*$/.test(input)) {
@@ -101,22 +50,67 @@ function blankInputRepsonder(req, res, next){
     next();
 }
 
+function aboutResponder(req, res, next){
+    var message = req.body.Body;
+    if (['about','hi','hello'].indexOf(message.trim().toLowerCase()) >= 0) {
+        res.locals.action = 'About';
+        return res.render('about-partial');
+    }
+    next();
+}
+
+function stopNumberResponder(req,res, next){
+    var input = req.body.Body;
+    var stopRequest = input.toLowerCase().replace(/\s*/g,'').replace("stop",'').replace("#",'');
+    if (/^\d+$/.test(stopRequest)) {
+        res.locals.action = 'Stop Lookup';
+        return lib.getStopFromStopNumber(parseInt(stopRequest))
+        .then((routeObject) => {
+            res.locals.routes = routeObject;
+            res.render('stop-list');
+        })
+        .catch((err) => {
+            res.locals.action = 'Failed Stop Lookup'
+            res.render('message', {message: err})
+        })
+    }
+    next()
+}
+function addressResponder(req, res, next){
+    var input = req.body.Body;
+    res.locals.action = 'Address Lookup'
+    return geocode.stops_near_location(input)
+    .then((routeObject) => {
+        if (routeObject.data.stops.length < 1) { // Address found, but no stops near address
+            res.locals.message = { name: "No Stops", message: `Sorry, no stops were found within ${config.NEAREST_BUFFER} mile` + ((config.NEAREST_BUFFER != 1) ? 's' : '' + '.')}
+            return res.render('message')
+        }
+        res.locals.routes = routeObject;
+        res.render('route-list');
+    })
+    .catch((err) => {
+        if (err.type == 'NOT_FOUND') return next() // Address not found pass to Watson
+
+        res.locals.action = 'Failed Address Lookup'
+        res.render('message', {message: err})
+    })
+}
+
+
+
 function findbyLatLon(req, res, next) {
     res.locals.returnHTML = 1;
 
     if (lib.serviceExceptions()) {
         res.locals.error = {message:'No Service - Holiday'};
-        res.render('message')
-        return;
+        return res.render('message')
     }
     if (!req.query.lat || !req.query.lon){
-        res.render('message', {message: {message: "Can't determine your location"}});
-        return;
+        return res.render('message', {message: {message: "Can't determine your location"}});
     }
     var data = geocode.findNearestStops(req.query.lat, req.query.lon);
     if (!data || data.length == 0){
-        res.render('message', {message: {message: "No stops found near you"}});
-        return;
+        return res.render('message', {message: {message: "No stops found near you"}});
     }
 
     res.render('route-list-partial', {routes: {data: {stops: data}} });
@@ -128,8 +122,7 @@ function respondto_feedback(req, res, next) {
     for(var i=comments.comments.length-1; i >= 0; i--) {
         if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.query.hash)) {
             if (comments.comments[i].phone) {
-                res.render("respond", {pageData: {hash: comments.comments[i].response_hash, feedback: comments.comments[i].feedback, phone: comments.comments[i].phone}});
-                return
+                return res.render("respond", {pageData: {hash: comments.comments[i].response_hash, feedback: comments.comments[i].feedback, phone: comments.comments[i].phone}});
             }
         }
     }
@@ -150,13 +143,12 @@ function feedbackResponder(req, res, next){
     var message = req.body.Body || '';
     if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
         res.locals.action = 'Feedback'
-        lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
+        return lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
         .then((data)=>res.send("Thanks for the feedback"))
         .catch((err)=>{
             res.send("Error saving feedback, administrator notified.");
             logger.error(err)
         });
-        return;
     }
     next();
 }
