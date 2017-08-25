@@ -5,10 +5,12 @@ const httpMocks = require('node-mocks-http'),
       lib = require('../lib/bustracker'),
       geocode = require('../lib/geocode'),
       logger = require('../lib/logger'),
-      config = require('../lib/config')
+      config = require('../lib/config'),
+      watson = require('watson-developer-cloud')
 
 const mw = require('../routes/middleware'),
-      fakedata = require('./fixtures/stopdata')
+      fakedata = require('./fixtures/stopdata'),
+      comment_fixture = require('./fixtures/comments.json')
 
 
 describe('Middleware Function', function(){
@@ -445,7 +447,6 @@ describe('Middleware Function', function(){
         })
         describe("feedback_response_get_form", function(){
             var  comment, res, jsonStub
-            const comment_fixture = require('./fixtures/comments.json')
             const next = sinon.stub()
             beforeEach(function(){
                 res = {render: sinon.stub(), sendStatus: sinon.stub()}
@@ -477,6 +478,86 @@ describe('Middleware Function', function(){
                 mw.feedback_get_form(req, res, next)
                 sinon.assert.notCalled(res.render)
                 sinon.assert.calledWith(res.sendStatus, 404)
+            })
+        })
+        describe("send_feedback_response", function(){
+            var  comment, res, jsonStub, twilioStub, expected_obj, next, loggerStub
+            beforeEach(function(){
+                loggerStub = sinon.stub(logger, 'error')
+                next = sinon.stub()
+                res = {render: sinon.stub()}
+                twilioStub = sinon.stub(twilioClient.messages, 'create')
+                jsonStub = sinon.stub(JSON, 'parse').returns(comment_fixture)
+                expected_obj = {
+                    pageData: {
+                        feedback: 'Findme',
+                        hash: "7d93f9a99c766418a33e5f334ad973a3e1da4494",
+                        phone: '9078548077'
+                    }}
+            })
+            afterEach(function(){
+                jsonStub.restore()
+                twilioStub.restore()
+                loggerStub.restore()
+            })
+            it("Should respond to the correct comment", function(){
+                var response = "Some random response"
+                var req = {body:{hash: expected_obj.pageData.hash, response:response}}
+                mw.send_feedback_response(req, res, next)
+                sinon.assert.calledWith(twilioStub, {
+                    to: expected_obj.pageData.phone,
+                    from: config.MY_PHONE,
+                    body: response
+                })
+            })
+            it("Should respond with a message if the comment was not found", function(){
+                var response = "Some random response"
+                var req = {body:{hash: '000', response:response}}
+                mw.send_feedback_response(req, res, next)
+                sinon.assert.calledWith(res.render, "message", {message: {message:'Error: The original comment was not found!?!'}})
+            })
+            it('Should send a response back with correct number after posting Twilio message', function(){
+                twilioStub.yieldsAsync(null, "success")
+                var response = "Some random response"
+                var req = {body: {hash: expected_obj.pageData.hash, response: response}}
+                var entry = {response: response, to_phone: expected_obj.pageData.phone}
+                mw.send_feedback_response(req, res, next)
+                setImmediate(() => sinon.assert.calledWith(res.render, "response", {pageData: {err: null, entry: entry}}))
+            })
+            it('Should render a response with the error if twilio fails', function(){
+                var err = new Error("Twilio Error")
+                twilioStub.yieldsAsync(err, null)
+                var req = {body: {hash: expected_obj.pageData.hash, response: "response"}}
+                mw.send_feedback_response(req, res, next)
+                setImmediate(() => sinon.assert.calledWith(res.render, "response", {pageData: {err: err}}))
+            })
+            it('Should log an error if twilio fails', function(){
+                var err = new Error("Twilio Error")
+                twilioStub.yieldsAsync(err, null)
+                var req = {body: {hash: expected_obj.pageData.hash, response: "response"}}
+                mw.send_feedback_response(req, res, next)
+                setImmediate(() => sinon.assert.calledWith(loggerStub, err))
+            })
+        })
+        describe("askWatson", function(){
+            var watsonStub, next, res, req
+            beforeEach(function(){
+                next = sinon.stub()
+                watsonStub = sinon.createStubInstance(watson.conversation)
+             //   messageStub = sinon.stub(watson.ConversationV1.prototype, 'message')
+
+                res = {send: sinon.stub(), locals: {}, set: sinon.stub()}
+                req = {body: {Body: "a question"}, cookies:{}}
+            })
+            afterEach(function(){
+            //    messageStub.restore()
+                watsonStub.restore()
+            })
+            it("should do something", function(){
+                mw.askWatson(req, res, next)
+               // sinon.assert.called(messageStub)
+                sinon.assert.called(watsonStub)
+
             })
         })
     })

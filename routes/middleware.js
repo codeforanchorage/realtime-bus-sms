@@ -155,6 +155,7 @@ function send_feedback_response(req, res, next) {
     for(let i=comments.comments.length-1; i >= 0 && !foundIt; i--) {
         if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.body.hash)) {
             if (comments.comments[i].phone) {
+
                 foundIt = true;
                 if (req.body.response) {
                     twilioClient.messages.create({
@@ -166,7 +167,7 @@ function send_feedback_response(req, res, next) {
                                     response: req.body.response,
                                     to_phone: comments.comments[i].phone
                                 };
-                                res.render("response", {pageData: {err: null}});
+                                res.render("response", {pageData: {err: null, entry: entry}});
                             } else {
                                 logger.error(err)
                                 res.render("response", {pageData: {err: err}});
@@ -177,6 +178,7 @@ function send_feedback_response(req, res, next) {
             }
         }
     }
+    if (!foundIt) res.render("message", {message: {message:'Error: The original comment was not found!?!'}});
 }
 
 
