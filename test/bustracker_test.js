@@ -1,3 +1,5 @@
+'use strict';
+
 const assert = require('assert'),
       nock = require('nock'),
       config = require('../lib/config'),
@@ -21,26 +23,31 @@ describe('Bustracker Module', function() {
     after(function(){ nock.enableNetConnect()})
     afterEach(function(){ nock.cleanAll()})
 
-
     describe('With a good Muni response', function(){
-        var get, nockscope
+        let get, nockscope, clock
+        const startTime = 100
         beforeEach(function() {
             nockscope = nock(muniURL.origin).get(muniURL.pathname)
                    .query({stopid: stop_number_lookup[stopNumber]})
                    .reply(200, responses.goodResponse )
+            clock = sinon.useFakeTimers({now: startTime})
             get = bustracker.getStopFromStopNumber(stopNumber)
+        })
+        afterEach(function(){
+            clock.restore();
         })
         it('Should call the correct muni URL', function(){
             return get.then(r => nockscope.done(), err => nockscope.done())
         })
         it('Should return an object with the stop number', function(){
-            return get.then(r => assert(r.data.stopId == stopNumber))
+            return get.then(r => assert.equal(r.data.stopId, stopNumber))
         })
-        it('Should return an object with a processing time', function(){
-            return get.then(r => assert(Number.isInteger(r.muniTime)))
+        it('Should return an object with the processing time', function(){
+            clock.tick(200)
+            return get.then(r => { assert.equal(200, r.muniTime)})
         })
         it('Should return an object with a stop string matching name returned from muni', function(){
-            return get.then(r => assert(r.data.stop == 'DOWNTOWN TRANSIT CENTER'))
+            return get.then(r => assert.equal(r.data.stop, 'DOWNTOWN TRANSIT CENTER'))
         })
         it('Should return an array of Stops', function(){
             return get.then(r => assert((Array.isArray(r.data.stops))))
@@ -48,53 +55,60 @@ describe('Bustracker Module', function() {
         it('Should return an array of stop objects each with a stop number', function(){
             return get.then(r => assert(r.data.stops.every(stop => Number.isInteger(stop.number))))
         })
+        it('Should return array of stops with stop name', function(){
+            const dir_rx = /^(.*) - (?:Inbound|Outbound|Loop)$/
+            return get.then(r => assert(r.data.stops.every(stop => dir_rx.test(stop.name))))
+        })
         it('Should return an array of stop objects each with an array of times', function(){
-            return get.then( r=> assert(r.data.stops.every(stop => stop.times.every(time => {
-                    timeRX = /^(1[0-2]|[1-9]):([0-5][0-9])\s?(AM|PM)$/ // 12:40 PM format no leading zeros
+            const timeRX = /^(1[0-2]|[1-9]):([0-5][0-9])\s?(AM|PM)$/ // 12:40 PM format no leading zeros
+            return get.then( r =>
+                assert(r.data.stops.every(stop => stop.times.every(time => {
                     return timeRX.test(time)
                 })))
             )
         })
+        it("Should return an out of service message when a route reports finished")
+
         it('Should return an array of stop objects each with a name string', function(){
             return get.then(r => assert(r.data.stops.every(stop => stop.name && typeof stop.name == 'string' )))
         })
     })
     describe('With an result different than expected', function(){
-        var get, nockscope
+        let get, nockscope, logs
         beforeEach(function() {
+            logs = sinon.stub(logger, 'error')
             nockscope = nock(muniURL.origin).get(muniURL.pathname)
                    .query({stopid: stop_number_lookup[stopNumber]})
         })
+        afterEach(function(){
+            nock.cleanAll()
+            logs.restore()
+        })
         it('Should respond with error and log it when muni returns a bad response data', function(){
             nockscope.reply(200, responses.unexpectedResponse )
-            var logs = sinon.stub(logger, 'error')
+
             return bustracker.getStopFromStopNumber(stopNumber)
             .then(r => {throw new Error("Promise should not be fulfilled when Muni send bad data")},
                   err => {
                     assert(err.message.includes('Sorry, Bustracker is down'))
-                    assert(logs.called && logs.args[0][0].type == 'MUNI_ERROR' )
-                    assert(logs.args[0][1].htmlBody && logs.args[0][1].stopID)
-                    logs.restore()
+                    sinon.assert.calledWithMatch(logs, sinon.match.has('type', 'MUNI_ERROR' ), sinon.match.has('htmlBody').and(sinon.match.has('stopID')))
                 }
             )
         })
-
         it('Should respond with error and log it with non-2xx Status', function(){
             nockscope.reply(404)
-            var logs = sinon.stub(logger, 'error')
             return bustracker.getStopFromStopNumber(stopNumber)
             .then(r => {throw new Error("Promise should not be fulfilled when Muni send bad data")},
                   err => {
                      assert(err.message.includes('Sorry, Bustracker is down'))
-                     assert(logs.called && logs.args[0][0].message == 'Muni Server returned status code: 404' )
-                    logs.restore()
+                     sinon.assert.calledWith(logs, sinon.match.has('type', 'MUNI_ERROR' ).and(sinon.match.has('message', 'Muni Server returned status code: 404')))
                 }
             )
         })
     })
 
     describe('With bad input', function(){
-        var get, nockscope
+        let get, nockscope
         beforeEach(function() {
             nockscope = nock(muniURL.origin).get(muniURL.pathname)
                     .query({stopid: stop_number_lookup[stopNumber]})
@@ -107,17 +121,17 @@ describe('Bustracker Module', function() {
                 )
         })
         it("Respond with an error when given a number that doesn't match a stop", function(){
-            var badNumber = 12928
+            const badNumber = 12928
             return bustracker.getStopFromStopNumber(badNumber)
-            .then(r => {throw new Error("Promise should not be fulfilled with empty input")},
+            .then(r => {throw new Error("Promise should not be fulfilled when bus number isn't found")},
                   err => {
                       assert(err.message.includes('Stop numbers are on the bus stop sign'))
-                      assert(err.name == `I couldn't find stop number ${badNumber}`)
+                      assert.equal(err.name, `I couldn't find stop number ${badNumber}`)
                     }
                 )
         })
         it("Respond with an error with nonesense input", function(){
-            return bustracker.getStopFromStopNumber('tpoipoit')
+            return bustracker.getStopFromStopNumber('tpoipoit#$')
             .then(r => {throw new Error("Promise should not be fulfilled with empty input")},
                   err => {
                       assert(err.message.includes('Stop numbers are on the bus stop sign'))
@@ -128,13 +142,13 @@ describe('Bustracker Module', function() {
 
     describe('Service Exceptions', function(){
         it('Should respond true when today is in service exceptions', function(){
-            var anException = exceptions.exceptions.find(ex => ex.exception_type == 2)
-            clock = sinon.useFakeTimers(moment(anException.date, 'YYYYMMDD').valueOf())
+            const anException = exceptions.exceptions.find(ex => ex.exception_type == 2)
+            const clock = sinon.useFakeTimers(moment(anException.date, 'YYYYMMDD').valueOf())
             assert(bustracker.serviceExceptions())
             clock.restore();
         })
         it('Should respond false when today is not in service exceptions', function(){
-            clock = sinon.useFakeTimers(0) // assumes start of epoch is not in service exceptions
+            const clock = sinon.useFakeTimers(0) // assumes start of epoch is not in service exceptions
             assert(!bustracker.serviceExceptions())
             clock.restore();
         })

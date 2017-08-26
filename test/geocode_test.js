@@ -1,3 +1,5 @@
+'use strict';
+
 const assert = require('assert'),
       nock = require('nock'),
       config = require('../lib/config'),
@@ -18,8 +20,8 @@ describe('Geocode Module', function() {
     let get_stops
 
     it('Should request the correct Google Maps API URL', function(){
-        var address = '632 W. 6th Street'
-        var n = nock('https://maps.googleapis.com')
+        const address = '632 W. 6th Street'
+        const n = nock('https://maps.googleapis.com')
             .get('/maps/api/geocode/json')
             .query({
                 address: address, // nock seems to URI encode this for us
@@ -40,7 +42,7 @@ describe('Geocode Module', function() {
         })
         it('Should return a geocoded address', function(){
             return get_stops
-                .then(resp => assert(resp.data.geocodedAddress == responses.goodResponse.results[0].formatted_address))
+                .then(resp => assert.equal(resp.data.geocodedAddress, responses.goodResponse.results[0].formatted_address))
         })
         it('Should return stops that have a numeric stopId property', function(){
             return get_stops.then(resp => assert(resp.data.stops.every(stop => /^\d+$/.test(stop.stopId))))
@@ -53,7 +55,7 @@ describe('Geocode Module', function() {
                 .then(resp => assert(Array.isArray(resp.data.stops) && resp.data.stops.length <= config.NEAREST_MAX))
         })
         it('Should return stops with a ll property that parses to a lat/lon', function(){
-            var latlonregex = /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?),\s*[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/
+            const latlonregex = /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?),\s*[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/
             return get_stops.then(resp => assert(resp.data.stops.every(stop => latlonregex.test(stop.ll))))
         })
         it('Should return stops with a route property', function() {
@@ -62,12 +64,12 @@ describe('Geocode Module', function() {
         it('Should return a Not_Found error with no input', function(){
             return geocode.stops_near_location().then(resp =>
                 { throw new Error("Promise should not be fulfilled when input is blank")},
-                  err => assert(err.type == 'NOT_FOUND'))
+                  err => assert.equal(err.type, 'NOT_FOUND'))
         })
     })
     describe('Accurate Timings', function(){
-        var timeTick = 100 //ms
-        var clock
+        const timeTick = 100 //ms
+        let clock
         beforeEach(function(){
             clock = sinon.useFakeTimers()
             nock('https://maps.googleapis.com').get(/^\/maps/)
@@ -101,11 +103,11 @@ describe('Geocode Module', function() {
         })
         it('Should return a rejected promise with NOT_FOUND error', function() {
             return get_stops.then(resp => {throw new Error("Promise should not be fulfilled when location isn't found")},
-                             err => assert(err.type == 'NOT_FOUND')
+                             err => assert.equal(err.type, 'NOT_FOUND')
             )})
     })
     describe("When it returns a Bad HTTP code", function() {
-        var logs
+        let logs
         beforeEach(function(){
             nock('https://maps.googleapis.com').get(/^\/maps/)
                 .reply(200, responses.badRequest )
@@ -119,7 +121,7 @@ describe('Geocode Module', function() {
             return get_stops.then(resp => {
                 throw new Error("Promise should not be fulfilled when location isn't found")},
                 err => {
-                    assert(err.type == 'GEOCODER_ERROR')
+                    assert.equal(err.type, 'GEOCODER_ERROR')
                     assert(logs.calledWith(err))
                 }
             )})
@@ -140,10 +142,10 @@ describe('Geocode Module', function() {
             assert(geocode.findNearestStops(ll[1], ll[0])[0].stopId == aStop.properties.stop_id)
         })
         it('Given distant coordinates, it should return an empty array', function(){
-            assert(geocode.findNearestStops(64.754780,-147.343045).length == 0) // Santa's house, North Pole
+            assert.equal(geocode.findNearestStops(64.754780,-147.343045).length, 0) // Santa's house, North Pole
         })
         it('Should return an empty array when given lat lon that fall outside normal range', function(){
-            var ret = geocode.findNearestStops(290, -1000)
+            let ret = geocode.findNearestStops(290, -1000)
             assert(Array.isArray(ret) && ret.length == 0)
         })
     })

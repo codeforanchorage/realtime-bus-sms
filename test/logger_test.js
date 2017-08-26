@@ -1,5 +1,7 @@
+'use strict';
+
 const assert = require('assert'),
-      util = require('util')
+      util = require('util'),
       rollbar = require("rollbar"),
       sinon = require('sinon'),
       ua = require('universal-analytics'),
@@ -10,7 +12,7 @@ const assert = require('assert'),
       config = require('../lib/config')
 
 describe('Logging middleware', function(){
-    let middleware, mockReq, mockRes, nextStub,logerstub
+    let middleware, mockReq, mockRes, nextStub,loggerstub
 
     beforeEach(function(){
        mockReq = {
@@ -46,7 +48,7 @@ describe('Logging middleware', function(){
         // Logging middleware uses onFinished(), which schedules the logger
         // We need to test at the end of the event loop
         setImmediate(() => {
-            var obj = loggerstub.args[0][0]
+            let obj = loggerstub.args[0][0]
             assert.equal(obj.status, mockRes.statusCode)
             assert.equal(obj.url, mockReq.url)
             assert.equal(obj.ip, mockReq.ip)
@@ -55,14 +57,14 @@ describe('Logging middleware', function(){
         })
     })
     it('Should call logger with additional fields passed into init function', function(done){
-        var initFunc = (req, res) => ({
+        let initFunc = (req, res) => ({
             phone:  req.phone,
             action: res.locals.action
         })
-        var custom_middleware = logs.initialize(initFunc)
+        let custom_middleware = logs.initialize(initFunc)
         custom_middleware(mockReq, mockRes, nextStub)
         setImmediate(() => {
-            var obj = loggerstub.args[0][0]
+            let obj = loggerstub.args[0][0]
             assert.equal(obj.phone, mockReq.phone)
             assert.equal(obj.action, mockRes.locals.action)
             done()
@@ -106,23 +108,23 @@ describe('Logging middleware', function(){
         })
     })
     it('Should log time between starting middleware and sending headers', function(done){
-        var timeTick = 200
-        var clock = sinon.useFakeTimers({
+        let timeTick = 200
+        let clock = sinon.useFakeTimers({
             shouldAdvanceTime: true
         });
         middleware(mockReq, mockRes, nextStub)
         clock.tick(timeTick);
         mockRes.writeHead() // manually call to force onHeaders to fire actions
         setImmediate(() => {
-            var obj = loggerstub.args[0][0]
+            let obj = loggerstub.args[0][0]
             assert.equal(timeTick, obj.responseTime)
             clock.restore()
             done()
         })
     })
     it('Should log current timestamp', function(done){
-        var timeTick = 20
-        var clock = sinon.useFakeTimers({
+        let timeTick = 20
+        let clock = sinon.useFakeTimers({
             now: 1483228800000, /* new year 2017, midnight zulu */
             shouldAdvanceTime: true
         });
@@ -130,7 +132,7 @@ describe('Logging middleware', function(){
         clock.tick(timeTick);
         mockRes.writeHead()
         setImmediate(() => {
-            var obj = loggerstub.args[0][0]
+            let obj = loggerstub.args[0][0]
             assert.equal(obj.timestamp, '2017-01-01T00:00:00.0' + timeTick + 'Z')
             clock.restore()
             done()
@@ -139,7 +141,7 @@ describe('Logging middleware', function(){
 })
 
 describe('Google Analytics Transport', function(){
-    let pageviewStub, eventStub, timingStub, sendStub, logWarning
+    let pageviewStub, eventStub, timingStub, sendStub, logWarning, setStub
     before(function(){
         // stop log calls from logging to the console
         logs.transports['console.info'].silent = true
@@ -166,8 +168,8 @@ describe('Google Analytics Transport', function(){
         setStub.restore()
     })
     describe('With normal init settings', function(){
-        var uuid = 'somUUID'
-        var testMeta = {
+        let uuid = 'somUUID'
+        let testMeta = {
             category: 'testCategory',
             action: 'testAction',
             label: 'testID',
@@ -194,20 +196,20 @@ describe('Google Analytics Transport', function(){
             assert(setStub.calledWith('uid',uuid ))
         })
         it("Should send a pageview with the url when event is not sent", function(){
-            var url = 'http://example.com'
+            let url = 'http://example.com'
             logs.info({url: url})
             assert(pageviewStub.calledWith(url))
         })
         it("Should log a warning if pageview fails", function(){
-            var url = 'http://example.com'
-            var errorString = 'some_google_error'
+            let url = 'http://example.com'
+            let errorString = 'some_google_error'
             pageviewStub.yields(errorString)
             logs.info({url: url})
             assert.equal(logWarning.args[0][1], errorString)
         })
         it("Should send an event with correct fields ", function(){
             logs.info(testMeta)
-            var sentData = eventStub.args[0][0]
+            let sentData = eventStub.args[0][0]
             assert.equal(sentData.ec, testMeta.category)
             assert.equal(sentData.ea, testMeta.action)
             assert.equal(sentData.el, testMeta.label)
@@ -215,7 +217,7 @@ describe('Google Analytics Transport', function(){
             assert.equal(sentData.dp, testMeta.url)
         })
         it("Should log a warning if event() fails", function(){
-            var errorString = 'some_google_event_error'
+            let errorString = 'some_google_event_error'
             eventStub.yields(errorString)
             logs.info(testMeta)
             assert.equal(logWarning.args[0][1], errorString)
@@ -267,14 +269,14 @@ describe("Rollbar Transport", function(){
         assert(rollbarStub.notCalled)
     })
     it('Should send Error instance to rollbar', function(){
-        var error = new Error("An Error")
+        let error = new Error("An Error")
         logs.error(error)
         assert(rollbarStub.calledWith(error))
     })
     it('Should send Error and addition message to rollbar', function(){
-        var error = new Error("An Error"),
+        let error = new Error("An Error"),
             metaObject = {foo: 'bar'}
-        rollbarStub_ErrorWithPayload = sinon.stub(rollbar, 'reportMessageWithPayloadData')
+        let rollbarStub_ErrorWithPayload = sinon.stub(rollbar, 'reportMessageWithPayloadData')
         logs.error(error, metaObject)
         assert(rollbarStub_ErrorWithPayload.calledWith(util.format(error), {custom: metaObject}))
         rollbarStub_ErrorWithPayload.restore()

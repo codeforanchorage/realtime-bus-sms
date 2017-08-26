@@ -111,76 +111,6 @@ function findbyLatLon(req, res, next) {
     res.render('route-list-partial', {routes: {data: {stops: data}} });
 }
 
-function feedbackResponder_web(req, res) {
-    res.locals.returnHTML = 1
-    res.locals.action = 'Feedback'
-    return lib.processFeedback(req)
-    .then(() => res.render('message', {message: {message:'Thanks for the feedback'}}))
-    .catch((err)=>{
-        res.render('message', {message: {message:'Error saving feedback, administrator notified'}})
-        logger.error(err)
-    });
-}
-function feedbackResponder_sms(req, res, next){
-    var message = req.body.Body || '';
-    if (message.substring(0, config.FEEDBACK_TRIGGER.length).toUpperCase() == config.FEEDBACK_TRIGGER.toUpperCase()) {
-        res.set('Content-Type', 'text/plain');
-        res.locals.action = 'Feedback'
-        return lib.processFeedback(message.substring(config.FEEDBACK_TRIGGER.length), req)
-        .then((data)=>res.send("Thanks for the feedback"))
-        .catch((err)=>{
-            res.send("Error saving feedback, administrator notified.");
-            logger.error(err)
-        });
-    }
-    next();
-}
-
-/* This creates an html form that allows admin to respond to feedback */
-function feedback_get_form(req, res, next) {
-    var comments = JSON.parse(fs.readFileSync('./comments.json'));
-    for(var i=comments.comments.length-1; i >= 0; i--) {
-        if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.query.hash)) {
-            if (comments.comments[i].phone) {
-                return res.render("respond", {pageData: {hash: comments.comments[i].response_hash, feedback: comments.comments[i].feedback, phone: comments.comments[i].phone}});
-            }
-        }
-    }
-    res.sendStatus(404);
-}
-/* This posts feedback from the form created by feedback_get_form() */
-function send_feedback_response(req, res, next) {
-    var comments = JSON.parse(fs.readFileSync('./comments.json'));
-    var foundIt = false;
-    for(let i=comments.comments.length-1; i >= 0 && !foundIt; i--) {
-        if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.body.hash)) {
-            if (comments.comments[i].phone) {
-
-                foundIt = true;
-                if (req.body.response) {
-                    twilioClient.messages.create({
-                            to: comments.comments[i].phone,
-                            from: config.MY_PHONE,
-                            body: req.body.response }, function(err, message) {
-                            if (!err) {
-                                var entry = {
-                                    response: req.body.response,
-                                    to_phone: comments.comments[i].phone
-                                };
-                                res.render("response", {pageData: {err: null, entry: entry}});
-                            } else {
-                                logger.error(err)
-                                res.render("response", {pageData: {err: err}});
-                            }
-                        }
-                    );
-                }
-            }
-        }
-    }
-    if (!foundIt) res.render("message", {message: {message:'Error: The original comment was not found!?!'}});
-}
-
 
 
 /*
@@ -383,9 +313,5 @@ module.exports = {
     findbyLatLon: findbyLatLon,
     facebook_verify:facebook_verify,
     facebook_update:facebook_update,
-    sendFBMessage: sendFBMessage,
-    feedbackResponder_sms:feedbackResponder_sms,
-    feedbackResponder_web:feedbackResponder_web,
-    feedback_get_form:feedback_get_form,
-    send_feedback_response: send_feedback_response
+    sendFBMessage: sendFBMessage
 }

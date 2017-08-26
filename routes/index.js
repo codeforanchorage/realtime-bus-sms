@@ -1,14 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var debug = require('debug')('routes/index.js');
-var lib = require('../lib/bustracker');
-var config = require('../lib/config');
-var logger = require('../lib/logger');
-var lowdb_log = require('../lib/lowdb_log_transport');
-var mw = require('./middleware')
+const   express = require('express'),
+        router = express.Router(),
+        debug = require('debug')('routes/index.js'),
+        lib = require('../lib/bustracker'),
+        config = require('../lib/config'),
+        logger = require('../lib/logger'),
+        feedback = require('../lib/feedback'),
+        lowdb_log = require('../lib/lowdb_log_transport'),
+        mw = require('./middleware')
 
 
-/* GET HOME PAGE */
+/*  GET HOME PAGE */
 router.get('/', function(req, res, next) {
         // redirect to https if the user is using http
         if (req.get('X-Forwarded-Proto') && req.get('X-Forwarded-Proto') == 'http') {
@@ -17,22 +18,15 @@ router.get('/', function(req, res, next) {
         res.render('index');
     }
 );
-/*
-Facebook Hooks
-GET is to do the initial app validation in the Facebook Page setup.
-POST is the actual Facebook message handling
-*/
-router.get('/fbhook', mw.facebook_verify);
-router.post('/fbhook', mw.facebook_update);
 
 /*
- TWILIO ENDPOINT
- The user's text message is
- in the POST body.
- TODO: better error messages
+    TWILIO ENDPOINT
+    The user's text message is
+    in the POST body.
  */
+
 router.post('/',
-    mw.feedbackResponder_sms,
+    feedback.feedbackResponder_sms,
     mw.checkServiceExceptions,
     mw.sanitizeInput,
     mw.blankInputRepsonder,
@@ -43,6 +37,7 @@ router.post('/',
 );
 
 /* BROWSER AJAX ENDPOINT */
+
 router.post('/ajax',
     function (req, res, next) {
         res.locals.returnHTML = 1;
@@ -57,12 +52,12 @@ router.post('/ajax',
     mw.askWatson
 );
 
-
 /*  DIRECT URL ACCESS
- Routes to allow deep linking and bookmarks via url with
- either address, stop number, or about.
+    Routes to allow deep linking and bookmarks via url with
+    either address, stop number, or about.
  */
-router.get('/find/about', function(req, res, next) {
+
+ router.get('/find/about', function(req, res, next) {
     res.locals.returnHTML = 1;
     res.locals.action = "About"
     res.render('index');
@@ -75,7 +70,7 @@ router.get('/find/:query', function(req, res, next) {
     res.locals.renderWholePage = 1;
     next();
     },
-    // mw.checkServiceExceptions,
+    mw.checkServiceExceptions,
     mw.sanitizeInput,
     mw.blankInputRepsonder,
     mw.stopNumberResponder,
@@ -83,31 +78,53 @@ router.get('/find/:query', function(req, res, next) {
     mw.askWatson
 );
 
-//  a browser with location service enabled can hit this
+/*  BROWSER FIND BY CURRENT LOCATION
+    A browser with location service enabled can hit this
+    It requires https on most browsers
+*/
+
 router.get('/byLatLon',
     mw.checkServiceExceptions,
     mw.findbyLatLon
 );
 
+/*  FACEBOOK HOOKS
+    GET is to do the initial app validation in the Facebook Page setup.
+    POST is the actual Facebook message handling
+*/
 
-// feedback form endpoint
+router.get('/fbhook', mw.facebook_verify);
+router.post('/fbhook', mw.facebook_update);
+
+
+/*  FEEDBACK FORM ENDPOINT */
+
 router.post('/feedback',
     mw.checkServiceExceptions,
-    mw.feedbackResponder_web
+    feedback.feedbackResponder_web
 );
 
-//  Respond to feedback from SMS
+/*  RESPONSE TO FEEDBACK FROM SMS
+    GET is to make the response form
+    POST handles the reponse from that form
+*/
 
-router.get('/respond', mw.feedback_get_form); // Make reponse form
-router.post('/respond', mw.send_feedback_response); // Handle posts from response form an send
+router.get('/respond', feedback.feedback_get_form);
+router.post('/respond', feedback.send_feedback_response);
 
 
+/*  LOG DATA
+    Provides ajax data for the log plot
+*/
 
-// Log data used by /logplot called from client script.
 router.get('/logData', function(req, res, next) {
     data = lowdb_log.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
     res.send(data)
 });
+
+/*  LOG PLOT
+    Draws plot from data provided by /logData
+*/
 
 router.get('/logplot', function(req, res, next) {
     res.render('logplot');
