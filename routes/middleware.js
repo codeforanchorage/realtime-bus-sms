@@ -188,7 +188,6 @@ function send_feedback_response(req, res, next) {
     TODO Test intent confidence to decide to help decide flow
 */
 function askWatson(req, res, next){
-    logger.debug("Calling Watson")
     var input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so things like "I'm" returns an unwanted number
 
     try {
@@ -205,14 +204,6 @@ function askWatson(req, res, next){
         return res.render('message')
     }
 
-    /* TODO - this is probably not the best way to do maintain state
-        If we want to be able to have conversation beyond a stateless
-        question & answer, we need to be able to pass the context that Watson sends
-        back to Watson. The context object isn't very big, so it fits within the 4k limit
-        on cookies imposed by browsers, but this might be fragile.
-        A more solid approach might be to use sessions and store the context with a session id.
-        But for right now th cookie approach is working.
-    */
     var context  = JSON.parse(req.cookies['context'] || '{}');
 
     conversation.message( {
@@ -232,10 +223,15 @@ function askWatson(req, res, next){
                 return res.render('message')
             }
 
+            if (!response.context) {
+                // this should never happen
+                logger.error("Watson returned an unusable response.", {response: response})
+                res.locals.message = {name: "Bustracker Error", message:"I'm sorry an error occured." }
+                return res.render('message')
+            }
             // Set cookie to value of returned conversation_id will allow
             // continuation of conversations that are otherwise stateless
             res.cookie('context', JSON.stringify(response.context))
-
             // The context.action is set in the Watson Conversation Nodes when we know
             // we need to respond with additional data or our own message.
             // If it's not set, we use the response sent from Watson.
@@ -245,71 +241,67 @@ function askWatson(req, res, next){
                 return res.render('message')
             }
 
-            switch(response.context.action) {
-                case "Stop Lookup":
-                    // Earlier middleware should catch plain stop numbers
-                    // But a query like "I'm at stop 36" should end up here
-                    // Watson should identify the number for use as an entity
-                    var stops = response.entities.filter((element) =>  element['entity'] == "sys-number"  );
+            if(response.context.action === "Stop Lookup"){
+                // Earlier middleware should catch plain stop numbers
+                // But a query like "I'm at stop 36" should end up here
+                // Watson should identify the number for use as an entity
+                var stops = response.entities.filter((element) =>  element['entity'] == "sys-number"  );
 
-                    // It's possible to have more than one number in a user query
-                    // If that happens we take the first number and hope it's right
-                    var stop = stops[0]
+                // It's possible to have more than one number in a user query
+                // If that happens we take the first number and hope it's right
+                var stop = stops[0]
+                if (stop) {
+                    res.locals.action = 'Stop Lookup'
+                    lib.getStopFromStopNumber(parseInt(stops[0].value))
+                    .then((routeObject) => {
+                        res.locals.routes = routeObject;
+                        res.render('stop-list');
+                    })
+                    .catch((err) => {
+                        res.locals.action = 'Failed Stop Lookup'
+                        res.render('message', {message: err})
+                    })
 
-                    if (stop) {
-                        res.locals.action = 'Stop Lookup'
-                        lib.getStopFromStopNumber(parseInt(stops[0].value))
-                        .then((routeObject) => {
-                            res.locals.routes = routeObject;
-                            res.render('stop-list');
-                        })
-                        .catch((err) => {
-                            res.locals.action = 'Failed Stop Lookup'
-                            res.render('message', {message: err})
-                        })
-                        return;
-                    } else {
-                        // This shouldn't ever happen.
-                        res.locals.action = 'Watson Error'
-                        logger.error("Watson returned a next_bus intent with no stops.", {input: input})
-                        res.locals.message = {name: "Bustracker Error", message:"I'm sorry an error occured." }
-                        return res.render('message')
-                    }
-                case("Address Lookup"):
-                    // The geocoder has already tried and failed to lookup
-                    // but Watson thinks this is an address. It's only a seperate
-                    // case so we can log a failed address lookup
-                    res.locals.action = 'Failed Address Lookup'
-                    res.locals.message = {message:response.output.text.join(' ')}
+                } else {
+                    // This shouldn't ever happen.
+                    res.locals.action = 'Watson Error'
+                    logger.error("Watson returned a next_bus intent with no stops.", {input: input})
+                    res.locals.message = {name: "Bustracker Error", message:"I'm sorry an error occured." }
                     return res.render('message')
-
-                default:
-                    // For everything else .
-                    res.locals.action = 'Watson Chat'
-                    res.locals.message = {message:response.output.text.join(' ')}
-                    return res.render('message')
-
+                }
+            } else if (response.context.action === "Address Lookup"){
+                // The geocoder has already tried and failed to lookup
+                // but Watson thinks this is an address. It's only a seperate
+                // case so we can log a failed address lookup
+                res.locals.action = 'Failed Address Lookup'
+                res.locals.message = {message:response.output.text.join(' ')}
+                return res.render('message')
+            } else {
+                // For everything else .
+                res.locals.action = 'Watson Chat'
+                res.locals.message = {message:response.output.text.join(' ')}
+                return res.render('message')
             }
-        next();
     });
 }
 
 /*
 
  Facebook Hooks
- GET is to do the initial app validation in the Facebook Page setup.
- POST is the actual Facebook message handling
+ facebook_verify is to do the initial app validation in the Facebook Page setup.
+ facebook_update is the actual Facebook message handling
 
  */
 function facebook_verify(req, res) {
     if (req.query['hub.mode'] === 'subscribe' &&
         req.query['hub.verify_token'] === config.FB_VALIDATION_TOKEN) {
-        logger.info("Validating webhook");
+        //logger.info("Validating webhook");
         res.status(200).send(req.query['hub.challenge']);
     } else {
         logger.warn("Failed validation. Make sure the validation tokens match.");
         res.sendStatus(403);
     }
+
 }
 
 function facebook_update(req, res) {
@@ -322,7 +314,7 @@ function facebook_update(req, res) {
         data.entry.forEach(function(pageEntry) {
             var pageID = pageEntry.id;
             var timeOfEvent = pageEntry.time;
-            console.log("messaging: ", pageEntry.messaging)
+            //console.log("messaging: ", pageEntry.messaging)
             // Iterate over each messaging event
             pageEntry.messaging.forEach(function(messagingEvent) {
                 if (messagingEvent.message) {
@@ -336,7 +328,7 @@ function facebook_update(req, res) {
                                isFB: true}
                     },function(code, data, headers){
                         //data has response from express
-                        sendFBMessage(messagingEvent.sender.id, data)
+                        module.exports.sendFBMessage(messagingEvent.sender.id, data)
                     })
                 } else {
                     logger.warn("fbhook received unknown messagingEvent: ", JSON.stringify(messagingEvent));
@@ -349,7 +341,7 @@ function facebook_update(req, res) {
         // You must send back a 200, within 20 seconds, to let us know you've
         // successfully received the callback. Otherwise, the request will time out.
         res.sendStatus(200);
-    }
+    } else  res.sendStatus(403);
 }
 
 function sendFBMessage(recipientId, messageText) {
@@ -363,11 +355,9 @@ function sendFBMessage(recipientId, messageText) {
         }
     };
     //console.log("Trying to send message \"%s\" to recipient %s", messageText, recipientId );
-
-    request({
+    request.post({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: config.FB_PAGE_ACCESS_TOKEN },
-        method: 'POST',
         json: messageData
 
     }, function (error, response, body) {
@@ -393,6 +383,7 @@ module.exports = {
     findbyLatLon: findbyLatLon,
     facebook_verify:facebook_verify,
     facebook_update:facebook_update,
+    sendFBMessage: sendFBMessage,
     feedbackResponder_sms:feedbackResponder_sms,
     feedbackResponder_web:feedbackResponder_web,
     feedback_get_form:feedback_get_form,

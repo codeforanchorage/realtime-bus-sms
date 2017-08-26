@@ -17,7 +17,11 @@ router.get('/', function(req, res, next) {
         res.render('index');
     }
 );
-
+/*
+Facebook Hooks
+GET is to do the initial app validation in the Facebook Page setup.
+POST is the actual Facebook message handling
+*/
 router.get('/fbhook', mw.facebook_verify);
 router.post('/fbhook', mw.facebook_update);
 
