@@ -143,7 +143,7 @@ describe('Bustracker Module', function() {
     describe('Service Exceptions', function(){
         it('Should respond true when today is in service exceptions', function(){
             const anException = exceptions.exceptions.find(ex => ex.exception_type == 2)
-            const clock = sinon.useFakeTimers(moment(anException.date, 'YYYYMMDD').valueOf())
+            const clock = sinon.useFakeTimers(moment.tz(anException.date, 'YYYYMMDD', config.TIMEZONE).valueOf())
             assert(bustracker.serviceExceptions())
             clock.restore();
         })

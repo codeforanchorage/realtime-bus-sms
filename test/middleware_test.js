@@ -23,6 +23,12 @@ describe('Middleware Function', function(){
             mw.sanitizeInput(req, res, next)
             assert.equal(req.body.Body, "Line One")
         })
+        it('Should ensure req.body.Body is a string', function(){
+            let int = 123
+            let req = {body: {Body:int} }
+            mw.sanitizeInput(req, res, next)
+            assert.equal(req.body.Body, String(int))
+        })
         it('Should replace tabs with a single space', function(){
             let req = {body: {Body:"One\tTwo\t\t\tThree"} }
             mw.sanitizeInput(req, res, next)
@@ -361,7 +367,7 @@ describe('Middleware Function', function(){
         it("Should call the Watson Init Function with correct versions, date, and auth info", function(){
             mw.askWatson(req, res, next)
             sinon.assert.calledWith(watsonStub, sinon.match({version: 'v1'}))
-            sinon.assert.calledWith(watsonStub, sinon.match({version_date: '2016-09-20'}))
+            sinon.assert.calledWith(watsonStub, sinon.match({version_date: '2017-05-26'}))
             sinon.assert.calledWith(watsonStub, sinon.match.has('username'))
             sinon.assert.calledWith(watsonStub, sinon.match.has('password'))
         })
@@ -504,11 +510,11 @@ describe('Middleware Function', function(){
                     'hub.challenge': fbChallenge
                     }
                 req = {query: fbRequest}
-                logStub = sinon.stub(logger, 'warn')
+                logger.transports['console.info'].silent = true
             })
             afterEach(function(){
                 config.FB_VALIDATION_TOKEN = originalToken
-                logStub.restore()
+                logger.transports['console.info'].silent = false
             })
             it("Should send 200 response to FB subscribe when token matches", function(){
                 mw.facebook_verify(req, res)

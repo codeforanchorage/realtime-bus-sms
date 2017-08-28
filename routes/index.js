@@ -27,8 +27,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/',
     feedback.feedbackResponder_sms,
-    mw.checkServiceExceptions,
     mw.sanitizeInput,
+    mw.checkServiceExceptions,
     mw.blankInputRepsonder,
     mw.aboutResponder,
     mw.stopNumberResponder,
@@ -43,8 +43,8 @@ router.post('/ajax',
         res.locals.returnHTML = 1;
         next()
     },
-    mw.checkServiceExceptions,
     mw.sanitizeInput,
+    mw.checkServiceExceptions,
     mw.blankInputRepsonder,
     mw.aboutResponder,
     mw.stopNumberResponder,
@@ -64,6 +64,12 @@ router.post('/ajax',
 
 });
 
+router.get('/find/', function(req, res, next) {
+    res.locals.returnHTML = 1;
+    res.render('index');
+
+});
+
 router.get('/find/:query', function(req, res, next) {
     req.body.Body = req.params.query
     res.locals.returnHTML = 1;
@@ -71,7 +77,6 @@ router.get('/find/:query', function(req, res, next) {
     next();
     },
     mw.checkServiceExceptions,
-    mw.sanitizeInput,
     mw.blankInputRepsonder,
     mw.stopNumberResponder,
     mw.addressResponder,
@@ -100,7 +105,6 @@ router.post('/fbhook', mw.facebook_update);
 /*  FEEDBACK FORM ENDPOINT */
 
 router.post('/feedback',
-    mw.checkServiceExceptions,
     feedback.feedbackResponder_web
 );
 

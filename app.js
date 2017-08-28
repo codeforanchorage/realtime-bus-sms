@@ -17,7 +17,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.set('trust proxy', true); // client’s IP address will be left-most entry in the X-Forwarded-* header
 require('run-middleware')(app);
 

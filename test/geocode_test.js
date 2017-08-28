@@ -26,7 +26,7 @@ describe('Geocode Module', function() {
             .query({
                 address: address, // nock seems to URI encode this for us
                 components: `country:US|administrative_area:${config.GOOGLE_GEOCODE_LOCATION}`,
-                key: process.env.GOOGLE_MAPS_KEY
+                key: config.GOOGLE_MAPS_KEY
             })
             .reply(200, responses.goodResponse)
 

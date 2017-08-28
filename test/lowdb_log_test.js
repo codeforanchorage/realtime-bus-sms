@@ -54,7 +54,7 @@ describe('LowDB Log Transport', function(){
     it('Should not save ip public db', function(){
         logger.info(metaObject)
         let saved = JSON.parse(stenoStubb.secondCall.args[1]).requests.pop()
-        assert.equal(saved.ip, "")
+        assert.strictEqual(saved.ip, undefined)
     })
     it('Should save hashed version of phone public db', function(){
         logger.info(metaObject)

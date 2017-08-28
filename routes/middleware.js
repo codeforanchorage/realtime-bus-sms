@@ -5,7 +5,8 @@ const watson = require('watson-developer-cloud')
       geocode = require('../lib/geocode'),
       emojiRegex = require('emoji-regex'),
       fs = require('fs'),
-      twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN)
+      twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN),
+      pug = require('pug')
 
       // Facebook requirements
 const request = require('request');
@@ -13,20 +14,19 @@ const request = require('request');
 
 /*
 
- MIDDLEWARE FUNCTIONS
- These are primarily concerned with parsing the input the comes in from the POST
- body and deciding how to handle it.
- To help logging this sets res.locals.action to one of
- '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
+    MIDDLEWARE FUNCTIONS
+    These are primarily concerned with parsing the input the comes in from the POST
+    body and deciding how to handle it.
+    To help logging these set res.locals.action to one of
+    '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
 
  */
-function sanitizeInput(req, res, next) {
-    // Removes everything after first return/carriage-return.
-    // Strip emojis
 
+function sanitizeInput(req, res, next) {
     if (req.body.Body) {
+        req.body.Body = String(req.body.Body)
         // Split on newline type characters and replace tabs with spaces
-        var firstLine = req.body.Body.split(/\r\n|\r|\n/, 1)[0].replace(/\t+/g, " ");
+        const firstLine = req.body.Body.split(/\r\n|\r|\n/, 1)[0].replace(/\t+/g, " ");
         const emoRegex = emojiRegex();
         req.body.Body = firstLine.replace(emoRegex, '');
     }
@@ -42,7 +42,7 @@ function checkServiceExceptions(req, res, next){
 }
 
 function blankInputRepsonder(req, res, next){
-    var input = req.body.Body;
+    let input = req.body.Body;
     if (!input || /^\s*$/.test(input)) {
         // res.locals.action is caching the event type which we can use later when logging anlytics
         res.locals.action = 'Empty Input'
@@ -53,7 +53,7 @@ function blankInputRepsonder(req, res, next){
 }
 
 function aboutResponder(req, res, next){
-    var message = req.body.Body;
+    let message = req.body.Body;
     if (['about','hi','hello'].indexOf(message.trim().toLowerCase()) >= 0) {
         res.locals.action = 'About';
         return res.render('about-partial');
@@ -62,8 +62,8 @@ function aboutResponder(req, res, next){
 }
 
 function stopNumberResponder(req,res, next){
-    var input = req.body.Body;
-    var stopRequest = input.toLowerCase().replace(/\s*/g,'').replace("stop",'').replace("#",'');
+    let input = req.body.Body;
+    let stopRequest = input.toLowerCase().replace(/\s*/g,'').replace("stop",'').replace("#",'');
     if (/^\d+$/.test(stopRequest)) {
         res.locals.action = 'Stop Lookup';
         return lib.getStopFromStopNumber(parseInt(stopRequest))
@@ -126,7 +126,7 @@ function askWatson(req, res, next){
             username: config.WATSON_USER,
             password: config.WATSON_PASSWORD,
             version: 'v1',
-            version_date: '2016-09-20'
+            version_date: '2017-05-26'
         })
     } catch(err) {
         logger.error(err, {input: input});
@@ -217,11 +217,12 @@ function askWatson(req, res, next){
 
 /*
 
- Facebook Hooks
- facebook_verify is to do the initial app validation in the Facebook Page setup.
- facebook_update is the actual Facebook message handling
+    Facebook Hooks
+    facebook_verify is to do the initial app validation in the Facebook Page setup.
+    facebook_update is the actual Facebook message handling
 
  */
+
 function facebook_verify(req, res) {
     if (req.query['hub.mode'] === 'subscribe' &&
         req.query['hub.verify_token'] === config.FB_VALIDATION_TOKEN) {
