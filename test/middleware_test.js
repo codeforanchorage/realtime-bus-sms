@@ -537,10 +537,10 @@ describe('Middleware Function', function(){
         })
         describe("facebook_update", function(){
             let req, runMWStub, res
-            const data = require('./fixtures/facebook_message')
+            const fb_message = require('./fixtures/facebook_message')
             beforeEach(function(){
                 runMWStub = sinon.stub()
-                req = {body: data, runMiddleware: runMWStub}
+                req = {body: fb_message.multiple, runMiddleware: runMWStub}
                 res = {sendStatus: sinon.stub()}
             })
             afterEach(function(){
@@ -554,7 +554,7 @@ describe('Middleware Function', function(){
             })
             it('Should pass an object with the data from each message back through the middleware', function(){
                 mw.facebook_update(req,res)
-                data.entry.forEach((entry, j) => entry.messaging.forEach((obj, i) => {
+                fb_message.multiple.entry.forEach((entry, j) => entry.messaging.forEach((obj, i) => {
                     let called = {
                         method: 'post',
                         body: {
@@ -563,7 +563,7 @@ describe('Middleware Function', function(){
                             isFB: true
                         }
                     }
-                    assert.deepEqual(called, runMWStub.args[j * data.entry.length + i][1])
+                    assert.deepEqual(called, runMWStub.args[j * fb_message.multiple.entry.length + i][1])
                 }))
             })
             it("Should pass data from middleware to sendFBMessage", function(){
@@ -571,8 +571,8 @@ describe('Middleware Function', function(){
                 let newdata = {"foo": "bar"}
                 req.runMiddleware.yields({}, newdata, {headers: "headers"})
                 mw.facebook_update(req,res)
-                data.entry.forEach((entry, j) => entry.messaging.forEach((obj, i) => {
-                    let itemNum = j*data.entry.length + i // unravel nested calls
+                fb_message.multiple.entry.forEach((entry, j) => entry.messaging.forEach((obj, i) => {
+                    let itemNum = j*fb_message.multiple.entry.length + i // unravel nested calls
                     assert.deepEqual(obj.sender.id, sendFBStub.args[itemNum][0])
                     assert.deepEqual(newdata, sendFBStub.args[itemNum][1])
                 }))
@@ -608,14 +608,17 @@ describe('Middleware Function', function(){
             it("Should log an error if facebook request fails", function(){
                 let error = new Error("A Facebook Error")
                 requestStub.yields(error)
-                mw.sendFBMessage('id', 'message')
-                sinon.assert.calledWith(loggerStub, "Failed calling Send API: " + error.message)
+                return mw.sendFBMessage('id', 'message')
+                .then(() =>{ throw new Error("Promise should not be fulfilled when there is an error")},
+                    () => sinon.assert.calledWith(loggerStub, "Failed calling Send API: " + error.message))
             })
-            it("Should log an error if facebook response code is other than 200", function(){
+            it("Should log an error if facebook response code is not 200", function(){
                 let bad_response = {statusCode: 404, statusMessage: "Not Found"}
                 requestStub.yields(null, bad_response)
-                mw.sendFBMessage('id', 'message')
-                sinon.assert.calledWith(loggerStub, "Failed calling Send API: " + bad_response.statusCode + " - " + bad_response.statusMessage)
+                return mw.sendFBMessage('id', 'message')
+                .then(() => {throw new Error("Promise should not be fulfilled when there is an error")},
+                   ()=> sinon.assert.calledWith(loggerStub, "Failed calling Send API: " + bad_response.statusCode + " - " + bad_response.statusMessage))
+
             })
         })
     })

@@ -67,7 +67,6 @@ router.post('/ajax',
 router.get('/find/', function(req, res, next) {
     res.locals.returnHTML = 1;
     res.render('index');
-
 });
 
 router.get('/find/:query', function(req, res, next) {

@@ -65,6 +65,7 @@ function stopNumberResponder(req,res, next){
     let input = req.body.Body;
     let stopRequest = input.toLowerCase().replace(/\s*/g,'').replace("stop",'').replace("#",'');
     if (/^\d+$/.test(stopRequest)) {
+
         res.locals.action = 'Stop Lookup';
         return lib.getStopFromStopNumber(parseInt(stopRequest))
         .then((routeObject) => {
@@ -242,6 +243,7 @@ function facebook_update(req, res) {
     if (data.object == 'page') {
         // Iterate over each entry
         // There may be multiple if batched
+        let requests = []
         data.entry.forEach(function(pageEntry) {
             var pageID = pageEntry.id;
             var timeOfEvent = pageEntry.time;
@@ -249,29 +251,31 @@ function facebook_update(req, res) {
             // Iterate over each messaging event
             pageEntry.messaging.forEach(function(messagingEvent) {
                 if (messagingEvent.message) {
-                    //var reqClone = Object.assign({}, req);  // Need copies for each handled message
-                    //var resClone = Object.assign({}, res);
-                    //receivedFBMessage(req, res, messagingEvent);
-                    req.runMiddleware('/', {
-                        method:'post',
-                        body: {Body: messagingEvent.message.text,
-                               From: messagingEvent.sender.id,
-                               isFB: true}
-                    },function(code, data, headers){
-                        //data has response from express
-                        module.exports.sendFBMessage(messagingEvent.sender.id, data)
-                    })
+                    requests.push(new Promise((resolve, reject) => {
+                        req.runMiddleware('/', {
+                            method:'post',
+                            body: {Body: messagingEvent.message.text,
+                                From: messagingEvent.sender.id,
+                                isFB: true}
+                        },function(code, data, headers){
+                            //data has response from express
+                            resolve( module.exports.sendFBMessage(messagingEvent.sender.id, data ))
+                        })
+                    }))
                 } else {
                     logger.warn("fbhook received unknown messagingEvent: ", JSON.stringify(messagingEvent));
                 }
             });
         });
 
-        // Assume all went well.
+        // Waits until all messages have been responded to then sends reply.
         //
         // You must send back a 200, within 20 seconds, to let us know you've
         // successfully received the callback. Otherwise, the request will time out.
-        res.sendStatus(200);
+        return Promise.all(requests)
+        .then(() =>  res.sendStatus(200))
+        .catch(() => res.sendStatus(200)) // this returns a 200 to FB even when there are errors
+
     } else  res.sendStatus(403);
 }
 
@@ -286,20 +290,23 @@ function sendFBMessage(recipientId, messageText) {
         }
     };
     //console.log("Trying to send message \"%s\" to recipient %s", messageText, recipientId );
-    request.post({
-        uri: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: { access_token: config.FB_PAGE_ACCESS_TOKEN },
-        json: messageData
+    return new Promise((resolve, reject) => {
+        request.post({
+            uri: 'https://graph.facebook.com/v2.6/me/messages',
+            qs: { access_token: config.FB_PAGE_ACCESS_TOKEN },
+            json: messageData
 
-    }, function (error, response, body) {
-        if (error || (response.statusCode != 200)) {
-            if (error) {
-                logger.error("Failed calling Send API: " + error.message);
+        }, function (error, response, body) {
+
+            if (error || (response.statusCode != 200)) {
+                if (error) logger.error("Failed calling Send API: " + error.message);
+                if (response)  logger.error("Failed calling Send API: " + response.statusCode + " - " + response.statusMessage);
+
+                reject(new Error("Failed calling Send API"))
+            } else {
+                resolve("success")
             }
-            if (response) {
-                logger.error("Failed calling Send API: " + response.statusCode + " - " + response.statusMessage);
-            }
-        }
+        })
     });
 
 }
