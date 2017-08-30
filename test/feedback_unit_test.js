@@ -6,7 +6,7 @@ const assert    = require('assert')
     , request   = require('request')
     , config    = require('../lib/config')
     , feedback  = require('../lib/feedback')
-    , comments  = require('./fixtures/comments.json')
+    , comments  = require('./fixtures/fake_comments.json')
 
 describe("User Feedback", function(){
     describe("feedbackResponder_web", function(){
