@@ -524,7 +524,7 @@ describe("Logging hits", function(){
                     } catch(e){ done(e) }
                 }
             })
-            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
+            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1500)
         })
     })
 
@@ -550,7 +550,7 @@ describe("Logging hits", function(){
                 }
             })
 
-            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
+            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1500)
         })
     })
 
@@ -579,7 +579,7 @@ describe("Logging hits", function(){
                     } catch(e){ done(e) }
                 }
             })
-            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
+            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1500)
         })
     })
 
@@ -607,7 +607,7 @@ describe("Logging hits", function(){
                     } catch(e){ done(e) }
                 }
             })
-            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
+            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1500)
         })
     })
 
@@ -643,7 +643,7 @@ describe("Logging hits", function(){
                     } catch(e){ done(e) }
                 }
             })
-            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
+            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1500)
         })
     })
 
