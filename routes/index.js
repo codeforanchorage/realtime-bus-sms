@@ -7,7 +7,7 @@ const   express = require('express'),
         feedback = require('../lib/feedback'),
         lowdb_log = require('../lib/lowdb_log_transport'),
         mw = require('./middleware')
-
+        fb = require('../lib/facebook')
 
 /*  GET HOME PAGE */
 router.get('/', function(req, res, next) {
@@ -29,6 +29,7 @@ router.post('/',
     feedback.feedbackResponder_sms,
     mw.sanitizeInput,
     mw.checkServiceExceptions,
+    mw.addLinkToRequest,
     mw.blankInputRepsonder,
     mw.aboutResponder,
     mw.stopNumberResponder,
@@ -97,8 +98,8 @@ router.get('/byLatLon',
     POST is the actual Facebook message handling
 */
 
-router.get('/fbhook', mw.facebook_verify);
-router.post('/fbhook', mw.facebook_update);
+router.get('/fbhook', fb.verify);
+router.post('/fbhook', fb.update);
 
 
 /*  FEEDBACK FORM ENDPOINT */

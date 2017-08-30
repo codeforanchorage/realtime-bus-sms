@@ -4,7 +4,9 @@
   "description": "Gets realtime bus data for the Peoplemover in Anchorage, AK. Input and output is through Twilio.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*_test.js",
+    "integration": "mocha test/*integration_test.js  || true",
+    "unit": "mocha test/*unit_test.js  || true",
+    "test": "npm run unit && npm run integration",
     "test_old": "nodeunit test/test.js",
     "start": "node ./bin/www"
   },

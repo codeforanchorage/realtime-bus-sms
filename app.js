@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var rollbar = require("rollbar");
 var config = require('./lib/config');
 var lib = require('./lib/bustracker');
-
+var fb = require('./lib/facebook')
 rollbar.init(config.ROLLBAR_TOKEN);
 
 var routes = require('./routes/index');
@@ -95,7 +95,7 @@ logs.initGoogleAnalytics((logFields) => {
 var lowDB_transport = require('./lib/lowdb_log_transport')
 logs.add(lowDB_transport(), {})
 
-app.use('/fbhook', bodyParser.json({ verify: lib.verifyFBRequestSignature }));  //For Facebook requests
+app.use('/fbhook', bodyParser.json({ verify: fb.verifyFBRequestSignature }));  //For Facebook requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

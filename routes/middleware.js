@@ -41,6 +41,37 @@ function checkServiceExceptions(req, res, next){
     next()
 }
 
+function addLinkToRequest(req,res, next){
+    // Twilio sms messages over 160 characters are split into
+    // (and charged as) smaller messages of 153 characters each.
+    // So we include the text + message if it won't push over 160 characters
+    // or if greater  it won't push over a multiple of 153
+
+    var single_message_limit = 160
+    var segment_length = 153
+
+    // the url with 'http://' results in a simple link on iPhones
+    // With 'http://' iphone users will see a big box that says 'tap to preview'
+    // Simple text seems more in the spirit
+    var message = "\n\More features on the smart phone version: bit.ly/AncBus"
+
+    //hikack the render function
+    var _render = res.render
+    res.render = function(view, options, callback) {
+        _render.call(this, view, options, (err, text) => {
+            if (err) return next(err)
+
+            if ( text.length + message.length <= single_message_limit ) {
+                res.send(text + message)
+            } else if ( text.length > single_message_limit
+                        && text.length % segment_length + message.length <= segment_length ) {
+                res.send(text + message)
+            } else res.send(text)
+        })
+    }
+    next()
+}
+
 function blankInputRepsonder(req, res, next){
     let input = req.body.Body;
     if (!input || /^\s*$/.test(input)) {
@@ -216,110 +247,15 @@ function askWatson(req, res, next){
     });
 }
 
-/*
 
-    Facebook Hooks
-    facebook_verify is to do the initial app validation in the Facebook Page setup.
-    facebook_update is the actual Facebook message handling
-
- */
-
-function facebook_verify(req, res) {
-    if (req.query['hub.mode'] === 'subscribe' &&
-        req.query['hub.verify_token'] === config.FB_VALIDATION_TOKEN) {
-        //logger.info("Validating webhook");
-        res.status(200).send(req.query['hub.challenge']);
-    } else {
-        logger.warn("Failed validation. Make sure the validation tokens match.");
-        res.sendStatus(403);
-    }
-
-}
-
-function facebook_update(req, res) {
-    var data = req.body;
-
-    // Make sure this is a page subscription
-    if (data.object == 'page') {
-        // Iterate over each entry
-        // There may be multiple if batched
-        let requests = []
-        data.entry.forEach(function(pageEntry) {
-            var pageID = pageEntry.id;
-            var timeOfEvent = pageEntry.time;
-            //console.log("messaging: ", pageEntry.messaging)
-            // Iterate over each messaging event
-            pageEntry.messaging.forEach(function(messagingEvent) {
-                if (messagingEvent.message) {
-                    requests.push(new Promise((resolve, reject) => {
-                        req.runMiddleware('/', {
-                            method:'post',
-                            body: {Body: messagingEvent.message.text,
-                                From: messagingEvent.sender.id,
-                                isFB: true}
-                        },function(code, data, headers){
-                            //data has response from express
-                            resolve( module.exports.sendFBMessage(messagingEvent.sender.id, data ))
-                        })
-                    }))
-                } else {
-                    logger.warn("fbhook received unknown messagingEvent: ", JSON.stringify(messagingEvent));
-                }
-            });
-        });
-
-        // Waits until all messages have been responded to then sends reply.
-        //
-        // You must send back a 200, within 20 seconds, to let us know you've
-        // successfully received the callback. Otherwise, the request will time out.
-        return Promise.all(requests)
-        .then(() =>  res.sendStatus(200))
-        .catch(() => res.sendStatus(200)) // this returns a 200 to FB even when there are errors
-
-    } else  res.sendStatus(403);
-}
-
-function sendFBMessage(recipientId, messageText) {
-    var messageData = {
-        recipient: {
-            id: recipientId
-        },
-        message: {
-            text: messageText,
-            metadata: "DEVELOPER_DEFINED_METADATA"
-        }
-    };
-    //console.log("Trying to send message \"%s\" to recipient %s", messageText, recipientId );
-    return new Promise((resolve, reject) => {
-        request.post({
-            uri: 'https://graph.facebook.com/v2.6/me/messages',
-            qs: { access_token: config.FB_PAGE_ACCESS_TOKEN },
-            json: messageData
-
-        }, function (error, response, body) {
-
-            if (error || (response.statusCode != 200)) {
-                if (error) logger.error("Failed calling Send API: " + error.message);
-                if (response)  logger.error("Failed calling Send API: " + response.statusCode + " - " + response.statusMessage);
-
-                reject(new Error("Failed calling Send API"))
-            } else {
-                resolve("success")
-            }
-        })
-    });
-
-}
 module.exports = {
     askWatson: askWatson,
     sanitizeInput: sanitizeInput,
     blankInputRepsonder: blankInputRepsonder,
+    addLinkToRequest: addLinkToRequest,
     checkServiceExceptions: checkServiceExceptions,
     aboutResponder:aboutResponder,
     stopNumberResponder:stopNumberResponder,
     addressResponder:addressResponder,
     findbyLatLon: findbyLatLon,
-    facebook_verify:facebook_verify,
-    facebook_update:facebook_update,
-    sendFBMessage: sendFBMessage
 }
