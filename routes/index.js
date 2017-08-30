@@ -10,6 +10,7 @@ const   express = require('express'),
         fb = require('../lib/facebook')
 
 /*  GET HOME PAGE */
+
 router.get('/', function(req, res, next) {
         // redirect to https if the user is using http
         if (req.get('X-Forwarded-Proto') && req.get('X-Forwarded-Proto') == 'http') {
@@ -53,7 +54,8 @@ router.post('/ajax',
     mw.askWatson
 );
 
-/*  DIRECT URL ACCESS
+/*
+    DIRECT URL ACCESS
     Routes to allow deep linking and bookmarks via url with
     either address, stop number, or about.
  */
@@ -83,7 +85,8 @@ router.get('/find/:query', function(req, res, next) {
     mw.askWatson
 );
 
-/*  BROWSER FIND BY CURRENT LOCATION
+/*
+    BROWSER FIND BY CURRENT LOCATION
     A browser with location service enabled can hit this
     It requires https on most browsers
 */
@@ -93,7 +96,8 @@ router.get('/byLatLon',
     mw.findbyLatLon
 );
 
-/*  FACEBOOK HOOKS
+/*
+    FACEBOOK HOOKS
     GET is to do the initial app validation in the Facebook Page setup.
     POST is the actual Facebook message handling
 */
@@ -108,7 +112,8 @@ router.post('/feedback',
     feedback.feedbackResponder_web
 );
 
-/*  RESPONSE TO FEEDBACK FROM SMS
+/*
+    RESPONSE TO FEEDBACK FROM SMS
     GET is to make the response form
     POST handles the reponse from that form
 */
@@ -117,7 +122,8 @@ router.get('/respond', feedback.feedback_get_form);
 router.post('/respond', feedback.send_feedback_response);
 
 
-/*  LOG DATA
+/*
+    LOG DATA
     Provides ajax data for the log plot
 */
 
@@ -126,7 +132,8 @@ router.get('/logData', function(req, res, next) {
     res.send(data)
 });
 
-/*  LOG PLOT
+/*
+    LOG PLOT
     Draws plot from data provided by /logData
 */
 

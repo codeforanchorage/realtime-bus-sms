@@ -7,7 +7,7 @@
     "integration": "mocha test/*integration_test.js  || true",
     "unit": "mocha test/*unit_test.js  || true",
     "test": "npm run unit && npm run integration",
-    "test_old": "nodeunit test/test.js",
+    "test_original": "nodeunit test/test.js",
     "start": "node ./bin/www"
   },
   "repository": {

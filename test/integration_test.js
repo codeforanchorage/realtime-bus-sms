@@ -27,13 +27,14 @@ const supertest        = require('supertest')
 let request = supertest(app)
 app.enable('view cache')
 
-logger.transports['console.info'].silent = true // prevents noisy output
 
 describe("Routes", function(){
     before(() => {
+        logger.transports['Google-Analytics'].silent = true // Don't send tests to GA
         logger.transports['console.info'].silent = true
     })
     after(() => {
+        logger.transports['Google-Analytics'].silent = false
         logger.transports['console.info'].silent = false
     })
     describe("GET '/'", function(){
@@ -49,6 +50,13 @@ describe("Routes", function(){
             .set('X-Forwarded-Proto', 'http')
             .expect(302)
             .expect('location', /https:/)
+            .end((err, res) => done(err))
+        })
+        it('Should return 404 page when route is not found', function(done){
+            request.get('/no_routes_here')
+            .expect(404)
+            .expect(/<!DOCTYPE/)
+            .expect(/Not Found/)
             .end((err, res) => done(err))
         })
     })
@@ -500,30 +508,23 @@ describe("Logging hits", function(){
     it('Should log SMS requests to private db', function(done){
         const from = "testPhone: " + Date.now().toString(8).slice(3)
         const stop = "1066"
-       nock(muniURL.origin).get(muniURL.pathname).query({stopid: "2124"}).reply(200, muniResponses.goodResponse )
+        nock(muniURL.origin).get(muniURL.pathname).query({stopid: "2124"}).reply(200, muniResponses.goodResponse )
 
         request.post('/')
         .send({Body: stop, From: from})
         .end((err, res) => {
             if (err) done(err)
-            try{
-                let watcher
-                const timer = setTimeout(() => (watcher.close(), done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
-
-                watcher = fs.watch(privateDB, (eventType, filename) => {
-                    const private_log = JSON.parse(fs.readFileSync(privateDB)).requests
-                    const last_entry = private_log[private_log.length-1]
-
-                    assert.equal(last_entry.phone, from)
-
-                    clearTimeout(timer)
-                    watcher.close()
-                    done()
-                })
-            } catch(e) {
-                assert.fail("couldn't find private db")
-                done(e)
-            }
+            logger.once('logging', (res) => {
+                if (res.name == 'File-Logs') {
+                    try {
+                        const private_log = JSON.parse(fs.readFileSync(privateDB)).requests
+                        const last_entry = private_log[private_log.length-1]
+                        assert.equal(last_entry.phone, from)
+                        done()
+                    } catch(e){ done(e) }
+                }
+            })
+            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
         })
     })
 
@@ -537,23 +538,19 @@ describe("Logging hits", function(){
         .send({Body: stop, From: from})
         .end((err, res) => {
             if (err) done(err)
-            try{
-                let watcher
-                const timer = setTimeout(() => (watcher.close(), done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
+            logger.once('logging', (res) => {
+                if (res.name == 'File-Logs') {
+                    try{
+                        const private_log = JSON.parse(fs.readFileSync(publicDB)).requests
+                        const last_entry = private_log[private_log.length-1]
 
-                watcher = fs.watch(publicDB, (eventType, filename) => {
-                    const private_log = JSON.parse(fs.readFileSync(publicDB)).requests
-                    const last_entry = private_log[private_log.length-1]
+                        assert.equal(last_entry.phone, hashwords.hashStr(from))
+                        done()
+                    } catch(e){ done(e) }
+                }
+            })
 
-                    assert.equal(last_entry.phone, hashwords.hashStr(from))
-                    clearTimeout(timer)
-                    watcher.close()
-                    done()
-                })
-            } catch(e) {
-                assert.fail("couldn't find private db")
-                done(e)
-            }
+            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
         })
     })
 
@@ -570,23 +567,19 @@ describe("Logging hits", function(){
         .send({Body: input})
         .end((err, res) => {
             if (err) done(err)
-            try{
-                let watcher
-                const timer = setTimeout(() => (watcher.close(), done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
-                watcher = fs.watch(privateDB, (eventType, filename) => {
-                    const private_log = JSON.parse(fs.readFileSync(privateDB)).requests
-                    const last_entry = private_log[private_log.length-1]
+            logger.once('logging', (res) => {
+                if (res.name == 'File-Logs') {
+                    try{
+                        const private_log = JSON.parse(fs.readFileSync(privateDB)).requests
+                        const last_entry = private_log[private_log.length-1]
 
-                    assert.equal(last_entry.input,input)
-                    assert.equal(last_entry.ip,ip)
-                    clearTimeout(timer)
-                    watcher.close()
-                    done()
-                })
-            } catch(e) {
-                assert.fail("couldn not find private db", privateDB)
-                done(e)
-            }
+                        assert.equal(last_entry.input,input)
+                        assert.equal(last_entry.ip,ip)
+                        done()
+                    } catch(e){ done(e) }
+                }
+            })
+            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
         })
     })
 
@@ -602,24 +595,19 @@ describe("Logging hits", function(){
         .send({Body: input})
         .end((err, res) => {
             if (err) done(err)
-            try{
-                let watcher
-                const timer = setTimeout(() => (watcher.close(), done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
-                watcher = fs.watch(publicDB, (eventType, filename) => {
-                    const public_log = JSON.parse(fs.readFileSync(publicDB)).requests
-                    const last_entry = public_log[public_log.length-1]
+            logger.once('logging', (res) => {
+                if (res.name == 'File-Logs') {
+                    try{
+                        const public_log = JSON.parse(fs.readFileSync(publicDB)).requests
+                        const last_entry = public_log[public_log.length-1]
 
-                    assert.equal(last_entry.input,input)
-                    assert.strictEqual(last_entry.ip,undefined)
-
-                    clearTimeout(timer)
-                    watcher.close()
-                    done()
-                })
-            } catch(e) {
-                assert.fail("couldn't find private db")
-                done(e)
-            }
+                        assert.equal(last_entry.input,input)
+                        assert.strictEqual(last_entry.ip,undefined)
+                        done()
+                    } catch(e){ done(e) }
+                }
+            })
+            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
         })
     })
 
@@ -642,25 +630,20 @@ describe("Logging hits", function(){
         .set('x-hub-signature', 'sha1='+verifyHash )
         .send(fbRequest)
         .end((err, res) => {
-           if (err) done("error here", err)
-            try{
-                let watcher
-                const timer = setTimeout(() => (watcher.close(), done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
-                watcher = fs.watch(publicDB, (eventType, filename) => {
-                    const public_log = JSON.parse(fs.readFileSync(publicDB)).requests
-                    const last_entry = public_log[public_log.length-1]
+            if (err) done("error here", err)
+            logger.once('logging', (res) => {
+                if (res.name == 'File-Logs') {
+                    try{
+                        const public_log = JSON.parse(fs.readFileSync(publicDB)).requests
+                        const last_entry = public_log[public_log.length-1]
 
-                    assert.equal(last_entry.input, input)
-                    assert.equal(hashwords.hashStr(fbuser), last_entry.fbUser)
-
-                    watcher.close()
-                    clearTimeout(timer)
-                    done()
-                })
-            } catch(e) {
-                assert.fail("couldn't find public db")
-                done(e)
-            }
+                        assert.equal(last_entry.input, input)
+                        assert.equal(hashwords.hashStr(fbuser), last_entry.fbUser)
+                        done()
+                    } catch(e){ done(e) }
+                }
+            })
+            const timer = setTimeout(() => (done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
         })
     })
 
@@ -684,26 +667,30 @@ describe("Logging hits", function(){
         .send(fbRequest)
         .end((err, res) => {
             if (err) done(err)
-            try{
-                let watcher
-                const timer = setTimeout(() => (watcher.close(), done(new Error("Log file was not written soon enough, waited 1 second"))), 1000)
-                watcher = fs.watch(privateDB, (eventType, filename) => {
-                    const private_log = JSON.parse(fs.readFileSync(privateDB)).requests
-                    const last_entry = private_log[private_log.length-1]
+            logger.once('logging', (res) => {
+                if (res.name == 'File-Logs') {
+                    try{
+                        const private_log = JSON.parse(fs.readFileSync(privateDB)).requests
+                        const last_entry = private_log[private_log.length-1]
 
-                    assert.equal(last_entry.input,input)
-                    assert.equal(fbuser, last_entry.fbUser)
+                        assert.equal(last_entry.input,input)
+                        assert.equal(fbuser, last_entry.fbUser)
+                        done()
+                    } catch(e){ done(e) }
+                }
+            })
 
-                    watcher.close()
-                    clearTimeout(timer)
-                    done()
-                })
-            } catch(e) {
-                assert.fail("couldn't find private db")
-                done(e)
-            }
         })
     })
-
+    it("Should call Google Analytics when requests are made", function(done){
+        const ns = nock("http://www.google-analytics.com").post('/collect', /ea=About/).query(true).reply(200)
+        request.post('/')
+        .send({Body: "about"})
+        .end((err, res) => {
+            if (err) done(err)
+                ns.done()
+                done()
+        })
+    })
 })
 
