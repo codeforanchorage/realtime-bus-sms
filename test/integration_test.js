@@ -508,7 +508,7 @@ describe("Logging hits", function(){
     it('Should log SMS requests to private db', function(done){
         const from = "testPhone: " + Date.now().toString(8).slice(3)
         const stop = "1066"
-        nock(muniURL.origin).get(muniURL.pathname).query({stopid: "2124"}).reply(200, muniResponses.goodResponse )
+        const nockscope = nock(muniURL.origin).get(muniURL.pathname).query({stopid: "2124"}).reply(200, muniResponses.goodResponse )
 
         request.post('/')
         .send({Body: stop, From: from})
@@ -520,6 +520,7 @@ describe("Logging hits", function(){
                         const private_log = JSON.parse(fs.readFileSync(privateDB)).requests
                         const last_entry = private_log[private_log.length-1]
                         assert.equal(last_entry.phone, from)
+                        nockscope.done()
                         done()
                     } catch(e){ done(e) }
                 }
@@ -531,7 +532,7 @@ describe("Logging hits", function(){
         const from = "testPhone: " + Date.now().toString(8).slice(3)
         const stop = "2051"
 
-        nock(muniURL.origin).get(muniURL.pathname).query({stopid: "1477"}).reply(200, muniResponses.goodResponse )
+        const nockscope = nock(muniURL.origin).get(muniURL.pathname).query({stopid: "1477"}).reply(200, muniResponses.goodResponse )
 
         request.post('/')
         .send({Body: stop, From: from})
@@ -544,6 +545,7 @@ describe("Logging hits", function(){
                         const last_entry = private_log[private_log.length-1]
 
                         assert.equal(last_entry.phone, hashwords.hashStr(from))
+                        nockscope.done()
                         done()
                     } catch(e){ done(e) }
                 }
@@ -556,9 +558,7 @@ describe("Logging hits", function(){
         const input = "Test query" + Date.now().toString(36)
         const ip = [0,0,0].reduce((acc, cur) => acc + "." + Math.floor(Math.random() * (256)), "10")
 
-        nock('http://bustracker.muni.org').get(muniURL.pathname).query(true).reply(200, muniResponses.goodResponse )
-        nock('https://maps.googleapis.com').get(/./).query(true).reply(200, geocodeResponses.nonspecificResponse)
-        nock('https://gateway.watsonplatform.net').post(/./).query(true).reply(200, watsonResponses.greeting)
+        const nockscope = nock('https://maps.googleapis.com').get(/./).query(true).reply(200, geocodeResponses.goodResponse)
 
         request.post('/')
         .set('X-Forwarded-For', ip)
@@ -573,6 +573,7 @@ describe("Logging hits", function(){
 
                         assert.equal(last_entry.input,input)
                         assert.equal(last_entry.ip,ip)
+                        nockscope.done()
                         done()
                     } catch(e){ done(e) }
                 }
@@ -584,8 +585,7 @@ describe("Logging hits", function(){
         const from = "testPhone: " + Date.now().toString(8).slice(3)
             , input = "Test query" + Date.now().toString(36)
 
-        nock('https://maps.googleapis.com').get(/./).query(true).reply(200, geocodeResponses.nonspecificResponse)
-        nock('https://gateway.watsonplatform.net').post(/./).query(true).reply(200, watsonResponses.greeting)
+        const nockscope = nock('https://maps.googleapis.com').get(/./).query(true).reply(200, geocodeResponses.goodResponse)
 
         request.post('/ajax')
         .set('X-Forwarded-For', '10.0.0.1')
@@ -600,6 +600,7 @@ describe("Logging hits", function(){
 
                         assert.equal(last_entry.input,input)
                         assert.strictEqual(last_entry.ip,undefined)
+                        nockscope.done()
                         done()
                     } catch(e){ done(e) }
                 }
