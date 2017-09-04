@@ -509,20 +509,24 @@ describe("Logging hits", function(){
         const from = "testPhone: " + Date.now().toString(8).slice(3)
         const stop = "1066"
         const nockscope = nock(muniURL.origin).get(muniURL.pathname).query({stopid: "2124"}).reply(200, muniResponses.goodResponse )
-
+        nock("http://www.google-analytics.com")
         request.post('/')
         .send({Body: stop, From: from})
         .end((err, res) => {
             if (err) done(err)
-            logger.once('logging', (res) => {
+            logger.on('logging', (res) => {
                 if (res.name == 'File-Logs') {
+                    logger.removeAllListeners('logging')
                     try {
                         const private_log = JSON.parse(fs.readFileSync(privateDB)).requests
                         const last_entry = private_log[private_log.length-1]
-                        assert.equal(last_entry.phone, from)
+                        assert.equal(from, last_entry.phone)
                         nockscope.done()
                         done()
-                    } catch(e){ done(e) }
+                    } catch(e){
+                        done(e)
+                        logger.removeAllListeners('logging')
+                    }
                 }
             })
         })
@@ -531,23 +535,27 @@ describe("Logging hits", function(){
     it('Should log SMS requests to public db', function(done){
         const from = "testPhone: " + Date.now().toString(8).slice(3)
         const stop = "2051"
-
+        nock("http://www.google-analytics.com")
         const nockscope = nock(muniURL.origin).get(muniURL.pathname).query({stopid: "1477"}).reply(200, muniResponses.goodResponse )
 
         request.post('/')
         .send({Body: stop, From: from})
         .end((err, res) => {
             if (err) done(err)
-            logger.once('logging', (res) => {
+            logger.on('logging', (res) => {
                 if (res.name == 'File-Logs') {
+                    logger.removeAllListeners('logging')
                     try{
                         const private_log = JSON.parse(fs.readFileSync(publicDB)).requests
                         const last_entry = private_log[private_log.length-1]
 
-                        assert.equal(last_entry.phone, hashwords.hashStr(from))
+                        assert.equal(hashwords.hashStr(from), last_entry.phone)
                         nockscope.done()
                         done()
-                    } catch(e){ done(e) }
+                    } catch(e){
+                        done(e)
+                        logger.removeAllListeners('logging')
+                    }
                 }
             })
 
@@ -557,7 +565,7 @@ describe("Logging hits", function(){
     it('Should log web requests to private db', function(done){
         const input = "Test query" + Date.now().toString(36)
         const ip = [0,0,0].reduce((acc, cur) => acc + "." + Math.floor(Math.random() * (256)), "10")
-
+        nock("http://www.google-analytics.com")
         const nockscope = nock('https://maps.googleapis.com').get(/./).query(true).reply(200, geocodeResponses.goodResponse)
 
         request.post('/')
@@ -565,17 +573,22 @@ describe("Logging hits", function(){
         .send({Body: input})
         .end((err, res) => {
             if (err) done(err)
-            logger.once('logging', (res) => {
+            logger.on('logging', (res) => {
                 if (res.name == 'File-Logs') {
+                    logger.removeAllListeners('logging')
                     try{
                         const private_log = JSON.parse(fs.readFileSync(privateDB)).requests
                         const last_entry = private_log[private_log.length-1]
 
-                        assert.equal(last_entry.input,input)
-                        assert.equal(last_entry.ip,ip)
+                        assert.equal(input, last_entry.input)
+                        assert.equal(ip, last_entry.ip)
                         nockscope.done()
                         done()
-                    } catch(e){ done(e) }
+
+                    } catch(e){
+                        done(e)
+                        logger.removeAllListeners('logging')
+                    }
                 }
             })
         })
@@ -584,7 +597,7 @@ describe("Logging hits", function(){
     it('Should log web requests to public db (without ip)', function(done){
         const from = "testPhone: " + Date.now().toString(8).slice(3)
             , input = "Test query" + Date.now().toString(36)
-
+        nock("http://www.google-analytics.com")
         const nockscope = nock('https://maps.googleapis.com').get(/./).query(true).reply(200, geocodeResponses.goodResponse)
 
         request.post('/ajax')
@@ -592,23 +605,28 @@ describe("Logging hits", function(){
         .send({Body: input})
         .end((err, res) => {
             if (err) done(err)
-            logger.once('logging', (res) => {
+            logger.on('logging', (res) => {
                 if (res.name == 'File-Logs') {
+                    logger.removeAllListeners('logging')
                     try{
                         const public_log = JSON.parse(fs.readFileSync(publicDB)).requests
                         const last_entry = public_log[public_log.length-1]
 
-                        assert.equal(last_entry.input,input)
+                        assert.equal(input, last_entry.input)
                         assert.strictEqual(last_entry.ip,undefined)
                         nockscope.done()
                         done()
-                    } catch(e){ done(e) }
+                    } catch(e){
+                        done(e)
+                        logger.removeAllListeners('logging')
+                    }
                 }
             })
         })
     })
 
     it('Should log facebook requests to public db (with hashed user)', function(done){
+        nock("http://www.google-analytics.com")
         nock('https://graph.facebook.com').post('/v2.6/me/messages', /./).query(true).reply(200)
 
         let fbRequest = facebookMessage.single_about()
@@ -617,7 +635,6 @@ describe("Logging hits", function(){
 
         fbRequest.entry[0].messaging[0].sender.id = fbuser
         fbRequest.entry[0].messaging[0].message.text = input
-
         const verifyBuf = new Buffer(JSON.stringify(fbRequest), "utf-8");
         const verifyHash = crypto.createHmac('sha1', config.FB_APP_SECRET)
             .update(verifyBuf)
@@ -628,22 +645,27 @@ describe("Logging hits", function(){
         .send(fbRequest)
         .end((err, res) => {
             if (err) done("error here", err)
-            logger.once('logging', (res) => {
+            logger.on('logging', (res) => {
                 if (res.name == 'File-Logs') {
+                    logger.removeAllListeners('logging')
                     try{
                         const public_log = JSON.parse(fs.readFileSync(publicDB)).requests
                         const last_entry = public_log[public_log.length-1]
 
-                        assert.equal(last_entry.input, input)
+                        assert.equal(input, last_entry.input)
                         assert.equal(hashwords.hashStr(fbuser), last_entry.fbUser)
                         done()
-                    } catch(e){ done(e) }
+                    } catch(e){
+                        done(e)
+                        logger.removeAllListeners('logging')
+                    }
                 }
             })
         })
     })
 
     it('Should log facebook requests to private db', function(done){
+        nock("http://www.google-analytics.com")
         nock('https://graph.facebook.com').post('/v2.6/me/messages', /./).query(true).reply(200)
 
         let fbRequest = facebookMessage.single_about()
@@ -663,16 +685,20 @@ describe("Logging hits", function(){
         .send(fbRequest)
         .end((err, res) => {
             if (err) done(err)
-            logger.once('logging', (res) => {
+            logger.on('logging', (res) => {
                 if (res.name == 'File-Logs') {
+                    logger.removeAllListeners('logging')
                     try{
                         const private_log = JSON.parse(fs.readFileSync(privateDB)).requests
                         const last_entry = private_log[private_log.length-1]
 
-                        assert.equal(last_entry.input,input)
+                        assert.equal(input, last_entry.input,input)
                         assert.equal(fbuser, last_entry.fbUser)
                         done()
-                    } catch(e){ done(e) }
+                    } catch(e){
+                        done(e)
+                        logger.removeAllListeners('logging')
+                    }
                 }
             })
 
