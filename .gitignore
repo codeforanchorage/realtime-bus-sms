@@ -4,8 +4,10 @@ config.js
 *.DS_Store
 *.vscode
 .idea
+lib/.vscode
 public/db.json
-
+npm-debug.log
 comments.json
 
 db_private.json
+.nyc_output
