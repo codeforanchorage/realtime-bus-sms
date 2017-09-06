@@ -254,13 +254,17 @@ function addLinkToRequest(req,res, next){
     res.render = function(view, options, callback) {
         _render.call(this, view, options, (err, text) => {
             if (err) return next(err)
-
-            if ( text.length + message.length <= single_message_limit ) {
+            
+            res.send(text + message)
+            
+            // uncomment below when we want to go back to previous behavior
+           /* if ( text.length + message.length <= single_message_limit ) {
                 res.send(text + message)
             } else if ( text.length > single_message_limit
                         && text.length % segment_length + message.length <= segment_length ) {
                 res.send(text + message)
             } else res.send(text)
+            */
         })
     }
     next()
