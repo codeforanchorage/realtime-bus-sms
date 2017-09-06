@@ -514,7 +514,7 @@ router.post('/respond', function(req, res, next) {
 
 // Log data used by /logplot called from client script.
 router.get('/logData', function(req, res, next) {
-    data = lowdb_log.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
+    var data = lowdb_log.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
     res.send(data)
 });
 
