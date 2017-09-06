@@ -235,7 +235,7 @@ exports.group = {
             test.ok(spy.called && spy.args[0][0] == 1066, "Test Browser Emoji Removal From Stop Number");
             lib.getStopFromStopNumber.restore();
             test.done();
-        }); 
+        });
     },
     test_emojiRemovalSMSStopNumber: function(test) {
         var input = "1066👌"
@@ -274,7 +274,7 @@ exports.group = {
             test.ok(spy.called && spy.args[0][0] == "5th and G Street", "Test Browser Removal of multi-line input");
             lib.getStopsFromAddress.restore();
             test.done();
-        }); 
+        });
     },
     test_SMSWhiteSpaceRemoval: function(test) {
         var input = "5th\tand G Street\nSome Other\n Text";
@@ -285,7 +285,7 @@ exports.group = {
             test.ok(spy.called && spy.args[0][0] == "5th and G Street", "Test SMS Removal of multi-line input");
             lib.getStopsFromAddress.restore();
             test.done();
-        }); 
+        });
     },
 //Test the home page
     test_browserHome: function (test) {
