@@ -15,7 +15,7 @@ var api;
 
 var config = require('../lib/config');
 var lib = require('../lib/index')
-var stop_number_lookup = require('../lib/stop_number_lookup');
+var gtfs = require('../lib/gtfs');
 var hashwords = require('hashwords')();
 var fs = require('fs');
 var crypto = require('crypto');
@@ -327,7 +327,7 @@ exports.group = {
 
 // Test Stop ID (Hard-coded stopIds should probably be read from list)
     test_browserStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         api.post(test, '/ajax', {
             data: {Body: stopId}
         }, function (res) {
@@ -335,7 +335,7 @@ exports.group = {
         });
     },
     test_smsStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         api.post(test, '/', {
             data: {Body: stopId}
         }, function (res) {
@@ -343,13 +343,13 @@ exports.group = {
         });
     },
     test_fbStopId: function(test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         testFBMsgResponse(test, stopId, new RegExp("Stop " + stopId))
     },
 
 // Alternate stopId combos (Assume browser and FB same as SMS)
     test_smsHashStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         var altStopId = "#" + stopId;
         api.post(test, '/', {
             data: {Body: altStopId}
@@ -358,7 +358,7 @@ exports.group = {
         });
     },
     test_smsHashSpaceStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         var altStopId = "# " + stopId;
         api.post(test, '/', {
             data: {Body: altStopId}
@@ -367,7 +367,7 @@ exports.group = {
         });
     },
     test_smsHashZeroStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         var altStopId = "#00" + stopId;
         api.post(test, '/', {
             data: {Body: altStopId}
@@ -376,7 +376,7 @@ exports.group = {
         });
     },
     test_smsStopHashStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         var altStopId = "Stop # " + stopId;
         api.post(test, '/', {
             data: {Body: altStopId}
@@ -385,7 +385,7 @@ exports.group = {
         });
     },
     test_smsStopStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         var altStopId = "Stop" + stopId;
         api.post(test, '/', {
             data: {Body: altStopId}
@@ -642,7 +642,7 @@ exports.group = {
 // Bustracker failure
     test_browserNetworkFailure: function(test) {
         config.MUNI_URL = '';
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         api.post(test, '/ajax', {
             data: {Body: stopId}
         }, function (res) {
@@ -651,7 +651,7 @@ exports.group = {
     },
     test_smsNetworkFailure: function(test) {
         config.MUNI_URL = '';
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         api.post(test, '/', {
             data: {Body: stopId}
         }, function (res) {
@@ -660,12 +660,12 @@ exports.group = {
     },
     test_fbNetworkFailure: function(test) {
         config.MUNI_URL = '';
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         testFBMsgResponse(test, stopId, /Bustracker is down/);
     },
     test_browserOutage: function(test) {
         config.MUNI_URL = "http://bustracker.muni.org/InfoPoint/departure.aspx?stopid=";  //"departures.aspx" spelled wrong
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         api.post(test, '/ajax', {
             data: {Body: stopId}
         }, function (res) {
@@ -674,7 +674,7 @@ exports.group = {
     },
     test_smsOutage: function(test) {
         config.MUNI_URL = "http://bustracker.muni.org/InfoPoint/departure.aspx?stopid=";  //"departures.aspx" spelled wrong
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         api.post(test, '/', {
             data: {Body: stopId}
         }, function (res) {
@@ -683,7 +683,7 @@ exports.group = {
     },
     test_fbOutage: function(test) {
         config.MUNI_URL = "http://bustracker.muni.org/InfoPoint/departure.aspx?stopid=";  //"departures.aspx" spelled wrong
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         testFBMsgResponse(test, stopId, /Bustracker is down/);
     }
 

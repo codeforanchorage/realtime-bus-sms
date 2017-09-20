@@ -240,7 +240,7 @@ function addLinkToRequest(req,res, next){
     // (and charged as) smaller messages of 153 characters each.
     // So we include the text + message if it won't push over 160 characters
     // or if greater  it won't push over a multiple of 153
- 
+
     var single_message_limit = 160
     var segment_length = 153
 
@@ -254,13 +254,17 @@ function addLinkToRequest(req,res, next){
     res.render = function(view, options, callback) {
         _render.call(this, view, options, (err, text) => {
             if (err) return next(err)
-
-            if ( text.length + message.length <= single_message_limit ) {
+            
+            res.send(text + message)
+            
+            // uncomment below when we want to go back to previous behavior
+           /* if ( text.length + message.length <= single_message_limit ) {
                 res.send(text + message)
-            } else if ( text.length > single_message_limit 
+            } else if ( text.length > single_message_limit
                         && text.length % segment_length + message.length <= segment_length ) {
                 res.send(text + message)
-            } else res.send(text)        
+            } else res.send(text)
+            */
         })
     }
     next()
@@ -483,7 +487,7 @@ router.get('/respond', function(req, res, next) {
 router.post('/respond', function(req, res, next) {
     var comments = JSON.parse(fs.readFileSync('./comments.json'));
     var foundIt = false;
-    for(var i=comments.comments.length-1; i >= 0 && !foundIt; i--) {
+    for(let i=comments.comments.length-1; i >= 0 && !foundIt; i--) {
         if (comments.comments[i].response_hash && (comments.comments[i].response_hash == req.body.hash)) {
             if (comments.comments[i].phone) {
                 foundIt = true;
@@ -514,7 +518,7 @@ router.post('/respond', function(req, res, next) {
 
 // Log data used by /logplot called from client script.
 router.get('/logData', function(req, res, next) {
-    data = lowdb_log.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
+    var data = lowdb_log.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
     res.send(data)
 });
 
