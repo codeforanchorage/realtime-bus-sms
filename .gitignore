@@ -5,7 +5,7 @@ config.js
 *.vscode
 .idea
 public/db.json
-
+.nyc_output/
 comments.json
 
 db_private.json
