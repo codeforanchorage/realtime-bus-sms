@@ -283,7 +283,6 @@ router.get('/', function(req, res, next) {
         if (req.get('X-Forwarded-Proto') && req.get('X-Forwarded-Proto') == 'http') {
             return res.redirect('https://' + req.get('host') + req.originalUrl)
         }
-
         config.BUSTRACKER_DOWN ? res.render('down') : res.render('index');
     }
 );
