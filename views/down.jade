@@ -1,0 +1,38 @@
+doctype html
+html
+    head
+        title= title
+        meta(name='MobileOptimized', content='320')
+        meta(name='viewport', content='width=device-width, minimum-scale=1, maximum-scale=1')
+        meta(name='apple-mobile-web-app-capable' content='yes')
+        meta(charset="utf-8")
+        link(href="https://fonts.googleapis.com/css?family=PT+Sans:400,700", rel="stylesheet")
+        link(href='/css/busStyles.css', rel='stylesheet')
+        script(src='/javascripts/fittext.js')
+
+    body
+        div
+            h1(id="headline") When’s the<br />next bus?
+
+
+                block info
+
+                    h3 Down for maintenance
+                    p The bus tracker is currently down for routine maintenance. It will return shortly.
+
+            div(id="footer")
+                div
+                    a(href="http://codeforanchorage.org")
+                        img.logo(src="/img/cfa.png", width"40px", height="40px")
+
+                div Code For Anchorage
+
+
+    script.
+        fitText(document.getElementById('headline'), .5);
+        var interval = null;
+        var outputDiv = document.getElementById('output');
+
+
+
+
