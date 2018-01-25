@@ -52,7 +52,7 @@ describe('Bustracker Module', function() {
             return get.then(r => assert((Array.isArray(r.data.stops))))
         })
         it('Should return an array of stop objects each with a stop number', function(){
-            return get.then(r => assert(r.data.stops.every(stop => Number.isInteger(stop.number))))
+            return get.then(r => assert(r.data.stops.every(stop => /^\d+$/.test(stop.number))))
         })
         it('Should return array of stops with stop name', function(){
             const dir_rx = /^(.*) - (?:Inbound|Outbound|Loop)$/

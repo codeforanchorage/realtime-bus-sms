@@ -133,7 +133,8 @@ describe("Routes", function(){
             .expect((res) =>{
                 var lines = res.text.split('\n')
                 assert(lines[0].includes(stop_number), "Results didn't include the stop number")
-                assert.equal(lines[1],  '  2 LAKE OTIS - Outbound - 12:49 PM')
+                assert.equal(lines[2],  '10 Northern Lights - Outbound - ')
+                assert.equal(lines[3],  '4:52 PM')
             })
             .end((err, res) => done(err))
         })
@@ -224,7 +225,7 @@ describe("Routes", function(){
             .send({Body: stop_number})
             .expect(/<div .* 2051/)
             .expect(/DOWNTOWN TRANSIT CENTER/)
-            .expect(/LAKE OTIS/)
+            .expect(/Mountain View/)
             .end((err, res) => done(err))
         })
 
@@ -308,7 +309,7 @@ describe("Routes", function(){
             request.get('/find/2051')
             .expect(/^<!DOCTYPE/)
             .expect(/DOWNTOWN TRANSIT CENTER/)
-            .expect(/LAKE OTIS/)
+            .expect(/Northern Lights/)
             .end((err, res) =>  done(err))
         })
 
