@@ -23,6 +23,10 @@ const supertest        = require('supertest')
     , gtfs             = require('../lib/gtfs');
 
 let request = supertest(app)
+
+// wait until GTFS has loaded and parsed
+gtfs.GTFS_Check.on("ready", run)
+
 app.enable('view cache')
 
 describe("Routes", function(){
@@ -401,6 +405,10 @@ describe("Routes", function(){
             .update(verifyBuf)
             .digest('hex');
 
+        afterEach(function(){
+            nock.cleanAll()
+        })
+
         it("Should accept multiple requests and respond to each individually", function(done){
             nock('http://bustracker.muni.org').get(muniURL.pathname).query(true).times(4).reply(200, muniResponses.goodResponse )
 
@@ -505,8 +513,8 @@ describe("Logging hits", function(){
 
     it('Should log SMS requests to private db', function(done){
         const from = "testPhone: " + Date.now().toString(8).slice(3)
-        const stop = "1066"
-        const nockscope = nock(muniURL.origin).get(muniURL.pathname).query({stopid: "2124"}).reply(200, muniResponses.goodResponse )
+        const stop = "2051"
+        const nockscope = nock(muniURL.origin).get(muniURL.pathname).query({stopid: "1477"}).reply(200, muniResponses.goodResponse )
         nock("http://www.google-analytics.com")
         request.post('/')
         .send({Body: stop, From: from})

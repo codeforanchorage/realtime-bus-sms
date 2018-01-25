@@ -8,7 +8,7 @@ module.exports = {
             sender: {id: 'user1'},
             recipient: {id: "123"},
             timestamp: Date.now(),
-            message: { text: "1067" }
+            message: { text: "3024" }
         },
         {
             sender: {id: 'user2'},

@@ -9,6 +9,8 @@ const assert = require('assert')
 const geocode  = require('../lib/geocode')
     , gtfs     = require('../lib/gtfs')
 
+gtfs.GTFS_Check.on("ready", run)
+
 describe('Geocode Module', function() {
     before(function(){ nock.disableNetConnect()})
     after(function(){ nock.enableNetConnect()})

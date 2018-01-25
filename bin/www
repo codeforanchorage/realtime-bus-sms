@@ -117,3 +117,4 @@ function onListening() {
 var getGTFSFile = require("../lib/gtfs").getGTFSFile
 var CronJob = require('cron').CronJob;
 var cron_job = new CronJob('0 01 02 * * *', getGTFSFile, null, true, 'America/Anchorage'); // check for new GTFS file every day at 2:01 am Alaska Time
+
