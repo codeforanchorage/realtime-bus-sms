@@ -5,18 +5,15 @@ const assert    = require('assert')
     , config    = require('../lib/config')
     , logger    = require('../lib/logger')
     , sinon     = require('sinon')
-    ,  moment    = require('moment-timezone')
+    , moment    = require('moment-timezone')
 
 
 const bustracker            = require('../lib/bustracker')
     , { URL }               = require('url')
     , muniURL               = new URL(config.MUNI_URL)
     , responses             = require('./fixtures/muniResponse')
-    , stop_number_lookup    = require('../lib/stop_number_lookup')
-    , stop                  = require('../gtfs/geojson/stops.json')['features'][0]
-    , stopNumber            = parseInt(stop.properties.stop_id)
-    , exceptions            = require('../gtfs/geojson/exceptions.json')
-
+    , gtfs                  = require('../lib/gtfs')
+    , stopNumber            = 3
 
 describe('Bustracker Module', function() {
     before(function(){ nock.disableNetConnect()})
@@ -27,7 +24,7 @@ describe('Bustracker Module', function() {
         const startTime = 100
         beforeEach(function() {
             nockscope = nock(muniURL.origin).get(muniURL.pathname)
-            .query({stopid: stop_number_lookup[stopNumber]})
+            .query({stopid: gtfs.stop_number_lookup[stopNumber]})
             .reply(200, responses.goodResponse )
             clock = sinon.useFakeTimers({now: startTime})
             get = bustracker.getStopFromStopNumber(stopNumber)
@@ -75,7 +72,7 @@ describe('Bustracker Module', function() {
         beforeEach(function() {
             logstub = sinon.stub(logger, 'error')
             nockscope = nock(muniURL.origin).get(muniURL.pathname)
-                        .query({stopid: stop_number_lookup[stopNumber]})
+                        .query({stopid: gtfs.stop_number_lookup[stopNumber]})
         })
         afterEach(function(){
             logstub.restore()
@@ -143,7 +140,7 @@ describe('Bustracker Module', function() {
             clock.restore();
         })
         it('Should respond true when today is in service exceptions', function(){
-            const anException = exceptions.exceptions.find(ex => ex.exception_type == 2)
+            const anException = gtfs.exceptions.find(ex => ex.exception_type == 2)
             clock = sinon.useFakeTimers(moment.tz(anException.date, 'YYYYMMDD', config.TIMEZONE).valueOf())
             assert(bustracker.serviceExceptions())
         })

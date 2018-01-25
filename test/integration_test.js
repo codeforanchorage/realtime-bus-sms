@@ -12,7 +12,6 @@ const supertest        = require('supertest')
     , muniURL          = new URL(config.MUNI_URL)
     , http             = require('http')
     , logger           = require('../lib/logger')
-    , exceptions       = require('../gtfs/geojson/exceptions.json')
     , moment           = require('moment-timezone')
     , muniResponses    = require('./fixtures/muniResponse')
     , geocodeResponses = require('./fixtures/googleMapsResponses')
@@ -20,13 +19,11 @@ const supertest        = require('supertest')
     , facebookMessage  = require('./fixtures/facebook_message')
     , onFinished       = require('on-finished')
     , hashwords        = require('hashwords')()
-    , crypto           = require('crypto');
-
-
+    , crypto           = require('crypto')
+    , gtfs             = require('../lib/gtfs');
 
 let request = supertest(app)
 app.enable('view cache')
-
 
 describe("Routes", function(){
     before(() => {
@@ -86,7 +83,7 @@ describe("Routes", function(){
         })
 
         it('Should check service exceptions', function(done){
-            const anException = exceptions.exceptions.find(ex => ex.exception_type == 2)
+            const anException = gtfs.exceptions.find(ex => ex.exception_type == 2)
                 , clock = sinon.useFakeTimers(moment.tz(anException.date, 'YYYYMMDD', config.TIMEZONE).valueOf())
 
             request.post('/')
@@ -194,7 +191,7 @@ describe("Routes", function(){
         })
 
         it('Should check service exceptions', function(done){
-            const anException = exceptions.exceptions.find(ex => ex.exception_type == 2)
+            const anException = gtfs.exceptions.find(ex => ex.exception_type == 2)
                 , clock = sinon.useFakeTimers(moment.tz(anException.date, 'YYYYMMDD', config.TIMEZONE).valueOf())
 
             request.post('/ajax')
@@ -288,7 +285,7 @@ describe("Routes", function(){
     describe("GET /find/:query", function(){
 
         it('Should check service exceptions', function(done){
-            const anException = exceptions.exceptions.find(ex => ex.exception_type == 2)
+            const anException = gtfs.exceptions.find(ex => ex.exception_type == 2)
                 , clock = sinon.useFakeTimers(moment.tz(anException.date, 'YYYYMMDD', config.TIMEZONE).valueOf())
 
             request.get('/find/1066')
@@ -344,7 +341,7 @@ describe("Routes", function(){
     describe("GET /byLatLon", function() {
 
         it('Should check service exceptions', function(done){
-            const anException = exceptions.exceptions.find(ex => ex.exception_type == 2)
+            const anException = gtfs.exceptions.find(ex => ex.exception_type == 2)
                 , clock = sinon.useFakeTimers(moment.tz(anException.date, 'YYYYMMDD', config.TIMEZONE).valueOf())
 
             request.get('/byLatLon')

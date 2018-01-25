@@ -7,7 +7,7 @@ const assert = require('assert')
     , sinon  = require('sinon')
 
 const geocode  = require('../lib/geocode')
-    , allstops = require('../gtfs/geojson/stops.json')
+    , gtfs     = require('../lib/gtfs')
 
 describe('Geocode Module', function() {
     before(function(){ nock.disableNetConnect()})
@@ -122,9 +122,19 @@ describe('Geocode Module', function() {
                 }
             )})
     })
+
     describe("Find stops by Lat/Lon", function(){
-        let aStop = allstops.features[0],
-        ll = aStop.geometry.coordinates
+        let aStop, ll
+        before(function(done){
+            /* GTFS reading csv files is async */
+            /* TODO: work out notification when read */
+            setTimeout(() => {
+                aStop = gtfs.all_stops.features[0],
+                ll = aStop.geometry.coordinates
+                done()
+            }, 100)
+        })
+
         it('Should return an array of stops from a nearby lat/lon', function(){
             assert(Array.isArray(geocode.findNearestStops(ll[1], ll[0])))
         })
@@ -145,6 +155,7 @@ describe('Geocode Module', function() {
             assert(Array.isArray(ret) && ret.length == 0)
         })
     })
+
 })
 
 
