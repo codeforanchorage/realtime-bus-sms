@@ -135,6 +135,13 @@ function askWatson(req, res, next){
  '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
 
  */
+function busTrackerDown(req, res, next){
+    if (!config.BUSTRACKER_DOWN) return next();
+    res.locals.action = 'Bustracker Down'
+    res.locals.message = {name: "Down for maintenance!", message:'The Bus Tracker is currently down for maintenance.'}
+    return res.render('message');
+}
+
 function sanitizeInput(req, res, next) {
     // Removes everything after first return/carriage-return.
     // Strip emojis
@@ -254,9 +261,9 @@ function addLinkToRequest(req,res, next){
     res.render = function(view, options, callback) {
         _render.call(this, view, options, (err, text) => {
             if (err) return next(err)
-            
+
             res.send(text + message)
-            
+
             // uncomment below when we want to go back to previous behavior
            /* if ( text.length + message.length <= single_message_limit ) {
                 res.send(text + message)
@@ -277,7 +284,7 @@ router.get('/', function(req, res, next) {
             return res.redirect('https://' + req.get('host') + req.originalUrl)
         }
 
-        res.render('index');
+        config.BUSTRACKER_DOWN ? res.render('down') : res.render('index');
     }
 );
 
@@ -382,6 +389,7 @@ function sendFBMessage(recipientId, messageText) {
  TODO: better error messages
  */
 router.post('/',
+    busTrackerDown,
     feedbackResponder,
     addLinkToRequest,
     checkServiceExceptions,
@@ -399,6 +407,7 @@ router.post('/ajax',
         res.locals.returnHTML = 1;
         next()
     },
+    busTrackerDown,
     checkServiceExceptions,
     sanitizeInput,
     blankInputRepsonder,
@@ -426,6 +435,7 @@ router.get('/find/:query', function(req, res, next) {
     res.locals.renderWholePage = 1;
     next();
     },
+    busTrackerDown,
     checkServiceExceptions,
     sanitizeInput,
     blankInputRepsonder,
