@@ -188,8 +188,8 @@ function askWatson(req, res, next){
 
             if(response.context.action === "Stop Lookup"){
                 // Earlier middleware should catch plain stop numbers
-                // But a query like "I'm at stop 36" should end up here
-                // Watson should identify the number for use as an entity
+                // But a query like "I'm at stop 36" will end up here
+                // Watson should identify the number for us as an entity
                 var stops = response.entities.filter((element) =>  element['entity'] == "sys-number"  );
 
                 // It's possible to have more than one number in a user query
@@ -246,10 +246,16 @@ function addressResponder(req, res, next){
         res.render('route-list');
     })
     .catch((err) => {
-        if (err.type == 'NOT_FOUND') return next() // Address not found pass to Watson
-
         res.locals.action = 'Failed Address Lookup'
-        res.render('message', {message: err})
+
+        if (err.type == 'NOT_FOUND') {
+            res.locals.message = {name: "Not Found", message: `My search for address ${input} returned zero results. You can enter a street address like '632 West 6th' or an intersection such as '6th and G street'.`}
+            res.render('message')
+        } else {
+            logger.error(err)
+            res.locals.message = {name: "Geocoder Error", message: `I'm sorry there was an error searching for that address`}
+            res.render('message')
+        }
     })
 }
 

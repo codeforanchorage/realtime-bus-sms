@@ -565,6 +565,7 @@ describe("Logging hits", function(){
         const input = "Test query" + Date.now().toString(36)
         const ip = [0,0,0].reduce((acc, cur) => acc + "." + Math.floor(Math.random() * (256)), "10")
         nock("http://www.google-analytics.com")
+        nock('https://gateway.watsonplatform.net').post(/./).query(true).reply(200, watsonResponses.greeting)
 
         request.post('/')
         .set('X-Forwarded-For', ip)
@@ -595,7 +596,7 @@ describe("Logging hits", function(){
         const from = "testPhone: " + Date.now().toString(8).slice(3)
             , input = "Test query" + Date.now().toString(36)
         nock("http://www.google-analytics.com")
-
+        nock('https://gateway.watsonplatform.net').post(/./).query(true).reply(200, watsonResponses.greeting)
         request.post('/ajax')
         .set('X-Forwarded-For', '10.0.0.1')
         .send({Body: input})

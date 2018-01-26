@@ -277,14 +277,16 @@ describe('Middleware Function', function(){
     })
 
     describe('addressResponder', function(){
-        let next, res, getStopsStub
+        let next, res, getStopsStub, loggerStub
         beforeEach(function(){
             res = {render: sinon.stub(), locals: {}}
             getStopsStub = sinon.stub(geocode, 'stops_near_location')
+            loggerStub =  sinon.stub(logger, 'error')
             next = () => assert.fail("Next() called", "addressResponder should have handled this case", undefined, 'when')
         })
         afterEach(function(){
             getStopsStub.restore()
+            loggerStub.restore()
         })
         it('Should pass input directly to geocoder', function(){
             let input = "5th and G Street"
@@ -315,21 +317,29 @@ describe('Middleware Function', function(){
                 sinon.assert.calledWith(res.render, 'message')
             })
         })
-        it('Should call next() when the address is not found', function(){
+        it('Should send "Not Found" message when the address is not found', function(){
             next = sinon.stub()
-            let req = {body: {Body:"1800 Citation Road"} }
+            let address = "1800 Citation Road"
+            let req = {body: {Body:address} }
             let error = new Error()
             error.type = 'NOT_FOUND'
             getStopsStub.rejects(error)
             return mw.addressResponder(req, res, next)
-            .then(() => sinon.assert.called(next))
+            .then(() => {
+                assert.equal(res.locals.message.name, "Not Found")
+                assert(res.locals.message.message.includes(`My search for address ${address} returned zero results.`))
+            })
         })
-        it('Should render message for other errors', function(){
+        it('Should render message for and log error for other messages', function(){
             let req = {body: {Body:"1800 Citation Road"} }
             let err = new Error("some other error")
             getStopsStub.rejects(err)
             return mw.addressResponder(req, res, next)
-            .then(() => sinon.assert.calledWith(res.render, 'message', {message: err}))
+            .then(() => {
+                sinon.assert.calledWith(res.render, 'message')
+                assert.equal(res.locals.message.name, "Geocoder Error")
+                sinon.assert.called(loggerStub)
+            })
         })
         it('Should set action to "Failed Address Lookup when address is not be found', function(){
             let req = {body: {Body:"1800 Citation Road"} }
