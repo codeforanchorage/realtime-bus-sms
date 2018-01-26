@@ -79,6 +79,34 @@ module.exports = {
             action: 'Address Lookup'
         }
     },
+    address_lookup_with_known_location: {
+        intents: [ { intent: 'address', confidence: 0.3610852134482194 } ],
+        entities:[
+            {
+                entity: "anchorage-location",
+                location: [0,27],
+                value: "Alaska Native Tribal Health Consortium",
+                confidence: 0.67
+            }],
+        input: { text: '18978 Bumbledorf Street' },
+        output: {
+            text: [ 'My search for address 18978 Bumbledorf Street returned zero results. You can enter a street address like \'632 West 6th\' or an intersection such as \'6th and G street\'. ' ],
+            nodes_visited: [ '#address' ],
+            log_messages: []
+        },
+        context:{
+            conversation_id: 'bf80ed89-f18e-436d-a9ed-cf86c63cbf56',
+            system: {
+                dialog_stack:  [ { dialog_node: 'root' } ],
+                dialog_turn_counter: 6,
+                dialog_request_counter: 6,
+                _node_output_map: { '#address': [ 0, 0 ] },
+                branch_exited: true,
+                branch_exited_reason: 'completed'
+            },
+            action: 'Address Lookup'
+        }
+    },
     greeting: {
         intents: [ { intent: 'greetings', confidence: 0.9853062695651725 } ],
         entities: [],

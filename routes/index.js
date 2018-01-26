@@ -34,8 +34,8 @@ router.post('/',
     mw.blankInputRepsonder,
     mw.aboutResponder,
     mw.stopNumberResponder,
+    mw.askWatson,
     mw.addressResponder,
-    mw.askWatson
 );
 
 /* BROWSER AJAX ENDPOINT */
@@ -50,8 +50,8 @@ router.post('/ajax',
     mw.blankInputRepsonder,
     mw.aboutResponder,
     mw.stopNumberResponder,
+    mw.askWatson,
     mw.addressResponder,
-    mw.askWatson
 );
 
 /*
@@ -81,8 +81,9 @@ router.get('/find/:query', function(req, res, next) {
     mw.checkServiceExceptions,
     mw.blankInputRepsonder,
     mw.stopNumberResponder,
-    mw.addressResponder,
-    mw.askWatson
+    mw.askWatson,
+    mw.addressResponder
+
 );
 
 /*

@@ -110,25 +110,6 @@ function stopNumberResponder(req,res, next){
     }
     next()
 }
-function addressResponder(req, res, next){
-    var input = req.body.Body;
-    res.locals.action = 'Address Lookup'
-    return geocode.stops_near_location(input)
-    .then((routeObject) => {
-        if (routeObject.data.stops.length < 1) { // Address found, but no stops near address
-            res.locals.message = { name: "No Stops", message: `Sorry, no stops were found within ${config.NEAREST_BUFFER} mile` + ((config.NEAREST_BUFFER != 1) ? 's' : '' + '.')}
-            return res.render('message')
-        }
-        res.locals.routes = routeObject;
-        res.render('route-list');
-    })
-    .catch((err) => {
-        if (err.type == 'NOT_FOUND') return next() // Address not found pass to Watson
-
-        res.locals.action = 'Failed Address Lookup'
-        res.render('message', {message: err})
-    })
-}
 
 function findbyLatLon(req, res, next) {
     res.locals.returnHTML = 1;
@@ -194,6 +175,7 @@ function askWatson(req, res, next){
             // Set cookie to value of returned conversation_id will allow
             // continuation of conversations that are otherwise stateless
             res.cookie('context', JSON.stringify(response.context))
+
             // The context.action is set in the Watson Conversation Nodes when we know
             // we need to respond with additional data or our own message.
             // If it's not set, we use the response sent from Watson.
@@ -232,19 +214,42 @@ function askWatson(req, res, next){
                     return res.render('message')
                 }
             } else if (response.context.action === "Address Lookup"){
-                // The geocoder has already tried and failed to lookup
-                // but Watson thinks this is an address. It's only a seperate
-                // case so we can log a failed address lookup
-                res.locals.action = 'Failed Address Lookup'
-                res.locals.message = {message:response.output.text.join(' ')}
-                return res.render('message')
+                // Watson has determined the user is looking for an address
+                // send the request to google places and see what we get.
+
+                // Certain frequently-used locations are hard coded into Watson
+                // If the user search for one of these it will be saved in know_location
+                // and passed to geocoder.
+                res.locals.known_location = response.entities.filter((element) =>  element['entity'] == "anchorage-location"  );
+                next()
             } else {
-                // For everything else .
+                // For everything else.
                 res.locals.action = 'Watson Chat'
                 res.locals.message = {message:response.output.text.join(' ')}
                 return res.render('message')
             }
     });
+}
+
+function addressResponder(req, res, next){
+    let known_location = res.locals.known_location
+    let input = (known_location && known_location.length > 0) ? known_location[0].value : req.body.Body;
+    res.locals.action = 'Address Lookup'
+    return geocode.stops_near_location(input)
+    .then((routeObject) => {
+        if (routeObject.data.stops.length < 1) { // Address found, but no stops near address
+            res.locals.message = { name: "No Stops", message: `Sorry, no stops were found within ${config.NEAREST_BUFFER} mile` + ((config.NEAREST_BUFFER != 1) ? 's' : '' + '.')}
+            return res.render('message')
+        }
+        res.locals.routes = routeObject;
+        res.render('route-list');
+    })
+    .catch((err) => {
+        if (err.type == 'NOT_FOUND') return next() // Address not found pass to Watson
+
+        res.locals.action = 'Failed Address Lookup'
+        res.render('message', {message: err})
+    })
 }
 
 

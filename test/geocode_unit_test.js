@@ -14,17 +14,19 @@ gtfs.GTFS_Check.on("ready", run)
 describe('Geocode Module', function() {
     before(function(){ nock.disableNetConnect()})
     after(function(){ nock.enableNetConnect()})
-
+    afterEach(function() {nock.cleanAll()})
     const responses = require('./fixtures/googleMapsResponses')
     let get_stops
 
     it('Should request the correct Google Maps API URL', function(){
         const address = '632 W. 6th Street'
-        const n = nock('https://maps.googleapis.com').get('/maps/api/geocode/json')
+        const n = nock('https://maps.googleapis.com').get('/maps/api/place/textsearch/json')
             .query({
-                address: address, // nock seems to URI encode this for us
-                components: `country:US|administrative_area:${config.GOOGLE_GEOCODE_LOCATION}`,
-                key: config.GOOGLE_MAPS_KEY
+                query: address, // nock seems to URI encode this for us
+                location: `61.2181,-149.9003`,
+                radius: '20000',
+                region:'US',
+                key: config.GOOGLE_PLACES_KEY
             })
             .reply(200, responses.goodResponse)
 

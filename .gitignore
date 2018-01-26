@@ -1,4 +1,5 @@
 node_modules
+gtfs/
 config.js
 *.swp
 *.DS_Store

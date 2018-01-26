@@ -385,7 +385,7 @@ describe('Middleware Function', function(){
     })
 
     describe("askWatson", function(){
-        let watsonStub, messageStub, next, res, req, loggerStub, watson_response, getStopsStub
+        let watsonStub, messageStub, next, res, req, loggerStub, watson_response, getStopsStub, getStopsStubLocation
         beforeEach(function(){
             watson_response = require('./fixtures/watson_context')
             next = sinon.stub()
@@ -394,11 +394,12 @@ describe('Middleware Function', function(){
             loggerStub =  sinon.stub(logger, 'error')
             res = {render: sinon.stub(), locals: {}, cookie: sinon.stub()}
             getStopsStub = sinon.stub(lib, 'getStopFromStopNumber')
+            getStopsStubLocation = sinon.stub(geocode, 'stops_near_location')
             req = {body: {Body: "A Question"}, cookies:{context: '{"this": ["is", "an", "object"]}'}}
-
         })
         afterEach(function(){
             getStopsStub.restore()
+            getStopsStubLocation.restore()
             watsonStub.restore()
             loggerStub.restore()
         })
@@ -468,7 +469,7 @@ describe('Middleware Function', function(){
             }
             mw.askWatson(req, res, next)
         })
-        it("Should render an error and set res.locals.action when stop lookup failis", function(done){
+        it("Should render an error and set res.locals.action when stop lookup fails", function(done){
             let error = new Error("Some stop error")
             getStopsStub.rejects(error)
             messageStub.yields(null, watson_response.stop_lookup)
@@ -490,20 +491,24 @@ describe('Middleware Function', function(){
             assert.deepEqual(res.locals.message, {name: "Bustracker Error", message:"I'm sorry an error occured." })
             sinon.assert.calledWith(res.render, 'message')
         })
-        it("Should render a failed Address lookup message when watson returns an Address Lookup intent", function(){
+        it("Should delegate to geocoder when watson returns an Address Lookup intent", function(){
+            let input = "5th and G Street"
+            getStopsStubLocation.resolves(fakedata.stops_from_location)
+            req.body =  {Body:input}
             messageStub.yields(null, watson_response.address_lookup)
             mw.askWatson(req, res, next)
-            assert.equal( res.locals.action, 'Failed Address Lookup')
-            assert.deepEqual(res.locals.message, {message:watson_response.address_lookup.output.text.join(' ')})
-            sinon.assert.calledWith(res.render, 'message')
+            sinon.assert.called(next)
         })
-        it("Should render watson's message and set res.local.action to 'Failed Address Lookup' when watson returns an Address Lookup intent", function(){
-            messageStub.yields(null, watson_response.address_lookup)
+        it("Should set res.locals.known_location when watson finds a known location", function(){
+            let input = "ANTHC"
+            getStopsStubLocation.resolves(fakedata.stops_from_location)
+            req.body =  {Body:input}
+            messageStub.yields(null, watson_response.address_lookup_with_known_location)
             mw.askWatson(req, res, next)
-            assert.equal( res.locals.action, 'Failed Address Lookup')
-            assert.deepEqual(res.locals.message, {message:watson_response.address_lookup.output.text.join(' ')})
-            sinon.assert.calledWith(res.render, 'message')
+            assert.equal(res.locals.known_location[0].value, 'Alaska Native Tribal Health Consortium')
+            assert.equal(res.locals.known_location[0].entity, 'anchorage-location')
         })
+
         it("Should set res.locals.action to 'Watson Chat' and render message for all other intents", function(){
             messageStub.yields(null, watson_response.greeting)
             mw.askWatson(req, res, next)
