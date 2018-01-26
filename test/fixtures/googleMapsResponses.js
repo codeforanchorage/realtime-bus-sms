@@ -1,83 +1,34 @@
 exports.goodResponse = {
-    "results" : [
-       {
-          "address_components" : [
-             {
-                "long_name" : "632",
-                "short_name" : "632",
-                "types" : [ "street_number" ]
-             },
-             {
-                "long_name" : "West 6th Avenue",
-                "short_name" : "W 6th Ave",
-                "types" : [ "route" ]
-             },
-             {
-                "long_name" : "Downtown",
-                "short_name" : "Downtown",
-                "types" : [ "neighborhood", "political" ]
-             },
-             {
-                "long_name" : "Anchorage",
-                "short_name" : "Anchorage",
-                "types" : [ "locality", "political" ]
-             },
-             {
-                "long_name" : "Anchorage",
-                "short_name" : "Anchorage",
-                "types" : [ "administrative_area_level_2", "political" ]
-             },
-             {
-                "long_name" : "Alaska",
-                "short_name" : "AK",
-                "types" : [ "administrative_area_level_1", "political" ]
-             },
-             {
-                "long_name" : "United States",
-                "short_name" : "US",
-                "types" : [ "country", "political" ]
-             },
-             {
-                "long_name" : "99501",
-                "short_name" : "99501",
-                "types" : [ "postal_code" ]
-             }
-          ],
-          "formatted_address" : "632 W 6th Ave, Anchorage, AK 99501, USA",
-          "geometry" : {
-             "bounds" : {
-                "northeast" : {
-                   "lat" : 61.21647240000001,
-                   "lng" : -149.8943509
+    html_attributions:[],
+    results : [
+        {
+            formatted_address: "632 W 6th Ave, Anchorage, AK 99501",
+            geometry: {
+                location: {
+                    lat: 61.2163327,
+                    lng: -149.8948618
                 },
-                "southwest" : {
-                   "lat" : 61.216193,
-                   "lng" : -149.8953727
+                viewport: {
+                    northeast:{
+                        lat: 61.21781182989272,
+                        lng: -149.8934942201073
+                    },
+                    southwest:{
+                        lat: 61.21511217010728,
+                        lng: -149.8961938798927
+                    }
                 }
-             },
-             "location" : {
-                "lat" : 61.2163327,
-                "lng" : -149.8948618
-             },
-             "location_type" : "ROOFTOP",
-             "viewport" : {
-                "northeast" : {
-                   "lat" : 61.2176816802915,
-                   "lng" : -149.8935128197085
-                },
-                "southwest" : {
-                   "lat" : 61.21498371970848,
-                   "lng" : -149.8962107802915
-                }
-             }
-          },
-          "partial_match" : true,
-          "place_id" : "ChIJ80XfroC9yFYRb4ltnt-cwc0",
-          "types" : [ 'street_address' ]
-       }
+            },
+            icon: "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
+            id: "4633048423a3dcbc97da6a5a5aae8795d9f59237",
+            name: "632 W 6th Ave",
+            place_id: "ChIJ80XfroC9yFYRb4ltnt-cwc0",
+            reference: "CmRbAAAAUxzueVAkaGav2owv6hAGofLiY7ZOsCbbjmb59TrXRVgy5Qq60P_HUn3PJG_35pz8ftuJp_tO3sxasVGewF3aTsvx5j5hLAYwgTXsBYSWmOyplW3inSJd0x2br9vcb1-kEhD7QwB9W_itZhYa7WxIHc8LGhTBpQm8q5vKa-l2JS-DvanHQUljXw",
+            types:["premise"]
+        }
     ],
-    "status" : "OK"
- }
+    status:"OK"
+}
 
  exports.glennAlpsLocation = {
     "results" : [

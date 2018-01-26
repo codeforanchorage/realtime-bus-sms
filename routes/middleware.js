@@ -132,7 +132,6 @@ function findbyLatLon(req, res, next) {
 */
 function askWatson(req, res, next){
     var input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so things like "I'm" returns an unwanted number
-
     try {
         // conversation() will just throw an error if credentials are missing
         var conversation = watson.conversation({
@@ -179,11 +178,13 @@ function askWatson(req, res, next){
             // The context.action is set in the Watson Conversation Nodes when we know
             // we need to respond with additional data or our own message.
             // If it's not set, we use the response sent from Watson.
+
             if (!response.context.action) {
                 res.locals.action = 'Watson Chat'
                 res.locals.message = {message:response.output.text.join(' ')}
                 return res.render('message')
             }
+
 
             if(response.context.action === "Stop Lookup"){
                 // Earlier middleware should catch plain stop numbers

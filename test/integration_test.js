@@ -62,6 +62,9 @@ describe("Routes", function(){
         })
     })
     describe("POST '/'", function(){
+        afterEach(function(){
+            nock.cleanAll()
+        })
         it('Should save feedback from SMS', function(done){
             const feedback = "test Feedback - " + Date.now().toString(36)
                 , from =  Date.now().toString(8).slice(3)
@@ -153,6 +156,11 @@ describe("Routes", function(){
             })
             .reply(200, geocodeResponses.goodResponse)
 
+            nock('https://gateway.watsonplatform.net')
+            .post(/\/conversation\/api\/v1\/workspaces/)
+            .query({version:'2017-05-26'})
+            .reply(200, watsonResponses.address_lookup)
+
             request.post('/')
             .send({Body: address})
             .expect(/^Enter/)
@@ -160,22 +168,6 @@ describe("Routes", function(){
             .end((err, res) => done(err))
         })
 
-        it('Should Ask Watson when then geocoder fails to find an address', function(done){
-            const query = "How does this work?"
-
-            nock('https://maps.googleapis.com').get(/./).query(true)
-            .reply(200, geocodeResponses.nonspecificResponse)
-
-            nock('https://gateway.watsonplatform.net')
-            .post(/\/conversation\/api\/v1\/workspaces/)
-            .query({ version:'2017-05-26' })
-            .reply(200, watsonResponses.greeting)
-
-            request.post('/')
-            .send({Body: query})
-            .expect(/^Greetings/)
-            .end((err, res) => done(err))
-        })
         it('Should pass message to user when muni site is down', function(done){
             const stop_number = "2051"
             nock(muniURL.origin).get(muniURL.pathname).query({stopid: 1477}).reply(404 )
@@ -188,7 +180,9 @@ describe("Routes", function(){
     })
 
     describe("POST /ajax", function(){
-
+        afterEach(function(){
+            nock.cleanAll()
+        })
         it('Should sanitize messy input', function(done){
             request.post('/ajax')
             .send({Body: ' ABO🌈UT ✊🏻   \n    🦑'})
@@ -235,35 +229,25 @@ describe("Routes", function(){
         it('Should deliver nearest stops to requests with address ', function(done){
             const address = "632 W 6th Ave"
 
-            nock('https://maps.googleapis.com').get('/maps/api/geocode/json')
+            nock('https://maps.googleapis.com').get('/maps/api/place/textsearch/json')
             .query({
-                address: address,
-                components: `country:US|administrative_area:${config.GOOGLE_GEOCODE_LOCATION}`,
-                key: config.GOOGLE_MAPS_KEY
+                query: address, // nock seems to URI encode this for us
+                location: `61.2181,-149.9003`,
+                radius: '20000',
+                region:'US',
+                key: config.GOOGLE_PLACES_KEY
             })
             .reply(200, geocodeResponses.goodResponse)
+
+            nock('https://gateway.watsonplatform.net')
+            .post(/\/conversation\/api\/v1\/workspaces/)
+            .query({version:'2017-05-26'})
+            .reply(200, watsonResponses.address_lookup)
 
             request.post('/ajax')
             .send({Body: address})
             .expect(/<div.*Enter/)
             .expect(/CITY HALL/)
-            .end((err, res) => done(err))
-        })
-
-        it('Should Ask Watson if geocoder fails to find an address', function(done){
-            const query = "How does this work?"
-
-            nock('https://maps.googleapis.com').get(/./).query(true)
-            .reply(200, geocodeResponses.nonspecificResponse)
-
-            nock('https://gateway.watsonplatform.net')
-            .post(/\/conversation\/api\/v1\/workspaces/)
-            .query({version:'2017-05-26'})
-            .reply(200, watsonResponses.greeting)
-
-            request.post('/ajax')
-            .send({Body: query})
-            .expect(/<div.*Greetings/)
             .end((err, res) => done(err))
         })
 
@@ -319,13 +303,20 @@ describe("Routes", function(){
         it('Should send full webpage with results for URL query with address', function(done){
             const address = '5th and G street'
 
-            nock('https://maps.googleapis.com').get('/maps/api/geocode/json')
+            nock('https://maps.googleapis.com').get('/maps/api/place/textsearch/json')
             .query({
-                address: address, // nock seems to URI encode this for us
-                components: `country:US|administrative_area:${config.GOOGLE_GEOCODE_LOCATION}`,
-                key: config.GOOGLE_MAPS_KEY
+                query: address, // nock seems to URI encode this for us
+                location: `61.2181,-149.9003`,
+                radius: '20000',
+                region:'US',
+                key: config.GOOGLE_PLACES_KEY
             })
             .reply(200, geocodeResponses.goodResponse)
+
+            nock('https://gateway.watsonplatform.net')
+            .post(/\/conversation\/api\/v1\/workspaces/)
+            .query({version:'2017-05-26'})
+            .reply(200, watsonResponses.address_lookup)
 
             request.get('/find/' + address)
             .expect(/^<!DOCTYPE/)
@@ -574,7 +565,6 @@ describe("Logging hits", function(){
         const input = "Test query" + Date.now().toString(36)
         const ip = [0,0,0].reduce((acc, cur) => acc + "." + Math.floor(Math.random() * (256)), "10")
         nock("http://www.google-analytics.com")
-        const nockscope = nock('https://maps.googleapis.com').get(/./).query(true).reply(200, geocodeResponses.goodResponse)
 
         request.post('/')
         .set('X-Forwarded-For', ip)
@@ -590,7 +580,6 @@ describe("Logging hits", function(){
 
                         assert.equal(input, last_entry.input)
                         assert.equal(ip, last_entry.ip)
-                        nockscope.done()
                         done()
 
                     } catch(e){
@@ -606,7 +595,6 @@ describe("Logging hits", function(){
         const from = "testPhone: " + Date.now().toString(8).slice(3)
             , input = "Test query" + Date.now().toString(36)
         nock("http://www.google-analytics.com")
-        const nockscope = nock('https://maps.googleapis.com').get(/./).query(true).reply(200, geocodeResponses.goodResponse)
 
         request.post('/ajax')
         .set('X-Forwarded-For', '10.0.0.1')
@@ -622,7 +610,6 @@ describe("Logging hits", function(){
 
                         assert.equal(input, last_entry.input)
                         assert.strictEqual(last_entry.ip,undefined)
-                        nockscope.done()
                         done()
                     } catch(e){
                         done(e)
