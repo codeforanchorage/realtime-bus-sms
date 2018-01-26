@@ -143,11 +143,13 @@ describe("Routes", function(){
         it('Should deliver nearest stops to SMS requests with address ', function(done){
             const address = "632 W 6th Ave"
 
-            nock('https://maps.googleapis.com').get('/maps/api/geocode/json')
+            nock('https://maps.googleapis.com').get('/maps/api/place/textsearch/json')
             .query({
-                address: address, // nock seems to URI encode this for us
-                components: `country:US|administrative_area:${config.GOOGLE_GEOCODE_LOCATION}`,
-                key: config.GOOGLE_MAPS_KEY
+                query: address, // nock seems to URI encode this for us
+                location: `61.2181,-149.9003`,
+                radius: '20000',
+                region:'US',
+                key: config.GOOGLE_PLACES_KEY
             })
             .reply(200, geocodeResponses.goodResponse)
 
