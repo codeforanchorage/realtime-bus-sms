@@ -1,13 +1,14 @@
 'use strict';
 
-const assert = require('assert')
-    , nock   = require('nock')
-    , config = require('../lib/config')
-    , logger = require('../lib/logger')
-    , sinon  = require('sinon')
-
-const geocode  = require('../lib/geocode')
-    , gtfs     = require('../lib/gtfs')
+const assert     = require('assert')
+    , nock       = require('nock')
+    , config     = require('../lib/config')
+    , logger     = require('../lib/logger')
+    , sinon      = require('sinon')
+    , geocode    = require('../lib/geocode')
+    , gtfs       = require('../lib/gtfs')
+    , { URL }    = require('url')
+    , GoogleURL  = new URL(config.GEOCODE_URL_BASE)
 
 gtfs.GTFS_Check.on("ready", run)
 
@@ -20,7 +21,7 @@ describe('Geocode Module', function() {
 
     it('Should request the correct Google Maps API URL', function(){
         const address = '632 W. 6th Street'
-        const n = nock('https://maps.googleapis.com').get('/maps/api/place/textsearch/json')
+        const n = nock(GoogleURL.origin).get(GoogleURL.pathname)
             .query({
                 query: address, // nock seems to URI encode this for us
                 location: `61.2181,-149.9003`,
@@ -36,7 +37,7 @@ describe('Geocode Module', function() {
 
     describe('With normal responses', function(){
         beforeEach(function(){
-            nock('https://maps.googleapis.com').get(/^\/maps/)
+            nock(GoogleURL.origin).get(/^\/maps/)
             .reply(200, responses.goodResponse )
             get_stops = geocode.stops_near_location("634 W. 6th Street")
         })
@@ -72,7 +73,7 @@ describe('Geocode Module', function() {
         let clock
         beforeEach(function(){
             clock = sinon.useFakeTimers()
-            nock('https://maps.googleapis.com').get(/^\/maps/)
+            nock(GoogleURL.origin).get(/^\/maps/)
             .reply(200, () => (clock.tick(timeTick), responses.goodResponse))
         })
         afterEach(function(){
@@ -85,7 +86,7 @@ describe('Geocode Module', function() {
     })
     describe('With locations outside the service area ', function() {
         beforeEach(function(){
-            nock('https://maps.googleapis.com').get(/^\/maps/)
+            nock(GoogleURL.origin).get(/^\/maps/)
             .reply(200, responses.glennAlpsLocation )
             get_stops = geocode.stops_near_location("13735 Canyon Rd")
         })
@@ -97,7 +98,7 @@ describe('Geocode Module', function() {
 
     describe("With locations that google can't find", function() {
         beforeEach(function(){
-            nock('https://maps.googleapis.com').get(/^\/maps/)
+            nock(GoogleURL.origin).get(/^\/maps/)
             .reply(200, responses.nonspecificResponse )
             get_stops = geocode.stops_near_location("785 Clusterfuddle Lane")
         })
@@ -110,7 +111,7 @@ describe('Geocode Module', function() {
     describe("When it returns a Bad HTTP code", function() {
         let logs
         beforeEach(function(){
-            nock('https://maps.googleapis.com').get(/^\/maps/).reply(200, responses.badRequest )
+            nock(GoogleURL.origin).get(/^\/maps/).reply(200, responses.badRequest )
             get_stops = geocode.stops_near_location("632 W. 6th Street")
             logs = sinon.stub(logger, 'error')
         })
