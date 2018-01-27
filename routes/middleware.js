@@ -1,4 +1,6 @@
-const watson         = require('watson-developer-cloud')
+'use strict';
+
+const watson       = require('watson-developer-cloud')
 const logger       = require('../lib/logger')
 const config       = require('../lib/config')
 const lib          = require('../lib/bustracker')
@@ -184,12 +186,18 @@ function findbyLatLon(req, res, next) {
  * A trained watson model hosted on IBM bluemix is required to use this.
  * Credentials for bluemix will need to be added to the config.js
  * A model can be created using the file /watson-workspace.json
+ *
+ * This Watson model will return an context object with an action property that
+ * we can use to determine if we need to take further action. For example,
+ * when Watson determines the user's intent is to locate stops near a location
+ * the context.action = 'Address Lookup'
+ *
  * @param {*} req
  * @param {*} res
  * @param {*} next
  */
 function askWatson(req, res, next){
-    var input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so things like "I'm" returns an unwanted number
+    const input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so things like "I'm" returns an unwanted number
     try {
         // conversation() will just throw an error if credentials are missing
         var conversation = watson.conversation({
@@ -204,7 +212,7 @@ function askWatson(req, res, next){
         return res.render('message')
     }
 
-    var context  = JSON.parse(req.cookies['context'] || '{}');
+    const context  = JSON.parse(req.cookies['context'] || '{}');
 
     conversation.message( {
         workspace_id: config.WATSON_WORKPLACE,
@@ -276,7 +284,7 @@ function askWatson(req, res, next){
                 // Watson has determined the user is looking for an address
                 // send the request to google places and see what we get.
 
-                // Certain frequently-used locations are hard coded into Watson
+                // Certain frequently-used locations are hard coded into our Watson model
                 // If the user search for one of these it will be saved in know_location
                 // and passed to geocoder.
                 res.locals.known_location = response.entities.filter((element) =>  element['entity'] == "anchorage-location"  );
@@ -290,9 +298,16 @@ function askWatson(req, res, next){
     });
 }
 
+/**
+ * Midddleware that responsds to user requests for stops near a location.
+
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 function addressResponder(req, res, next){
-    let known_location = res.locals.known_location
-    let input = (known_location && known_location.length > 0) ? known_location[0].value : req.body.Body;
+    const known_location = res.locals.known_location
+    const input = (known_location && known_location.length > 0) ? known_location[0].value : req.body.Body;
     res.locals.action = 'Address Lookup'
     return geocode.stops_near_location(input)
     .then((routeObject) => {
@@ -324,8 +339,8 @@ module.exports = {
     blankInputRepsonder: blankInputRepsonder,
     addLinkToRequest: addLinkToRequest,
     checkServiceExceptions: checkServiceExceptions,
-    aboutResponder:aboutResponder,
-    stopNumberResponder:stopNumberResponder,
-    addressResponder:addressResponder,
+    aboutResponder: aboutResponder,
+    stopNumberResponder: stopNumberResponder,
+    addressResponder: addressResponder,
     findbyLatLon: findbyLatLon,
 }

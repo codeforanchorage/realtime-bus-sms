@@ -1,4 +1,5 @@
 'use strict';
+
 /*
    steno is used by lowdb for writing the files
    These tests stub steno's writeFile()
