@@ -133,22 +133,5 @@ describe('Bustracker Module', function() {
                 )
         })
     })
-/*
-    describe('Service Exceptions', function(){
-        let clock
-        afterEach(function(){
-            clock.restore();
-        })
-        it('Should respond true when today is in service exceptions', function(){
-            const anException = gtfs.exceptions.find(ex => ex.exception_type == 2)
-            clock = sinon.useFakeTimers(moment.tz(anException.date, 'YYYYMMDD', config.TIMEZONE).valueOf())
-            assert(bustracker.serviceExceptions())
-        })
-        it('Should respond false when today is not in service exceptions', function(){
-            clock = sinon.useFakeTimers(100) // assumes start of epoch is not in service exceptions
-            assert(!bustracker.serviceExceptions())
-        })
 
-    })
-    */
 })
