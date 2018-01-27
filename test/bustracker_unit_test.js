@@ -133,7 +133,7 @@ describe('Bustracker Module', function() {
                 )
         })
     })
-
+/*
     describe('Service Exceptions', function(){
         let clock
         afterEach(function(){
@@ -150,4 +150,5 @@ describe('Bustracker Module', function() {
         })
 
     })
+    */
 })

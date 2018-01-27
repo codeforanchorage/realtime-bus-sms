@@ -55,7 +55,7 @@ describe('Geocode Module', function() {
                 .then(resp => assert(Array.isArray(resp.data.stops) && resp.data.stops.length <= config.NEAREST_MAX))
         })
         it('Should return stops with a ll property that parses to a lat/lon', function(){
-            const latlonregex = /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?),\s*[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/
+            const latlonregex = /^\s*[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/
             return get_stops.then(resp => assert(resp.data.stops.every(stop => latlonregex.test(stop.ll))))
         })
         it('Should return stops with a route property', function() {

@@ -51,7 +51,7 @@ describe('Middleware Function', function(){
     describe('Check Service Exceptions', function(){
         let libStub, res, next
         beforeEach(function(){
-            libStub = sinon.stub(lib, 'serviceExceptions')
+            libStub = sinon.stub(gtfs, 'serviceExceptions')
             res = {render: sinon.stub(), locals: {}}
             next = sinon.stub()
         })

@@ -2,6 +2,7 @@ const watson = require('watson-developer-cloud')
       logger = require('../lib/logger'),
       config = require('../lib/config'),
       lib = require('../lib/bustracker'),
+      gtfs = require('../lib/gtfs'),
       geocode = require('../lib/geocode'),
       emojiRegex = require('emoji-regex'),
       fs = require('fs'),
@@ -34,7 +35,7 @@ function sanitizeInput(req, res, next) {
 }
 
 function checkServiceExceptions(req, res, next){
-    if (lib.serviceExceptions()){
+    if (gtfs.serviceExceptions()){
            res.locals.message = {name: "Holiday", message:'There is no bus service today.'}
            return res.render('message')
         }
