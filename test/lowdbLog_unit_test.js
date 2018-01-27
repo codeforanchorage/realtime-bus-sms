@@ -126,24 +126,22 @@ describe('Get Log Data', function(){
     })
     it('Should set the correct type', function(){
         let daysBack = 0
-        let dateThen = new Date().setDate(new Date().getDate()-daysBack)
         let data = lowdb_log.getLogData(daysBack, 'hits',fixturePath )
-        assert.equal(data[0].type, 'sms')
+        assert.equal(data[2].type, 'sms')
         assert.equal(data[1].type, 'browser')
-        assert.equal(data[2].type, 'fb')
+        assert.equal(data[0].type, 'fb')
     })
     it('Should set the correct userID', function(){
         let daysBack = 0
-        let dateThen = new Date().setDate(new Date().getDate()-daysBack)
         let data = lowdb_log.getLogData(0, 'hits',fixturePath )
-        assert.equal(data[0].userId, 'phone'+fixtureFile.requests[0].phone)
-        assert.equal(data[1].userId, 'ip'+fixtureFile.requests[1].ip)
-        assert.equal(data[2].userId, fixtureFile.requests[2].fbUser)
+        let records = fixtureFile.requests.length
+        assert.equal(data[2].userId, 'phone'+fixtureFile.requests[records - 3].phone)
+        assert.equal(data[1].userId, 'ip'+fixtureFile.requests[records - 2].ip)
+        assert.equal(data[0].userId, fixtureFile.requests[records -1 ].fbUser)
     })
     it('Returned objects should have the correct properties', function(){
         let properties = ['type', 'date', 'dateOffset', 'muniTime', 'totalTime', 'userId']
         let daysBack = 10
-        let dateThen = new Date().setDate(new Date().getDate()-daysBack)
         let data = lowdb_log.getLogData(0, 'hits',fixturePath )
         assert(data.every(entry => properties.every(key => entry.hasOwnProperty(key))
         ))
