@@ -1,12 +1,12 @@
 'use strict';
 
 const assert    = require('assert')
-    , config    = require('../lib/config')
-    , logger    = require('../lib/logger')
-    , gtfs      = require("../lib/gtfs")
-    , sinon     = require('sinon')
-    , moment    = require('moment-timezone')
-    , child_pr  = require('child_process')
+const config    = require('../lib/config')
+const logger    = require('../lib/logger')
+const gtfs      = require("../lib/gtfs")
+const sinon     = require('sinon')
+const moment    = require('moment-timezone')
+const child_pr  = require('child_process')
 
 describe('GTFS Module', function() {
         before(function(){

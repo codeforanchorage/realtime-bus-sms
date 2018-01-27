@@ -1,14 +1,14 @@
 'use strict';
 
 const assert     = require('assert')
-    , nock       = require('nock')
-    , config     = require('../lib/config')
-    , logger     = require('../lib/logger')
-    , sinon      = require('sinon')
-    , geocode    = require('../lib/geocode')
-    , gtfs       = require('../lib/gtfs')
-    , { URL }    = require('url')
-    , GoogleURL  = new URL(config.GEOCODE_URL_BASE)
+const nock       = require('nock')
+const config     = require('../lib/config')
+const logger     = require('../lib/logger')
+const sinon      = require('sinon')
+const geocode    = require('../lib/geocode')
+const gtfs       = require('../lib/gtfs')
+const { URL }    = require('url')
+const GoogleURL  = new URL(config.GEOCODE_URL_BASE)
 
 gtfs.GTFS_Check.on("ready", run)
 

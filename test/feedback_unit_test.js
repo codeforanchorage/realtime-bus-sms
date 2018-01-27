@@ -1,12 +1,15 @@
 'use strict';
 
 const assert    = require('assert')
-    , sinon     = require('sinon')
-    , steno     = require('steno')
-    , request   = require('request')
-    , config    = require('../lib/config')
-    , feedback  = require('../lib/feedback')
-    , comments  = require('./fixtures/fake_comments.json')
+const sinon     = require('sinon')
+const steno     = require('steno')
+const request   = require('request')
+const config    = require('../lib/config')
+const feedback  = require('../lib/feedback')
+const comments  = require('./fixtures/fake_comments.json')
+const logger    = require('../lib/logger')
+const twilioClient = feedback.twilioClient
+
 
 describe("User Feedback", function(){
     describe("feedbackResponder_web", function(){
@@ -351,4 +354,5 @@ describe("User Feedback", function(){
             setImmediate(() => sinon.assert.calledWith(loggerStub, err))
         })
     })
+
 })

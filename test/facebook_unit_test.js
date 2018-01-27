@@ -1,12 +1,12 @@
 "use.strict";
 
 const fb      = require('../lib/facebook')
-    , crypto  = require('crypto')
-    , sinon   = require('sinon')
-    , assert  = require('assert')
-    , request = require('request')
-    , logger  = require('../lib/logger')
-    , config  = require('../lib/config')
+const crypto  = require('crypto')
+const sinon   = require('sinon')
+const assert  = require('assert')
+const request = require('request')
+const logger  = require('../lib/logger')
+const config  = require('../lib/config')
 
 describe("Facebook Functions", function(){
     describe("facebook_verify", function(){

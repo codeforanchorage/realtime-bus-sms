@@ -5,13 +5,13 @@
    The signature for steno.writeFile is: writeFile(filename, data, errCallback)
 */
 const steno     = require('steno')
-    , sinon     = require('sinon')
-    , path      = require('path')
-    , assert    = require('assert')
-    , winston   = require('winston')
-    , hashwords = require('hashwords')()
-    , config    = require('../lib/config')
-    , lowdb_log = require('../lib/lowdb_log_transport')
+const sinon     = require('sinon')
+const path      = require('path')
+const assert    = require('assert')
+const winston   = require('winston')
+const hashwords = require('hashwords')()
+const config    = require('../lib/config')
+const lowdb_log = require('../lib/lowdb_log_transport')
 
 describe('LowDB Log Transport', function(){
     let logger, stenoStubb

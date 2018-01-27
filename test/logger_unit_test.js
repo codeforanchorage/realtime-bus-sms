@@ -1,15 +1,15 @@
 'use strict';
 
 const assert     = require('assert')
-    , util       = require('util')
-    , rollbar    = require("rollbar")
-    , sinon      = require('sinon')
-    , ua         = require('universal-analytics')
-    , onFinished = require('on-finished')
-    , onHeaders  = require('on-headers')
-    , logs       = require('../lib/logger')
-    , winston    = require('winston')
-    , config     = require('../lib/config')
+const util       = require('util')
+const rollbar    = require("rollbar")
+const sinon      = require('sinon')
+const ua         = require('universal-analytics')
+const onFinished = require('on-finished')
+const onHeaders  = require('on-headers')
+const logs       = require('../lib/logger')
+const winston    = require('winston')
+const config     = require('../lib/config')
 
 describe('Logging middleware', function(){
     let middleware, mockReq, mockRes, nextStub,loggerstub

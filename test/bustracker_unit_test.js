@@ -1,11 +1,11 @@
 'use strict';
 
 const assert    = require('assert')
-    , nock      = require('nock')
-    , config    = require('../lib/config')
-    , logger    = require('../lib/logger')
-    , sinon     = require('sinon')
-    , moment    = require('moment-timezone')
+const nock      = require('nock')
+const config    = require('../lib/config')
+const logger    = require('../lib/logger')
+const sinon     = require('sinon')
+const moment    = require('moment-timezone')
 
 
 const bustracker            = require('../lib/bustracker')

@@ -1,16 +1,22 @@
-const   express = require('express'),
-        router = express.Router(),
-        debug = require('debug')('routes/index.js'),
-        lib = require('../lib/bustracker'),
-        config = require('../lib/config'),
-        logger = require('../lib/logger'),
-        feedback = require('../lib/feedback'),
-        lowdb_log = require('../lib/lowdb_log_transport'),
-        mw = require('./middleware')
-        fb = require('../lib/facebook')
+const express = require('express')
+const router = express.Router()
+const debug = require('debug')('routes/index.js')
+const lib = require('../lib/bustracker')
+const config = require('../lib/config')
+const logger = require('../lib/logger')
+const feedback = require('../lib/feedback')
+const lowdb_log = require('../lib/lowdb_log_transport')
+const mw = require('./middleware')
+const fb = require('../lib/facebook')
 
-/*  GET HOME PAGE */
+/**
+ * Express routes for Bus App
+ * @module routes/index
+ */
 
+/**
+ * Index page for web clients
+ */
 router.get('/', function(req, res, next) {
         // redirect to https if the user is using http
         if (req.get('X-Forwarded-Proto') && req.get('X-Forwarded-Proto') == 'http') {
@@ -20,10 +26,10 @@ router.get('/', function(req, res, next) {
     }
 );
 
-/*
-    TWILIO ENDPOINT
-    The user's text message is
-    in the POST body.
+/**
+ *  TWILIO ENDPOINT
+ *  The user's text message is
+ *  in the POST body.
  */
 
 router.post('/',
@@ -57,7 +63,8 @@ router.post('/ajax',
 /*
     DIRECT URL ACCESS
     Routes to allow deep linking and bookmarks via url with
-    either address, stop number, or about.
+    either address, stop number, or about, for example:
+    https://bus.codeforanchorage.org/find/2051
  */
 
  router.get('/find/about', function(req, res, next) {

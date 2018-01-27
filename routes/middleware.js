@@ -1,28 +1,37 @@
-const watson = require('watson-developer-cloud')
-      logger = require('../lib/logger'),
-      config = require('../lib/config'),
-      lib = require('../lib/bustracker'),
-      gtfs = require('../lib/gtfs'),
-      geocode = require('../lib/geocode'),
-      emojiRegex = require('emoji-regex'),
-      fs = require('fs'),
-      twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN),
-      pug = require('pug')
+const watson         = require('watson-developer-cloud')
+const logger       = require('../lib/logger')
+const config       = require('../lib/config')
+const lib          = require('../lib/bustracker')
+const gtfs         = require('../lib/gtfs')
+const geocode      = require('../lib/geocode')
+const emojiRegex   = require('emoji-regex')
+const fs           = require('fs')
+const twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN)
+const pug          = require('pug');
 
-      // Facebook requirements
-const request = require('request');
-      https = require('https');
+/* Facebook requirements */
+const request = require('request')
+    , https   = require('https');
 
-/*
-
-    MIDDLEWARE FUNCTIONS
-    These are primarily concerned with parsing the input the comes in from the POST
-    body and deciding how to handle it.
-    To help logging these set res.locals.action to one of
-    '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
-
+/**
+ * Middelware Functions for bus app
+ * These are primarily concerned with parsing the input the comes in from the POST body and deciding how to handle it
+ * To help logging these set res.locals.action to one of:
+ * - '[Failed?]Stop Lookup'
+ * - '[Failed?]Address Lookup'
+ * - 'Empty Input'
+ * - 'About'
+ * - 'Feedback'
+ *
+ * @module routes/middleware
  */
 
+/**
+ * Strips everything after the first line and removes emojis
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 function sanitizeInput(req, res, next) {
     if (req.body.Body) {
         req.body.Body = String(req.body.Body)
@@ -34,6 +43,13 @@ function sanitizeInput(req, res, next) {
     next();
 }
 
+/**
+ * Checks for holidays. When buses are not running
+ * the app only delivers the message.
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 function checkServiceExceptions(req, res, next){
     if (gtfs.serviceExceptions()){
            res.locals.message = {name: "Holiday", message:'There is no bus service today.'}
@@ -42,21 +58,26 @@ function checkServiceExceptions(req, res, next){
     next()
 }
 
+/**
+ * Adds a link to the final response suggesting the web version.
+ * Twilio sms messages over 160 characters are split into
+ * (and charged as) smaller messages of 153 characters each.
+ * This includes the text + message if it won't push over 160 characters
+ * or if it's greater and it won't push over a multiple of 153
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 function addLinkToRequest(req,res, next){
-    // Twilio sms messages over 160 characters are split into
-    // (and charged as) smaller messages of 153 characters each.
-    // So we include the text + message if it won't push over 160 characters
-    // or if greater  it won't push over a multiple of 153
-
-    var single_message_limit = 160
-    var segment_length = 153
+    const single_message_limit = 160
+    const segment_length = 153
 
     // the url with 'http://' results in a simple link on iPhones
     // With 'http://' iphone users will see a big box that says 'tap to preview'
     // Simple text seems more in the spirit
-    var message = "\n\More features on the smart phone version: bit.ly/AncBus"
+    const message = "\n\More features on the smart phone version: bit.ly/AncBus"
 
-    //hikack the render function
+    // Hikack the render function
     var _render = res.render
     res.render = function(view, options, callback) {
         _render.call(this, view, options, (err, text) => {
@@ -73,6 +94,12 @@ function addLinkToRequest(req,res, next){
     next()
 }
 
+/**
+ * Respond to blank messages.
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 function blankInputRepsonder(req, res, next){
     let input = req.body.Body;
     if (!input || /^\s*$/.test(input)) {
@@ -84,15 +111,28 @@ function blankInputRepsonder(req, res, next){
     next();
 }
 
+/**
+ * Responds with about page to any of the activationWords
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 function aboutResponder(req, res, next){
     let message = req.body.Body;
-    if (['about','hi','hello'].indexOf(message.trim().toLowerCase()) >= 0) {
+    const activationWords = ['about','hi','hello']
+    if (activationWords.indexOf(message.trim().toLowerCase()) >= 0) {
         res.locals.action = 'About';
         return res.render('about-partial');
     }
     next();
 }
 
+/**
+ * Responds to requests that look like stop numbers.
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 function stopNumberResponder(req,res, next){
     let input = req.body.Body;
     let stopRequest = input.toLowerCase().replace(/\s*/g,'').replace("stop",'').replace("#",'');
@@ -112,6 +152,15 @@ function stopNumberResponder(req,res, next){
     next()
 }
 
+/**
+ * Respond to requests from browser with location services
+ * with a list of nearby stops.
+ * The front end will send lat/lon coordinates wit the query.
+ *
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 function findbyLatLon(req, res, next) {
     res.locals.returnHTML = 1;
 
@@ -126,11 +175,19 @@ function findbyLatLon(req, res, next) {
 }
 
 
-
-/*
-    WATSON MIDDLE WARE
-    TODO Test intent confidence to decide to help decide flow
-*/
+/**
+ * Watson Conversation Middleware
+ * This provides an interface to IBM Watson's conversation service.
+ * It uses a trained machine learning model to determin user intent from their message
+ * for more information see:  https://www.ibm.com/watson/services/conversation/
+ *
+ * A trained watson model hosted on IBM bluemix is required to use this.
+ * Credentials for bluemix will need to be added to the config.js
+ * A model can be created using the file /watson-workspace.json
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 function askWatson(req, res, next){
     var input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so things like "I'm" returns an unwanted number
     try {

@@ -1,15 +1,16 @@
 'use strict';
 
 const assert    = require('assert')
-    , sinon     = require('sinon')
-    , lib       = require('../lib/bustracker')
-    , geocode   = require('../lib/geocode')
-    , logger    = require('../lib/logger')
-    , config    = require('../lib/config')
-    , watson    = require('watson-developer-cloud')
-    , request   = require('request')
-    , mw        = require('../routes/middleware')
-    , fakedata  = require('./fixtures/stopdata')
+const sinon     = require('sinon')
+const lib       = require('../lib/bustracker')
+const geocode   = require('../lib/geocode')
+const logger    = require('../lib/logger')
+const config    = require('../lib/config')
+const watson    = require('watson-developer-cloud')
+const request   = require('request')
+const mw        = require('../routes/middleware')
+const fakedata  = require('./fixtures/stopdata')
+const gtfs      = require('../lib/gtfs')
 
 describe('Middleware Function', function(){
     describe('sanitizeInput', function(){
