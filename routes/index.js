@@ -138,7 +138,7 @@ router.post('/respond', feedback.send_feedback_response);
 */
 
 router.get('/logData', function(req, res, next) {
-    data = lowdb_log.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
+    const data = lowdb_log.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
     res.send(data)
 });
 
