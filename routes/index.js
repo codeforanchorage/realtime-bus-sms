@@ -15,6 +15,8 @@ var https = require('https');
 
 var watson = require('watson-developer-cloud');
 
+var electricBus = require('../lib/eb'); 
+
 /*
     WATSON MIDDLE WARE
     TODO Test intent confidence to decide to help decide flow
@@ -135,6 +137,7 @@ function askWatson(req, res, next){
  '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
 
  */
+
 function sanitizeInput(req, res, next) {
     // Removes everything after first return/carriage-return.
     // Strip emojis
@@ -276,7 +279,6 @@ router.get('/', function(req, res, next) {
         if (req.get('X-Forwarded-Proto') && req.get('X-Forwarded-Proto') == 'http') {
             return res.redirect('https://' + req.get('host') + req.originalUrl)
         }
-
         res.render('index');
     }
 );
@@ -455,6 +457,16 @@ router.get('/byLatLon', function(req, res, next) {
     var data = lib.findNearestStops(req.query.lat, req.query.lon);
 
     res.render('route-list-partial', {routes: {data: {stops: data}} });
+
+
+});
+
+// find the electric bus
+router.get('/electricBus', function(req, res, next) {
+    electricBus.getLatestBusInfo(function(error, data) {
+        if (error) {res.send(error)}
+        res.send(data);
+    });
 
 
 });
