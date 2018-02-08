@@ -215,7 +215,7 @@ function askWatson(req, res, next){
     const context  = JSON.parse(req.cookies['context'] || '{}');
 
     conversation.message( {
-        workspace_id: config.WATSON_WORKPLACE,
+        workspace_id: config.WATSON_WORKPLACE_ID,
         input: {'text': input},
         context: context
         }, function(err, response) {
