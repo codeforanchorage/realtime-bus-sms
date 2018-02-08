@@ -79,3 +79,37 @@ Mac:
 Windows:
 
     TODO: add
+
+Third Party Services
+--------------------
+
+This app depends on third party service that require api keys to run. When running in production the api keys are added as environmental variables when the app starts. To run a fully functioning version locally, you will need copy your own api keys into config.js or add them as environmental variables.
+
+- Watson Conversation from IBM. This identifies user intent from input other than stop numbers
+- Google Place. Geolocates addressed and places
+- Google Analytics.
+
+The app will run without api keys for these services but you will get warnings and errors if a response to input calls one of the services.
+
+**Watson Setup**
+You can create a free account on IBM Bluemix and clone the Watson Service using the *watson-workspace.json* file in the repo.
+
+To create an account, go to:
+
+https://www.ibm.com/watson/services/conversation/
+
+Click get started for free and create an IBM account by filling out the form.
+
+Once logged in and confirmed you can access the IBM Watson Bluemix console (https://watson-conversation.ng.bluemix.net)
+
+Create a clone of the Watson workplace by clicking the upload icon under workplaces and uploading the *watson-workspace.json* file. The workplace will then have a workplace ID (accessed by clicking the three dots next to the name) such as 6cb32c12-6b1s-1273-f81f-3ae0984c7c2b which you can add to your configuration env file for WATSON_WORKPLACE.
+
+You will also need to find your login credentials for the Watson app. These are not in an obvious place. Go to:
+https://console.bluemix.net/dashboard/apps/
+
+Click the service you just created. Then in the left menu click 'service credentials' than click veiw credentials in the table on the page. This will show you a username and password which you can add to your conviguration for
+WATSON_USER and WATSON_PASSWORD
+
+**Google Places**
+To create an API Key go to and follow prompts:
+https://developers.google.com/places/web-service/get-api-key
