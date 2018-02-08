@@ -1,5 +1,5 @@
 node_modules
-gtfs/
+gtfs/raw/*
 config.js
 *.swp
 *.DS_Store
