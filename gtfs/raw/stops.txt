@@ -57,7 +57,7 @@ stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url,bt_id
 0135,0135,SPENARD & OREGON WNW,61.186077,-149.918527,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1595,1595
 0136,0136,SPENARD & MCRAE WNW,61.185174,-149.923969,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1596,1596
 0137,0137,SPENARD & NORTHWOOD ENE,61.183869,-149.927104,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1597,1597
-0141,0141,SPENARD & WISCONSIN SSW,61.178722,-149.939618,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1598,1598
+0141,0141,SPENARD & WISCONSIN SSW,61.178722,-149.939618,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2841,2841
 0142,0142,SPENARD & BREEZEWOOD SSW,61.17706,-149.942041,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1599,1599
 0143,0143,SPENARD & INTL ARPT RD NNW,61.175228,-149.944283,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1600,1600
 0154,0154,JEWEL LAKE & RASPBERRY SSW,61.158085,-149.95201,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1608,1608
@@ -75,7 +75,7 @@ stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url,bt_id
 0215,0215,JEWEL LAKE & STRAWBERRY NNE,61.152487,-149.951629,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1638,1638
 0227,0227,SPENARD & INTL ARPT RD NNE,61.17512,-149.943772,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1649,1649
 0228,0228,SPENARD & VALLEYWOOD NNE,61.177653,-149.940313,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1650,1650
-0229,0229,SPENARD & WISCONSIN NNE,61.17959,-149.938265,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1651,1651
+0229,0229,SPENARD & WISCONSIN NNE,61.17959,-149.938265,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2842,2842
 0232,0232,SPENARD & MCKINLEY SSE,61.183984,-149.926171,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1652,1652
 0233,0233,SPENARD & TAFT ESE,61.185366,-149.922413,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1653,1653
 0234,0234,SPENARD & WYOMING WSW,61.186327,-149.916088,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1654,1654
@@ -86,7 +86,7 @@ stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url,bt_id
 0239,0239,SPENARD & NORTHERN LIGHTS NNE,61.195857,-149.905288,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1659,1659
 0240,0240,SPENARD & 26TH AVE NNE,61.197395,-149.905242,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1660,1660
 0245,0245,17TH AVENUE & E STREET WSW,61.205181,-149.89271,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1661,1661
-0250,0250,A STREET & 8TH AVENUE NNE,61.215023,-149.883119,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1662,1662
+0250,0250,A STREET & 8TH AVENUE NNE,61.215023,-149.883119,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2843,2843
 0275,0275,BENSON & SPENARD ESE,61.193943,-149.904488,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1663,1663
 0276,0276,BENSON & ARCTIC ESE,61.194139,-149.896939,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1664,1664
 0277,0277,BENSON & CHEECHAKO ESE,61.194175,-149.893564,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1665,1665
@@ -109,6 +109,11 @@ stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url,bt_id
 0364,0364,NORTHERN LIGHTS & AUGUSTINE WNW,61.19545,-149.744502,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1705,1705
 0365,0365,NORTHERN LIGHTS & PATTERSON WNW,61.195402,-149.749509,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1706,1706
 0366,0366,NORTHERN LIGHTS & BRITTANY WNW,61.1954,-149.755046,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1707,1707
+0177,0177,DIMOND & VICTOR ESE,61.137278,-149.919241,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1620,1620
+0665,0665,ARCTIC & 36TH AVENUE SSW,61.187569,-149.898118,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1885,1885
+0862,0862,LOOP & HOLLYWOOD SSW,61.229647,-149.875,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2030,2030
+1010,1010,OCEANVIEW & VENUS ESE,61.099553,-149.85422,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2082,2082
+1011,1011,OLD SEWARD & HAMILTON NNE,61.10038,-149.852545,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2083,2083
 0367,0367,NORTHERN LIGHTS & CIMMARON WNW,61.195373,-149.759002,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1708,1708
 0368,0368,NORTHERN LIGHTS & BAXTER WNW,61.195355,-149.764613,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1709,1709
 0369,0369,NORTHERN LIGHTS & DERBY WNW,61.195348,-149.769305,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1710,1710
@@ -153,10 +158,10 @@ stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url,bt_id
 0448,0448,DEBARR & HOYT ESE,61.209581,-149.799486,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1759,1759
 0449,0449,DEBARR & PINE WSW,61.209583,-149.793936,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1760,1760
 0450,0450,DEBARR & L SELKREGG WSW,61.209582,-149.786848,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1761,1761
-0451,0451,DEBARR & BONIFACE WSW,61.209649,-149.779258,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1762,1762
 0452,0452,DEBARR & BONIFACE ESE,61.209635,-149.775917,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1763,1763
 0453,0453,DEBARR & BUCKNER ESE,61.209592,-149.771054,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1764,1764
 0454,0454,DEBARR & ATKINSON ESE,61.209594,-149.766396,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1765,1765
+1012,1012,OLD SEWARD & HELEN SSE,61.102462,-149.855326,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2084,2084
 0467,0467,TUDOR & BAXTER WNW,61.180919,-149.764611,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1778,1778
 0479,0479,PROVIDENCE & ELMORE WSW,61.188672,-149.810993,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1779,1779
 0501,0501,DEBARR & NUNAKA ENE,61.209833,-149.768476,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1791,1791
@@ -198,7 +203,6 @@ stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url,bt_id
 0630,0630,15TH AVENUE & MEDFRA WNW,61.20781,-149.859415,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1865,1865
 0632,0632,15TH AVENUE & INGRA ENE,61.207811,-149.865041,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1866,1866
 0635,0635,13TH AVENUE & EAGLE WNW,61.209744,-149.875839,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1868,1868
-0636,0636,13TH AVENUE & CORDOVA ENE,61.209749,-149.878282,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1869,1869
 0637,0637,CORDOVA & 11TH AVENUE SSE,61.211585,-149.879021,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1870,1870
 0640,0640,CORDOVA & 6TH AVENUE NNE,61.216944,-149.87905,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1872,1872
 0652,0652,9TH AVENUE & C STREET WNW,61.213673,-149.88852,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=1873,1873
@@ -407,7 +411,7 @@ stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url,bt_id
 1338,1338,BRAGAW & PARSONS SSW,61.229065,-149.808594,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2286,2286
 1339,1339,BRAGAW & THOMPSON SSW,61.227228,-149.808536,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2287,2287
 1340,1340,BRAGAW & PETERKIN SSW,61.225428,-149.808593,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2288,2288
-1341,1341,MOUNTAIN VIEW & BRAGAW WNW,61.224231,-149.810071,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2289,2289
+1341,1341,MOUNTAIN VIEW & BRAGAW WNW,61.224231,-149.810071,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2844,2844
 1342,1342,MOUNTAIN VIEW & PRICE WNW,61.224232,-149.812792,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2290,2290
 1343,1343,COMMERCIAL & TAYLOR WNW,61.224244,-149.817985,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2291,2291
 1344,1344,COMMERCIAL & MEYER WNW,61.224241,-149.823841,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2292,2292
@@ -588,7 +592,7 @@ stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url,bt_id
 7017,7017,BRAGAW ST & 7TH AVE NNE,61.21625,-149.808182,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2850,2850
 7016,7016,BRAGAW ST & 3RD AVE SSW,61.219911,-149.808452,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2851,2851
 7015,7015,BRAGAW ST & 4TH AVE NNE,61.219074,-149.808235,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2852,2852
-7013,7013,MOUNTAIN VIEW DR & BRAGAW ST WSW,61.224046,-149.809478,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2828,2828
+7013,7013,MOUNTAIN VIEW DR & BRAGAW ST WSW,61.224046,-149.809478,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2853,2853
 1479,1479,MOUNTAIN VIEW DR & HOYT ST,61.224297,-149.800623,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2768,2768
 1478,1478,MOUNTAIN VIEW DR & FLOWER ESE,61.224107,-149.805813,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2767,2767
 3723,3723,ARCTIC & 42ND AVE SSW,61.18275,-149.898166,http://bustracker.muni.org/InfoPoint/departures.aspx?stopid=2870,2870
