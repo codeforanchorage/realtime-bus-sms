@@ -17,13 +17,13 @@ var api;
 var config = require('../lib/config');
 var lib = require('../lib/bustracker');
 var geocode = require('../lib/geocode');
-var stop_number_lookup = require('../lib/stop_number_lookup');
+
 var hashwords = require('hashwords')();
 var fs = require('fs');
 var crypto = require('crypto');
 var sandbox = require('sinon').sandbox.create();
 var sinon = require('sinon')
-
+var gtfs = require('../lib/gtfs')
 // Helper functions
 
 /*
@@ -195,7 +195,8 @@ exports.group = {
             },
             asyncTime: 686
         }
-        done();
+        setTimeout(done, 500) // allow time for GTFS files to be parsed
+
     },
 
     tearDown: function (done) {
@@ -246,7 +247,7 @@ exports.group = {
 
 // Test Stop ID (Hard-coded stopIds should probably be read from list)
     test_browserStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         api.post(test, '/ajax', {
             data: {Body: stopId}
         }, function (res) {
@@ -254,7 +255,7 @@ exports.group = {
         });
     },
     test_smsStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         api.post(test, '/', {
             data: {Body: stopId}
         }, function (res) {
@@ -262,13 +263,13 @@ exports.group = {
         });
     },
     test_fbStopId: function(test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         testFBMsgResponse(test, stopId, new RegExp("Stop " + stopId))
     },
 
 // Alternate stopId combos (Assume browser and FB same as SMS)
     test_smsHashStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         var altStopId = "#" + stopId;
         api.post(test, '/', {
             data: {Body: altStopId}
@@ -277,7 +278,7 @@ exports.group = {
         });
     },
     test_smsHashSpaceStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         var altStopId = "# " + stopId;
         api.post(test, '/', {
             data: {Body: altStopId}
@@ -286,7 +287,7 @@ exports.group = {
         });
     },
     test_smsHashZeroStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         var altStopId = "#00" + stopId;
         api.post(test, '/', {
             data: {Body: altStopId}
@@ -295,7 +296,7 @@ exports.group = {
         });
     },
     test_smsStopHashStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         var altStopId = "Stop # " + stopId;
         api.post(test, '/', {
             data: {Body: altStopId}
@@ -304,7 +305,7 @@ exports.group = {
         });
     },
     test_smsStopStopId: function (test) {
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         var altStopId = "Stop" + stopId;
         api.post(test, '/', {
             data: {Body: altStopId}
@@ -349,7 +350,7 @@ exports.group = {
 
 // Test logging
     test_smsLogging: function (test) {
-        var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
+        var input = Math.floor(Math.random() * 10000000) // Input large INT to prevent hitting other serives like Watson and places
         var phone = "608-555-1212";
         api.post(test, '/', {
             data: {Body: input,
@@ -359,7 +360,7 @@ exports.group = {
         });
     },
     test_browserLogging: function (test) {
-        var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
+        var input = Math.floor(Math.random() * 10000000) // Input large INT to prevent hitting other serives like Watson and places
         api.post(test, '/ajax', {
             data: {Body: input}
         }, function (res) {
@@ -367,7 +368,7 @@ exports.group = {
         });
     },
     test_fbLogging: function(test) {
-        var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
+        var input = Math.floor(Math.random() * 10000000) // Input large INT to prevent hitting other serives like Watson and places
        // testFBMsgResponse(test, input, /Stop/)
         testFBMsgResponse(undefined, input, /Stop/i);
         setTimeout(function () {testLogging(test, input, undefined, FBUser)}, 500);  //Delay to make sure logging saves
@@ -563,7 +564,7 @@ exports.group = {
 // Bustracker failure
     test_browserNetworkFailure: function(test) {
         config.MUNI_URL = '';
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         api.post(test, '/ajax', {
             data: {Body: stopId}
         }, function (res) {
@@ -572,7 +573,7 @@ exports.group = {
     },
     test_smsNetworkFailure: function(test) {
         config.MUNI_URL = '';
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         api.post(test, '/', {
             data: {Body: stopId}
         }, function (res) {
@@ -581,12 +582,12 @@ exports.group = {
     },
     test_fbNetworkFailure: function(test) {
         config.MUNI_URL = '';
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         testFBMsgResponse(test, stopId, /Bustracker is down/);
     },
     test_browserOutage: function(test) {
         config.MUNI_URL = "http://bustracker.muni.org/InfoPoint/departure.aspx?stopid=";  //"departures.aspx" spelled wrong
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         api.post(test, '/ajax', {
             data: {Body: stopId}
         }, function (res) {
@@ -595,16 +596,17 @@ exports.group = {
     },
     test_smsOutage: function(test) {
         config.MUNI_URL = "http://bustracker.muni.org/InfoPoint/departure.aspx?stopid=";  //"departures.aspx" spelled wrong
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         api.post(test, '/', {
             data: {Body: stopId}
         }, function (res) {
             testOutage(test, res)
         });
     },
+
     test_fbOutage: function(test) {
         config.MUNI_URL = "http://bustracker.muni.org/InfoPoint/departure.aspx?stopid=";  //"departures.aspx" spelled wrong
-        for (var stopId in stop_number_lookup) break;
+        for (var stopId in gtfs.stop_number_lookup) break;
         testFBMsgResponse(test, stopId, /Bustracker is down/);
     }
 
