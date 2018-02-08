@@ -21,7 +21,7 @@ html
             div(id="output")
 
                 block info
-
+                    
                     h3 How this works:
                     p <b>Get bus ETAs:</b><br />Enter a bus stop number into the field above to see when the next bus arrives. 
 
@@ -40,6 +40,11 @@ html
                 br
                 button(type="submit", value="Send Feedback") Send Feedback
                 button(type="reset", value="Cancel" , onclick="closeFeedback()") Cancel 
+
+            br
+            br
+            a(onclick="return electricBus()" id="electric_bus") Find the Electric Bus
+                
             div(id="footer")
                 div
                     a(href="http://codeforanchorage.org")
@@ -199,4 +204,21 @@ html
                     }
             );
         }
+        
+        function electricBus() {
+            var http = new XMLHttpRequest();
+            var url = '/electricBus';
+            http.open('GET', url, true);
+
+            http.onreadystatechange = function() {
+                if(this.readyState == 4) {
+                    var output = 'Sorry, there was an error';
+                    if(this.status == 200) output = this.responseText;
+                    output = output.replace(/\n/g, '<br>');
+                    electric_bus.innerHTML = output;
+                }   
+            }.bind(http);
+            http.send();
+        }
+
 
