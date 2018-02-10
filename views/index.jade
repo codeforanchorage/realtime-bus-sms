@@ -208,22 +208,6 @@ html
             );
         }
         
-        //- function electricBus() {
-        //-     var http = new XMLHttpRequest();
-        //-     var url = '/electricBus';
-        //-     http.open('GET', url, true);
-
-        //-     http.onreadystatechange = function() {
-        //-         if(this.readyState == 4) {
-        //-             var output = 'Sorry, there was an error';
-        //-             if(this.status == 200) output = this.responseText;
-        //-             output = output.replace(/\n/g, '<br>');
-        //-             electric_bus.innerHTML = output;
-        //-         }   
-        //-     }.bind(http);
-        //-     http.send();
-        //- }
-
         function electricBus() {
             var http = new XMLHttpRequest();
             var url = '/electricBus';
