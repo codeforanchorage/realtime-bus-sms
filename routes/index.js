@@ -15,7 +15,7 @@ var https = require('https');
 
 var watson = require('watson-developer-cloud');
 
-var electricBus = require('../lib/eb'); 
+var electricBus = require('../lib/electric_bus'); 
 
 /*
     WATSON MIDDLE WARE
