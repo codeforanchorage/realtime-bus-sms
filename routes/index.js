@@ -15,7 +15,7 @@ var https = require('https');
 
 var watson = require('watson-developer-cloud');
 
-var electricBus = require('../lib/electric_bus'); 
+var electricBus = require('../lib/electric_bus');
 
 /*
     WATSON MIDDLE WARE
@@ -257,9 +257,9 @@ function addLinkToRequest(req,res, next){
     res.render = function(view, options, callback) {
         _render.call(this, view, options, (err, text) => {
             if (err) return next(err)
-            
+
             res.send(text + message)
-            
+
             // uncomment below when we want to go back to previous behavior
            /* if ( text.length + message.length <= single_message_limit ) {
                 res.send(text + message)
@@ -463,6 +463,7 @@ router.get('/byLatLon', function(req, res, next) {
 
 // find the electric bus
 router.get('/electricBus', function(req, res, next) {
+    res.locals.action = 'Electric Bus'
     electricBus.getLatestBusInfo(function(error, data) {
         if (error) {res.send(error)}
         res.send(data);
