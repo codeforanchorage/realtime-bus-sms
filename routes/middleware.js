@@ -10,6 +10,7 @@ const emojiRegex   = require('emoji-regex')
 const fs           = require('fs')
 const twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN)
 const pug          = require('pug');
+const electricBus  = require('../lib/electric_bus')
 
 /* Facebook requirements */
 const request = require('request')
@@ -174,6 +175,21 @@ function findbyLatLon(req, res, next) {
         return res.render('message', {message: {message: "No stops found near you"}});
     }
     res.render('route-list-partial', {routes: {data: {stops: data}} });
+}
+
+/**
+ * Respond to requests from browser for electic bus location
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+
+function findElecticBus(req, res, next) {
+    res.locals.action = 'Electric Bus'
+    electricBus.getLatestBusInfo(function(error, data) {
+        if (error) {res.send(error)}
+        res.send(data);
+    })
 }
 
 
@@ -342,5 +358,6 @@ module.exports = {
     aboutResponder: aboutResponder,
     stopNumberResponder: stopNumberResponder,
     addressResponder: addressResponder,
+    findElecticBus: findElecticBus,
     findbyLatLon: findbyLatLon,
 }

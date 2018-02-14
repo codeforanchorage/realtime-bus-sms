@@ -82,17 +82,16 @@ router.get('/find/', function(req, res, next) {
 });
 
 router.get('/find/:query', function(req, res, next) {
-    req.body.Body = req.params.query
-    res.locals.returnHTML = 1;
-    res.locals.renderWholePage = 1;
-    next();
+        req.body.Body = req.params.query
+        res.locals.returnHTML = 1;
+        res.locals.renderWholePage = 1;
+        next();
     },
     mw.checkServiceExceptions,
     mw.blankInputRepsonder,
     mw.stopNumberResponder,
     mw.askWatson,
     mw.addressResponder
-
 );
 
 /*
@@ -115,9 +114,12 @@ router.get('/byLatLon',
 router.get('/fbhook', fb.verify);
 router.post('/fbhook', fb.update);
 
+/*
+    Find the electric bus
+*/
+router.get('/electricBus', mw.findElecticBus)
 
-/*  FEEDBACK FORM ENDPOINT */
-
+/* FEEDBACK ROUTES */
 router.post('/feedback',
     feedback.feedbackResponder_web
 );
