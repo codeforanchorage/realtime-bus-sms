@@ -43,7 +43,7 @@ router.post('/',
     mw.aboutResponder,
     mw.stopNumberResponder,
     mw.askWatson,
-    mw.addressResponder,
+    mw.addressResponder
 );
 
 /* BROWSER AJAX ENDPOINT */
@@ -59,7 +59,7 @@ router.post('/ajax',
     mw.aboutResponder,
     mw.stopNumberResponder,
     mw.askWatson,
-    mw.addressResponder,
+    mw.addressResponder
 );
 
 /*
