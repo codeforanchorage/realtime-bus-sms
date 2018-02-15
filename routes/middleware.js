@@ -196,8 +196,8 @@ function findElecticBus(req, res, next) {
 /**
  * Watson Conversation Middleware
  * This provides an interface to IBM Watson's conversation service.
- * It uses a trained machine learning model to determine user intent from their message
- * for more information see:  https://www.ibm.com/watson/services/conversation/
+ * It uses a trained machine learning model to determine user intent from their message.
+ * For more information see:  https://www.ibm.com/watson/services/conversation/
  *
  * A trained watson model hosted on IBM bluemix is required to use this.
  * Credentials for bluemix will need to be added to the config.js

@@ -35,6 +35,11 @@ router.get('/', function(req, res, next) {
  */
 
 router.post('/',
+    function(req, res, next) {
+        /* Required otherwise twilio expects Twilio Markup XML */
+        res.set('Content-Type', 'text/plain');
+        next()
+    },
     feedback.feedbackResponder_sms,
     mw.sanitizeInput,
     mw.checkServiceExceptions,
