@@ -1,6 +1,7 @@
 node_modules
-gtfs/
+gtfs/raw/*
 config.js
+!lib/config.js
 *.swp
 *.DS_Store
 *.vscode

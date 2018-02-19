@@ -35,6 +35,11 @@ router.get('/', function(req, res, next) {
  */
 
 router.post('/',
+    function(req, res, next) {
+        /* Required otherwise twilio expects Twilio Markup XML */
+        res.set('Content-Type', 'text/plain');
+        next()
+    },
     feedback.feedbackResponder_sms,
     mw.sanitizeInput,
     mw.checkServiceExceptions,
@@ -43,7 +48,7 @@ router.post('/',
     mw.aboutResponder,
     mw.stopNumberResponder,
     mw.askWatson,
-    mw.addressResponder,
+    mw.addressResponder
 );
 
 /* BROWSER AJAX ENDPOINT */
@@ -59,7 +64,7 @@ router.post('/ajax',
     mw.aboutResponder,
     mw.stopNumberResponder,
     mw.askWatson,
-    mw.addressResponder,
+    mw.addressResponder
 );
 
 /*
@@ -82,17 +87,16 @@ router.get('/find/', function(req, res, next) {
 });
 
 router.get('/find/:query', function(req, res, next) {
-    req.body.Body = req.params.query
-    res.locals.returnHTML = 1;
-    res.locals.renderWholePage = 1;
-    next();
+        req.body.Body = req.params.query
+        res.locals.returnHTML = 1;
+        res.locals.renderWholePage = 1;
+        next();
     },
     mw.checkServiceExceptions,
     mw.blankInputRepsonder,
     mw.stopNumberResponder,
     mw.askWatson,
     mw.addressResponder
-
 );
 
 /*
@@ -115,9 +119,12 @@ router.get('/byLatLon',
 router.get('/fbhook', fb.verify);
 router.post('/fbhook', fb.update);
 
+/*
+    Find the electric bus
+*/
+router.get('/electricBus', mw.findElecticBus)
 
-/*  FEEDBACK FORM ENDPOINT */
-
+/* FEEDBACK ROUTES */
 router.post('/feedback',
     feedback.feedbackResponder_web
 );

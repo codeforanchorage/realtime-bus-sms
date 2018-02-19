@@ -100,6 +100,13 @@ describe("Routes", function(){
             .end((err, res) =>  (clock.restore(), done(err)))
         })
 
+        it('Should set Content/Type to text/plain', function(done){
+            request.post('/')
+            .send({Body: '1'})
+            .expect('Content-Type', /text\/plain/)
+            .end((err, res) => done(err))
+        })
+
         it('Should respond to blank input', function(done){
             request.post('/')
             .send("")

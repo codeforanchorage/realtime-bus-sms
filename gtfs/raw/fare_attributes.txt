@@ -1,2 +1,0 @@
-fare_id,price,currency_type,payment_method,transfers
-Adult,2,USD,0,0
