@@ -35,9 +35,7 @@ describe("Integration Tests", function(){
 
     before(function(){
         // If today is a bus holiday move day 
-        // so tests don't trigger holiday exception
         while (gtfs.serviceExceptions()){
-            console.log("Holiday. setting new date")
             clock =  sinon.useFakeTimers(moment().add(1, 'days').tz(config.TIMEZONE).valueOf())
         }
     })
