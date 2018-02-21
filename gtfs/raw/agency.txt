@@ -1,2 +1,0 @@
-agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone
-Anchorage People Mover,Anchorage People Mover,http://www.peoplemover.org/,America/Anchorage,en,(907)343-6543

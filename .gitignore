@@ -1,11 +1,15 @@
 node_modules
+gtfs/raw/*
 config.js
+!lib/config.js
 *.swp
 *.DS_Store
 *.vscode
 .idea
+lib/.vscode
 public/db.json
-
+npm-debug.log
 comments.json
 
 db_private.json
+.nyc_output

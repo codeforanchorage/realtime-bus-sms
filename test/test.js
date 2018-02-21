@@ -3,6 +3,7 @@ var nock = require('nock');
 process.env.FB_APP_SECRET = 'secret' // note: this must be set before requiring app code
 nock.enableNetConnect();
 nock('https://graph.facebook.com').log(console.log);
+
 var FBUser = "123456";   // FB User to receive messages on outgoing responses
 
 // Server config
@@ -14,14 +15,15 @@ var server = http.createServer(app);
 var api;
 
 var config = require('../lib/config');
-var lib = require('../lib/index')
-var gtfs = require('../lib/gtfs');
+var lib = require('../lib/bustracker');
+var geocode = require('../lib/geocode');
+
 var hashwords = require('hashwords')();
 var fs = require('fs');
 var crypto = require('crypto');
 var sandbox = require('sinon').sandbox.create();
 var sinon = require('sinon')
-
+var gtfs = require('../lib/gtfs')
 // Helper functions
 
 /*
@@ -57,6 +59,7 @@ function testFBMsgResponse(test, message, response) {
         .update(verifyBuf)
         .digest('hex');
     console.log("VerifyHash: " + verifyHash);
+
     api.post(test, '/fbhook', {
         data: data,
         headers: { 'x-hub-signature' : 'sha1='+verifyHash }
@@ -66,6 +69,7 @@ function testFBMsgResponse(test, message, response) {
             if (test) test.done();
         }, 1500);
     });
+
 }
 
 function testFeedback(test, res, feedbackString, phone, email, fbUser) {
@@ -191,11 +195,8 @@ exports.group = {
             },
             asyncTime: 686
         }
-        sandbox.stub(lib, 'getGeocodedAddress').returns(
-            Promise.resolve(fake_geocoding_output)
-        )
+        setTimeout(done, 500) // allow time for GTFS files to be parsed
 
-        done();
     },
 
     tearDown: function (done) {
@@ -203,91 +204,9 @@ exports.group = {
         sandbox.restore();
         done();
     },
-// Test emoji Removal from User Input
-    test_emojiRemovalBrowserAddress: function(test) {
-        var input = "5th and G 💋 Street"
-        var spy = sinon.spy(lib, "getStopsFromAddress");
-        api.post(test, '/ajax', {
-            data: {Body: input}
-        }, function (res) {
-            test.ok(spy.args[0][0].indexOf("💋") == -1, "Test Browser Emoji Removal From Address");
-            lib.getStopsFromAddress.restore();
-            test.done();
-        });
-    },
-    test_emojiRemovalSMSAddress: function(test) {
-        var input = "5th and G 👍 Street"
-        var spy = sinon.spy(lib, "getStopsFromAddress");
-        api.post(test, '/', {
-            data: {Body: input}
-        }, function (res) {
-            test.ok(spy.args[0][0] == "5th and G  Street", "Test SMS Emoji Removal From Address");
-            lib.getStopsFromAddress.restore();
-            test.done();
-        });
-    },
-    test_emojiRemovalBrowserStopNumber: function(test) {
-        var input = "1066😀"
-        var spy = sinon.spy(lib, "getStopFromStopNumber");
-        api.post(test, '/ajax', {
-            data: {Body: input}
-        }, function (res) {
-            test.ok(spy.called && spy.args[0][0] == 1066, "Test Browser Emoji Removal From Stop Number");
-            lib.getStopFromStopNumber.restore();
-            test.done();
-        }); 
-    },
-    test_emojiRemovalSMSStopNumber: function(test) {
-        var input = "1066👌"
-        var spy = sinon.spy(lib, "getStopFromStopNumber");
-        api.post(test, '/', {
-            data: {Body: input}
-        }, function (res) {
-            test.ok(spy.called && spy.args[0][0] == 1066, "Test SMS Emoji Removal From Stop Number");
-            lib.getStopFromStopNumber.restore();
-            test.done();
-        });
-    },
-    test_emojiRemovalGETStopNumber: function(test) {
-        var spy = sinon.spy(lib, "getStopFromStopNumber");
-        api.get(test, "/find/1066" + encodeURIComponent('👆'), function (res) { // emoji uri encoded as high/low pair
-            test.ok(spy.called && spy.args[0][0] == 1066, "Test direct URL Emoji Removal From Stop Number");
-            lib.getStopFromStopNumber.restore();
-            test.done();
-        });
-    },
-    test_emojiRemovalGETAddress: function(test) {
-        var address = "5th and G Street"
-        var spy = sinon.spy(lib, "getStopsFromAddress");
-        api.get(test, "/find/" + encodeURIComponent('👉') + encodeURIComponent(address), function (res) { // emoji uri encoded as high/low pair
-            test.ok(spy.called && spy.args[0][0] == address, "Test direct URL Emoji Removal From Address");
-            lib.getStopsFromAddress.restore();
-            test.done();
-        });
-    },
-    test_browserWhiteSpaceRemoval: function(test) {
-        var input = "5th and G\tStreet\nSome \tOther Text";
-        var spy = sinon.spy(lib, "getStopsFromAddress");
-        api.post(test, '/ajax', {
-            data: {Body: input}
-        }, function (res) {
-            test.ok(spy.called && spy.args[0][0] == "5th and G Street", "Test Browser Removal of multi-line input");
-            lib.getStopsFromAddress.restore();
-            test.done();
-        }); 
-    },
-    test_SMSWhiteSpaceRemoval: function(test) {
-        var input = "5th\tand G Street\nSome Other\n Text";
-        var spy = sinon.spy(lib, "getStopsFromAddress");
-        api.post(test, '/', {
-            data: {Body: input}
-        }, function (res) {
-            test.ok(spy.called && spy.args[0][0] == "5th and G Street", "Test SMS Removal of multi-line input");
-            lib.getStopsFromAddress.restore();
-            test.done();
-        }); 
-    },
+
 //Test the home page
+
     test_browserHome: function (test) {
         api.get(test, '/', function (res) {
             test.ok(res.body.indexOf("When’s the<br />next bus?") > -1, "Test homepage heading");
@@ -308,7 +227,8 @@ exports.group = {
             )
             test.done()
         });
-    },
+    }
+    ,
     test_smsAddressEntry: function (test) {
         var address = "JEWEL LAKE & 82ND";
         api.post(test, '/', {
@@ -430,7 +350,7 @@ exports.group = {
 
 // Test logging
     test_smsLogging: function (test) {
-        var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
+        var input = Math.floor(Math.random() * 10000000) // Input large INT to prevent hitting other serives like Watson and places
         var phone = "608-555-1212";
         api.post(test, '/', {
             data: {Body: input,
@@ -440,7 +360,7 @@ exports.group = {
         });
     },
     test_browserLogging: function (test) {
-        var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
+        var input = Math.floor(Math.random() * 10000000) // Input large INT to prevent hitting other serives like Watson and places
         api.post(test, '/ajax', {
             data: {Body: input}
         }, function (res) {
@@ -448,8 +368,9 @@ exports.group = {
         });
     },
     test_fbLogging: function(test) {
-        var input = (Math.random().toString(36)+'00000000000000000').slice(2, 12);  // Input 12 random characters just to get something logged
-        testFBMsgResponse(undefined, input, /Stop/);
+        var input = Math.floor(Math.random() * 10000000) // Input large INT to prevent hitting other serives like Watson and places
+       // testFBMsgResponse(test, input, /Stop/)
+        testFBMsgResponse(undefined, input, /Stop/i);
         setTimeout(function () {testLogging(test, input, undefined, FBUser)}, 500);  //Delay to make sure logging saves
     },
 
@@ -483,6 +404,7 @@ exports.group = {
     },
 
 // Test feedback
+
     test_browserFeedback: function (test) {
         var feedbackString = "Test Feedback " + (new Date().toISOString());
         var email = "test@example.com";
@@ -681,13 +603,12 @@ exports.group = {
             testOutage(test, res)
         });
     },
+
     test_fbOutage: function(test) {
         config.MUNI_URL = "http://bustracker.muni.org/InfoPoint/departure.aspx?stopid=";  //"departures.aspx" spelled wrong
         for (var stopId in gtfs.stop_number_lookup) break;
         testFBMsgResponse(test, stopId, /Bustracker is down/);
     }
-
-
 
 
 };

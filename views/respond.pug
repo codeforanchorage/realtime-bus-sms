@@ -1,0 +1,44 @@
+doctype html
+html
+    head
+        title= title
+        style.
+            body {
+                font-family: sans-serif;
+                text-align: center;
+            }
+            button {
+                margin: 20px auto;
+            }
+            .logo-tag {
+                font-size: 10pt;
+                vertical-align: middle;
+            }
+            .logo {
+                width: 40px;
+                height: 40px;
+                vertical-align: middle;
+            }
+
+        meta(name='MobileOptimized', content='320')
+        meta(name='viewport', content='width=device-width, minimum-scale=1, maximum-scale=1')
+        meta(name='apple-mobile-web-app-capable' content='yes')
+
+
+    body
+        h1 Respond to feedback
+        p Original feedback: #{pageData.feedback}
+        p From phone: #{pageData.phone}
+        form(method="POST" action="/respond" id="respond")
+            input(type="hidden" name="hash" value=pageData.hash)
+            textarea(name="response" id="response" style="width:300px; height:50px;")
+            br
+            input(type="submit", value="Send Response")
+
+    p
+        div
+            a(href="http://codeforanchorage.org")
+                img.logo(src="img/cfa.png")
+            span.logo-tag &nbsp; Code For Anchorage
+
+
