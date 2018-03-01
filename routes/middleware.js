@@ -302,7 +302,7 @@ function askWatson(req, res, next){
                 // Watson thinks the user is looking for a known place entity
                 // Set the location to the known place's canonical name
                 // and send to google geocoder
-                res.locals.known_location = response.entities.filter((element) =>  element['entity'] == "anchorage-location"  )[0];
+                res.locals.known_location = response.entities.find((element) =>  element['entity'] == "anchorage-location"  );
                 next()
             } 
             else {
