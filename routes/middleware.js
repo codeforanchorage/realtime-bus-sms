@@ -188,7 +188,6 @@ function findElecticBus(req, res, next) {
     res.locals.action = 'Electric Bus'
     electricBus.getLatestBusInfo(function(error, data) {
         if (error) {res.send(error)}
-        console.log(data)
         res.render('electric-bus', {data: data})
     })
 }
