@@ -516,8 +516,8 @@ describe('Middleware Function', function(){
             req.body =  {Body:input}
             messageStub.yields(null, watson_response.address_lookup_with_known_location)
             mw.askWatson(req, res, next)
-            assert.equal(res.locals.known_location[0].value, 'Alaska Native Tribal Health Consortium')
-            assert.equal(res.locals.known_location[0].entity, 'anchorage-location')
+            assert.equal(res.locals.known_location.value, 'Alaska Native Tribal Health Consortium')
+            assert.equal(res.locals.known_location.entity, 'anchorage-location')
         })
 
         it("Should set res.locals.action to 'Watson Chat' and render message for all other intents", function(){

@@ -266,8 +266,6 @@ function askWatson(req, res, next){
                 res.locals.message = {message:response.output.text.join(' ')}
                 return res.render('message')
             }
-
-
             if(response.context.action === "Stop Lookup"){
                 // Earlier middleware should catch plain stop numbers
                 // But a query like "I'm at stop 36" will end up here
@@ -299,13 +297,15 @@ function askWatson(req, res, next){
             } else if (response.context.action === "Address Lookup"){
                 // Watson has determined the user is looking for an address
                 // send the request to google places and see what we get.
-
-                // Certain frequently-used locations are hard coded into our Watson model
-                // If the user search for one of these it will be saved in know_location
-                // and passed to geocoder.
-                res.locals.known_location = response.entities.filter((element) =>  element['entity'] == "anchorage-location"  );
                 next()
-            } else {
+            } else if (response.context.action === "Known Place"){
+                // Watson thinks the user is looking for a known place entity
+                // Set the location to the known place's canonical name
+                // and send to google geocoder
+                res.locals.known_location = response.entities.find((element) =>  element['entity'] == "anchorage-location"  );
+                next()
+            } 
+            else {
                 // For everything else.
                 res.locals.action = 'Watson Chat'
                 res.locals.message = {message:response.output.text.join(' ')}
