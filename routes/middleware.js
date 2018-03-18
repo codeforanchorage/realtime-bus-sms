@@ -323,7 +323,7 @@ function askWatson(req, res, next){
  */
 function addressResponder(req, res, next){
     const known_location = res.locals.known_location
-    const input = (known_location && known_location.length > 0) ? known_location[0].value : req.body.Body;
+    const input = known_location ? known_location.value : req.body.Body;
     res.locals.action = 'Address Lookup'
     return geocode.stops_near_location(input)
     .then((routeObject) => {
