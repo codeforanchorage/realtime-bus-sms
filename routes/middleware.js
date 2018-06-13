@@ -10,7 +10,6 @@ const emojiRegex   = require('emoji-regex')
 const fs           = require('fs')
 const twilioClient = require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN)
 const pug          = require('pug');
-const electricBus  = require('../lib/electric_bus')
 
 /* Facebook requirements */
 const request = require('request')
@@ -178,22 +177,6 @@ function findbyLatLon(req, res, next) {
 }
 
 /**
- * Respond to requests from browser for electic bus location
- * @param {*} req
- * @param {*} res
- * @param {*} next
- */
-
-function findElecticBus(req, res, next) {
-    res.locals.action = 'Electric Bus'
-    electricBus.getLatestBusInfo(function(error, data) {
-        if (error) {res.send(error)}
-        res.render('electric-bus', {data: data})
-    })
-}
-
-
-/**
  * Watson Conversation Middleware
  * This provides an interface to IBM Watson's conversation service.
  * It uses a trained machine learning model to determine user intent from their message.
@@ -358,6 +341,5 @@ module.exports = {
     aboutResponder: aboutResponder,
     stopNumberResponder: stopNumberResponder,
     addressResponder: addressResponder,
-    findElecticBus: findElecticBus,
     findbyLatLon: findbyLatLon,
 }

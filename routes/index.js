@@ -119,11 +119,6 @@ router.get('/byLatLon',
 router.get('/fbhook', fb.verify);
 router.post('/fbhook', fb.update);
 
-/*
-    Find the electric bus
-*/
-router.get('/electricBus', mw.findElecticBus)
-
 /* FEEDBACK ROUTES */
 router.post('/feedback',
     feedback.feedbackResponder_web
