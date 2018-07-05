@@ -10,7 +10,6 @@ const nock             = require('nock')
 const app              = require('../app')
 const config           = require('../lib/config')
 const { URL }          = require('url')
-
 const http             = require('http')
 const logger           = require('../lib/logger')
 const moment           = require('moment-timezone')
