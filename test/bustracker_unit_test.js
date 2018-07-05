@@ -10,13 +10,16 @@ const moment    = require('moment-timezone')
 
 const bustracker            = require('../lib/bustracker')
     , { URL }               = require('url')
-    , muniURL               = new URL(config.MUNI_URL)
     , responses             = require('./fixtures/muniResponse')
     , gtfs                  = require('../lib/gtfs')
     , stopNumber            = 3
 
 describe('Bustracker Module', function() {
-    before(function(){ nock.disableNetConnect()})
+    let muniURL
+    before(function(){ 
+        muniURL= new URL(gtfs.stop_number_url[stopNumber])
+        nock.disableNetConnect()
+    })
     after(function(){ nock.enableNetConnect()})
 
     describe('With a good Muni response', function(){
@@ -24,7 +27,7 @@ describe('Bustracker Module', function() {
         const startTime = 100
         beforeEach(function() {
             nockscope = nock(muniURL.origin).get(muniURL.pathname)
-            .query({stopid: gtfs.stop_number_lookup[stopNumber]})
+            .query({stopid: muniURL.searchParams.get('stopid')})
             .reply(200, responses.goodResponse )
             clock = sinon.useFakeTimers({now: startTime})
             get = bustracker.getStopFromStopNumber(stopNumber)
@@ -72,7 +75,7 @@ describe('Bustracker Module', function() {
         beforeEach(function() {
             logstub = sinon.stub(logger, 'error')
             nockscope = nock(muniURL.origin).get(muniURL.pathname)
-                        .query({stopid: gtfs.stop_number_lookup[stopNumber]})
+                        .query({stopid: muniURL.searchParams.get('stopid')})
         })
         afterEach(function(){
             logstub.restore()
