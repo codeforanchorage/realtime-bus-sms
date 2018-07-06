@@ -10,7 +10,6 @@ const nock             = require('nock')
 const app              = require('../app')
 const config           = require('../lib/config')
 const { URL }          = require('url')
-const muniURL          = new URL(config.MUNI_URL)
 const http             = require('http')
 const logger           = require('../lib/logger')
 const moment           = require('moment-timezone')
@@ -24,6 +23,7 @@ const crypto           = require('crypto')
 const gtfs             = require('../lib/gtfs');
 
 let request = supertest(app)
+const stopNumber = 2051
 
 // wait until GTFS has loaded and parsed
 gtfs.GTFS_Check.on("ready", run)
@@ -31,9 +31,10 @@ gtfs.GTFS_Check.on("ready", run)
 app.enable('view cache')
 
 describe("Integration Tests", function(){
-    let clock;
+    let clock, muniURL;
 
     before(function(){
+        muniURL = new URL(gtfs.stop_number_url[stopNumber])
         // If today is a bus holiday move day 
         while (gtfs.serviceExceptions()){
             clock =  sinon.useFakeTimers(moment().add(1, 'days').tz(config.TIMEZONE).valueOf())
@@ -148,15 +149,14 @@ describe("Integration Tests", function(){
             })
 
             it('Should deliver stops to SMS requests with stop number', function(done){
-                const stop_number = "2051"
-                nock(muniURL.origin).get(muniURL.pathname).query({stopid: 1477}).reply(200, muniResponses.goodResponse )
+                nock(muniURL.origin).get(muniURL.pathname).query({stopid: muniURL.searchParams.get('stopid')}).reply(200, muniResponses.goodResponse )
 
                 request.post('/')
-                .send({Body: stop_number})
+                .send({Body: stopNumber})
                 .expect(/^\* Stop/)
                 .expect((res) =>{
                     var lines = res.text.split('\n')
-                    assert(lines[0].includes(stop_number), "Results didn't include the stop number")
+                    assert(lines[0].includes(stopNumber), "Results didn't include the stop number")
                     assert.equal(lines[2],  '10 Northern Lights - Outbound - ')
                     assert.equal(lines[3],  '4:52 PM')
                 })
@@ -189,11 +189,10 @@ describe("Integration Tests", function(){
             })
 
             it('Should pass message to user when muni site is down', function(done){
-                const stop_number = "2051"
-                nock(muniURL.origin).get(muniURL.pathname).query({stopid: 1477}).reply(404 )
+                nock(muniURL.origin).get(muniURL.pathname).query({stopid: muniURL.searchParams.get('stopid')}).reply(404 )
 
                 request.post('/')
-                .send({Body: stop_number})
+                .send({Body: stopNumber})
                 .expect(/Bustracker is down/)
                 .end((err, res) => done(err))
             })
@@ -235,11 +234,10 @@ describe("Integration Tests", function(){
             })
 
             it('Should deliver stops from requests with stop number', function(done){
-                const stop_number = "2051"
-                nock(muniURL.origin).get(muniURL.pathname).query({stopid: "1477"}).reply(200, muniResponses.goodResponse )
+                nock(muniURL.origin).get(muniURL.pathname).query({stopid:  muniURL.searchParams.get('stopid')}).reply(200, muniResponses.goodResponse )
 
                 request.post('/ajax')
-                .send({Body: stop_number})
+                .send({Body: stopNumber})
                 .expect(/<div .* 2051/)
                 .expect(/DOWNTOWN TRANSIT CENTER/)
                 .expect(/Mountain View/)
@@ -272,11 +270,10 @@ describe("Integration Tests", function(){
             })
 
             it('Should report error when muni site is down', function(done){
-                const stop_number = "2051"
-                nock(muniURL.origin).get(muniURL.pathname).query({stopid: "1477"}).reply(404)
+                nock(muniURL.origin).get(muniURL.pathname).query({stopid:  muniURL.searchParams.get('stopid')}).reply(404)
 
                 request.post('/ajax')
-                .send({Body: stop_number})
+                .send({Body: stopNumber})
                 .expect(/<div.*Bustracker is down/)
                 .end((err, res) => done(err))
             })
@@ -311,9 +308,9 @@ describe("Integration Tests", function(){
             })
 
             it('Should send full webpage with results for URL query with stop number', function(done){
-                nock(muniURL.origin).get(muniURL.pathname).query({stopid: "1477"}).reply(200, muniResponses.goodResponse )
+                nock(muniURL.origin).get(muniURL.pathname).query({stopid:  muniURL.searchParams.get('stopid')}).reply(200, muniResponses.goodResponse )
 
-                request.get('/find/2051')
+                request.get('/find/' + stopNumber)
                 .expect(/^<!DOCTYPE/)
                 .expect(/DOWNTOWN TRANSIT CENTER/)
                 .expect(/Northern Lights/)
@@ -526,11 +523,10 @@ describe("Integration Tests", function(){
 
         it('Should log SMS requests to private db', function(done){
             const from = "testPhone: " + Date.now().toString(8).slice(3)
-            const stop = "2051"
-            const nockscope = nock(muniURL.origin).get(muniURL.pathname).query({stopid: "1477"}).reply(200, muniResponses.goodResponse )
+            const nockscope = nock(muniURL.origin).get(muniURL.pathname).query({stopid:  muniURL.searchParams.get('stopid')}).reply(200, muniResponses.goodResponse )
             nock("http://www.google-analytics.com")
             request.post('/')
-            .send({Body: stop, From: from})
+            .send({Body: stopNumber, From: from})
             .end((err, res) => {
                 if (err) done(err)
                 logger.on('logging', (res) => {
@@ -553,12 +549,11 @@ describe("Integration Tests", function(){
 
         it('Should log SMS requests to public db', function(done){
             const from = "testPhone: " + Date.now().toString(8).slice(3)
-            const stop = "2051"
             nock("http://www.google-analytics.com")
-            const nockscope = nock(muniURL.origin).get(muniURL.pathname).query({stopid: "1477"}).reply(200, muniResponses.goodResponse )
+            const nockscope = nock(muniURL.origin).get(muniURL.pathname).query({stopid: muniURL.searchParams.get('stopid')}).reply(200, muniResponses.goodResponse )
 
             request.post('/')
-            .send({Body: stop, From: from})
+            .send({Body: stopNumber, From: from})
             .end((err, res) => {
                 if (err) done(err)
                 logger.on('logging', (res) => {
