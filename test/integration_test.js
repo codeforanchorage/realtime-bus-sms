@@ -22,6 +22,8 @@ const hashwords        = require('hashwords')()
 const crypto           = require('crypto')
 const gtfs             = require('../lib/gtfs');
 
+const GoogleURL  = new URL(config.GEOCODE_URL_BASE)
+
 let request = supertest(app)
 const stopNumber = 2051
 
@@ -166,13 +168,9 @@ describe("Integration Tests", function(){
             it('Should deliver nearest stops to SMS requests with address ', function(done){
                 const address = "632 W 6th Ave"
 
-                nock('https://maps.googleapis.com').get('/maps/api/place/textsearch/json')
-                .query({
-                    query: address, // nock seems to URI encode this for us
-                    location: `61.2181,-149.9003`,
-                    radius: '20000',
-                    region:'US',
-                    key: config.GOOGLE_PLACES_KEY
+                nock(GoogleURL.origin).get(GoogleURL.pathname)
+                .query(function(queryObject){
+                    return queryObject.input === `${address} ${config.GOOGLE_GEOCODE_LOCATION}`
                 })
                 .reply(200, geocodeResponses.goodResponse)
 
@@ -247,13 +245,9 @@ describe("Integration Tests", function(){
             it('Should deliver nearest stops to requests with address ', function(done){
                 const address = "632 W 6th Ave"
 
-                nock('https://maps.googleapis.com').get('/maps/api/place/textsearch/json')
-                .query({
-                    query: address, // nock seems to URI encode this for us
-                    location: `61.2181,-149.9003`,
-                    radius: '20000',
-                    region:'US',
-                    key: config.GOOGLE_PLACES_KEY
+                nock(GoogleURL.origin).get(GoogleURL.pathname)
+                .query(function(queryObject){
+                    return queryObject.input === `${address} ${config.GOOGLE_GEOCODE_LOCATION}`
                 })
                 .reply(200, geocodeResponses.goodResponse)
 
@@ -320,13 +314,9 @@ describe("Integration Tests", function(){
             it('Should send full webpage with results for URL query with address', function(done){
                 const address = '5th and G street'
 
-                nock('https://maps.googleapis.com').get('/maps/api/place/textsearch/json')
-                .query({
-                    query: address, // nock seems to URI encode this for us
-                    location: `61.2181,-149.9003`,
-                    radius: '20000',
-                    region:'US',
-                    key: config.GOOGLE_PLACES_KEY
+                nock(GoogleURL.origin).get(GoogleURL.pathname)
+                .query(function(queryObject){
+                    return queryObject.input === `${address} ${config.GOOGLE_GEOCODE_LOCATION}`
                 })
                 .reply(200, geocodeResponses.goodResponse)
 

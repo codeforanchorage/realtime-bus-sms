@@ -10,6 +10,7 @@ const gtfs       = require('../lib/gtfs')
 const { URL }    = require('url')
 const GoogleURL  = new URL(config.GEOCODE_URL_BASE)
 
+
 gtfs.GTFS_Check.on("ready", run)
 
 describe('Geocode Module', function() {
@@ -22,14 +23,11 @@ describe('Geocode Module', function() {
     it('Should request the correct Google Maps API URL', function(){
         const address = '632 W. 6th Street'
         const n = nock(GoogleURL.origin).get(GoogleURL.pathname)
-            .query({
-                query: address, // nock seems to URI encode this for us
-                location: `61.2181,-149.9003`,
-                radius: '20000',
-                region:'US',
-                key: config.GOOGLE_PLACES_KEY
-            })
-            .reply(200, responses.goodResponse)
+        .query(function(queryObject){
+           return queryObject.input === `${address} ${config.GOOGLE_GEOCODE_LOCATION}`
+        })
+        .reply(200, responses.goodResponse) 
+
 
         return geocode.stops_near_location(address)
         .then(r => n.done(), err => n.done())
@@ -43,7 +41,7 @@ describe('Geocode Module', function() {
         })
         it('Should return a geocoded address', function(){
             return get_stops
-                .then(resp => assert.equal(resp.data.geocodedAddress, responses.goodResponse.results[0].formatted_address))
+                .then(resp => assert.equal(resp.data.geocodedAddress, responses.goodResponse.candidates[0].formatted_address))
         })
         it('Should return stops that have a numeric stopId property', function(){
             return get_stops.then(resp => assert(resp.data.stops.every(stop => /^\d+$/.test(stop.stopId))))
