@@ -2,14 +2,15 @@
 
 const assert     = require('assert')
 const util       = require('util')
-const rollbar    = require("rollbar")
+const config     = require('../lib/config')
+const Rollbar    = require("rollbar")
+const rollbar    = new Rollbar(config.ROLLBAR_TOKEN)
 const sinon      = require('sinon')
 const ua         = require('universal-analytics')
 const onFinished = require('on-finished')
 const onHeaders  = require('on-headers')
 const logs       = require('../lib/logger')
 const winston    = require('winston')
-const config     = require('../lib/config')
 
 describe('Logging middleware', function(){
     let middleware, mockReq, mockRes, nextStub,loggerstub
@@ -249,7 +250,7 @@ describe('Google Analytics Transport', function(){
 describe("Rollbar Transport", function(){
     let rollbarStub
     beforeEach(function(){
-        rollbarStub = sinon.stub(rollbar, 'handleError')
+        rollbarStub = sinon.stub(Rollbar.prototype, 'log')
         logs.transports['console.info'].silent = true
     })
     afterEach(function(){
@@ -274,10 +275,8 @@ describe("Rollbar Transport", function(){
     it('Should send Error and addition message to rollbar', function(){
         let error = new Error("An Error")
         let metaObject = {foo: 'bar'}
-        let rollbarStub_ErrorWithPayload = sinon.stub(rollbar, 'reportMessageWithPayloadData')
         logs.error(error, metaObject)
-        assert(rollbarStub_ErrorWithPayload.calledWith(util.format(error), {custom: metaObject}))
-        rollbarStub_ErrorWithPayload.restore()
+        assert(rollbarStub.calledWith(util.format(error),null, {custom: metaObject}))
     })
 
 })
