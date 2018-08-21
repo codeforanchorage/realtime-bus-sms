@@ -250,7 +250,7 @@ describe('Google Analytics Transport', function(){
 describe("Rollbar Transport", function(){
     let rollbarStub
     beforeEach(function(){
-        rollbarStub = sinon.stub(Rollbar.prototype, 'log')
+        rollbarStub = sinon.stub(Rollbar.prototype, 'error')
         logs.transports['console.info'].silent = true
     })
     afterEach(function(){
