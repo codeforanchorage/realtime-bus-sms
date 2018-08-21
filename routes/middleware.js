@@ -1,6 +1,7 @@
 'use strict';
 
-const watson       = require('watson-developer-cloud')
+//const watson       = require('watson-developer-cloud')
+const ConversationV1 = require('watson-developer-cloud/conversation/v1');
 const logger       = require('../lib/logger')
 const config       = require('../lib/config')
 const lib          = require('../lib/bustracker')
@@ -199,11 +200,10 @@ function askWatson(req, res, next){
     const input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so things like "I'm" returns an unwanted number
     try {
         // conversation() will just throw an error if credentials are missing
-        var conversation = watson.conversation({
+        var conversation = new ConversationV1({
             username: config.WATSON_USER,
             password: config.WATSON_PASSWORD,
-            version: 'v1',
-            version_date: '2017-05-26'
+            version: '2017-05-26'
         })
     } catch(err) {
         logger.error(err, {input: input});

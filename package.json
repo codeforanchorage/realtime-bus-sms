@@ -44,7 +44,7 @@
     "serve-favicon": "^2.5.0",
     "twilio": "^3.19.1",
     "universal-analytics": "^0.4.8",
-    "watson-developer-cloud": "^2.9.1",
+    "watson-developer-cloud": "^3.9.0",
     "winston": "^2.3.0"
   },
   "devDependencies": {
@@ -54,7 +54,7 @@
     "nodeunit": "^0.11.3",
     "nodeunit-httpclient": "^0.2.1",
     "nyc": "^13.0.1",
-    "sinon": "^3.2.1",
+    "sinon": "^6.1.5",
     "supertest": "^3.0.0"
   }
 }
