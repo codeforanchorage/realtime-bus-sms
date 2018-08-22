@@ -1,5 +1,6 @@
 'use strict';
 
+const config = require('./lib/config');
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -7,14 +8,16 @@ const logs = require('./lib/logger');
 const cookieParser = require('cookie-parser');
 const UUID = require("pure-uuid");
 const bodyParser = require('body-parser');
-const rollbar = require("rollbar");
-const config = require('./lib/config');
+const Rollbar = require("rollbar");
+const rollbar =  new Rollbar({
+    accessToken:config.ROLLBAR_TOKEN,
+    captureUncaught: true,
+    captureUnhandledRejections: true
+})
 const lib = require('./lib/bustracker');
 const fb = require('./lib/facebook')
 const lowDB_transport = require('./lib/lowdb_log_transport')
 const routes = require('./routes/index');
-
-rollbar.init(config.ROLLBAR_TOKEN);
 
 const app = express();
 
@@ -115,10 +118,7 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-app.use(rollbar.errorHandler(process.env.ROLLBAR_TOKEN));
-rollbar.handleUncaughtExceptionsAndRejections(
-    process.env.ROLLBAR_TOKEN,
-    {exitOnUncaughtException: true}
-);
+app.use(rollbar.errorHandler());
+
 
 module.exports = app;

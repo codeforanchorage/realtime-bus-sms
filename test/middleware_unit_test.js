@@ -6,7 +6,8 @@ const lib       = require('../lib/bustracker')
 const geocode   = require('../lib/geocode')
 const logger    = require('../lib/logger')
 const config    = require('../lib/config')
-const watson    = require('watson-developer-cloud')
+//const watson    = require('watson-developer-cloud')
+const ConversationV1 = require('watson-developer-cloud/conversation/v1');
 const request   = require('request')
 const mw        = require('../routes/middleware')
 const fakedata  = require('./fixtures/stopdata')
@@ -396,12 +397,11 @@ describe('Middleware Function', function(){
     })
 
     describe("askWatson", function(){
-        let watsonStub, messageStub, next, res, req, loggerStub, watson_response, getStopsStub, getStopsStubLocation
+        let messageStub, next, res, req, loggerStub, watson_response, getStopsStub, getStopsStubLocation
         beforeEach(function(){
             watson_response = require('./fixtures/watson_context')
             next = sinon.stub()
-            messageStub = sinon.stub()
-            watsonStub = sinon.stub(watson, 'conversation').returns({message: messageStub})
+            messageStub = sinon.stub(ConversationV1.prototype, "message")//.returns({message: watson_response})
             loggerStub =  sinon.stub(logger, 'error')
             res = {render: sinon.stub(), locals: {}, cookie: sinon.stub()}
             getStopsStub = sinon.stub(lib, 'getStopFromStopNumber')
@@ -411,29 +411,10 @@ describe('Middleware Function', function(){
         afterEach(function(){
             getStopsStub.restore()
             getStopsStubLocation.restore()
-            watsonStub.restore()
+            messageStub.restore()
             loggerStub.restore()
         })
-        it("Should call the Watson Init Function with correct versions, date, and auth info", function(){
-            mw.askWatson(req, res, next)
-            sinon.assert.calledWith(watsonStub, sinon.match({version: 'v1'}))
-            sinon.assert.calledWith(watsonStub, sinon.match({version_date: '2017-05-26'}))
-            sinon.assert.calledWith(watsonStub, sinon.match.has('username'))
-            sinon.assert.calledWith(watsonStub, sinon.match.has('password'))
-        })
-        it("Should log an error when Watson init fails", function(){
-            let error = new Error("Watson Error")
-            watsonStub.throws(error)
-            mw.askWatson(req, res, next)
-            sinon.assert.calledWith(loggerStub, error)
-        })
-        it("Should return a not found message to the user when Watson init fails", function(){
-            let error = new Error("Watson Error")
-            watsonStub.throws(error)
-            mw.askWatson(req, res, next)
-            assert.deepEqual(res.locals.message, {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`} )
-            sinon.assert.calledWith(res.render, "message")
-        })
+        
         it("Should call waston message with workspace, user input, and contex", function(){
             let context = JSON.parse(req.cookies['context'])
             mw.askWatson(req, res, next)
