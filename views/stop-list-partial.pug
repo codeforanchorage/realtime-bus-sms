@@ -17,5 +17,5 @@ else
     each stop in routes.data.stops
         | 
         |#{stop.number} #{stop.name} - 
-        |#{stop.times[0]}
+        |#{stop.times.join(", ")}
         | 
