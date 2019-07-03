@@ -7,7 +7,6 @@
     "integration": "mocha --delay test/*integration_test.js  || true",
     "unit": "mocha --delay test/*unit_test.js || true",
     "test": "npm run unit && npm run integration",
-    "test_original": "nodeunit test/test.js",
     "start": "node ./bin/www"
   },
   "repository": {
@@ -36,7 +35,7 @@
     "moment-timezone": "^0.5.0",
     "on-finished": "^2.3.0",
     "on-headers": "^1.0.1",
-    "pug": "^2.0.0-rc.3",
+    "pug": "^2.0.4",
     "pure-uuid": "^1.4.2",
     "request": "^2.88.0",
     "rollbar": "^2.4.4",
@@ -51,9 +50,6 @@
     "mocha": "^5.0.0",
     "nock": "^9.1.6",
     "node-mocks-http": "^1.6.4",
-    "nodeunit": "^0.11.3",
-    "nodeunit-httpclient": "^0.2.1",
-    "nyc": "^13.0.1",
     "sinon": "^6.1.5",
     "supertest": "^3.0.0"
   }
