@@ -272,7 +272,6 @@ describe("User Feedback", function(){
                     assert.equal(the_comment.phone, undefined)
                 })
             })
-
         })
     })
 
