@@ -2,7 +2,6 @@
 
 const assert    = require('assert')
 const sinon     = require('sinon')
-const steno     = require('steno')
 const request   = require('request')
 const config    = require('../lib/config')
 const feedback  = require('../lib/feedback')
