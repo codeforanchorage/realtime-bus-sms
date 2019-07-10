@@ -7,15 +7,12 @@ if returnHTML
             each stop in routes.data.stops
                 li
                     div #{stop.number}
-                    div #{stop.name} 
-                        ul(class="times")
-                            each time in stop.times
-                                li #{time}
+                    div #{stop.name} #{stop.times[0]}
 else
     |* Stop #{routes.data.stopId} - #{routes.data.stop} *
     | 
     each stop in routes.data.stops
         | 
         |#{stop.number} #{stop.name} - 
-        |#{stop.times.join(", ")}
+        |#{stop.times[0]}
         | 

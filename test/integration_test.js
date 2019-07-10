@@ -37,9 +37,7 @@ describe("Integration Tests", function(){
 
     before(function(){
         muniURL = new URL(gtfs.stop_number_url[stopNumber])
-        const startTime = 1562202000000 //5:00PM
         // If today is a bus holiday move day 
-        clock = sinon.useFakeTimers({now: startTime})
         while (gtfs.serviceExceptions()){
             clock =  sinon.useFakeTimers(moment().add(1, 'days').tz(config.TIMEZONE).valueOf())
         }
@@ -162,7 +160,7 @@ describe("Integration Tests", function(){
                     var lines = res.text.split('\n')
                     assert(lines[0].includes(stopNumber), "Results didn't include the stop number")
                     assert.equal(lines[2],  '10 Northern Lights - Outbound - ')
-                    assert.equal(lines[3],  '5:09 PM, 5:23 PM')
+                    assert.equal(lines[3],  '4:52 PM')
                 })
                 .end((err, res) => done(err))
             })
@@ -400,7 +398,7 @@ describe("Integration Tests", function(){
             })
         })
 
-        describe.skip("POST /fbhook", function(){
+        describe("POST /fbhook", function(){
 
             const verifyBuf = new Buffer(JSON.stringify(facebookMessage.multiple), "utf-8");
             const verifyHash = crypto.createHmac('sha1', config.FB_APP_SECRET)
@@ -628,7 +626,7 @@ describe("Integration Tests", function(){
             })
         })
 
-        it.skip('Should log facebook requests to public db (with hashed user)', function(done){
+        it('Should log facebook requests to public db (with hashed user)', function(done){
             nock("http://www.google-analytics.com")
             nock('https://graph.facebook.com').post('/v2.6/me/messages', /./).query(true).reply(200)
 
@@ -667,7 +665,7 @@ describe("Integration Tests", function(){
             })
         })
 
-        it.skip('Should log facebook requests to private db', function(done){
+        it('Should log facebook requests to private db', function(done){
             nock("http://www.google-analytics.com")
             nock('https://graph.facebook.com').post('/v2.6/me/messages', /./).query(true).reply(200)
 
