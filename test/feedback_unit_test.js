@@ -8,7 +8,7 @@ const feedback  = require('../lib/feedback')
 const comments  = require('./fixtures/fake_comments.json')
 const logger    = require('../lib/logger')
 const twilioClient = feedback.twilioClient
-const FileASync = require('lowdb/adapters/FileASync')
+const FileASync = require('lowdb/adapters/FileAsync')
 
 
 describe("User Feedback", function(){
