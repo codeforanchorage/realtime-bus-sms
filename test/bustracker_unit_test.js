@@ -24,7 +24,7 @@ describe('Bustracker Module', function() {
 
     describe('With a good Muni response', function(){
         let get, nockscope, clock
-        const startTime = 100
+        const startTime = 1562202000000 // 5:00 PM local
         beforeEach(function() {
             nockscope = nock(muniURL.origin).get(muniURL.pathname)
             .query({stopid: muniURL.searchParams.get('stopid')})
@@ -50,6 +50,9 @@ describe('Bustracker Module', function() {
         })
         it('Should return an array of Stops', function(){
             return get.then(r => assert((Array.isArray(r.data.stops))))
+        })
+        it('Should filter times that have alread passed', function(){
+            return get.then(r => assert(r.data.stops[0].times.length === 2))
         })
         it('Should return an array of stop objects each with a stop number', function(){
             return get.then(r => assert(r.data.stops.every(stop => /^\d+$/.test(stop.number))))
