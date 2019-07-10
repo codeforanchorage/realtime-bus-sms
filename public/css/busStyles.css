@@ -82,7 +82,16 @@ ul{
     padding: 0px;
     list-style-type: none;
  }
+ul.times {
+    display:flex;
+    justify-content: left;
+}
+ul.times li {
+    border: none;
+    padding:0px;
+    padding-right: 1.2em;
 
+}
 li{
     display:flex;
     padding-top: 1.2em;

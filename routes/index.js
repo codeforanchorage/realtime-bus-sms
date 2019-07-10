@@ -139,8 +139,8 @@ router.post('/respond', feedback.send_feedback_response);
     Provides ajax data for the log plot
 */
 
-router.get('/logData', function(req, res, next) {
-    const data = lowdb_log.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
+router.get('/logData', async function(req, res, next) {
+    const data = await lowdb_log.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
     res.send(data)
 });
 
