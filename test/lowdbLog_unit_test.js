@@ -13,10 +13,11 @@ const winston   = require('winston')
 const hashwords = require('hashwords')()
 const config    = require('../lib/config')
 const lowdb_log = require('../lib/lowdb_log_transport')
+
 const FileASync = require('lowdb/adapters/FileAsync')
 
 describe('LowDB Log Transport', function(){
-    let logger, lowdbStub
+    let logger, stenoStubb
     const metaObject =
         {
             input: "test input2",
@@ -25,127 +26,74 @@ describe('LowDB Log Transport', function(){
             ip: '127.0.0.10',
             fbUser: "Facebook User"
         }
-    
-
-    beforeEach(function(){
+    before(function(){
         logger = new winston.Logger()
         logger.add(lowdb_log(), {})
-        lowdbStub = sinon.stub(FileASync.prototype, 'write')
-    })
-    afterEach(function(){
-        lowdbStub.restore()
     })
 
-    it('Should save ip and phone to private db', function(done){
-        logger.on('logging', () => {
-            console.log("log ")
-            try {
-                let saved = lowdbStub.firstCall.args[0].requests.pop()
-                assert.equal(saved.phone, metaObject.phone)
-                assert.equal(saved.ip, metaObject.ip)    
-                done()
-            } catch(e){
-                done(e)
-            }
-        })
-        logger.info(metaObject)
+    beforeEach(function(){
+        stenoStubb = sinon.stub(steno, 'writeFile')
     })
-    it('Should save FB user to private db', function(done){
-        logger.on('logging', () => {
-            try{
-                let saved = lowdbStub.firstCall.args[0].requests.pop()
-                assert.equal(saved.fbUser, metaObject.fbUser)
-                done()
-            } catch (e) {
-                done(e)
-            }
-        })
-        logger.info(metaObject)
+    afterEach(function(){
+        stenoStubb.restore()
     })
-    it('Should save hashed FB user to public db', function(done){
-        logger.on('logging', () => {     
-            try{
-                let saved = lowdbStub.secondCall.args[0].requests.pop()
-                assert.equal(saved.fbUser, hashwords.hashStr(metaObject.fbUser))
-                done()
-            } catch (e) {
-                done(e)
-            }
-        })
+
+    it('Should save ip and phone to private db', function(){
         logger.info(metaObject)
+        let saved = JSON.parse(stenoStubb.firstCall.args[1]).requests.pop()
+        assert.equal(saved.phone, metaObject.phone)
+        assert.equal(saved.ip, metaObject.ip)
     })
-    it('Should not save ip public db', function(done){
-        logger.on('logging', () => {
-            try{
-                let saved = lowdbStub.secondCall.args[0].requests.pop()
-                assert.strictEqual(saved.ip, undefined)
-                done()
-            } catch(e) {
-                done(e)
-            }
-        })
+    it('Should save FB user to private db', function(){
         logger.info(metaObject)
+        let saved = JSON.parse(stenoStubb.firstCall.args[1]).requests.pop()
+        assert.equal(saved.fbUser, metaObject.fbUser)
     })
-    it('Should save hashed version of phone public db', function(done){
-        logger.on('logging', () => {
-            try{
-                let saved = lowdbStub.secondCall.args[0].requests.pop()
-                assert.equal(saved.phone, hashwords.hashStr(metaObject.phone))
-                done()
-            } catch(e) {
-                done(e)
-            }
-        })
+    it('Should save hashed FB user to public db', function(){
         logger.info(metaObject)
+        let saved = JSON.parse(stenoStubb.secondCall.args[1]).requests.pop()
+        assert.equal(saved.fbUser, hashwords.hashStr(metaObject.fbUser))
     })
-    it('Should save a timestampe of the current date', function(done){
+    it('Should not save ip public db', function(){
+        logger.info(metaObject)
+        let saved = JSON.parse(stenoStubb.secondCall.args[1]).requests.pop()
+        assert.strictEqual(saved.ip, undefined)
+    })
+    it('Should save hashed version of phone public db', function(){
+        logger.info(metaObject)
+        let saved = JSON.parse(stenoStubb.secondCall.args[1]).requests.pop()
+        assert.equal(saved.phone, hashwords.hashStr(metaObject.phone))
+    })
+    it('Should save private db to correct file', function(){
+        let private_db_file  = './db_private.json'
+        logger.info(metaObject)
+        let path = stenoStubb.firstCall.args[0]
+        assert.equal(private_db_file, path)
+    })
+    it('Should save public db to correct file', function(){
+        let public_db_file  = './public/db.json'
+        logger.info(metaObject)
+        let path = stenoStubb.secondCall.args[0]
+        assert.equal(public_db_file, path)
+    })
+    it('Should save a timestampe of the current date', function(){
         let clock = sinon.useFakeTimers(1483228800000) // First milisecond of 2017
-        logger.on('logging', () => {
-            try{
-                let saved = lowdbStub.secondCall.args[0].requests.pop()
-                assert.equal(saved.date.toISOString(), '2017-01-01T00:00:00.000Z')
-                clock.restore()
-                done()
-            } catch (e) {
-                clock.restore()
-                done(e)
-            }          
-        })
         logger.info(metaObject)
+        let saved = JSON.parse(stenoStubb.secondCall.args[1]).requests.pop()
+        assert.equal(saved.date, '2017-01-01T00:00:00.000Z')
+        clock.restore()
     })
-    it('Should not save log levels other than "info"', function(done){
-        logger.on('logging', () => {
-            try {
-                assert(lowdbStub.notCalled)
-                done()
-            } catch(e) {
-                done(e)
-            }
-        })
+    it('Should not save log levels other than "info"', function(){
         logger.warn(metaObject)
-        
+        assert(stenoStubb.notCalled)
     })
-    it('Should not save empty input', function(done){
-        logger.on('logging', () => {
-            try {
-                assert(lowdbStub.notCalled)
-                done()
-            } catch(e) {
-                done(e)
-            }
-        })        
+    it('Should not save empty input', function(){
         logger.info({action: 'Empty Input'})
+        assert(stenoStubb.notCalled)
     })
-    it('Should not save feeback hits', function(done){
-        logger.on('logging', () => {
-            try {
-                assert(lowdbStub.notCalled)
-                done()
-            } catch(e) {
-                done(e)
-            }
-        })
+    it('Should not save feeback hits', function(){
         logger.info({action: 'Feedback'})
+        assert(stenoStubb.notCalled)
     })
 })
 
@@ -159,43 +107,45 @@ describe('Get Log Data', function(){
     afterEach(function(){
         clock.restore()
     })
-    it('Should return only hits within given time frame', async function(){
+    it('Should return only hits within given time frame', function(){
         let daysBack = 1
         let dateThen = new Date().setDate(new Date().getDate()-daysBack)
-        let data = await lowdb_log.getLogData(daysBack, 'hits',fixturePath )
+        let data = lowdb_log.getLogData(daysBack, 'hits',fixturePath )
         assert(data.every((entry) => entry.date * 1000 >= dateThen ))
 
         daysBack = 3
         dateThen = new Date().setDate(new Date().getDate()-daysBack)
-        data = await lowdb_log.getLogData(daysBack, 'hits',fixturePath )
+        data = lowdb_log.getLogData(daysBack, 'hits',fixturePath )
         assert(data.every((entry) => entry.date * 1000 >= dateThen ))
     })
-    it('Should return all hits within given time frame', async function(){
+    it('Should return all hits within given time frame', function(){
         let daysBack = 1
-        let data = await lowdb_log.getLogData(daysBack, 'hits',fixturePath )
+        let data = lowdb_log.getLogData(daysBack, 'hits',fixturePath )
         assert(data.length == 5)
 
         daysBack = 2
-        data = await lowdb_log.getLogData(daysBack, 'hits',fixturePath )
+        data = lowdb_log.getLogData(daysBack, 'hits',fixturePath )
         assert(data.length == 8)
     })
-    it('Should set the correct type', async function(){
+    it('Should set the correct type', function(){
         let daysBack = 0
-        let data = await lowdb_log.getLogData(daysBack, 'hits',fixturePath )
+        let data = lowdb_log.getLogData(daysBack, 'hits',fixturePath )
         assert.equal(data[2].type, 'sms')
         assert.equal(data[1].type, 'browser')
         assert.equal(data[0].type, 'fb')
     })
-    it('Should set the correct userID', async function(){
-        let data = await lowdb_log.getLogData(0, 'hits',fixturePath )
+    it('Should set the correct userID', function(){
+        let daysBack = 0
+        let data = lowdb_log.getLogData(0, 'hits',fixturePath )
         let records = fixtureFile.requests.length
         assert.equal(data[2].userId, 'phone'+fixtureFile.requests[records - 3].phone)
         assert.equal(data[1].userId, 'ip'+fixtureFile.requests[records - 2].ip)
         assert.equal(data[0].userId, fixtureFile.requests[records -1 ].fbUser)
     })
-    it('Returned objects should have the correct properties', async function(){
+    it('Returned objects should have the correct properties', function(){
         let properties = ['type', 'date', 'dateOffset', 'muniTime', 'totalTime', 'userId']
-        let data = await lowdb_log.getLogData(0, 'hits',fixturePath )
+        let daysBack = 10
+        let data = lowdb_log.getLogData(0, 'hits',fixturePath )
         assert(data.every(entry => properties.every(key => entry.hasOwnProperty(key))
         ))
     })

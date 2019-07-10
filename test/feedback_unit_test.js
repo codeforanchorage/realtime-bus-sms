@@ -2,6 +2,7 @@
 
 const assert    = require('assert')
 const sinon     = require('sinon')
+const steno     = require('steno')
 const request   = require('request')
 const config    = require('../lib/config')
 const feedback  = require('../lib/feedback')
@@ -9,7 +10,6 @@ const comments  = require('./fixtures/fake_comments.json')
 const logger    = require('../lib/logger')
 const twilioClient = feedback.twilioClient
 const FileASync = require('lowdb/adapters/FileAsync')
-
 
 describe("User Feedback", function(){
     describe("feedbackResponder_web", function(){
@@ -24,8 +24,7 @@ describe("User Feedback", function(){
             }
             res = {render: sinon.stub(), locals: {}, send: sinon.stub(), set: sinon.stub()}
             logStub = sinon.stub(logger, 'error')
-            commentStub = sinon.stub(FileASync.prototype, 'write') 
-
+            commentStub = sinon.stub(steno, 'writeFile') //lowDB uses steno to write files
             formStub = sinon.stub()
             postStub = sinon.stub(request, 'post').returns({form: formStub})
         })
@@ -36,33 +35,33 @@ describe("User Feedback", function(){
         })
 
         it("Should set returnHTML flag", function(){
-            return feedback.feedbackResponder_web(req, res)
-            .then(() => assert.equal(res.locals.returnHTML, 1))
+            feedback.feedbackResponder_web(req, res)
+            assert.equal(res.locals.returnHTML, 1)
         })
-        it ('Should set actions to "feedback"', function(){
-            return feedback.feedbackResponder_web(req, res)
-            .then(() => assert.equal(res.locals.action, "Feedback"))
+        it('Should set actions to "feedback"', function(){
+            feedback.feedbackResponder_web(req, res)
+            assert.equal(res.locals.action, "Feedback")
         })
         it('Should render message template with message', function(){
-            commentStub.resolves()
+            commentStub.yields()
             return feedback.feedbackResponder_web(req, res)
             .then(() => sinon.assert.calledWith(res.render, 'message', {message: {message:'Thanks for the feedback'}}))
        })
        it('Should send a message to the user if there is an error', function(){
-            commentStub.rejects(new Error("Write Error"))
+            commentStub.yields(new Error("Write Error"))
             return feedback.feedbackResponder_web(req, res)
             .then(() => sinon.assert.calledWith(res.render, 'message', {message: {message:'Error saving feedback, administrator notified'}}))
        })
        it('Should log an error when the feedback fails', function(){
             const feedbackError = new Error("Feedback Problem")
-            commentStub.rejects(feedbackError)
+            commentStub.yields(feedbackError)
             return feedback.feedbackResponder_web(req, res)
             .then(() => sinon.assert.calledWith(logStub, feedbackError))
         })
         it("Should post to Slack webhook", function(){
             var slackwebhook = config.SLACK_WEBHOOK
             config.SLACK_WEBHOOK = "https://slackhook.example.com"
-            commentStub.resolves()
+            commentStub.yields()
             return feedback.feedbackResponder_web(req, res)
             .then(() => {
                 sinon.assert.calledWith(postStub, config.SLACK_WEBHOOK)
@@ -72,7 +71,7 @@ describe("User Feedback", function(){
         it("Slack webhook payload should include message and phone", function(){
             var slackwebhook = config.SLACK_WEBHOOK
             config.SLACK_WEBHOOK = "https://slackhook.example.com"
-            commentStub.resolves()
+            commentStub.yields()
             return feedback.feedbackResponder_web(req, res)
             .then(() => {
                 let text = formStub.args[0][0] &&  formStub.args[0][0]
@@ -84,53 +83,46 @@ describe("User Feedback", function(){
         })
 
         describe("Saves comments to LowBD", function(){
-            beforeEach(() => commentStub.resolves())
+            beforeEach(() => commentStub.yields())
 
             it("Should save the feedback", function(){
                 req.body.comment =  "A test comment" + Date.now().toString(36)
-                return feedback.feedbackResponder_web(req, res)
-                .then(() => {
-                    let all_comments = commentStub.args[0][0].comments
-                    let the_comment =  all_comments[all_comments.length -1]
-                    assert.equal(the_comment.feedback, req.body.comment )
-                })
+                feedback.feedbackResponder_web(req, res)
+                let all_comments = JSON.parse(commentStub.args[0][1]).comments
+                let the_comment =  all_comments[all_comments.length -1]
+
+                assert.equal(the_comment.feedback, req.body.comment )
             })
             it("Should save the ip address", function(){
                 req.connection.remoteAddress =   "192." +  Date.now().toString(10)
-                return feedback.feedbackResponder_web(req, res)
-                .then(() => {
-                    let all_comments = commentStub.args[0][0].comments
-                    let the_comment =  all_comments[all_comments.length -1]
-                    assert.equal(the_comment.ip, req.connection.remoteAddress )    
-                })
+                feedback.feedbackResponder_web(req, res)
+                let all_comments = JSON.parse(commentStub.args[0][1]).comments
+                let the_comment =  all_comments[all_comments.length -1]
+
+                assert.equal(the_comment.ip, req.connection.remoteAddress )
             })
             it("Should save the email address", function(){
                 req.body.email =  "user@" + Date.now().toString(36) + ".com"
-                return feedback.feedbackResponder_web(req, res)
-                .then(() => {
-                    let all_comments = commentStub.args[0][0].comments
-                    let the_comment =  all_comments[all_comments.length -1]
-                    assert.equal(the_comment.email, req.body.email )
-                })
+                feedback.feedbackResponder_web(req, res)
+                let all_comments = JSON.parse(commentStub.args[0][1]).comments
+                let the_comment =  all_comments[all_comments.length -1]
+
+                assert.equal(the_comment.email, req.body.email )
             })
             it("Should save a hash", function(){
-                return feedback.feedbackResponder_web(req, res)
-                .then(() => {
-                    let all_comments = commentStub.args[0][0].comments
-                    let the_comment =  all_comments[all_comments.length -1]
-                    assert(the_comment.response_hash.length == 40 )
-                })
+                feedback.feedbackResponder_web(req, res)
+                let all_comments = JSON.parse(commentStub.args[0][1]).comments
+                let the_comment =  all_comments[all_comments.length -1]
+
+                assert(the_comment.response_hash.length == 40 )
             })
             it("Should save the correct date", function(){
                 let clock = sinon.useFakeTimers(40035600000)
-                return feedback.feedbackResponder_web(req, res)
-                .then(() => {
-                    let all_comments = commentStub.args[0][0].comments
-                    let the_comment =  all_comments[all_comments.length -1]
-                    clock.restore()
-                    assert.equal(the_comment.date, '1971-04-09 09:00:00')
-    
-                })
+                feedback.feedbackResponder_web(req, res)
+                let all_comments = JSON.parse(commentStub.args[0][1]).comments
+                let the_comment =  all_comments[all_comments.length -1]
+                clock.restore()
+                assert.equal(the_comment.date, '1971-04-09 09:00:00')
             })
         })
     })
@@ -148,7 +140,7 @@ describe("User Feedback", function(){
             res = {render: sinon.stub(), locals: {}, send: sinon.stub(), set: sinon.stub()}
             next = sinon.stub()
             logStub = sinon.stub(logger, 'error') // this just keeps the test errors off the console
-            commentStub = sinon.stub(FileASync.prototype, 'write') 
+            commentStub = sinon.stub(steno, 'writeFile')
             formStub = sinon.stub()
             postStub = sinon.stub(request, 'post').returns({form: formStub})
         })
@@ -158,57 +150,55 @@ describe("User Feedback", function(){
             postStub.restore()
         })
         it('Should only respond with the feedback trigger word', function(){
-            commentStub.resolves()
+            commentStub.yields()
             req = {body: {Body: "A comment"}}
-            return feedback.feedbackResponder_sms(req, res, next)
-            .then(() => {
-                sinon.assert.called(next)
-                sinon.assert.notCalled(res.send)
-                sinon.assert.notCalled(res.set)    
-            })
+            feedback.feedbackResponder_sms(req, res, next)
+            sinon.assert.called(next)
+            sinon.assert.notCalled(res.send)
+            sinon.assert.notCalled(res.set)
         })
         it("Should set content type to plain/text", function(){
-            commentStub.resolves()
-            return feedback.feedbackResponder_sms(req, res, next)
-            .then(() =>  sinon.assert.calledWith(res.set, 'Content-Type', 'text/plain'))
+            commentStub.yields()
+            feedback.feedbackResponder_sms(req, res, next)
+            sinon.assert.calledWith(res.set, 'Content-Type', 'text/plain')
         })
         it("Should not crash when body is not a string", function(){
-            commentStub.resolves()
+            commentStub.yields()
             req = {body: {Body: 1}}
-            return feedback.feedbackResponder_sms(req, res, next)
+            feedback.feedbackResponder_sms(req, res, next)
         })
         it("Should set res.locals.action to 'Feedback'", function(){
-            commentStub.resolves()
-            return feedback.feedbackResponder_sms(req, res, next)
-            .then(() => assert.equal(res.locals.action, "Feedback"))
+            commentStub.yields()
+            feedback.feedbackResponder_sms(req, res, next)
+            assert.equal(res.locals.action, "Feedback")
         })
         it("Should send a response", function(){
-            commentStub.resolves()
+            commentStub.yields()
             return feedback.feedbackResponder_sms(req, res, next)
             .then(() => sinon.assert.calledWith(res.send, "Thanks for the feedback"))
         })
         it("Feedback trigger should be case insensitive ", function(){
             let trigger = config.FEEDBACK_TRIGGER.split('').map(char => Math.random() > .5 ? char.toUpperCase() : char).join('')
             req.body.Body = trigger + "a comment"
-            commentStub.resolves()
-            return feedback.feedbackResponder_sms(req, res, next)
+            commentStub.yields()
+            feedback.feedbackResponder_sms(req, res, next)
             .then(()=> sinon.assert.calledWith(res.send, "Thanks for the feedback"))
         })
         it("Should send a response on failure", function(){
-            commentStub.rejects(new Error("Feedback write error"))
+            commentStub.yields(new Error("Feedback write error"))
             return feedback.feedbackResponder_sms(req, res, next)
             .then(() => sinon.assert.calledWith(res.send, "Error saving feedback, administrator notified."))
         })
         it("Should log an error on failure", function(){
             const error = new Error("Feedback Error")
-            commentStub.rejects(error)
+            commentStub.yields(error)
             return feedback.feedbackResponder_sms(req, res, next)
             .then(() => sinon.assert.calledWith(logStub, error))
         })
         it("Should post to Slack webhook", function(){
             var slackwebhook = config.SLACK_WEBHOOK
             config.SLACK_WEBHOOK = "https://slackhook.example.com"
-            commentStub.resolves()
+            commentStub.yields()
             return feedback.feedbackResponder_sms(req, res, next)
             .then(() => {
                 sinon.assert.calledWith(postStub, config.SLACK_WEBHOOK)
@@ -218,7 +208,7 @@ describe("User Feedback", function(){
         it("Slack webhook payload should include message and phone", function(){
             var slackwebhook = config.SLACK_WEBHOOK
             config.SLACK_WEBHOOK = "https://slackhook.example.com"
-            commentStub.resolves()
+            commentStub.yields()
             return feedback.feedbackResponder_sms(req, res, next)
             .then(() => {
                 let text = formStub.args[0][0] &&  formStub.args[0][0]
@@ -229,48 +219,41 @@ describe("User Feedback", function(){
             })
         })
         describe('Saving comments to LowDB', function(){
-            beforeEach(() => commentStub.resolves())
+            beforeEach(() => commentStub.yields())
 
             it("Should save feedback without the trigger word ", function(){
                 let comment = "Test Comment: " + Date.now().toString(36)
                 req.body.Body =  config.FEEDBACK_TRIGGER + comment
-                return feedback.feedbackResponder_sms(req, res, next)
-                .then(() => {
-                    let all_comments = commentStub.args[0][0].comments
-                    let the_comment =  all_comments[all_comments.length -1]
-                    assert.equal(the_comment.feedback, comment)
-                })
+                feedback.feedbackResponder_sms(req, res, next)
+                let all_comments = JSON.parse(commentStub.args[0][1]).comments
+                let the_comment =  all_comments[all_comments.length -1]
+                assert.equal(the_comment.feedback, comment)
             })
             it("Should save the phone number", function(){
-                req.body.From =  Date.now().toString(10).slice(2)
-                return feedback.feedbackResponder_sms(req, res)
-                .then(() => {
-                    let all_comments = commentStub.args[0][0].comments
-                    let the_comment =  all_comments[all_comments.length -1]
-                    assert.equal(the_comment.phone, req.body.From)
-                }) 
+                req.body.From =  Date.now().toString(10).slice(2),
+                feedback.feedbackResponder_sms(req, res)
+                let all_comments = JSON.parse(commentStub.args[0][1]).comments
+                let the_comment =  all_comments[all_comments.length -1]
+                assert.equal(the_comment.phone, req.body.From)
             })
 
             it("Should save the Facebook user when from Facebook", function(){
                 req.body.isFB = true;
                 req.body.From =  "FB User: " + Date.now().toString(36)
-                return feedback.feedbackResponder_sms(req, res, next)
-                .then(() => {
-                    let all_comments = commentStub.args[0][0].comments
-                    let the_comment =  all_comments[all_comments.length -1]
-                    assert.equal(the_comment.fbUser, req.body.From)    
-                })
+                feedback.feedbackResponder_sms(req, res, next)
+                let all_comments = JSON.parse(commentStub.args[0][1]).comments
+                let the_comment =  all_comments[all_comments.length -1]
+                assert.equal(the_comment.fbUser, req.body.From)
             })
             it("Should not save a phone number when from Facebook", function(){
                 req.body.isFB = true;
                 req.body.From =  "FB User: " + Date.now().toString(36)
-                return feedback.feedbackResponder_sms(req, res)
-                .then(() => {
-                    let all_comments = commentStub.args[0][0].comments
-                    let the_comment =  all_comments[all_comments.length -1]
-                    assert.equal(the_comment.phone, undefined)
-                })
+                feedback.feedbackResponder_sms(req, res)
+                let all_comments = JSON.parse(commentStub.args[0][1]).comments
+                let the_comment =  all_comments[all_comments.length -1]
+                assert.equal(the_comment.phone, undefined)
             })
+
         })
     })
 
