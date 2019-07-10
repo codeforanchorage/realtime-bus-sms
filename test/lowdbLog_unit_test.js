@@ -13,7 +13,7 @@ const winston   = require('winston')
 const hashwords = require('hashwords')()
 const config    = require('../lib/config')
 const lowdb_log = require('../lib/lowdb_log_transport')
-const FileASync = require('lowdb/adapters/FileASync')
+const FileASync = require('lowdb/adapters/FileAsync')
 
 describe('LowDB Log Transport', function(){
     let logger, lowdbStub
