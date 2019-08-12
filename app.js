@@ -101,7 +101,7 @@ logs.initGoogleAnalytics((logFields) => {
  * This is in its own module becuase rather than the logger module
  * because it's all very specific to the bus app.
  */
-logs.add(lowDB_transport(), {})
+//logs.add(lowDB_transport(), {})
 
 app.use('/fbhook', bodyParser.json({ verify: fb.verifyFBRequestSignature }));  //For Facebook requests
 app.use(bodyParser.json());
