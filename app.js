@@ -50,7 +50,7 @@ app.use(function(req, res, next){
  * SETUP LOGGING
  * This sets which fields in addition to the defaults in logger.js should be logged
  * After these values are logged other transports such as Google Analytics can
- * choose to send them so other services.
+ * choose to send them to other services.
  */
 app.use(logs.initialize((req, res) => {
     const routes = res.locals.routes
