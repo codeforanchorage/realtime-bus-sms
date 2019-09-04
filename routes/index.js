@@ -7,7 +7,6 @@ const lib = require('../lib/bustracker')
 const config = require('../lib/config')
 const logger = require('../lib/logger')
 const feedback = require('../lib/feedback')
-const lowdb_log = require('../lib/lowdb_log_transport')
 const mw = require('./middleware')
 const fb = require('../lib/facebook')
 
@@ -140,8 +139,9 @@ router.post('/respond', feedback.send_feedback_response);
 */
 
 router.get('/logData', async function(req, res, next) {
-    const data = await lowdb_log.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
-    res.send(data)
+    //const data = await lowdb_log.getLogData(req.query.daysBack || config.LOG_DAYS_BACK, req.query.type )
+    //res.send(data)
+    res.send("TODO!")
 });
 
 /*

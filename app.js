@@ -16,7 +16,6 @@ const rollbar =  new Rollbar({
 })
 const lib = require('./lib/bustracker');
 const fb = require('./lib/facebook')
-const lowDB_transport = require('./lib/lowdb_log_transport')
 const routes = require('./routes/index');
 
 const app = express();
@@ -74,7 +73,7 @@ app.use(logs.initialize((req, res) => {
  *         currently: '[Failed?]Stop Lookup' '[Failed?]Address Lookup', 'Empty Input', 'About', 'Feedback'
  * label:  the actual search: the stop number, geocoded address, or the raw input if lookup failed
  */
-logs.initGoogleAnalytics((logFields) => {
+logs.initGoogleAnalytics(logFields => {
     //  There should be a UUID in the req.session which will be found by default
     //  But Twilio's expires after 4 hours so this makes a more stable phone-based
     //  one for SMS users
@@ -95,13 +94,6 @@ logs.initGoogleAnalytics((logFields) => {
         timings:      [{name: "muniTime", time: logFields.muniTime }]
     }
 })
-
-/**
- * Add custom transport for logging to lowDB
- * This is in its own module becuase rather than the logger module
- * because it's all very specific to the bus app.
- */
-//logs.add(lowDB_transport(), {})
 
 app.use('/fbhook', bodyParser.json({ verify: fb.verifyFBRequestSignature }));  //For Facebook requests
 app.use(bodyParser.json());

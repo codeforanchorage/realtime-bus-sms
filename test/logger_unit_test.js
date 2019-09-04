@@ -4,7 +4,7 @@ const assert     = require('assert')
 const util       = require('util')
 const config     = require('../lib/config')
 const Rollbar    = require("rollbar")
-const rollbar    = new Rollbar(config.ROLLBAR_TOKEN)
+const rollbar    = new Rollbar(config.ROLLBAR_TOKEN || "")
 const sinon      = require('sinon')
 const ua         = require('universal-analytics')
 const onFinished = require('on-finished')
@@ -142,10 +142,15 @@ describe('Logging middleware', function(){
 describe('Google Analytics Transport', function(){
     let pageviewStub, eventStub, timingStub, sendStub, logWarning, setStub
     before(function(){
-        logs.transports['console.info'].silent = true
+       logs.transports.find(t => t.name == 'console-info').silent = true
+       logs.transports.find(t => t.name == 'public-log-file').silent = true
+       logs.transports.find(t => t.name == 'private-log-file').silent = true
     })
     after(function(){
-        logs.transports['console.info'].silent = false
+      logs.transports.find(t => t.name == 'console-info').silent = false
+      logs.transports.find(t => t.name == 'public-log-file').silent = false
+      logs.transports.find(t => t.name == 'private-log-file').silent = false
+
     })
     beforeEach(function(){
         pageviewStub = sinon.stub(ua.Visitor.prototype, 'pageview').returns({
@@ -154,8 +159,8 @@ describe('Google Analytics Transport', function(){
         eventStub = sinon.stub(ua.Visitor.prototype, 'event')
         timingStub = sinon.stub(ua.Visitor.prototype, 'timing')
         sendStub = sinon.stub(ua.Visitor.prototype, 'send')
-        setStub = sinon.stub(ua.Visitor.prototype, 'set')
         logWarning = sinon.stub(logs, 'warn')
+        setStub = sinon.stub(ua.Visitor.prototype, 'set')
     })
     afterEach(function(){
         pageviewStub.restore()
@@ -168,7 +173,8 @@ describe('Google Analytics Transport', function(){
     describe('With normal init settings', function(){
         let uuid = 'somUUID'
         let testMeta =
-            {
+            {  
+                message: "message",
                 category: 'testCategory',
                 action: 'testAction',
                 label: 'testID',
@@ -181,14 +187,17 @@ describe('Google Analytics Transport', function(){
             logs.initGoogleAnalytics((logFields) => Object.assign({uuid:'somUUID', trackingCode: config.GOOGLE_ANALYTICS_ID}, logFields))
         })
         afterEach(function(){
-            logs.remove(logs.transports['Google-Analytics'])
+            let gaLog = logs.transports.find(t => t.name == 'Google-Analytics')
+            logs.remove(gaLog)
+
         })
 
         it("Should add the GA Transport to the logger's transports", function(){
-            assert(logs.transports['Google-Analytics'])
+            assert(logs.transports.find(t => t.name == 'Google-Analytics'))
         })
-        it("Should be an instance of winston Transport", function(){
-            assert(logs.transports['Google-Analytics'] instanceof winston.Transport)
+        
+        it("Should be an instance of winston Transport", function(){      
+            assert(logs.transports.find(t => t.name == 'Google-Analytics') instanceof winston.Transport)
         })
         it("Should set a UUID for each hit", function(){
             logs.info('Test Hit')
@@ -196,24 +205,24 @@ describe('Google Analytics Transport', function(){
         })
         it("Should send a pageview with the url when event is not sent", function(){
             let url = 'http://example.com'
-            logs.info({url: url})
+            logs.info("", {url: url})
             assert(pageviewStub.calledWith(url))
         })
         it("Should log a warning if pageview fails", function(){
             let url = 'http://example.com'
             let errorString = 'some_google_error'
             pageviewStub.yields(errorString)
-            logs.info({url: url})
+            logs.info("", {url: url})
             assert.equal(logWarning.args[0][1], errorString)
         })
         it("Should send an event with correct fields ", function(){
             logs.info(testMeta)
-            let sentData = eventStub.args[0][0]
-            assert.equal(sentData.ec, testMeta.category)
-            assert.equal(sentData.ea, testMeta.action)
-            assert.equal(sentData.el, testMeta.label)
-            assert.equal(sentData.ev, testMeta.value)
-            assert.equal(sentData.dp, testMeta.url)
+               let sentData = eventStub.args[0][0]
+               assert.equal(sentData.ec, testMeta.category)
+               assert.equal(sentData.ea, testMeta.action)
+               assert.equal(sentData.el, testMeta.label)
+               assert.equal(sentData.ev, testMeta.value)
+               assert.equal(sentData.dp, testMeta.url)
         })
         it("Should log a warning if event() fails", function(){
             let errorString = 'some_google_event_error'
@@ -233,14 +242,16 @@ describe('Google Analytics Transport', function(){
             logs.info(testMeta)
             assert(timingStub.calledWith('Response Time', testMeta.timings[0].name, testMeta.timings[0].time ))
         })
+        
     })
     describe("With bad init settings", function(){
         afterEach(function(){
-            logs.remove(logs.transports['Google-Analytics'])
+            let gaLog = logs.transports.find(t => t.name == 'Google-Analytics')
+            logs.remove(gaLog)
         })
         it("Should warn and return when used without tracking code", function(){
             logs.initGoogleAnalytics(() => ({uuid:'somUUID'}))
-            logs.info("Test Hit")
+            logs.info("some info")
             assert(logWarning.called)
             assert([pageviewStub, eventStub, sendStub].every(stub => stub.notCalled) )
         })
@@ -251,11 +262,17 @@ describe("Rollbar Transport", function(){
     let rollbarStub
     beforeEach(function(){
         rollbarStub = sinon.stub(Rollbar.prototype, 'error')
-        logs.transports['console.info'].silent = true
+        logs.transports.find(t => t.name = 'console-info').silent = true
+        logs.transports.find(t => t.name = 'public-log-file').silent = true
+        logs.transports.find(t => t.name = 'private-log-file').silent = true
+ 
     })
     afterEach(function(){
         rollbarStub.restore()
-        logs.transports['console.info'].silent = false
+        logs.transports.find(t => t.name = 'console-info').silent = false
+        logs.transports.find(t => t.name = 'public-log-file').silent = false
+        logs.transports.find(t => t.name = 'private-log-file').silent = false
+ 
     })
     it("Should send error-level log events to Rollbar", function(){
         logs.error(new Error("this is a random test error"))
@@ -274,9 +291,9 @@ describe("Rollbar Transport", function(){
     })
     it('Should send Error and addition message to rollbar', function(){
         let error = new Error("An Error")
-        let metaObject = {foo: 'bar'}
-        logs.error(error, metaObject)
-        assert(rollbarStub.calledWith(util.format(error),null, {custom: metaObject}))
+        let meta = {foo: 'bar'}
+        logs.error({message: error, meta})
+        assert(rollbarStub.calledWith(error) , null, {meta: {custom: meta}})
     })
 
 })

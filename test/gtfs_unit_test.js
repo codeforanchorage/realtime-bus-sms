@@ -10,10 +10,10 @@ const child_pr  = require('child_process')
 
 describe('GTFS Module', function() {
         before(function(){
-            logger.transports['console.info'].silent = true
+            logger.transports.find(t => t.name == 'console-info').silent  = true
         })
         after(function(){
-            logger.transports['console.info'].silent = false
+             logger.transports.find(t => t.name == 'console-info').silent  = false
          })
 
     describe('Service Exceptions', function(){

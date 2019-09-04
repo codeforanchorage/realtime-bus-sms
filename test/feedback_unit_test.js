@@ -10,7 +10,6 @@ const logger    = require('../lib/logger')
 const twilioClient = feedback.twilioClient
 const FileASync = require('lowdb/adapters/FileAsync')
 
-
 describe("User Feedback", function(){
     describe("feedbackResponder_web", function(){
         let req, res, logStub, postStub, commentStub, formStub

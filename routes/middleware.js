@@ -206,7 +206,7 @@ function askWatson(req, res, next){
             version: '2017-05-26'
         })
     } catch(err) {
-        logger.error(err, {input: input});
+        logger.error({message: err, meta:{input: input}});
         res.locals.message = {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`}
         return res.render('message')
     }
@@ -224,7 +224,7 @@ function askWatson(req, res, next){
                     error_data.passed = err
                     err = new Error('Watson error')
                 }
-                logger.error(err, error_data);
+                logger.error({message: err, meta:error_data});
                 // At this point we know the request isn't a bus number or address. If Watson sends an error fall back to older behavior.
                 res.locals.message = {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`}
                 return res.render('message')
@@ -232,7 +232,7 @@ function askWatson(req, res, next){
 
             if (!response.context) {
                 // this should never happen
-                logger.error("Watson returned an unusable response.", {response: response})
+                logger.error({message: "Watson returned an unusable response.", meta:{response: response}})
                 res.locals.message = {name: "Bustracker Error", message:"I'm sorry an error occured." }
                 return res.render('message')
             }

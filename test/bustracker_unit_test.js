@@ -90,7 +90,7 @@ describe('Bustracker Module', function() {
             .then(r => {throw new Error("Promise should not be fulfilled when Muni send bad data")},
                   err => {
                     assert(err.message.includes('Sorry, Bustracker is down'))
-                    sinon.assert.calledWithMatch(logstub, sinon.match.has('type', 'MUNI_ERROR' ), sinon.match.has('htmlBody').and(sinon.match.has('stopID')))
+                    sinon.assert.calledWithMatch(logstub, {message: sinon.match.has('type', 'MUNI_ERROR' ), meta: sinon.match.has('htmlBody').and(sinon.match.has('stopID'))})
                 }
             )
         })

@@ -49,13 +49,13 @@ describe("Integration Tests", function(){
     })
     describe("Routes", function(){
         before(() => {
-            logger.transports['Google-Analytics'].silent = true // Don't send tests to GA
-            logger.transports['console.info'].silent = true
+            logger.transports.find(t => t.name == 'console-info').silent = true
+            logger.transports.find(t => t.name == 'Google-Analytics').silent = true
         })
         after(() => {
-            logger.transports['Google-Analytics'].silent = false
-            logger.transports['console.info'].silent = false
-        })
+         logger.transports.find(t => t.name == 'console-info').silent = false
+         logger.transports.find(t => t.name == 'Google-Analytics').silent = false
+     })
         describe("GET '/'", function(){
             it('Should server the home page', function(done){
                 request.get('/')
@@ -507,13 +507,23 @@ describe("Integration Tests", function(){
     })
 
     describe("Logging hits", function(){
-        const publicDB = './public/db.json'
-            , privateDB = './db_private.json'
+        const publicDB = './access_public.log'
+            , privateDB = './access_private.log'
 
-        before(() => logger.transports['console.info'].silent = true)
-        after(() => logger.transports['console.info'].silent = false)
+        before(() => {
+           logger.transports.find(t => t.name == 'console-info').silent = true
+           logger.transports.find(t => t.name == 'Google-Analytics').silent = true
+           
+        })
+
+        after(() => {
+           logger.transports.find(t => t.name == 'console-info').silent =  false
+           logger.transports.find(t => t.name == 'Google-Analytics').silent = false
+
+        })
 
         it('Should log SMS requests to private db', function(done){
+             
             const from = "testPhone: " + Date.now().toString(8).slice(3)
             const nockscope = nock(muniURL.origin).get(muniURL.pathname).query({stopid:  muniURL.searchParams.get('stopid')}).reply(200, muniResponses.goodResponse )
             nock("http://www.google-analytics.com")
@@ -521,21 +531,23 @@ describe("Integration Tests", function(){
             .send({Body: stopNumber, From: from})
             .end((err, res) => {
                 if (err) done(err)
-                logger.on('logging', (res) => {
-                    if (res.name == 'File-Logs') {
-                        logger.removeAllListeners('logging')
-                        try {
-                            const private_log = JSON.parse(fs.readFileSync(privateDB)).requests
-                            const last_entry = private_log[private_log.length-1]
-                            assert.equal(from, last_entry.phone)
-                            nockscope.done()
-                            done()
-                        } catch(e){
-                            done(e)
-                            logger.removeAllListeners('logging')
-                        }
-                    }
-                })
+                // there seems to be no reliable way to know when Winston's
+                // file log has finished without calling logger.end() and 
+                // listening to `on('finished')`. So...timeout :(
+                console.log("update")
+                try {
+                    const last_line = fs.readFileSync(privateDB, {encoding: 'utf-8'})
+                    .trim()
+                    .split('\n')
+                    .pop()
+                    const last_entry = JSON.parse(last_line)
+                    assert.equal(from, last_entry.phone)
+                    nockscope.done()
+                    done()
+                } catch(e){
+                    done(e)
+                }
+                    
             })
         })
 
@@ -548,23 +560,20 @@ describe("Integration Tests", function(){
             .send({Body: stopNumber, From: from})
             .end((err, res) => {
                 if (err) done(err)
-                logger.on('logging', (res) => {
-                    if (res.name == 'File-Logs') {
-                        logger.removeAllListeners('logging')
-                        try{
-                            const private_log = JSON.parse(fs.readFileSync(publicDB)).requests
-                            const last_entry = private_log[private_log.length-1]
+                    try{
+                    const last_line = fs.readFileSync(publicDB, {encoding: 'utf-8'})
+                        .trim()
+                        .split('\n')
+                        .pop()
+                        const last_entry = JSON.parse(last_line)
 
-                            assert.equal(hashwords.hashStr(from), last_entry.phone)
-                            nockscope.done()
-                            done()
-                        } catch(e){
-                            done(e)
-                            logger.removeAllListeners('logging')
-                        }
+                        assert.equal(hashwords.hashStr(from), last_entry.phone)
+                        nockscope.done()
+                        done()
+                    } catch(e){
+                        done(e)
                     }
-                })
-
+                
             })
         })
 
@@ -579,23 +588,20 @@ describe("Integration Tests", function(){
             .send({Body: input})
             .end((err, res) => {
                 if (err) done(err)
-                logger.on('logging', (res) => {
-                    if (res.name == 'File-Logs') {
-                        logger.removeAllListeners('logging')
-                        try{
-                            const private_log = JSON.parse(fs.readFileSync(privateDB)).requests
-                            const last_entry = private_log[private_log.length-1]
+                    try{
+                        const last_line = fs.readFileSync(privateDB, {encoding: 'utf-8'})
+                        .trim()
+                        .split('\n')
+                        .pop()
+                        const last_entry = JSON.parse(last_line)
+                        assert.equal(input, last_entry.input)
+                        assert.equal(ip, last_entry.ip)
+                        done()
 
-                            assert.equal(input, last_entry.input)
-                            assert.equal(ip, last_entry.ip)
-                            done()
-
-                        } catch(e){
+                    } catch(e){
                             done(e)
-                            logger.removeAllListeners('logging')
-                        }
-                    }
-                })
+                    }               
+                
             })
         })
 
@@ -609,22 +615,20 @@ describe("Integration Tests", function(){
             .send({Body: input})
             .end((err, res) => {
                 if (err) done(err)
-                logger.on('logging', (res) => {
-                    if (res.name == 'File-Logs') {
-                        logger.removeAllListeners('logging')
-                        try{
-                            const public_log = JSON.parse(fs.readFileSync(publicDB)).requests
-                            const last_entry = public_log[public_log.length-1]
+                    try{
+                        const last_line = fs.readFileSync(publicDB, {encoding: 'utf-8'})
+                        .trim()
+                        .split('\n')
+                        .pop()
+                        const last_entry = JSON.parse(last_line)
 
-                            assert.equal(input, last_entry.input)
-                            assert.strictEqual(last_entry.ip,undefined)
-                            done()
-                        } catch(e){
-                            done(e)
-                            logger.removeAllListeners('logging')
-                        }
+                        assert.equal(input, last_entry.input)
+                        assert.strictEqual(last_entry.ip,undefined)
+                        done()
+                    } catch(e){
+                        done(e)
                     }
-                })
+                
             })
         })
 
@@ -648,7 +652,6 @@ describe("Integration Tests", function(){
             .send(fbRequest)
             .end((err, res) => {
                 if (err) done("error here", err)
-                logger.on('logging', (res) => {
                     if (res.name == 'File-Logs') {
                         logger.removeAllListeners('logging')
                         try{
@@ -663,7 +666,6 @@ describe("Integration Tests", function(){
                             logger.removeAllListeners('logging')
                         }
                     }
-                })
             })
         })
 
@@ -708,13 +710,15 @@ describe("Integration Tests", function(){
             })
         })
         it("Should call Google Analytics when requests are made", function(done){
+            logger.transports.find(t => t.name == 'Google-Analytics').silent = false
             const ns = nock("http://www.google-analytics.com").post('/collect', /ea=About/).query(true).reply(200)
             request.post('/')
             .send({Body: "about"})
             .end((err, res) => {
                 if (err) done(err)
-                    ns.done()
-                    done()
+                ns.done()
+                done()
+                
             })
         })
     })

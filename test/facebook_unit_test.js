@@ -27,11 +27,12 @@ describe("Facebook Functions", function(){
                 'hub.challenge': fbChallenge
                 }
             req = {query: fbRequest}
-            logger.transports['console.info'].silent = true
+            logger.transports.find(t => t.name == 'console-info').silent = true
+            
         })
         afterEach(function(){
             config.FB_VALIDATION_TOKEN = originalToken
-            logger.transports['console.info'].silent = false
+            logger.transports.find(t => t.name == 'console-info').silent  = false
         })
         it("Should send 200 response to FB subscribe when token matches", function(){
             fb.verify(req, res)

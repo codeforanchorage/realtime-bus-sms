@@ -426,7 +426,7 @@ describe('Middleware Function', function(){
             let error = new Error("Watson Error")
             messageStub.yields(error)
             mw.askWatson(req, res, next)
-            sinon.assert.calledWith(loggerStub, error, {input: req.body.Body} )
+            sinon.assert.calledWith(loggerStub, {message: error, meta: {input: req.body.Body}} )
         })
         it("Should send a no-results message to their user if the message fails", function(){
             let error = new Error("Watson Error")
@@ -519,7 +519,7 @@ describe('Middleware Function', function(){
             let badResponse = {huh: "wtf?"}
             messageStub.yields(null, badResponse)
             mw.askWatson(req, res, next)
-            sinon.assert.calledWith(loggerStub, sinon.match.string, sinon.match({response: badResponse}))
+            sinon.assert.calledWith(loggerStub, {message: sinon.match.string, meta: sinon.match({response: badResponse})})
             sinon.assert.calledWith(res.render, 'message')
         })
     })
