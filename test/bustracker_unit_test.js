@@ -51,7 +51,7 @@ describe('Bustracker Module', function() {
         it('Should return an array of Stops', function(){
             return get.then(r => assert((Array.isArray(r.data.stops))))
         })
-        it('Should filter times that have alread passed', function(){
+        it('Should filter times that have alread passed minus the buffer time', function(){
             return get.then(r => assert(r.data.stops[0].times.length === 2))
         })
         it('Should return an array of stop objects each with a stop number', function(){
