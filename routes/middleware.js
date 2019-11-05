@@ -1,7 +1,9 @@
 'use strict';
 
 //const watson       = require('watson-developer-cloud')
-const ConversationV1 = require('watson-developer-cloud/conversation/v1');
+const AssistantV2 = require('ibm-watson/assistant/v2');
+const { IamAuthenticator } = require('ibm-watson/auth');
+
 const logger       = require('../lib/logger')
 const config       = require('../lib/config')
 const lib          = require('../lib/bustracker')
@@ -196,106 +198,138 @@ function findbyLatLon(req, res, next) {
  * @param {*} res
  * @param {*} next
  */
-function askWatson(req, res, next){
-    const input = req.body.Body.replace(/['"]+/g, ''); // Watson number parser take m for million so things like "I'm" returns an unwanted number
+async function askWatson(req, res, next){
+    // Watson number parser take m for million so things like 
+    // "I'm" returns an unwanted number
+    const input = req.body.Body.replace(/['"]+/g, ''); 
+
+    let response;
+
+    let conversation = new AssistantV2({
+        version: '2019-02-28',
+        authenticator: new IamAuthenticator({
+            apikey: config.WATSON_API_KEY,
+        }),
+        url: "https://gateway.watsonplatform.net/assistant/api",
+    })
+
+    // Saving the sessionID in a cookie and passing it back allows the conversation
+    // to maintain state between requests.
+    let sessionId  = req.cookies['watsonSessionId'] && req.cookies['watsonSessionId'];
+
+    // Watson Assistant Sesssion
+    if (!sessionId){
+        try {
+            let session = await conversation.createSession(
+                {assistantId: config.WATSON_ASSISTANT_ID}
+            )
+            sessionId = session.result.session_id
+        } catch (err){
+            logger.error(err)
+            res.locals.message = {message: `I'm sorry I'm having trouble answering questions right now.`}
+            return res.render('message')
+        }
+    }
+
+    // Send and receive message
     try {
-        // conversation() will just throw an error if credentials are missing
-        var conversation = new ConversationV1({
-            username: config.WATSON_USER,
-            password: config.WATSON_PASSWORD,
-            version: '2017-05-26'
+        response = await conversation.message( {
+            assistantId: config.WATSON_ASSISTANT_ID,
+            input: {
+                'text': input, 
+                'options': {
+                    'return_context': true
+                }
+            },
+            sessionId: sessionId,
+            return_context: true
         })
-    } catch(err) {
-        logger.error(err, {input: input});
+
+        if (response.status !== 200) 
+            throw new Error(`Watson returned a status code of ${response.status} ${response.statusText}`)
+    } catch (err) {
+        let error_data = { input: input }
+        if (!(err instanceof Error)) {
+            error_data.passed = err
+            err = new Error('Watson error')
+        }
+        logger.error(err, error_data);
         res.locals.message = {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`}
         return res.render('message')
     }
 
-    const context  = JSON.parse(req.cookies['context'] || '{}');
+    let context = response.result.context
+    let watsonOutput = response.result.output
 
-    conversation.message( {
-        workspace_id: config.WATSON_WORKPLACE_ID,
-        input: {'text': input},
-        context: context
-        }, function(err, response) {
-            if (err) {
-                let error_data = { input: input }
-                if (!(err instanceof Error)) {
-                    error_data.passed = err
-                    err = new Error('Watson error')
-                }
-                logger.error(err, error_data);
-                // At this point we know the request isn't a bus number or address. If Watson sends an error fall back to older behavior.
-                res.locals.message = {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`}
-                return res.render('message')
-            }
+    if (!context) {
+        // this should never happen
+        logger.error("Watson returned an unusable response.", {response: response})
+        res.locals.message = {name: "Bustracker Error", message:"I'm sorry an error occured." }
+        return res.render('message')
+    }
 
-            if (!response.context) {
-                // this should never happen
-                logger.error("Watson returned an unusable response.", {response: response})
-                res.locals.message = {name: "Bustracker Error", message:"I'm sorry an error occured." }
-                return res.render('message')
-            }
-            // Set cookie to value of returned conversation_id will allow
-            // continuation of conversations that are otherwise stateless
-            res.cookie('context', JSON.stringify(response.context))
+    // Set cookie to value of returned conversation_id will allow
+    // continuation of conversations that are otherwise stateless
+    res.cookie('watsonSessionId', sessionId)
 
-            // The context.action is set in the Watson Conversation Nodes when we know
-            // we need to respond with additional data or our own message.
-            // If it's not set, we use the response sent from Watson.
+    // The context.action is set in the Watson Conversation Nodes when we know
+    // we need to respond with additional data or our own message.
+    // If it's not set, we use the response sent from Watson.
+    let action = context.skills['main skill'].user_defined['action']
 
-            if (!response.context.action) {
-                res.locals.action = 'Watson Chat'
-                res.locals.message = {message:response.output.text.join(' ')}
-                return res.render('message')
-            }
-            if(response.context.action === "Stop Lookup"){
-                // Earlier middleware should catch plain stop numbers
-                // But a query like "I'm at stop 36" will end up here
-                // Watson should identify the number for us as an entity
-                var stops = response.entities.filter((element) =>  element['entity'] == "sys-number"  );
+    if (!action) {
+        res.locals.action = 'Watson Chat'
+        res.locals.message = {message:watsonOutput.generic[0].text}
+        return res.render('message')
+    }
+    if(action === "Stop Lookup"){
+        // Earlier middleware should catch plain stop numbers
+        // But a query like "I'm at stop 36" will end up here
+        // Watson should identify the number for us as an entity
+        var stops = watsonOutput.entities.filter((element) =>  element['entity'] == "sys-number"  );
 
-                // It's possible to have more than one number in a user query
-                // If that happens we take the first number and hope it's right
-                var stop = stops[0]
-                if (stop) {
-                    res.locals.action = 'Stop Lookup'
-                    lib.getStopFromStopNumber(parseInt(stops[0].value))
-                    .then((routeObject) => {
-                        res.locals.routes = routeObject;
-                        res.render('stop-list');
-                    })
-                    .catch((err) => {
-                        res.locals.action = 'Failed Stop Lookup'
-                        res.render('message', {message: err})
-                    })
+        // It's possible to have more than one number in a user query
+        // If that happens we take the first number and hope it's right
+        var stop = stops[0]
 
-                } else {
-                    // This shouldn't ever happen.
-                    res.locals.action = 'Watson Error'
-                    logger.error("Watson returned a next_bus intent with no stops.", {input: input})
-                    res.locals.message = {name: "Bustracker Error", message:"I'm sorry an error occured." }
-                    return res.render('message')
-                }
-            } else if (response.context.action === "Address Lookup"){
-                // Watson has determined the user is looking for an address
-                // send the request to google places and see what we get.
-                next()
-            } else if (response.context.action === "Known Place"){
-                // Watson thinks the user is looking for a known place entity
-                // Set the location to the known place's canonical name
-                // and send to google geocoder
-                res.locals.known_location = response.entities.find((element) =>  element['entity'] == "anchorage-location"  );
-                next()
-            } 
-            else {
-                // For everything else.
-                res.locals.action = 'Watson Chat'
-                res.locals.message = {message:response.output.text.join(' ')}
-                return res.render('message')
-            }
-    });
+        if (stop) {
+            res.locals.action = 'Stop Lookup'
+            lib.getStopFromStopNumber(parseInt(stops[0].value))
+            .then(routeObject => {
+                res.locals.routes = routeObject;
+                res.render('stop-list');
+            })
+            .catch((err) => {
+                res.locals.action = 'Failed Stop Lookup'
+                res.render('message', {message: err})
+            })
+
+        } else {
+            // This shouldn't ever happen.
+            res.locals.action = 'Watson Error'
+            logger.error("Watson returned a next_bus intent with no stops.", {input: input})
+            res.locals.message = {name: "Bustracker Error", message:"I'm sorry an error occured." }
+            return res.render('message')
+        }
+    } else if (action === "Address Lookup"){
+        // Watson has determined the user is looking for an address
+        // send the request to google places and see what we get.
+        next()
+    } else if (action === "Known Place"){
+        // Watson thinks the user is looking for a known place entity
+        // Set the location to the known place's canonical name
+        // and send to google geocoder
+        res.locals.known_location = watsonOutput.entities.find((element) =>  element['entity'] == "anchorage-location"  );
+        next()
+    } 
+    else {
+        // For everything else.
+        res.locals.action = 'Watson Chat'
+        res.locals.message = {message:response.output.text.join(' ')}
+        return res.render('message')
+    } 
 }
+
 
 /**
  * Midddleware that responsds to user requests for stops near a location.
