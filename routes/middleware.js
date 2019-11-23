@@ -217,12 +217,10 @@ async function askWatson(req, res, next){
     let sessionId  = req.cookies['watsonSessionId'] && req.cookies['watsonSessionId'];
     // Watson Assistant Sesssion
     if (!sessionId){
-
         try {
             let session = await conversation.createSession(
                 {assistantId: config.WATSON_ASSISTANT_ID}
-            )
-            
+            )           
             sessionId = session.result.session_id
         } catch (err){
             logger.error(err)
@@ -244,7 +242,6 @@ async function askWatson(req, res, next){
             sessionId: sessionId,
             return_context: true
         })
-
         if (response.status !== 200) 
             throw new Error(`Watson returned a status code of ${response.status} ${response.statusText}`)
     } catch (err) {
@@ -257,7 +254,7 @@ async function askWatson(req, res, next){
         res.locals.message = {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`}
         return res.render('message')
     }
-    
+
     if (!response.result ||  !response.result.context) {
         // this should never happen
         logger.error("Watson returned an unusable response.", {response: response})
@@ -275,6 +272,7 @@ async function askWatson(req, res, next){
     // The context.action is set in the Watson Conversation Nodes when we know
     // we need to respond with additional data or our own message.
     // If it's not set, we use the response sent from Watson.
+
     let action = context.skills['main skill'].user_defined['action']
 
     if (!action) {
