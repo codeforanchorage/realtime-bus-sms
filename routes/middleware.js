@@ -204,7 +204,6 @@ async function askWatson(req, res, next){
     const input = req.body.Body.replace(/['"]+/g, ''); 
 
     let response;
-
     let conversation = new AssistantV2({
         version: '2019-02-28',
         authenticator: new IamAuthenticator({
@@ -216,13 +215,14 @@ async function askWatson(req, res, next){
     // Saving the sessionID in a cookie and passing it back allows the conversation
     // to maintain state between requests.
     let sessionId  = req.cookies['watsonSessionId'] && req.cookies['watsonSessionId'];
-
     // Watson Assistant Sesssion
     if (!sessionId){
+
         try {
             let session = await conversation.createSession(
                 {assistantId: config.WATSON_ASSISTANT_ID}
             )
+            
             sessionId = session.result.session_id
         } catch (err){
             logger.error(err)
@@ -257,20 +257,20 @@ async function askWatson(req, res, next){
         res.locals.message = {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`}
         return res.render('message')
     }
+    
+    if (!response.result ||  !response.result.context) {
+        // this should never happen
+        logger.error("Watson returned an unusable response.", {response: response})
+        res.locals.message = {name: "Bustracker Error", message: "I'm sorry an error occured." }
+        return res.render('message')
+    }
 
     let context = response.result.context
     let watsonOutput = response.result.output
 
-    if (!context) {
-        // this should never happen
-        logger.error("Watson returned an unusable response.", {response: response})
-        res.locals.message = {name: "Bustracker Error", message:"I'm sorry an error occured." }
-        return res.render('message')
-    }
-
     // Set cookie to value of returned conversation_id will allow
     // continuation of conversations that are otherwise stateless
-    res.cookie('watsonSessionId', sessionId)
+    res.cookie('watsonSessionId', sessionId, { maxAge: 5* 60 * 1000 }) // watson sessions only last five minutes 
 
     // The context.action is set in the Watson Conversation Nodes when we know
     // we need to respond with additional data or our own message.
@@ -279,7 +279,10 @@ async function askWatson(req, res, next){
 
     if (!action) {
         res.locals.action = 'Watson Chat'
-        res.locals.message = {message:watsonOutput.generic[0].text}
+        let text = watsonOutput.generic
+         .filter(t => t.response_type === 'text')
+         .map(t => t.text)
+        res.locals.message = {message:text.join(' ')}
         return res.render('message')
     }
     if(action === "Stop Lookup"){
