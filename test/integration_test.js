@@ -162,7 +162,7 @@ describe("Integration Tests", function(){
                     var lines = res.text.split('\n')
                     assert(lines[0].includes(stopNumber), "Results didn't include the stop number")
                     assert.equal(lines[2],  '10 Northern Lights - Outbound - ')
-                    assert.equal(lines[3],  '5:09 PM, 5:23 PM')
+                    assert.equal(lines[3],  '4:58 PM, 5:23 PM')
                 })
                 .end((err, res) => done(err))
             })
