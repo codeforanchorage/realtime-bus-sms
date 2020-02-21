@@ -109,7 +109,7 @@ You will also need to find your login credentials for the Watson app. These are 
 https://console.bluemix.net/dashboard/apps/
 
 Click the service you just created. Then in the left menu click 'service credentials' than click veiw credentials in the table on the page. This will show you a username and password which you can add to your conviguration for
-WATSON_USER and WATSON_PASSWORD
+WATSON_API_KEY and WATSON_ASSISTANT_KEY
 
 **Google Places**
 
