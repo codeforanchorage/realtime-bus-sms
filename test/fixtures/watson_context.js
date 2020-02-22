@@ -1,33 +1,56 @@
 module.exports = {
     stop_lookup: {
-        intents: [ { intent: 'stop_number', confidence: 0.9944038056904262 } ],
-        entities:[
-            {
-                entity: 'sys-number',
-                location: [ 12, 16 ],
-                value: '1066',
-                confidence: 1,
-                metadata: { numeric_value: 1066 }
-            }],
-        input: { text: 'stop number 1066' },
-        output:{
-            text: [ 'okay I found bus 1066.' ],
-            nodes_visited: [ 'node_7_1480375740958' ],
-            log_messages: []
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+       "content-type": "application/json; charset=utf-8",
+      },
+      "result": {
+       "output": {
+        "generic": [
+         {
+          "response_type": "text",
+          "text": "Found stop 2051"
+         }
+        ],
+        "intents": [
+         {
+          "intent": "stop_number",
+          "confidence": 0.9074814319610596
+         }
+        ],
+        "entities": [
+         {
+          "entity": "sys-number",
+          "location": [
+           12,
+           16
+          ],
+          "value": "2051",
+          "confidence": 1,
+          "metadata": {
+           "numeric_value": 2051
+          }
+         }
+        ]
+       },
+       "context": {
+        "global": {
+         "system": {
+          "turn_count": 4
+         }
         },
-        context:{
-            conversation_id: 'bf80ed89-f18e-436d-a9ed-cf86c63cbf56',
-            system: {
-                dialog_stack:  [ { dialog_node: 'root' } ],
-                dialog_turn_counter: 5,
-                dialog_request_counter: 5,
-                _node_output_map:  { '#address': [ 0, 0 ] },
-                branch_exited: true,
-                branch_exited_reason: 'completed'
-            },
-            action: 'Stop Lookup'
+        "skills": {
+         "main skill": {
+          "user_defined": {
+           "action": "Stop Lookup"
+          },
+          "system": {}
+         }
         }
-    },
+       }
+      }
+     },
     stop_lookup_no_stop: {
         intents: [ { intent: 'stop_number', confidence: 0.9944038056904262 } ],
         entities:[],
@@ -52,104 +75,175 @@ module.exports = {
     },
 
     address_lookup: {
-        intents: [ { intent: 'address', confidence: 0.3610852134482194 } ],
-        entities:[
-            {
-                entity: 'sys-number',
-                location: [ 0, 5 ],
-                value: '18978',
-                confidence: 1,
-                metadata: { numeric_value: 18978 } } ],
-        input: { text: '18978 Bumbledorf Street' },
-        output: {
-            text: [ 'My search for address 18978 Bumbledorf Street returned zero results. You can enter a street address like \'632 West 6th\' or an intersection such as \'6th and G street\'. ' ],
-            nodes_visited: [ '#address' ],
-            log_messages: []
-        },
-        context:{
-            conversation_id: 'bf80ed89-f18e-436d-a9ed-cf86c63cbf56',
-            system: {
-                dialog_stack:  [ { dialog_node: 'root' } ],
-                dialog_turn_counter: 6,
-                dialog_request_counter: 6,
-                _node_output_map: { '#address': [ 0, 0 ] },
-                branch_exited: true,
-                branch_exited_reason: 'completed'
-            },
-            action: 'Address Lookup'
-        }
-    },
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "content-length": "427",
+      },
+      "result": {
+      "output": {
+         "generic": [
+         {
+         "response_type": "text",
+         "text": "My search for address 5th and G Street returned zero results. You can enter a street address like '632 West 6th' or an intersection such as '6th and G street'."
+         }
+         ],
+         "intents": [
+         {
+         "intent": "address",
+         "confidence": 0.8689370155334473
+         }
+         ],
+         "entities": []
+      },
+      "context": {
+         "global": {
+         "system": {
+         "turn_count": 1
+         }
+         },
+         "skills": {
+         "main skill": {
+         "user_defined": {
+            "action": "Address Lookup"
+         },
+         "system": {}
+         }
+         }
+      }
+      }
+   },
     address_lookup_with_known_location: {
-        intents: [ { intent: 'place', confidence: 0.971315574645996 } ],
-        entities:[
-            {
-                entity: "anchorage-location",
-                location: [0,27],
-                value: "Alaska Native Tribal Health Consortium",
-                confidence: 1
-            }],
-        input: { text: 'ANTHC' },
-        output: {
-            text: [ 'My search for address ANTHC returned zero results. You can enter a street address like \'632 West 6th\' or an intersection such as \'6th and G street\'. ' ],
-            nodes_visited: [ '#address' ],
-            log_messages: []
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+       "content-type": "application/json; charset=utf-8",
+       "content-length": "515",
+      },
+      "result": {
+       "output": {
+        "generic": [
+         {
+          "response_type": "text",
+          "text": "My search for ANTHC returned zero results. You can enter a street address like '632 West 6th' or an intersection such as '6th and G street'."
+         }
+        ],
+        "intents": [
+         {
+          "intent": "place",
+          "confidence": 0.9883307933807373
+         }
+        ],
+        "entities": [
+         {
+          "entity": "anchorage-location",
+          "location": [
+           0,
+           5
+          ],
+          "value": "Alaska Native Tribal Health Consortium",
+          "confidence": 1
+         }
+        ]
+       },
+       "context": {
+        "global": {
+         "system": {
+          "turn_count": 1
+         }
         },
-        context:{
-            conversation_id: 'bf80ed89-f18e-436d-a9ed-cf86c63cbf56',
-            system: {
-                dialog_stack:  [ { dialog_node: 'root' } ],
-                dialog_turn_counter: 6,
-                dialog_request_counter: 6,
-                _node_output_map: { '#address': [ 0, 0 ] },
-                branch_exited: true,
-                branch_exited_reason: 'completed'
-            },
-            action: 'Known Place'
+        "skills": {
+         "main skill": {
+          "user_defined": {
+           "action": "Known Place"
+          },
+          "system": {}
+         }
         }
-    },
+       }
+      }
+     },
     greeting: {
-        intents: [ { intent: 'greetings', confidence: 0.9853062695651725 } ],
-        entities: [],
-        input: { text: 'Whats up?' },
-        output: {
-            nodes_visited: [ 'node_1_1480374793842', 'node_2_1480445527939' ],
-            text:[
-                'Greetings.',
-                'Send me a bus stop number and I\'ll let you know when the next bus is coming.'
-            ],
-           log_messages: [] },
-        context: {
-            conversation_id: 'bf80ed89-f18e-436d-a9ed-cf86c63cbf56',
-            system: {
-                dialog_turn_counter: 20,
-                dialog_request_counter: 20,
-                branch_exited: true,
-                branch_exited_reason: 'completed'
-            },
-           action: null
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+       "content-type": "application/json; charset=utf-8",
+      },
+      "result": {
+       "output": {
+        "generic": [
+         {
+          "response_type": "text",
+          "text": "Hello!"
+         },
+         {
+          "response_type": "text",
+          "text": "Send me a bus stop number and I'll let you know when the next bus is coming."
+         }
+        ],
+        "intents": [
+         {
+          "intent": "greetings",
+          "confidence": 0.9264728546142578
+         }
+        ],
+        "entities": []
+       },
+       "context": {
+        "global": {
+         "system": {
+          "turn_count": 3
+         }
+        },
+        "skills": {
+         "main skill": {
+          "user_defined": {
+           "action": null
+          },
+          "system": {}
+         }
         }
-    },
+       }
+      }
+     },
     no_intent: {
-        intents: [  ],
-        entities: [],
-        input: { text: 'Whats up?' },
-        output: {
-            nodes_visited: [ 'node_1_1480374793842', 'node_2_1480445527939' ],
-            text:[
-                'Huh?',
-                'I have no idea what you are talking about!?!'
-            ],
-           log_messages: [] },
-        context: {
-            conversation_id: 'bf80ed89-f18e-436d-a9ed-cf86c63cbf56',
-            system: {
-                dialog_turn_counter: 20,
-                dialog_request_counter: 20,
-                branch_exited: true,
-                branch_exited_reason: 'completed'
-            },
-           action: null
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+       "content-type": "application/json; charset=utf-8",
+      },
+      "result": {
+       "output": {
+        "generic": [
+         {
+          "response_type": "text",
+          "text": "Huh?"
+         },
+         {
+          "response_type": "text",
+          "text": "I have no idea what you're talking about."
+         }
+        ],
+        "intents": [],
+        "entities": []
+       },
+       "context": {
+        "global": {
+         "system": {
+          "turn_count": 3
+         }
+        },
+        "skills": {
+         "main skill": {
+          "user_defined": {
+           "action": null
+          },
+          "system": {}
+         }
         }
-    }
+       }
+      }
+     }
 
 }

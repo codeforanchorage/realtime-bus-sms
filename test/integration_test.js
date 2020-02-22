@@ -176,10 +176,17 @@ describe("Integration Tests", function(){
                 })
                 .reply(200, geocodeResponses.goodResponse)
 
+                // watson session creation
                 nock('https://gateway.watsonplatform.net')
-                .post(/\/conversation\/api\/v1\/workspaces/)
-                .query({version:'2017-05-26'})
-                .reply(200, watsonResponses.address_lookup)
+                .post(/sessions$/)
+                .query({version:'2019-02-28'})
+                .reply(200, {session_id:"someSessionID"})
+
+                // watson message
+                nock('https://gateway.watsonplatform.net')
+                .post(/message/)
+                .query({version:'2019-02-28'})
+                .reply(200, watsonResponses.address_lookup.result)
 
                 request.post('/')
                 .send({Body: address})
@@ -253,10 +260,17 @@ describe("Integration Tests", function(){
                 })
                 .reply(200, geocodeResponses.goodResponse)
 
+                // watson session creation
                 nock('https://gateway.watsonplatform.net')
-                .post(/\/conversation\/api\/v1\/workspaces/)
-                .query({version:'2017-05-26'})
-                .reply(200, watsonResponses.address_lookup)
+                .post(/sessions$/)
+                .query({version:'2019-02-28'})
+                .reply(200, {session_id:"someSessionID"})
+
+                // watson message
+                nock('https://gateway.watsonplatform.net')
+                .post(/message/)
+                .query({version:'2019-02-28'})
+                .reply(200, watsonResponses.address_lookup.result)
 
                 request.post('/ajax')
                 .send({Body: address})
@@ -321,11 +335,17 @@ describe("Integration Tests", function(){
                     return queryObject.input === `${address} ${config.GOOGLE_GEOCODE_LOCATION}`
                 })
                 .reply(200, geocodeResponses.goodResponse)
-
+                // watson session creation
                 nock('https://gateway.watsonplatform.net')
-                .post(/\/conversation\/api\/v1\/workspaces/)
-                .query({version:'2017-05-26'})
-                .reply(200, watsonResponses.address_lookup)
+                .post(/sessions$/)
+                .query({version:'2019-02-28'})
+                .reply(200, {session_id:"someSessionID"})
+
+                // watson message
+                nock('https://gateway.watsonplatform.net')
+                .post(/message/)
+                .query({version:'2019-02-28'})
+                .reply(200, watsonResponses.address_lookup.result)
 
                 request.get('/find/' + address)
                 .expect(/^<!DOCTYPE/)
@@ -335,11 +355,21 @@ describe("Integration Tests", function(){
 
             it('Should send full webpage with Watson results for other queries', function(done){
                 nock('https://maps.googleapis.com').get(/./).query(true).reply(200, geocodeResponses.nonspecificResponse)
-                nock('https://gateway.watsonplatform.net').post(/./).query(true).reply(200, watsonResponses.greeting)
+               // watson session creation
+               nock('https://gateway.watsonplatform.net')
+               .post(/sessions$/)
+               .query({version:'2019-02-28'})
+               .reply(200, {session_id:"someSessionID"})
 
+               // watson message
+               nock('https://gateway.watsonplatform.net')
+               .post(/message/)
+               .query({version:'2019-02-28'})
+               .reply(200, watsonResponses.greeting.result)
+                
                 request.get("/find/What's%20up")
                 .expect(/^<!DOCTYPE/)
-                .expect(/Greetings./)
+                .expect(/Hello!/)
                 .end((err, res) =>  done(err))
             })
         })
@@ -572,7 +602,17 @@ describe("Integration Tests", function(){
             const input = "Test query" + Date.now().toString(36)
             const ip = [0,0,0].reduce((acc, cur) => acc + "." + Math.floor(Math.random() * (256)), "10")
             nock("http://www.google-analytics.com")
-            nock('https://gateway.watsonplatform.net').post(/./).query(true).reply(200, watsonResponses.greeting)
+            // watson session creation
+            nock('https://gateway.watsonplatform.net')
+            .post(/sessions$/)
+            .query({version:'2019-02-28'})
+            .reply(200, {session_id:"someSessionID"})
+
+            // watson message
+            nock('https://gateway.watsonplatform.net')
+            .post(/message/)
+            .query({version:'2019-02-28'})
+            .reply(200, watsonResponses.greeting.result)
 
             request.post('/')
             .set('X-Forwarded-For', ip)
@@ -603,7 +643,18 @@ describe("Integration Tests", function(){
             const from = "testPhone: " + Date.now().toString(8).slice(3)
                 , input = "Test query" + Date.now().toString(36)
             nock("http://www.google-analytics.com")
-            nock('https://gateway.watsonplatform.net').post(/./).query(true).reply(200, watsonResponses.greeting)
+             // watson session creation
+             nock('https://gateway.watsonplatform.net')
+             .post(/sessions$/)
+             .query({version:'2019-02-28'})
+             .reply(200, {session_id:"someSessionID"})
+
+             // watson message
+             nock('https://gateway.watsonplatform.net')
+             .post(/message/)
+             .query({version:'2019-02-28'})
+             .reply(200, watsonResponses.greeting.result)
+            
             request.post('/ajax')
             .set('X-Forwarded-For', '10.0.0.1')
             .send({Body: input})

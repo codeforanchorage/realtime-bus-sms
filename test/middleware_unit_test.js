@@ -6,9 +6,7 @@ const lib       = require('../lib/bustracker')
 const geocode   = require('../lib/geocode')
 const logger    = require('../lib/logger')
 const config    = require('../lib/config')
-//const watson    = require('watson-developer-cloud')
-const ConversationV1 = require('watson-developer-cloud/conversation/v1');
-const request   = require('request')
+const AssistantV2 = require('ibm-watson/assistant/v2');
 const mw        = require('../routes/middleware')
 const fakedata  = require('./fixtures/stopdata')
 const gtfs      = require('../lib/gtfs')
@@ -397,11 +395,14 @@ describe('Middleware Function', function(){
     })
 
     describe("askWatson", function(){
-        let messageStub, next, res, req, loggerStub, watson_response, getStopsStub, getStopsStubLocation
+        let messageStub, createSessionStub, next, res, req, loggerStub, watson_response, getStopsStub, getStopsStubLocation
+        let sessionId = "someSessionID"
         beforeEach(function(){
             watson_response = require('./fixtures/watson_context')
             next = sinon.stub()
-            messageStub = sinon.stub(ConversationV1.prototype, "message")//.returns({message: watson_response})
+            createSessionStub = sinon.stub(AssistantV2.prototype, "createSession").resolves({result:{session_id:sessionId}})
+
+            messageStub = sinon.stub(AssistantV2.prototype, "message")//.returns({message: watson_response})
             loggerStub =  sinon.stub(logger, 'error')
             res = {render: sinon.stub(), locals: {}, cookie: sinon.stub()}
             getStopsStub = sinon.stub(lib, 'getStopFromStopNumber')
@@ -413,44 +414,45 @@ describe('Middleware Function', function(){
             getStopsStubLocation.restore()
             messageStub.restore()
             loggerStub.restore()
+            createSessionStub.restore()
         })
         
-        it("Should call waston message with workspace, user input, and contex", function(){
-            let context = JSON.parse(req.cookies['context'])
-            mw.askWatson(req, res, next)
-            sinon.assert.calledWith(messageStub, sinon.match.has('workspace_id'))
+        it("Should call waston message with workspace, user input, and contex", async function(){
+            await mw.askWatson(req, res, next)
+            
+            sinon.assert.calledWith(messageStub, sinon.match.has('assistantId'))
             sinon.assert.calledWith(messageStub, sinon.match.has('input',  sinon.match({'text': req.body.Body})))
-            sinon.assert.calledWith(messageStub, sinon.match.has('context', sinon.match(context)))
+            sinon.assert.calledWith(messageStub, sinon.match.has('sessionId', sinon.match(sessionId)))
         })
-        it("Should log an error if the message fails", function(){
+        it("Should log an error if the message fails", async function(){
             let error = new Error("Watson Error")
-            messageStub.yields(error)
-            mw.askWatson(req, res, next)
+            messageStub.throws(error)
+            await mw.askWatson(req, res, next)
             sinon.assert.calledWith(loggerStub, error, {input: req.body.Body} )
         })
-        it("Should send a no-results message to their user if the message fails", function(){
+        it("Should send a no-results message to their user if the message fails", async function(){
             let error = new Error("Watson Error")
-            messageStub.yields(error)
-            mw.askWatson(req, res, next)
+            messageStub.throws(error)
+            await mw.askWatson(req, res, next)
             assert.deepEqual(res.locals.message, {message: `A search for ${req.body.Body} found no results. For information about using this service send "About".`})
             sinon.assert.calledWith(res.render, 'message' )
         })
-        it("Should set cookie to the response context ", function(){
+        it("Should set cookie to the sessionID ", async function(){
             getStopsStub.resolves()
-            messageStub.yields(null, watson_response.stop_lookup)
-            mw.askWatson(req, res, next)
-            sinon.assert.calledWith(res.cookie, 'context', JSON.stringify(watson_response.stop_lookup.context))
+            messageStub.resolves(watson_response.stop_lookup)
+            await mw.askWatson(req, res, next)
+            sinon.assert.calledWith(res.cookie, 'watsonSessionId', sessionId)
         })
-        it("Should set res.locals.action to 'Stop Lookup' when watson returns stop lookup intent", function(){
+        it("Should set res.locals.action to 'Stop Lookup' when watson returns stop lookup intent", async function(){
             getStopsStub.resolves()
-            messageStub.yields(null, watson_response.stop_lookup)
-            mw.askWatson(req, res, next)
+            messageStub.resolves(watson_response.stop_lookup)
+            await mw.askWatson(req, res, next)
             assert.equal(res.locals.action, 'Stop Lookup')
         })
-        it("Should render stop-list with stops when watson returns a stop", function(done){
+        it("Should render stop-list with stops when watson returns a stop",  function(done){
             let fake_stop_list = {stop_list: [1, 2, 3]}
             getStopsStub.resolves(fake_stop_list)
-            messageStub.yields(null, watson_response.stop_lookup)
+            messageStub.resolves(watson_response.stop_lookup)
 
             res.render = (arg) => {
                 try{
@@ -464,7 +466,7 @@ describe('Middleware Function', function(){
         it("Should render an error and set res.locals.action when stop lookup fails", function(done){
             let error = new Error("Some stop error")
             getStopsStub.rejects(error)
-            messageStub.yields(null, watson_response.stop_lookup)
+            messageStub.resolves(watson_response.stop_lookup)
             res.render = (template, obj) => {
                 try{
                     assert.equal(res.locals.action, 'Failed Stop Lookup')
@@ -475,50 +477,46 @@ describe('Middleware Function', function(){
             }
             mw.askWatson(req, res, next)
         })
-        it("Should render (and log) an error if watson returns a stop lookup intent with no stop", function(){
-            messageStub.yields(null, watson_response.stop_lookup_no_stop)
-            mw.askWatson(req, res, next)
-            assert.equal(res.locals.action, 'Watson Error')
-            sinon.assert.called(loggerStub)
-            assert.deepEqual(res.locals.message, {name: "Bustracker Error", message:"I'm sorry an error occured." })
-            sinon.assert.calledWith(res.render, 'message')
-        })
-        it("Should delegate to geocoder when watson returns an Address Lookup intent", function(){
+        it("Should delegate to geocoder when watson returns an Address Lookup intent", async function(){
             let input = "5th and G Street"
             getStopsStubLocation.resolves(fakedata.stops_from_location)
             req.body =  {Body:input}
-            messageStub.yields(null, watson_response.address_lookup)
-            mw.askWatson(req, res, next)
+            messageStub.resolves(watson_response.address_lookup)
+            await mw.askWatson(req, res, next)
             sinon.assert.called(next)
         })
-        it("Should set res.locals.known_location when watson finds a known location", function(){
+        it("Should set res.locals.known_location when watson finds a known location", async function(){
             let input = "ANTHC"
             getStopsStubLocation.resolves(fakedata.stops_from_location)
             req.body =  {Body:input}
-            messageStub.yields(null, watson_response.address_lookup_with_known_location)
-            mw.askWatson(req, res, next)
+            messageStub.resolves(watson_response.address_lookup_with_known_location)
+            await mw.askWatson(req, res, next)
             assert.equal(res.locals.known_location.value, 'Alaska Native Tribal Health Consortium')
             assert.equal(res.locals.known_location.entity, 'anchorage-location')
         })
 
-        it("Should set res.locals.action to 'Watson Chat' and render message for all other intents", function(){
-            messageStub.yields(null, watson_response.greeting)
-            mw.askWatson(req, res, next)
+        it("Should set res.locals.action to 'Watson Chat' and render message for all other intents", async function(){
+            messageStub.resolves(watson_response.greeting)
+            await mw.askWatson(req, res, next)
             assert.equal( res.locals.action, 'Watson Chat')
-            assert.deepEqual(res.locals.message, {message:watson_response.greeting.output.text.join(' ')})
+            assert.deepEqual(res.locals.message, {
+               message: watson_response.greeting.result.output.generic.map(t => t.text).join(' ')
+            })
             sinon.assert.calledWith(res.render, 'message')
         })
-        it("Should set res.locals.action to 'Watson Chat' and render message when there is no intent", function(){
-            messageStub.yields(null, watson_response.no_intent)
-            mw.askWatson(req, res, next)
+        it("Should set res.locals.action to 'Watson Chat' and render message when there is no intent", async function(){
+            messageStub.resolves(watson_response.no_intent)
+            await mw.askWatson(req, res, next)
             assert.equal( res.locals.action, 'Watson Chat')
-            assert.deepEqual(res.locals.message, {message:watson_response.no_intent.output.text.join(' ')})
+            assert.deepEqual(res.locals.message, {
+               message: watson_response.no_intent.result.output.generic.map(t => t.text).join(' ')
+            })
             sinon.assert.calledWith(res.render, 'message')
         })
-        it("Should render and log an error message if there is no context in the response ", function(){
-            let badResponse = {huh: "wtf?"}
-            messageStub.yields(null, badResponse)
-            mw.askWatson(req, res, next)
+        it("Should render and log an error message if there is no context in the response ", async function(){
+            let badResponse = {huh: "wtf?", status: 200}
+            messageStub.resolves(badResponse)
+            await mw.askWatson(req, res, next)
             sinon.assert.calledWith(loggerStub, sinon.match.string, sinon.match({response: badResponse}))
             sinon.assert.calledWith(res.render, 'message')
         })
