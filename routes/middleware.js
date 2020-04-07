@@ -60,7 +60,7 @@ function emergencyException(req, res, next) {
 
    res.locals.message = {
       name: "Service Temporarily Suspended", 
-      message:`Due to COVID-19 People Mover bus service is suspended. Limited, essential trips available by reservation. To schedule call ${number} or visit ${link}`}
+      message:`Due to COVID-19 People Mover bus service is suspended. Limited, essential trips available by reservation.\n\n To schedule call ${number} \n\nor visit ${link}`}
    return res.render('covid-response')
 }
 
