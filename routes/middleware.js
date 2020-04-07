@@ -47,6 +47,22 @@ function sanitizeInput(req, res, next) {
     }
     next();
 }
+/**
+ * Preempt normal messaging with a custom message
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+function emergencyException(req, res, next) {
+   let number = '907-343-6543'
+   let link = 'https://bit.ly/anc-covid19' 
+   
+
+   res.locals.message = {
+      name: "Service Temporarily Suspended", 
+      message:`Due to COVID-19 People Mover bus service is suspended. Limited, essential trips available by reservation. To schedule call ${number} or visit ${link}`}
+   return res.render('covid-response')
+}
 
 /**
  * Checks for holidays. When buses are not running
@@ -377,4 +393,5 @@ module.exports = {
     stopNumberResponder: stopNumberResponder,
     addressResponder: addressResponder,
     findbyLatLon: findbyLatLon,
+    emergencyException: emergencyException,
 }

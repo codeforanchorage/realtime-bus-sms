@@ -1,0 +1,16 @@
+if returnHTML
+    if renderWholePage
+
+    div 
+        b Service Temporarily Suspended
+        p Due to to COVID-19, People Mover bus service is suspended. Limited, essential trips available by reservation. 
+        p To schedule call: 
+            b 907-343-6543 
+        p or visit: 
+            br
+            |
+            a(href='https://bit.ly/anc-covid19') People Mover COVID-19 Transit Information
+else
+    if message.name
+        |#{message.name}. 
+    | !{message.message}  

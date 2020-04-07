@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
         if (req.get('X-Forwarded-Proto') && req.get('X-Forwarded-Proto') == 'http') {
             return res.redirect('https://' + req.get('host') + req.originalUrl)
         }
-        res.render('index');
+        res.render('covid-index');
     }
 );
 
@@ -41,6 +41,7 @@ router.post('/',
         next()
     },
     feedback.feedbackResponder_sms,
+    mw.emergencyException,
     mw.sanitizeInput,
     mw.checkServiceExceptions,
     mw.addLinkToRequest,
@@ -58,6 +59,7 @@ router.post('/ajax',
         res.locals.returnHTML = 1;
         next()
     },
+    mw.emergencyException,
     mw.sanitizeInput,
     mw.checkServiceExceptions,
     mw.blankInputRepsonder,
@@ -77,13 +79,13 @@ router.post('/ajax',
  router.get('/find/about', function(req, res, next) {
     res.locals.returnHTML = 1;
     res.locals.action = "About"
-    res.render('index');
+    res.render('covid-index');
 
 });
 
 router.get('/find/', function(req, res, next) {
     res.locals.returnHTML = 1;
-    res.render('index');
+    res.render('covid-index');
 });
 
 router.get('/find/:query', function(req, res, next) {
@@ -92,6 +94,7 @@ router.get('/find/:query', function(req, res, next) {
         res.locals.renderWholePage = 1;
         next();
     },
+    mw.emergencyException,
     mw.checkServiceExceptions,
     mw.blankInputRepsonder,
     mw.stopNumberResponder,
@@ -106,6 +109,7 @@ router.get('/find/:query', function(req, res, next) {
 */
 
 router.get('/byLatLon',
+    mw.emergencyException,
     mw.checkServiceExceptions,
     mw.findbyLatLon
 );

@@ -1,0 +1,208 @@
+doctype html
+html
+    head
+        title= title
+        meta(name='MobileOptimized', content='320')
+        meta(name='viewport', content='width=device-width, minimum-scale=1, maximum-scale=1')
+        meta(name='apple-mobile-web-app-capable' content='yes')
+        meta(charset="utf-8")
+        link(href="https://fonts.googleapis.com/css?family=PT+Sans:400,700", rel="stylesheet")
+        link(href='/css/busStyles.css', rel='stylesheet')
+        script(src='/javascripts/fittext.js')
+
+    body
+        div
+            h1(id="headline") When’s the<br />next bus?
+            form(method="POST", onsubmit="return makeRequest()")
+                input(name="Body", placeholder="bus stop number or address")
+                button(type="submit") Get Routes
+            p#location.https_only <a onclick="locateMe()"> <span class="pointer">⊕</span> <span class="location">Find stops near you</span></a>
+
+            div(id="output")
+
+                block info
+                    
+                  b Service Temporarily Suspended
+                  p Due to to COVID-19, People Mover bus service is suspended. Limited, essential trips available by reservation. 
+                  p To schedule call: 
+                        b 907-343-6543 
+                  p or visit: 
+                        br
+                        |
+                        a(href='https://bit.ly/anc-covid19') People Mover COVID-19 Transit Information
+
+
+            a(onclick="return openFeedback()" href="#" id="feedback_link") Give feedback
+            form(method="POST", style="display:none" onsubmit="return submitFeedback()", id="feedback")
+                label(for='comment') Comments
+                textarea(name="comment" id='comment', placeholder="Comments or questions")
+                br
+                label(for='email') Email (optional for response)
+                input(type='text', id='email', name='email', placeholder="email (optional)")
+                br
+                button(type="submit", value="Send Feedback") Send Feedback
+                button(type="reset", value="Cancel" , onclick="closeFeedback()") Cancel 
+
+                
+            div(id="footer")
+                div
+                    a(href="http://codeforanchorage.org")
+                        img.logo(src="/img/cfa.png", width="40px", height="40px")
+                
+                div Code For Anchorage
+
+
+    script.
+        fitText(document.getElementById('headline'), .5);
+        var interval = null;
+        var outputDiv = document.getElementById('output');
+
+        if (location.protocol != 'https:'){
+            // Allow selective display of elements based on protocol (i.e. the location service)
+            document.body.className += ' ' + 'not_https';
+        }
+
+        
+
+
+        function showLoading() {
+            var elements = ['&bull;', '&nbsp;', '&nbsp;', '&nbsp;']
+            interval = window.setInterval(
+                    function() {
+                        var output = elements.join('');
+                        outputDiv.innerHTML = output;
+                        elements.unshift(elements.pop());
+                    },
+                    300
+            );
+        }
+
+        function openFeedback() {
+            document.getElementById('feedback').style.display='block';
+            document.getElementById('feedback_link').style.display='none';
+            return false;
+        }
+        function closeFeedback() {
+            console.log("in close Feedback: ", this)
+            var form = document.getElementById('feedback');
+            form.reset();
+            form.style.display="none";
+            document.getElementById('feedback_link').style.display='inline';
+        
+            if(this.readyState == 4) {
+                var output = 'Sorry, there was an error';
+                if(this.status == 200) output = this.responseText;
+                output = output.replace(/\n/g, '<br>');
+                outputDiv.innerHTML = output;
+            }
+
+        }
+        function submitFeedback() {       
+            var payload =  {
+                comment: document.getElementById('comment').value,
+                email: document.getElementById('email').value
+                }  
+            payload = JSON.stringify(payload);
+            console.log(payload)
+            var http = new XMLHttpRequest();
+            http.open("POST", "/feedback", true);
+            http.setRequestHeader('Content-type', 'application/json');
+
+            http.onreadystatechange = closeFeedback.bind(http);
+            http.send(payload);
+            return false;
+
+        }
+
+        function removeLoading() {
+            window.clearInterval(interval);
+            outputDiv.innerHTML = '';
+        }
+
+
+        function updateOutputDiv() {
+            removeLoading();
+
+            if(this.readyState == 4) {
+                var output = 'Sorry, there was an error';
+                if(this.status == 200) output = this.responseText;
+                output = output.replace(/\n/g, '<br>');
+                outputDiv.innerHTML = output;
+            }
+        }
+
+        function makeRequest(query){
+            var payload = {Body: query || document.getElementsByName('Body')[0].value};
+            history.pushState(payload, "BusTracker", "/find/"+encodeURIComponent(payload.Body))
+            postIt(payload);
+            return false;
+        }
+
+        function postIt(payload){
+            showLoading();           
+            var http = new XMLHttpRequest();
+            http.open("POST", "/ajax", true);
+            payload = JSON.stringify(payload);
+
+            //Send the proper header information along with the request
+            http.setRequestHeader("Content-type", "application/json");
+
+            http.onreadystatechange = updateOutputDiv.bind(http);
+            http.send(payload);
+
+            return false;
+        }
+        window.onpopstate = function(event) {
+          if(event && event.state) { //state is null on page load
+            console.log(event)
+            postIt(event.state)
+          }
+        }
+
+        function showPosition(position) {
+            console.log("in Show position with pos = ", position)
+            var http = new XMLHttpRequest();
+            var url = '/byLatLon?lat=';
+            url += position.coords.latitude + '&lon=' + position.coords.longitude;
+            http.open('GET', url, true);
+
+            http.onreadystatechange = updateOutputDiv.bind(http);
+            http.send();
+        }
+        function postitionError(e) {
+            console.log("error: ", e)
+            removeLoading();
+            // from spec https://dev.w3.org/geo/api/spec-source.html#position_error_interface
+            var error_codes = {
+                1: "<b>Permision Denied</b><br>Make sure you have allowed location services in your privacy settings.",
+                2: "<b>Position Unavailable</b><br>The browser couldn't determine your location. This can happen if you have poor GPS coverage or are using a desktop browser.",
+                3: "A Timeout Occured",
+                'default': "An unknown error occured" 
+            }
+            var error_message = error_codes[e.code] || error_codes['default']
+            var output = 'Sorry, your browser reported an error: <p>' + error_message +"</p>";
+            output = output.replace(/\n/g, '<br>');
+            outputDiv.innerHTML = output;
+
+
+        }
+
+        // if the browser is capable, get the nearest stop by geolocation
+        function locateMe() {
+            console.log("in Show position with pos = ")
+
+            showLoading();
+
+            navigator.geolocation.getCurrentPosition(
+                    showPosition,
+                    postitionError,
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 60000,
+                    }
+            );
+        }
+
+
+
