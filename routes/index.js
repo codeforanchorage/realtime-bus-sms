@@ -109,6 +109,10 @@ router.get('/find/:query', function(req, res, next) {
 */
 
 router.get('/byLatLon',
+    function (req, res, next) { // remove this after covid response
+      res.locals.returnHTML = 1;
+      next()
+    },
     mw.emergencyException,
     mw.checkServiceExceptions,
     mw.findbyLatLon
