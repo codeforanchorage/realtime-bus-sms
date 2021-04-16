@@ -209,7 +209,7 @@ async function askWatson(req, res, next){
         authenticator: new IamAuthenticator({
             apikey: config.WATSON_API_KEY,
         }),
-        url: "https://gateway.watsonplatform.net/assistant/api",
+        url: "https://api.us-south.assistant.watson.cloud.ibm.com"
     })
 
     // Saving the sessionID in a cookie and passing it back allows the conversation
