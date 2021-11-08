@@ -442,7 +442,7 @@ describe("Integration Tests", function(){
             })
 
             it("Should accept multiple requests and respond to each individually", function(done){
-                nock('http://bustracker.muni.org').get(muniURL.pathname).query(true).times(4).reply(200, muniResponses.goodResponse )
+                nock('https://bustracker.muni.org').get(muniURL.pathname).query(true).times(4).reply(200, muniResponses.goodResponse )
 
                 let nocks = []
                 facebookMessage.multiple.entry.forEach(entry =>  entry.messaging.forEach(message => {
@@ -466,7 +466,7 @@ describe("Integration Tests", function(){
             })
 
             it("Should pass error messages on to user", function(done){
-                nock('http://bustracker.muni.org').get(muniURL.pathname).times(4).query(true).reply(404)
+                nock('https://bustracker.muni.org').get(muniURL.pathname).times(4).query(true).reply(404)
 
                 let nocks = []
                 facebookMessage.multiple.entry.forEach(entry =>  entry.messaging.forEach(message => {
