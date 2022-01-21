@@ -80,7 +80,7 @@ function addLinkToRequest(req,res, next){
     // the url with 'http://' results in a simple link on iPhones
     // With 'http://' iphone users will see a big box that says 'tap to preview'
     // Simple text seems more in the spirit
-    const message = "\n\More features on the smart phone version: bit.ly/AncBus"
+    const message = "\n\Due to COVID-19 related staff shortages, some trips have been canceled today. Visit https://www.peoplemover.org for details. We apologize for the inconvenience. More features on the smart phone version: bit.ly/AncBus"
 
     // Hikack the render function
     var _render = res.render
