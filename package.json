@@ -42,7 +42,7 @@
     "rollbar": "^2.4.4",
     "run-middleware": "^0.9.10",
     "serve-favicon": "^2.5.0",
-    "twilio": "^3.19.1",
+    "twilio": "^3.79.0",
     "universal-analytics": "^0.4.8",
     "watson-developer-cloud": "^3.9.0",
     "winston": "^2.3.0"
