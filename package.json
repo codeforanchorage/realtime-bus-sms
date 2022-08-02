@@ -38,7 +38,7 @@
     "on-headers": "^1.0.1",
     "pug": "^3.0.1",
     "pure-uuid": "^1.4.2",
-    "request": "^2.88.0",
+    "request": "^2.88.2",
     "rollbar": "^2.4.4",
     "run-middleware": "^0.9.10",
     "serve-favicon": "^2.5.0",
