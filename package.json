@@ -31,7 +31,7 @@
     "express": "^4.16.3",
     "fs-extra": "^5.0.0",
     "hashwords": "^0.1.2",
-    "ibm-watson": "^5.7.3",
+    "ibm-watson": "^7.1.1",
     "lowdb": "^1.0.0",
     "moment-timezone": "^0.5.0",
     "on-finished": "^2.3.0",
@@ -44,7 +44,7 @@
     "serve-favicon": "^2.5.0",
     "twilio": "^3.79.0",
     "universal-analytics": "^0.5.3",
-    "watson-developer-cloud": "^3.9.0",
+    "watson-developer-cloud": "^4.0.0",
     "winston": "^2.3.0"
   },
   "devDependencies": {
