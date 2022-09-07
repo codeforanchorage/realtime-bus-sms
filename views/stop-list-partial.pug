@@ -1,21 +1,29 @@
 if returnHTML
     div(id="routeInformation")
+    p(id="tempMessage")
+        i As we upgrade technology, <b>scheduled</b> arrival times are provided instead of <b>real-time</b>.
+
         div(id="stop")
             h2(id="stop-number") stop<br /> #{routes.data.stopId}
             h3(id="stop-name") #{routes.data.stop}
-        ul 
+        ul
             each stop in routes.data.stops
                 li
                     div #{stop.number}
-                    div #{stop.name} 
+                    div #{stop.name}
                         ul(class="times")
                             each time in stop.times
                                 li #{time}
+
+
+
 else
+    |As we upgrade technology, *scheduled* arrival times are provided instead of *real-time*.
+    |
     |* Stop #{routes.data.stopId} - #{routes.data.stop} *
-    | 
+    |
     each stop in routes.data.stops
-        | 
-        |#{stop.number} #{stop.name} - 
+        |
+        |#{stop.number} #{stop.name} -
         |#{stop.times.join(", ")}
-        | 
+        |
