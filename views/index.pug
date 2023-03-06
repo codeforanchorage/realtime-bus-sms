@@ -13,11 +13,11 @@ html
     body
         div
             h1(id="headline") When’s the<br />next bus?
-            form(method="POST", onsubmit="return makeRequest()")
+            //form(method="POST", onsubmit="return makeRequest()")
                 input(name="Body", placeholder="bus stop number or address")
                 button(type="submit") Get Routes
-            p#location.https_only <a onclick="locateMe()"> <span class="pointer">⊕</span> <span class="location">Find stops near you</span></a>
-
+           // p#location.https_only <a onclick="locateMe()"> <span class="pointer">⊕</span> <span class="location">Find stops near you</span></a>
+           
             div(id="output")
 
                 block info
@@ -31,11 +31,12 @@ html
                     p <b>People Mover has a new mobile friendly application for real time bus info</b><br>
                     p Go to <b><a href="https://bustracker.muni.org/">https://bustracker.muni.org/</a></b>
                     
-                    p Also! You can text your bus stop ID (ex: ANC2051) to <b><a href="sms:907-312-2060">321123</a></b>. Remember to include "ANC" in front of the 4-digit bus stop number.” <br />
+                    p Also! You can text your bus stop ID (ex: ANC2051) to <b><a href="sms:907-312-2060">321123</a></b>. <br>  
+                    p Remember to include "ANC" in front of the 4-digit bus stop number.” <br />
 
 
-            a(onclick="return openFeedback()" href="#" id="feedback_link") Give feedback
-            form(method="POST", style="display:none" onsubmit="return submitFeedback()", id="feedback")
+            //a(onclick="return openFeedback()" href="#" id="feedback_link") Give feedback
+            //form(method="POST", style="display:none" onsubmit="return submitFeedback()", id="feedback")
                 label(for='comment') Comments
                 textarea(name="comment" id='comment', placeholder="Comments or questions")
                 br
