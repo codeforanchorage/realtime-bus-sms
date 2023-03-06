@@ -22,7 +22,7 @@ html
                     h3 How this works:
                     p <b>*** People Mover has a new mobile friendly application for real time bus info ***</b>
                     p Go to <b><a href="https://bustracker.muni.org/">https://bustracker.muni.org/</a></b>
-                    p Also - You can text your bus stop ID (ex: ANC2051) to <b><a href="sms:907-312-2060">321123</a></b>. Remember to include "ANC" in front of the 4-digit bus stop number.” <br />
+                    p Also - You can text your bus stop ID (ex: ANC2051) to <b><a href="sms:907-312-2060">321123</a></b>. Remember to include "ANC" in front of the 4-digit bus stop number.” 
                     
                     h1(id="headline") When’s the<br />next bus?
                     form(method="POST", onsubmit="return makeRequest()")
@@ -33,24 +33,24 @@ html
                     div(id="output")
 
 
-            a(onclick="return openFeedback()" href="#" id="feedback_link") Give feedback
-            form(method="POST", style="display:none" onsubmit="return submitFeedback()", id="feedback")
-                label(for='comment') Comments
-                textarea(name="comment" id='comment', placeholder="Comments or questions")
-                br
-                label(for='email') Email (optional for response)
-                input(type='text', id='email', name='email', placeholder="email (optional)")
-                br
-                button(type="submit", value="Send Feedback") Send Feedback
-                button(type="reset", value="Cancel" , onclick="closeFeedback()") Cancel 
+                    a(onclick="return openFeedback()" href="#" id="feedback_link") Give feedback
+                    form(method="POST", style="display:none" onsubmit="return submitFeedback()", id="feedback")
+                    label(for='comment') Comments
+                    textarea(name="comment" id='comment', placeholder="Comments or questions")
+                    br
+                    label(for='email') Email (optional for response)
+                    input(type='text', id='email', name='email', placeholder="email (optional)")
+                    br
+                    button(type="submit", value="Send Feedback") Send Feedback
+                    button(type="reset", value="Cancel" , onclick="closeFeedback()") Cancel 
 
                 
-            div(id="footer")
-                div
+                    div(id="footer")
+                    div
                     a(href="http://codeforanchorage.org")
                         img.logo(src="/img/cfa.png", width="40px", height="40px")
                 
-                div Code For Anchorage
+                    div Code For Anchorage
 
 
     script.
