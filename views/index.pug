@@ -12,15 +12,7 @@ html
 
     body
         div
-            h1(id="headline") When’s the<br />next bus?
-            form(method="POST", onsubmit="return makeRequest()")
-                input(name="Body", placeholder="bus stop number or address")
-                button(type="submit") Get Routes
-            p#location.https_only <a onclick="locateMe()"> <span class="pointer">⊕</span> <span class="location">Find stops near you</span></a>
-           
-            div(id="output")
-
-                block info
+         block info
                     
                     //h3 How this works:
                     //p <b>Get bus ETAs:</b><br />Enter a bus stop number into the field above to see when the next bus arrives. 
@@ -28,11 +20,19 @@ html
                     //p Also! You can text a bus stop number or intersection to <br /><b><a href="sms:907-312-2060">907-312-2060</a></b>
                     
                     h3 How this works:
-                    p <b>People Mover has a new mobile friendly application for real time bus info</b><br>
+                    p <b>*** People Mover has a new mobile friendly application for real time bus info ***</b><br>
                     p Go to <b><a href="https://bustracker.muni.org/">https://bustracker.muni.org/</a></b>
                     
                     p Also! You can text your bus stop ID (ex: ANC2051) to <b><a href="sms:907-312-2060">321123</a></b>. <br>  
                     p Remember to include "ANC" in front of the 4-digit bus stop number.” <br />
+                    
+            //h1(id="headline") When’s the<br />next bus?
+            form(method="POST", onsubmit="return makeRequest()")
+                input(name="Body", placeholder="bus stop number or address")
+                button(type="submit") Get Routes
+            p#location.https_only <a onclick="locateMe()"> <span class="pointer">⊕</span> <span class="location">Find stops near you</span></a>
+           
+            div(id="output")
 
 
             a(onclick="return openFeedback()" href="#" id="feedback_link") Give feedback
