@@ -33,7 +33,7 @@
     "hashwords": "^0.1.2",
     "ibm-watson": "^5.7.3",
     "lowdb": "^1.0.0",
-    "moment-timezone": "^0.5.0",
+    "moment-timezone": "^0.5.35",
     "on-finished": "^2.3.0",
     "on-headers": "^1.0.1",
     "pug": "^3.0.1",
