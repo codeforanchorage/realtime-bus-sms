@@ -31,7 +31,7 @@
     "express": "^4.19.2",
     "fs-extra": "^5.0.0",
     "hashwords": "^0.1.2",
-    "ibm-watson": "^5.7.3",
+    "ibm-watson": "^9.1.0",
     "lowdb": "^1.0.0",
     "moment-timezone": "^0.5.35",
     "on-finished": "^2.3.0",
