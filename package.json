@@ -31,7 +31,7 @@
     "express": "^4.19.2",
     "fs-extra": "^5.0.0",
     "hashwords": "^0.1.2",
-    "ibm-watson": "^5.7.3",
+    "ibm-watson": "^9.1.0",
     "lowdb": "^1.0.0",
     "moment-timezone": "^0.5.35",
     "on-finished": "^2.3.0",
@@ -42,7 +42,7 @@
     "rollbar": "^2.4.4",
     "run-middleware": "^0.9.10",
     "serve-favicon": "^2.5.0",
-    "twilio": "^3.79.0",
+    "twilio": "^5.2.2",
     "universal-analytics": "^0.5.3",
     "watson-developer-cloud": "^3.9.0",
     "winston": "^2.3.0"
